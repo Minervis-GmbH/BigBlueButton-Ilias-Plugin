@@ -1,0 +1,39 @@
+// 
+// Spanish Language File for Big Blue Button Plugin
+//
+<!-- language file start -->
+obj_xbbb#:#Aula Virtual de Big Blue Button
+objs_xbbb#:#Aula Virtual de Aula Virtual de Big Blue Buttons
+obj_xbbb_duplicate#:#Copiar 
+objs_xbbb_duplicate#:#Copiar Aula Virtual de Big Blue Button
+obj_xbbb_select#:#Seleccionar Aula Virtual de Big Blue Button
+xbbb_add#:#Añadir Aula Virtual de Big Blue Button
+xbbb_new#:#Añadir Nueva Aula Virtual de Big Blue Button
+xbbb_read#:#Acceso de lectura a Aula Virtual de Big Blue Button
+xbbb_write#:#Editar Aula Virtual de Big Blue Button
+xbbb_delete#:#Borrar Aula Virtual de Big Blue Button
+xbbb_visible#:#Aula Virtual de Big Blue Button está visible
+xbbb_edit_permission#:#Cambiar configuración de permisos
+BigBlueButton_plugin_configuration#:#Configuración de conexion de Big Blue Button
+crs_create_xbbb#:#Crear Aula Virtual de Big Blue Button
+grp_create_xbbb#:#Crear Aula Virtual de Big Blue Button
+fold_create_xbbb#:#Crear Aula Virtual de Big Blue Button
+root_create_xbbb#:#Crear Aula Virtual de Big Blue Button
+cat_create_xbbb#:#Crear Aula Virtual de Big Blue Button
+content#:#Content#:#Crear Aula Virtual de Big Blue Button
+class_not_started_yet#:#Esta clase aun no ha comenzado. Por favor inténtelo de nuevo más adelante cuando la clase esté en marcha.
+click_to_open_class#:#Pulse aquí para abrir su Clase Virtual en una nueva ventana.
+no_class_running#:#No hay ninguna clase en curso,
+start_class#:#pulse aquí para iniciar esta clase.
+class_running#:#Hay una clase en curso,
+end_class#:#pulse aquí para finalizar la clase.
+end_class_comment#:#(Ojo, al finalizar la clase se expulsarán de la misma a todos los participantes que aun estuvieran dentro de la clase).
+new_class_created#:#Se ha creado una nuev Clase Virtual y esta se abrirá automáticamente en una nueva ventana.
+new_class_created_warning#:#DEBE entrar en la clase antes que el resto de asistentes. Nadie podrá entrar a la clase hasta que un moderador entre primero.
+new_class_created_join_manual#:#Pulse aquí para abrir su Clase Virtual si está no se ha abierto automáticamente.
+class_ended#:#La clase ha sido finalizada.
+publicurl#:#URL Pública (p.e. http://mibbbserver.com)
+publicport#:#Puerto Público (p.e. 80)
+privateurl#:#URL Privada (p.e. http://192.168.1.100)
+privateport#:#Puerto Privado (p.e. 8080)
+salt#:#Sal de seguridad

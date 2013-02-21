@@ -1,0 +1,19 @@
+BigBLueButton-ILIAS Plugin Changelog
+------------------------------------
+
+2011-05-02 Version 0.0.1 
+
+	- First version available in the "Release early, release often" sense.
+	- Provides a Big Blue Button Virtual Class ILIAS Repository Object.
+	- Moderators(users with write permission over the object) can start and end the Virtual Classroom.
+	- Attendees(users with read permission over the object) can join a class that has started.
+	
+
+2011-05-10
+
+	- FIXED Moderator permission at BBB: users with write permission were not moderators.
+	- FIXED Added import form from the course creation GUI. (Thanks Graham).
+	- ADDED New italian translation. (Thanks Graham).
+	- CHANGED Now when a moderator creates a Virtual Classroom the attendees can enter the classroom and they dont have to wait for the moderator to enter.
+
+2013-02-21

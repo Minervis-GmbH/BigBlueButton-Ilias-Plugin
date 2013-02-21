@@ -1,0 +1,57 @@
+{VAL_1}
+
+
+    <script type="text/JavaScript">
+        
+	il.Util.addOnLoad(
+		function()
+		{
+			
+			$('#endClassForm').hide();
+			$('#startClassForm').hide();
+			
+			var isMeetingRunning={isMeetingRunning};
+			if(isMeetingRunning){
+				$('#openClassLink').show();
+				$('#endClassDiv').show();
+				$('#startClassDiv').hide();
+			}else{
+				$('#openClassLink').hide();
+				$('#endClassDiv').hide();
+				$('#startClassDiv').show();
+			}
+			
+			
+			$('#startClassLink').click(function() {
+				  $('#startClassFormInput').click();
+				  //$('#openClassLink').click();
+			});
+			
+			$('#endClassLink').click(function() {
+				  $('#endClassFormInput').click();
+				  //$('#openClassLink').click();
+			});
+			
+		});
+</script>
+
+
+<a id="openClassLink" href="{bbbURL}" target="_blank">{clickToOpenClass}</a>
+
+<div id="startClassDiv">
+{noClassRunning} <a id="startClassLink" href="#">{startClass}</a>
+</div>
+
+<div id="endClassDiv">
+{classRunning} <a id="endClassLink" href="#">{endClass}</a> {endClassComment}
+</div>
+
+<form id="endClassForm" action="{FORMACTION}" method="post">
+    <input id="endClassFormInput" class="submit" type="submit" name="{CMD_END_CLASS}" value="{END_CLASS}" >
+</form>
+
+<form id="startClassForm" action="{FORMACTION2}" method="post">
+    <input id="startClassFormInput" class="submit" type="submit" name="{CMD_START_CLASS}" value="{START_CLASS}" >
+</form>
+
+
