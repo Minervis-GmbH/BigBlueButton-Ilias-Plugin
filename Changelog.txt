@@ -16,4 +16,6 @@ BigBLueButton-ILIAS Plugin Changelog
 	- ADDED New italian translation. (Thanks Graham).
 	- CHANGED Now when a moderator creates a Virtual Classroom the attendees can enter the classroom and they dont have to wait for the moderator to enter.
 
-2013-02-21
+2013-02-21 Version 0.0.3
+    
+        - SUPPORT for ILIAS 4.3

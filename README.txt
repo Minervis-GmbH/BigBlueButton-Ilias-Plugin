@@ -1,5 +1,8 @@
+Based on ILIAS BigBLueButton Plugin from Andres https://sourceforge.net/projects/bbb-ilias-plug/
+
+
 ******************************************************************************
-INSTALLATION INSTRUCTIONS   (Tested at least with ILIAs 4.1.5)
+INSTALLATION INSTRUCTIONS   (Tested with ILIAs 4.3.1)
 ******************************************************************************
 
 1. Copy the content of this folder in <ILIAS_directory>/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton
