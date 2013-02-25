@@ -8,6 +8,15 @@ obj_xbbb_duplicate#:#Copy
 objs_xbbb_duplicate#:#Copy Big Blue Button Virtual Classroom
 obj_xbbb_select#:#Select Big Blue Button Virtual Classroom
 xbbb_add#:#Add Big Blue Button Virtual Classroom
+edit#:#Bearbeiten
+save#:#Speichern
+properties#:#Eigenschaften
+edit_properties#:#Eigenschaften bearbeiten
+description#:#Beschreibung
+welcometext#:#Wilkommenstext
+title#:#Titel
+status#:#Status
+offline#:#Offline
 xbbb_new#:#Add New Big Blue Button Virtual Classroom
 xbbb_read#:#Read access to Big Blue Button Virtual Classroom
 xbbb_write#:#Edit Big Blue Button Virtual Classroom
@@ -21,17 +30,17 @@ fold_create_xbbb#:#Create Big Blue Button Virtual Classroom
 root_create_xbbb#:#Create Big Blue Button Virtual Classroom
 cat_create_xbbb#:#Create Big Blue Button Virtual Classroom
 content#:#Content#:#Create Big Blue Button Virtual Classroom
-class_not_started_yet#:#This class has not started yet. Please try again later when the class is running.
-click_to_open_class#:#Click here to open your Virtual Classroom in a new window.
-no_class_running#:#There is no class running,
-start_class#:#click here to start the class.
-class_running#:#There is a class running,
-end_class#:#click here to end the class.
-end_class_comment#:#(Note that all participants will be kicked if they are still connected to the class).
-new_class_created#:#A new Virtual Clasroom has been created and it will be opened automatically in a new window.
-new_class_created_warning#:#You MUST join the class before the attendees. No one will be able to join until a moderator does.
-new_class_created_join_manual#:#Click here to join your Virtual Classroom if it did not open automatically.
-class_ended#:#The class has been ended.
+class_not_started_yet#:#Bislang ist noch kein Raum gestartet, versuchen Sie es zu einem späteren Zeitpunkt erneut.
+click_to_open_class#:#Klicken Sie hier um den virtuellen Raum in einem neuen Fenster zu öffnen.
+no_class_running#:#Derzeit ist kein virtueller Raum gestartet,
+start_class#:#klicken Sie hier, um einen virtuellen Raum zu starten.
+class_running#:#Es ist bereits ein virtueller Raum gestartet,
+end_class#:#klicken Sie hier um den virtuellen Raum zu beenden.
+end_class_comment#:#(Beachten Sie, dass alle Teilnehmer getrennt werden wenn Sie sich noch in den Raum befinden).
+new_class_created#:#Es wurde ein neuer virtueller Raum erstellt, dieser wird gleich in einem neuen Fenster geöffnet.
+new_class_created_warning#:#Sie müssen den Raum vor Ihren Teilnehmern betreten, es kann sich kein Teilnehmer anmelden, bis ein Moderator den Raum betreten hat.
+new_class_created_join_manual#:#Klicken Sie hier um den virtuellen Raum manuell beizutreten, falls er nicht automatisch geöffnet wurde.
+class_ended#:#Der Raum wurde beendet.
 publicurl#:#Public URL (e.g. http://mybbbserver.com)
 publicport#:#Public Port (e.g. 80)
 privateurl#:#Private URL (e.g. http://192.168.1.100)
