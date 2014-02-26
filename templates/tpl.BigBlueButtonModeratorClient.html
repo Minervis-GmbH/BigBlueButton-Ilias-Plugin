@@ -3,27 +3,46 @@
 
     <script type="text/JavaScript">
         
+        function deleteRecord (link){
+			
+             $('#recordID').val(link);
+	     $('#deleteRecordingInput').click();
+
+        }
+        
 	il.Util.addOnLoad(
 		function()
 		{
 			
 			$('#endClassForm').hide();
 			$('#startClassForm').hide();
+                        $('#deleteRecording').hide();
 			
 			var isMeetingRunning={isMeetingRunning};
 			if(isMeetingRunning){
 				$('#openClassLink').show();
 				$('#endClassDiv').show();
 				$('#startClassDiv').hide();
+                                $('#recordmeeting_visible').hide();
+                                $('#recordmeeting_label').hide();
 			}else{
 				$('#openClassLink').hide();
 				$('#endClassDiv').hide();
 				$('#startClassDiv').show();
 			}
-			
+                        
+                        var hasMeetingRecordings = {hasMeetingRecordings};
+			if(hasMeetingRecordings){
+                            $('#recordings').show();
+                        }
+                        else{
+                            $('#recordings').hide();
+                        }
 			
 			$('#startClassLink').click(function() {
+                                  $('#recordmeeting').prop("checked",$('#recordmeeting_visible').attr("checked"));
 				  $('#startClassFormInput').click();
+                                  
 				  //$('#openClassLink').click();
 			});
 			
@@ -41,6 +60,7 @@
 <div id="startClassDiv">
 {noClassRunning} <a id="startClassLink" href="#">{startClass}</a>
 </div>
+<input type="checkbox" id="recordmeeting_visible" /><span id="recordmeeting_label">{checkbox_record_meeting}</span>
 
 <div id="endClassDiv">
 {classRunning} <a id="endClassLink" href="#">{endClass}</a> {endClassComment}
@@ -52,6 +72,18 @@
 
 <form id="startClassForm" action="{FORMACTION2}" method="post">
     <input id="startClassFormInput" class="submit" type="submit" name="{CMD_START_CLASS}" value="{START_CLASS}" >
+    <input type="checkbox" id="recordmeeting" name="recordmeeting" />
 </form>
+
+<form id="deleteRecording" action="{FORMACTION3}" method="post">
+    <input id="deleteRecordingInput" class="submit" type="submit" name="{CMD_DELETE_RECORDING}" value="{DELETE_RECORDING}" >
+    <input type="text" id="recordID" name="recordID" />
+</form>
+<br/>
+<div id="recordings">
+<h1><span>{Headline_Recordings}</span></h1>
+<div>{recordings}</div>
+</div>
+
 
 
