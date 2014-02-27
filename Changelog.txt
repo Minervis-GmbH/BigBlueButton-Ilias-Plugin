@@ -20,5 +20,5 @@ BigBLueButton-ILIAS Plugin Changelog
     
         - SUPPORT for ILIAS 4.3
 
-2014-02-26 Version 0.0.4
+2014-02-26 Version 1.0.1
         - Add Support for Playback an Recording of Meetings
