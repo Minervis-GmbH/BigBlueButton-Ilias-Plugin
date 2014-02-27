@@ -42,3 +42,9 @@ properties#:Proprietà
 title#:#Titolo
 description#:#Descrizione
 welcometext#:#Testo di benvenuto
+Date_Title#:#data
+Link_Title#:#link
+DeleteLink_Title#:#eliminare la registrazione
+Length_Title#:#lunghezza
+Headline_Recordings#:#registrazioni precedenti
+checkbox_record_meeting#:#sessione di registrazione

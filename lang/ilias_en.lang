@@ -37,3 +37,9 @@ publicport#:#Public Port (e.g. 80)
 privateurl#:#Private URL (e.g. http://192.168.1.100)
 privateport#:#Private Port (e.g. 8080)
 salt#:#Security Salt
+Date_Title#:#date
+Link_Title#:#link
+DeleteLink_Title#:#delete recording
+Length_Title#:#length
+Headline_Recordings#:#Recordings
+checkbox_record_meeting#:#record next session

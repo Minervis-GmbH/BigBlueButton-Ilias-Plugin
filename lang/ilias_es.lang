@@ -37,3 +37,9 @@ publicport#:#Puerto Público (p.e. 80)
 privateurl#:#URL Privada (p.e. http://192.168.1.100)
 privateport#:#Puerto Privado (p.e. 8080)
 salt#:#Sal de seguridad
+Date_Title#:#fecha
+Link_Title#:#link
+DeleteLink_Title#:#eliminar grabación
+Length_Title#:#longitud
+Headline_Recordings#:#grabaciones anteriores
+checkbox_record_meeting#:#grabar la sesión
