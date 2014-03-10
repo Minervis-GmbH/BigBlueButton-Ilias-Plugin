@@ -43,3 +43,4 @@ DeleteLink_Title#:#eliminar grabación
 Length_Title#:#longitud
 Headline_Recordings#:#grabaciones anteriores
 checkbox_record_meeting#:#grabar la sesión
+meetingRecordedMessage#:#La sesión actual se está grabando!

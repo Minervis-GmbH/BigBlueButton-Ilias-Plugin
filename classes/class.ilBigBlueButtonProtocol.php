@@ -115,6 +115,20 @@ class ilBigBlueButtonProtocol
 		
 		return $url;
 	}
+        
+        function isMeetingRecorded($object){
+         
+		$meetingID=$object->getBBBId();
+		
+		$mPW=$object->getModeratorPwd();
+
+		$SALT=trim($object->getSvrSalt());
+		
+		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
+                
+                return BigBlueButton::isMeetingRecorded($meetingID, $mPW, $srvURL, $SALT);
+                
+        }
 	
 	/*
 	function getCloseURL($object){

@@ -343,10 +343,16 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 		//$tpl->addJavaScript("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/js/jquery-1.5.2.min.js");
 		
 		$isMeetingRunning=$BBBHelper->isMeetingRunning($this->object);
-		
+                
 		$my_tpl->setVariable("isMeetingRunning", $isMeetingRunning?"true":"false");
+                
+                $isMeetingRecorded = $BBBHelper->isMeetingRecorded($this->object);
+                
+                $my_tpl->setVariable("isMeetingRecorded", $isMeetingRecorded?"true":"false");
 		
 		$my_tpl->setVariable("bbbURL", $bbbURL);
+                
+                $my_tpl->setVariable("meetingRecordedMessage", $this->txt("meetingRecordedMessage"));
                 
                 
 

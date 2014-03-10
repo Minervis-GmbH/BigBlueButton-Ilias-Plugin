@@ -43,3 +43,4 @@ DeleteLink_Title#:#delete recording
 Length_Title#:#length
 Headline_Recordings#:#Recordings
 checkbox_record_meeting#:#record next session
+meetingRecordedMessage#:#The current session will be recorded!

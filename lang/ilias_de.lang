@@ -52,3 +52,4 @@ DeleteLink_Title#:#Aufnahme löschen
 Length_Title#:#Dauer
 Headline_Recordings#:#bisherige Aufnahmen
 checkbox_record_meeting#:#Sitzung aufzeichen
+meetingRecordedMessage#:#Die aktuelle Sitzung wird aufgezeichnet!

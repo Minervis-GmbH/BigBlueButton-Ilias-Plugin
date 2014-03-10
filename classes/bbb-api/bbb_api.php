@@ -374,6 +374,29 @@ class BigBlueButton {
 		}
 		return false;
 	}
+        
+	//-------------------------------------------getMeetingInfo---------------------------------------------------
+	/**
+	*This method calls the getMeetingInfo on the bigbluebutton server and returns an xml packet.
+	*
+	*@param meetingID -- the unique meeting identifier used to store the meeting in the bigbluebutton server
+	*@param modPW -- the moderator password of the meeting
+	*@param SALT -- the security salt of the bigbluebutton server
+	*@param URL -- the url of the bigbluebutton server
+	*
+	*@return An xml packet. 
+	*	If failed it returns an xml packet containing a returncode, messagekey, and message. 
+	*	If success it returnsan xml packet containing a returncode, 
+	*/
+	public function isMeetingRecorded( $meetingID, $modPW, $URL, $SALT ) {
+		$xml = bbb_wrap_simplexml_load_file( BigBlueButton::getMeetingInfoURL( $meetingID, $modPW, $URL, $SALT ) );
+		return 
+                 $xml && $xml->returncode == 'SUCCESS' && $xml->recording == "true";
+	}        
+        
+                        
+                
+                
 
 	/**
 	*This method calls the getMeetingInfo on the bigbluebutton server and returns an array.

@@ -14,6 +14,14 @@
 				$('#openClassLink').hide();
 				$('#classNotStarted').show();
 			}
+                        
+                        var isMeetingRecorded={isMeetingRecorded};
+			if(isMeetingRecorded){
+				$('#isMeetingRecorded').show();
+			}else{
+				$('#isMeetingRecorded').hide();
+			}
+                        
 		});
 </script>
 
@@ -25,4 +33,6 @@
 <div id="classNotStarted">
 {classNotStartedText}
 </div>
+<div id="isMeetingRecorded">{meetingRecordedMessage}</div>
+
 
