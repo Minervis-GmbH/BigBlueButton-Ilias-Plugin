@@ -41,6 +41,12 @@ Date_Title#:#date
 Link_Title#:#link
 DeleteLink_Title#:#delete recording
 Length_Title#:#length
-Headline_Recordings#:#Recordings
+Headline_Recordings#:#recordings
 checkbox_record_meeting#:#record next session
 meetingRecordedMessage#:#The current session will be recorded!
+properties#:#Properties
+edit_properties#:#edit properties
+description#:#description
+welcometext#:#welcome text
+save#:#Save
+edit#:#Edit

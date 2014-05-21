@@ -257,8 +257,8 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 
 
 		global $ilCtrl, $ilAccess;
-		$ilTabs->clearTargets();
-
+		//$ilTabs->clearTargets();
+                $ilTabs->activateTab("content");
 
 		$isModerator=false;
 
@@ -363,7 +363,8 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 		
 		global $tpl, $ilTabs;
 		
-		$ilTabs->clearTargets();
+		//$ilTabs->clearTargets();
+                $ilTabs->activateTab("content");
 	
 		include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
 		$BBBHelper=new ilBigBlueButtonProtocol();
@@ -376,15 +377,17 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 		$my_tpl->setVariable("classEnded", $this->txt("class_ended"));
 		
 		$tpl->setContent($my_tpl->get());
-		
+                
+                $this->showContent();
 	}
 	
 	function startClass(){
 	
 		global $tpl, $ilTabs;
 		
-		$ilTabs->clearTargets();
-				
+		//$ilTabs->clearTargets();
+		$ilTabs->activateTab("content");
+                
 		include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
 		$BBBHelper=new ilBigBlueButtonProtocol();
 		$BBBHelper->createMeeting($this->object, isset($_POST["recordmeeting"]));
