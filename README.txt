@@ -4,6 +4,7 @@ Based on ILIAS BigBLueButton Plugin from Andres https://sourceforge.net/projects
 ******************************************************************************
 INSTALLATION INSTRUCTIONS   (Tested with ILIAs 4.3.1)
 ******************************************************************************
+0. Installation BigBlueButton https://code.google.com/p/bigbluebutton/wiki/InstallationUbuntu
 
 1. Copy the content of this folder in <ILIAS_directory>/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton
 
