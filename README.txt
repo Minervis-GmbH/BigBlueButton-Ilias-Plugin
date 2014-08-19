@@ -1,8 +1,11 @@
+Copyright (c) 2014 Sebastian Ziegler, Fachhochschule Nordhausen 
+GPLv3, see LICENSE 
+
 Based on ILIAS BigBLueButton Plugin from Andres https://sourceforge.net/projects/bbb-ilias-plug/
 
 
 ******************************************************************************
-INSTALLATION INSTRUCTIONS   (Tested with ILIAs 4.3.1)
+INSTALLATION INSTRUCTIONS   (Tested with ILIAs 4.3.1 and 4.4.4)
 ******************************************************************************
 0. Installation BigBlueButton https://code.google.com/p/bigbluebutton/wiki/InstallationUbuntu
 
