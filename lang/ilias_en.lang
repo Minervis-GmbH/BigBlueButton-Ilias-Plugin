@@ -50,4 +50,6 @@ description#:#description
 welcometext#:#welcome text
 save#:#Save
 edit#:#Edit
+title#:#title
+status#:#status
 saving_invoked#:#saved
