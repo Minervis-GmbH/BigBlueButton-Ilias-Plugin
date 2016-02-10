@@ -25,3 +25,7 @@ BigBLueButton-ILIAS Plugin Changelog
 
 2015-05-27 Version 1.0.4
 	- Support for ILIAS 5.0
+
+2016-02-10 Version 1.0.5
+	- fixed some Javascript problems
+	- Support ILIAS 5.1

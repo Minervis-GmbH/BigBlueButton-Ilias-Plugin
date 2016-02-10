@@ -394,7 +394,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 		
 		$my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorMeetingCreated.html", true, true);
 		
-		$tpl->addJavaScript("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/js/jquery-1.5.2.min.js");
+		//$tpl->addJavaScript("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/js/jquery-1.5.2.min.js");
 		
 		$bbbURL=$BBBHelper->joinURLModerator($this->object);
 

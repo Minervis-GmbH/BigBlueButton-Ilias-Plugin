@@ -170,8 +170,8 @@ class ilBigBlueButtonProtocol
 		
 		$SALT=trim($object->getSvrSalt());
 		
-		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
-		//$srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";
+		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
+		$srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";
 	
 		return BigBlueButton::getRecordings($srvURL, $SALT, $meetingID); 
 	}
@@ -182,8 +182,8 @@ class ilBigBlueButtonProtocol
 
 		$SALT=trim($object->getSvrSalt());
 		
-		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
-		//$srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";
+		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
+		$srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";
 	
 		return BigBlueButton::deleteRecordingURL( $recordID, $srvURL, $SALT ); 
 	}
@@ -193,8 +193,8 @@ class ilBigBlueButtonProtocol
 
 		$SALT=trim($object->getSvrSalt());
 		
-		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
-                
+		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
+        $srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";        
                 return BigBlueButton::deleteRecording( $recordID, $srvURL, $SALT );
         
         }
