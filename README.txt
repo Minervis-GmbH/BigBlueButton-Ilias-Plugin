@@ -5,7 +5,7 @@ Based on ILIAS BigBLueButton Plugin from Andres https://sourceforge.net/projects
 
 
 ******************************************************************************
-INSTALLATION INSTRUCTIONS   (Tested with ILIAs 4.3.1, 5.0.x, 5.1.2)
+INSTALLATION INSTRUCTIONS   (Tested with ILIAs 4.3.1, 5.0.x, 5.1.2, 5.2.1)
 ******************************************************************************
 0. Installation BigBlueButton https://code.google.com/p/bigbluebutton/wiki/InstallationUbuntu
 
