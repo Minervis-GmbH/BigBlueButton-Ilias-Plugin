@@ -390,7 +390,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                 
 		include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
 		$BBBHelper=new ilBigBlueButtonProtocol();
-		echo "POST Meetingrecoding: ".$_POST["recordmeeting"]." ttttt";
+		
 		$BBBHelper->createMeeting($this->object, isset($_POST["recordmeeting"]));
 		
 		$my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorMeetingCreated.html", true, true);
