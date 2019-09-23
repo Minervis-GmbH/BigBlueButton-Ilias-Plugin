@@ -1,28 +1,49 @@
-Copyright (c) 2014 Sebastian Ziegler, Fachhochschule Nordhausen 
-GPLv3, see LICENSE 
+Forked from https://sourceforge.net/projects/bigbluebuttonil/
 
-Based on ILIAS BigBLueButton Plugin from Andres https://sourceforge.net/projects/bbb-ilias-plug/
+# About
+
+This is a [ILIAS](https://www.ilias.de) Plugin which allows the creation of [BigBlueButton](https://bigbluebutton.org) Virtual Classrooms inside of ILIAS.
+
+# Prerequisites
+
+## BBB 
+
+At first you need a working installation of BigBlueButton http://docs.bigbluebutton.org/.  
+The following data from BBB is required to configure this ILIAS Plugin:
+
+- public/private URL
+- public/private port 
+- BBB security salt
+
+## ILIAS
+
+It is assumed you already have a ILIAS Intallation [up and running](https://docu.ilias.de/goto_docu_pg_116903_367.html).
+
+# Installation
+
+On your ILIAS Server:
+
+- copy the content of this folder into `<ILIAS_directory>/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton`
+- log in to ILIAS as `root` and go to the administration page
+- select `Modules, Services and Plugins` in the menu on the right
+- hits the `Services` tab and ILIAS will show a service list
+- look for the `Repository` and hit the `Show Details` link that is located next to the title
+- look for the BigBlueButton plugin on the table and hit the `update` link
+- when ILIAS has updated the plugin, hit the `activate` link that will appear instead of the `update` link
+- now hit the `configure` link and enter your 
+    - public/private URL
+    - public/private port 
+    - BBB security salt
+- finally you can create "Big Blue Button" Virtual Classrooms as regular repository object
 
 
-******************************************************************************
-INSTALLATION INSTRUCTIONS   (Tested with ILIAs 4.3.1, 5.0.x, 5.1.2, 5.2.1)
-******************************************************************************
-0. Installation BigBlueButton https://code.google.com/p/bigbluebutton/wiki/InstallationUbuntu
+# Compatibility
 
-1. Copy the content of this folder in <ILIAS_directory>/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton
+Tested with ILIAS
 
-2. Access to ILIAS and go to the administration page.
+- 4.3.1
+- 5.0.x
+- 5.1.2
+- 5.2.1
 
-3. Select "Modules, Services and Plugins" in the menu on the right.
-
-4. Hits the "Services" tab and ILIAS will show a service list.
-
-5. Look for the "Repository" and hit the "Show Details" link that is located next to the title.
-
-6. Look for the BigBlueButton plugin on the table and hit the "update" link.
-
-7. When ILIAS update the plugin, hit the "activate" link that will appear instead of the "update" link. 
-
-8. Now hit the "configure" link and enter your public/private URL, public/private port and the BBB security salt.
-
-9. At last, you can create "Big Blue Button" Virtual Classrooms as regular repository object
+5.3 and 5.4 coming soon...
