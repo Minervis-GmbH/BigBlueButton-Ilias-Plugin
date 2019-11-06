@@ -45,5 +45,4 @@ Tested with ILIAS
 - 5.0.x
 - 5.1.2
 - 5.2.1
-
-5.3 and 5.4 coming soon...
+- 5.3.16
