@@ -1,0 +1,25 @@
+{
+  "name": "xbbb",
+  "version": "1.0.9",
+  "description": "This is a ILIAS Plugin which allows the creation of BigBlueButton Virtual Classrooms inside of ILIAS.",
+  "main": "plugin.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Minervis-GmbH/BigBlueButton-Ilias-Plugin.git"
+  },
+  "keywords": [
+    "php",
+    "ilias",
+    "bigbluebutton",
+    "bbb"
+  ],
+  "author": "Alexander Löhr",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Minervis-GmbH/BigBlueButton-Ilias-Plugin/issues"
+  },
+  "homepage": "https://docu.ilias.de/goto_docu_dcl_3342_1_73.html"
+}
