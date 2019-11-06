@@ -212,7 +212,7 @@ class ilBigBlueButtonProtocol
 		//This version checks if the meeting is created, not if it has any attendee
     	$response=BigBlueButton::getMeetingInfoArray( $meetingID, $mPW, $srvURL, $SALT );
 		
-		if($response && !array_key_exists('returncode',$response) && $response[hasBeenForciblyEnded]=='false'){
+		if($response && !array_key_exists('returncode',$response) && $response['hasBeenForciblyEnded']=='false'){
 			return true;
 		}else{
 			return false;

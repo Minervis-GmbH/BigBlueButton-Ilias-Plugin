@@ -294,40 +294,41 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 			$my_tpl->setVariable("endClass", $this->txt("end_class"));
 			$my_tpl->setVariable("endClassComment", $this->txt("end_class_comment"));
                         
-                        $table_template = new ilTemplate("tpl.BigBlueButtonRecordTable.html",
-                                            true,
-                                            true,
-                                            "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
-                        
-                        $table_content ="";
-                        $recordcount=0;
-                        foreach($BBBHelper->getRecordings($this->object)->recordings->recording as $recording){
-                            $table_row_template = new ilTemplate("tpl.BigBlueButtonRecordTableRow.html",
-                                            true,
-                                            true,
-                                            "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
-                            $table_row_template->setVariable("Date",date("d.m.Y H:i",  substr ($recording->startTime,0,10)));
-                            $table_row_template->setVariable("Length",$recording->playback->format->length);
-                            $table_row_template->setVariable("Link",$recording->playback->format->url);
-                            $table_row_template->setVariable("DeleteLink", $recording->recordID);
-                            
-                            $table_row_template->setVariable("Link_Title", $this->txt("link_title"));
-                            $table_row_template->setVariable("DeleteLink_Title", $this->txt("deletelink_title"));
-                            
-                            $table_content .= $table_row_template->get();
-                            $recordcount++;
-                        }
-                        
-                        $table_template->setVariable("BBB_RECORD_CONTENT", $table_content);
-                        $table_template->setVariable("Date_Title", $this->txt("Date_Title"));
-                        $table_template->setVariable("Length_Title", $this->txt("Length_Title"));
-                        $table_template->setVariable("Link_Title", $this->txt("Link_Title"));
-                        $my_tpl->setVariable("recordings", $table_template->get());  
-                        $my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
-                        $my_tpl->setVariable("checkbox_record_meeting", $this->txt("checkbox_record_meeting"));
-                        $my_tpl->setVariable("hasMeetingRecordings", $recordcount > 0?"true":"false");
-     
+			$table_template = new ilTemplate("tpl.BigBlueButtonRecordTable.html",
+								true,
+								true,
+								"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
 			
+			$table_content ="";
+			$recordcount=0;
+			$all_recordings=$BBBHelper->getRecordings($this->object)->recordings->recording;
+			if ($all_recordings){
+				foreach($all_recordings as $recording){
+					$table_row_template = new ilTemplate("tpl.BigBlueButtonRecordTableRow.html",
+									true,
+									true,
+									"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+					$table_row_template->setVariable("Date",date("d.m.Y H:i",  substr ($recording->startTime,0,10)));
+					$table_row_template->setVariable("Length",$recording->playback->format->length);
+					$table_row_template->setVariable("Link",$recording->playback->format->url);
+					$table_row_template->setVariable("DeleteLink", $recording->recordID);
+					
+					$table_row_template->setVariable("Link_Title", $this->txt("link_title"));
+					$table_row_template->setVariable("DeleteLink_Title", $this->txt("deletelink_title"));
+					
+					$table_content .= $table_row_template->get();
+					$recordcount++;
+				}
+			}                        
+			$table_template->setVariable("BBB_RECORD_CONTENT", $table_content);
+			$table_template->setVariable("Date_Title", $this->txt("Date_Title"));
+			$table_template->setVariable("Length_Title", $this->txt("Length_Title"));
+			$table_template->setVariable("Link_Title", $this->txt("Link_Title"));
+			$my_tpl->setVariable("recordings", $table_template->get());  
+			$my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
+			$my_tpl->setVariable("checkbox_record_meeting", $this->txt("checkbox_record_meeting"));
+			$my_tpl->setVariable("hasMeetingRecordings", $recordcount > 0?"true":"false");
+
 			$bbbURL=$BBBHelper->joinURLModerator($this->object);
 		}else{
 			$my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonClient.html", true, true);
