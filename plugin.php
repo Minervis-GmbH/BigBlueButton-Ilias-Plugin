@@ -12,8 +12,9 @@ $ilias_min_version = "4.0.0";
 $ilias_max_version = "5.4.999";
  
 // optional, but useful: Add one or more responsible persons and a contact email
-$responsible = "Andrés Ederra, Sebastian Ziegler";
-//$responsible_mail = "private";
+$responsible = "Alexander Löhr";
 
+//$responsible_mail = "private";
 //$supports_export = true;
+
 ?>
