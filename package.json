@@ -1,6 +1,6 @@
 {
   "name": "xbbb",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "This is a ILIAS Plugin which allows the creation of BigBlueButton Virtual Classrooms inside of ILIAS.",
   "main": "plugin.php",
   "scripts": {
