@@ -30,7 +30,7 @@ end_class#:#klik hier om de klas te stoppen.
 end_class_comment#:#(Noot; alle deelnemers die nog verbonden zijn met de klas worden verwijderd).
 new_class_created#:#Een nieuw virtueel klaslokaal is aangemaakt en wordt geopend in een nieuw scherm.
 new_class_created_warning#:#U MOET deelnemen aan de klas voor de deelnemers. Niemand kan deelnemen tot zonder de aanwezigheid van een moderator.
-new_class_created_join_manual#:#Klik nier om deel te nemen aan het virtuele klaslokaal indien dit niet automatisch is geopend.
+new_class_created_join_manual#:#Klik hier om deel te nemen aan het virtuele klaslokaal indien dit niet automatisch is geopend.
 class_ended#:#De klas is afgelopen.
 publicurl#:#Publieke URL (b.v. http://mybbbserver.com)
 publicport#:#Publieke Poort (b.v. 80)
