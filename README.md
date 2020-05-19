@@ -11,8 +11,7 @@ This is a [ILIAS](https://www.ilias.de) Plugin which allows the creation of [Big
 At first you need a working installation of BigBlueButton http://docs.bigbluebutton.org/.  
 The following data from BBB is required to configure this ILIAS Plugin:
 
-- public/private URL
-- public/private port 
+- public/private URL: e.g. `https://bbb.myserver.com:9000/bigbluebutton/`
 - BBB security salt
 
 ## ILIAS
