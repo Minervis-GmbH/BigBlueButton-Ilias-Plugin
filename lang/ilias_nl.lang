@@ -1,0 +1,55 @@
+// 
+// Dutch Language File for Big Blue Button Plugin
+//
+<!-- language file start -->
+obj_xbbb#:#Big Blue Button Virtueel Klaslokaal
+objs_xbbb#:#Big Blue Button Virtuele Klaslokalen
+obj_xbbb_duplicate#:#Kopieer 
+objs_xbbb_duplicate#:#Kopieer Big Blue Button Virtueel Klaslokaal
+obj_xbbb_select#:#Selecteer Big Blue Button Virtueel Klaslokaal
+xbbb_add#:#Voeg Big Blue Button Virtueel Klaslokaal toe
+xbbb_new#:#Voeg Nieuw Big Blue Button Virtueel Klaslokaal toe
+xbbb_read#:#Leestoegang tot Big Blue Button Virtueel Klaslokaal
+xbbb_write#:#Bewerk Big Blue Button Virtueel Klaslokaal
+xbbb_delete#:#Verwijder Big Blue Button Virtueel Klaslokaal
+xbbb_visible#:#Big Blue Button Virtueel Klaslokaal is zichtbaar
+xbbb_edit_permission#:#Wijzig rechten instellingen
+BigBlueButton_plugin_configuration#:#Big Blue Button Verbindingseigenschappen
+crs_create_xbbb#:#Creëer Big Blue Button Virtueel Klaslokaal
+grp_create_xbbb#:#Creëer Big Blue Button Virtueel Klaslokaal
+fold_create_xbbb#:#Creëer Big Blue Button Virtueel Klaslokaal
+root_create_xbbb#:#Creëer Big Blue Button Virtueel Klaslokaal
+cat_create_xbbb#:#Creëer Big Blue Button Virtueel Klaslokaal
+content#:#Content#:#Creëer Big Blue Button Virtueel Klaslokaal
+class_not_started_yet#:#Deze klas is nog niet begonnen. Probeer het a.u.b. later wanneer de klas gestart is.
+click_to_open_class#:#Klik hier om het Virtuele Klaslokaal te openen in een nieuw venster.
+no_class_running#:#Er is geen klas actief,
+start_class#:#klik hier om de klas te starten.
+class_running#:#Er is een klas actief,
+end_class#:#klik hier om de klas te stoppen.
+end_class_comment#:#(Noot; alle deelnemers die nog verbonden zijn met de klas worden verwijderd).
+new_class_created#:#Een nieuw virtueel klaslokaal is aangemaakt en wordt geopend in een nieuw scherm.
+new_class_created_warning#:#U MOET deelnemen aan de klas voor de deelnemers. Niemand kan deelnemen tot zonder de aanwezigheid van een moderator.
+new_class_created_join_manual#:#Klik hier om deel te nemen aan het virtuele klaslokaal indien dit niet automatisch is geopend.
+class_ended#:#De klas is afgelopen.
+publicurl#:#Publieke URL (b.v. http://mybbbserver.com)
+publicport#:#Publieke Poort (b.v. 80)
+privateurl#:#Private URL (b.v. http://192.168.1.100)
+privateport#:#Private Poort (b.v. 8080)
+salt#:#Security Salt
+Date_Title#:#datum
+Link_Title#:#link
+DeleteLink_Title#:#Verwijder opname
+Length_Title#:#lengte
+Headline_Recordings#:#opnames
+checkbox_record_meeting#:#Neem de volgende sessie op
+meetingRecordedMessage#:#De huidige sessie wordt opgenomen!
+properties#:#Eigenschappen
+edit_properties#:#bewerk eigenschappen
+description#:#omschrijving
+welcometext#:#welkom tekst
+save#:#Opslaan
+edit#:#Bewerken
+title#:#titel
+status#:#status
+saving_invoked#:#opgeslagen
