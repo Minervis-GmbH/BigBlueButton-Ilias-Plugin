@@ -30,7 +30,7 @@ class ilBigBlueButtonProtocol
 
 		$SALT=trim($object->getSvrSalt());
 		
-		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
+		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort() ;
 		
 		include_once('classes/class.ilLink.php');
 		$logoutURL = ilLink::_getLink($object->getRefId());
@@ -62,8 +62,8 @@ class ilBigBlueButtonProtocol
 
 		$SALT=trim($object->getSvrSalt());
 		
-		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
-		$srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";
+		$srvURL=$object->getSvrPublicURL()/*.":".$object->getSvrPublicPort()*/ ;
+		//$srvURL=$object->getSvrPrivateURL()/*.":".$object->getSvrPrivatePort()*/ ;
 		
 		
 		include_once('./Services/Link/classes/class.ilLink.php');
@@ -90,7 +90,7 @@ class ilBigBlueButtonProtocol
 
 		$SALT=trim($object->getSvrSalt());
 		
-		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
+		$srvURL=$object->getSvrPublicURL()/*.":".$object->getSvrPublicPort()*/ ;
 
 		$url=BigBlueButton::joinURL($meetingID, $userName, $aPW, $SALT, $srvURL);
 		
@@ -109,7 +109,7 @@ class ilBigBlueButtonProtocol
 
 		$SALT=trim($object->getSvrSalt());
 		
-		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
+		$srvURL=$object->getSvrPublicURL()/*.":".$object->getSvrPublicPort()*/ ;
 
 		$url=BigBlueButton::joinURL($meetingID, $userName, $mPW, $SALT, $srvURL);
 		
@@ -124,7 +124,7 @@ class ilBigBlueButtonProtocol
 
 		$SALT=trim($object->getSvrSalt());
 		
-		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
+		$srvURL=$object->getSvrPublicURL()/*.":".$object->getSvrPublicPort()*/ ;
                 
                 return BigBlueButton::isMeetingRecorded($meetingID, $mPW, $srvURL, $SALT);
                 
@@ -140,7 +140,7 @@ class ilBigBlueButtonProtocol
 		
 		$SALT=trim($object->getSvrSalt());
 		
-		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
+		$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort() ;
 		
 		$closeUrl=BigBlueButton::endMeetingURL($meetingID, $mPW, $srvURL, $SALT);
 		
@@ -156,8 +156,8 @@ class ilBigBlueButtonProtocol
 		
 		$SALT=trim($object->getSvrSalt());
 		
-		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
-		$srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";
+		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort() ;
+		$srvURL=$object->getSvrPrivateURL()/*.":".$object->getSvrPrivatePort()*/ ;
 	
 		BigBlueButton::endMeeting($meetingID, $mPW, $srvURL, $SALT); 
 	}
@@ -170,8 +170,8 @@ class ilBigBlueButtonProtocol
 		
 		$SALT=trim($object->getSvrSalt());
 		
-		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
-		$srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";
+		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort() ;
+		$srvURL=$object->getSvrPrivateURL()/*.":".$object->getSvrPrivatePort()*/ ;
 	
 		return BigBlueButton::getRecordings($srvURL, $SALT, $meetingID); 
 	}
@@ -182,8 +182,8 @@ class ilBigBlueButtonProtocol
 
 		$SALT=trim($object->getSvrSalt());
 		
-		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
-		$srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";
+		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort() ;
+		$srvURL=$object->getSvrPrivateURL()/*.":".$object->getSvrPrivatePort()*/ ;
 	
 		return BigBlueButton::deleteRecordingURL( $recordID, $srvURL, $SALT ); 
 	}
@@ -193,8 +193,8 @@ class ilBigBlueButtonProtocol
 
 		$SALT=trim($object->getSvrSalt());
 		
-		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort()."/bigbluebutton/";
-        $srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";        
+		//$srvURL=$object->getSvrPublicURL().":".$object->getSvrPublicPort() ;
+        $srvURL=$object->getSvrPrivateURL()/*.":".$object->getSvrPrivatePort() */;        
                 return BigBlueButton::deleteRecording( $recordID, $srvURL, $SALT );
         
         }
@@ -207,7 +207,7 @@ class ilBigBlueButtonProtocol
 		
 		$SALT=trim($object->getSvrSalt());
 		
-		$srvURL=$object->getSvrPrivateURL().":".$object->getSvrPrivatePort()."/bigbluebutton/";
+		$srvURL=$object->getSvrPrivateURL()/*.":".$object->getSvrPrivatePort() */;
 	
 		//This version checks if the meeting is created, not if it has any attendee
     	$response=BigBlueButton::getMeetingInfoArray( $meetingID, $mPW, $srvURL, $SALT );

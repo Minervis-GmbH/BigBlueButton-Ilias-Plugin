@@ -34,3 +34,5 @@ BigBLueButton-ILIAS Plugin Changelog
 	- Update doc
 	- Fixed PHP Errors for PHP Versions 7.2+
 	- Support for ILIAS v5.3.0
+2020-5-19 Version 1.1.10
+	- Fixed Server url issue

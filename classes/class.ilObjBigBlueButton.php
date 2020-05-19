@@ -82,9 +82,9 @@ class ilObjBigBlueButton extends ilObjectPlugin
 		while ($record = $ilDB->fetchAssoc($result))
         {
        		$this->setSvrPublicURL($record["svrpublicurl"]);
-       		$this->setSvrPublicPort($record["svrpublicport"]);
+       		//$this->setSvrPublicPort($record["svrpublicport"]);
       		$this->setSvrPrivateURL($record["svrprivateurl"]);
-       		$this->setSvrPrivatePort($record["svrprivateport"]);
+       		//$this->setSvrPrivatePort($record["svrprivateport"]);
         	$this->setSvrSalt($record["svrsalt"]);
       
         }
@@ -115,9 +115,9 @@ class ilObjBigBlueButton extends ilObjectPlugin
 		while ($record = $ilDB->fetchAssoc($result))
         {
        		$this->setSvrPublicURL($record["svrpublicurl"]);
-       		$this->setSvrPublicPort($record["svrpublicport"]);
+       		//$this->setSvrPublicPort($record["svrpublicport"]);
       		$this->setSvrPrivateURL($record["svrprivateurl"]);
-       		$this->setSvrPrivatePort($record["svrprivateport"]);
+       		//$this->setSvrPrivatePort($record["svrprivateport"]);
         	$this->setSvrSalt($record["svrsalt"]);
       
         }
@@ -177,9 +177,9 @@ class ilObjBigBlueButton extends ilObjectPlugin
 	function doClone($a_target_id,$a_copy_id,$new_obj)
 	{
 		$new_obj->setOnline($this->getOnline());
-		$new_obj->setSvrPublicPort($this->getSvrPubicPort());
+		//$new_obj->setSvrPublicPort($this->getSvrPubicPort());
 		$new_obj->setSvrPublicURL($this->getSvrPublicURL());
-		$new_obj->setSvrPrivatePort($this->getSvrPrivatePort());
+		//$new_obj->setSvrPrivatePort($this->getSvrPrivatePort());
 		$new_obj->setSvrPrivateURL($this->getSvrPrivateURL());
 		$new_obj->setSvrSalt($this->getSvrSalt());
 		$new_obj->setAttendeePwd($this->getAttendeePwd());
@@ -223,13 +223,15 @@ class ilObjBigBlueButton extends ilObjectPlugin
 		return $this->svrPublicUrl;
 	}
 	
+	/*
 	function setSvrPublicPort($a_val){
 		$this->svrPublicPort = $a_val;
 	}
 	function getSvrPublicPort(){
 		return $this->svrPublicPort;
 	}
-	
+	*/
+
 	function setSvrPrivateURL($a_val){
 		$this->svrPrivateURL = $a_val;
 	}
@@ -237,13 +239,15 @@ class ilObjBigBlueButton extends ilObjectPlugin
 		return $this->svrPrivateURL;
 	}
 	
+	/*
 	function setSvrPrivatePort($a_val){
 		$this->svrPrivatePort = $a_val;
 	}
 	function getSvrPrivatePort(){
 		return $this->svrPrivatePort;
 	}
-	
+	*/
+
 	function setSvrSalt($a_val){
 		$this->svrSalt = $a_val;
 	}

@@ -53,9 +53,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 		while ($record = $ilDB->fetchAssoc($result))
 		{
 	        $values["svrpublicurl"] = $record["svrpublicurl"];
-	        $values["svrpublicport"] = $record["svrpublicport"];
 	        $values["svrprivateurl"] = $record["svrprivateurl"];
-	        $values["svrprivateport"] = $record["svrprivateport"];
 	        $values["svrsalt"] = $record["svrsalt"];
 		}
 
@@ -65,7 +63,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 		include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
 		$form = new ilPropertyFormGUI();
 		
-	
+	    //
 		
 		// public url (text)
 		$ti = new ilTextInputGUI($pl->txt("publicurl"), "frmpublicurl");
@@ -75,14 +73,6 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 		$ti->setValue($values["svrpublicurl"]);
 		$form->addItem($ti);
 		
-		// public port (text)
-		$ti = new ilTextInputGUI($pl->txt("publicport"), "frmpublicport");
-		$ti->setRequired(true);
-		$ti->setMaxLength(10);
-		$ti->setSize(10);
-		$ti->setValue($values["svrpublicport"]);
-		$form->addItem($ti);
-		
 		// private url (text)
 		$ti = new ilTextInputGUI($pl->txt("privateurl"), "frmprivateurl");
 		$ti->setRequired(true);
@@ -90,15 +80,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 		$ti->setSize(60);
 		$ti->setValue($values["svrprivateurl"]);
 		$form->addItem($ti);
-		
-		// private port (text)
-		$ti = new ilTextInputGUI($pl->txt("privateport"), "frmprivateport");
-		$ti->setRequired(true);
-		$ti->setMaxLength(10);
-		$ti->setSize(10);
-		$ti->setValue($values["svrprivateport"]);
-		$form->addItem($ti);
-		
+
 		// salt (text)
 		$ti = new ilTextInputGUI($pl->txt("salt"), "frmsalt");
 		$ti->setRequired(true);
@@ -130,31 +112,28 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 		$form = $this->initConfigurationForm();
 		if ($form->checkInput())
 		{
-			$setPublicURL = $form->getInput("frmpublicurl");
-			$setPublicPort = $form->getInput("frmpublicport");
-			$setPrivateURL = $form->getInput("frmprivateurl");
-			$setPrivatePort = $form->getInput("frmprivateport");
+			$setPublicURL = $this->checkUrl($form->getInput("frmpublicurl"));
+			$setPrivateURL = $this->checkUrl($form->getInput("frmprivateurl"));
 			$setSalt= $form->getInput("frmsalt");
 			
 			// check if data exisits decide to update or insert
 			$result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
 			$num = $ilDB->numRows($result);
 			if($num == 0){
+
+
 				$ilDB->manipulate("INSERT INTO rep_robj_xbbb_conf ".
-				"(id, svrpublicurl , svrpublicport, svrprivateurl , svrprivateport , svrsalt) VALUES (".
+				"(id, svrpublicurl , svrprivateurl, svrsalt) VALUES (".
 				$ilDB->quote(1, "integer").",". // id
 				$ilDB->quote($setPublicURL, "text").",". //public url
-				$ilDB->quote($setPublicPort , "integer").",". //public port
 				$ilDB->quote($setPrivateURL, "text").",". //private url
-				$ilDB->quote($setPrivatePort , "integer").",". //privateport
+
 	            $ilDB->quote($setSalt, "text"). //salt
 				")");
 			}else{
 				$ilDB->manipulate($up = "UPDATE rep_robj_xbbb_conf  SET ".
 				" svrpublicurl = ".$ilDB->quote($setPublicURL, "text").",".
-				" svrpublicport = ".$ilDB->quote($setPublicPort, "integer").",".
 				" svrprivateurl = ".$ilDB->quote($setPublicURL, "text").",".
-				" svrprivateport = ".$ilDB->quote($setPublicPort, "integer").",".
 				" svrsalt = ".$ilDB->quote($setSalt, "text").
 				" WHERE id = ".$ilDB->quote(1, "integer")
 				);
@@ -168,6 +147,13 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 			$form->setValuesByPost();
 			$tpl->setContent($form->getHtml());
 		}
+	}
+
+	private function checkUrl(string $url){
+		if (substr($url, -1)!="/"){
+			$url .="/";
+		}
+		return $url;
 	}
 	
 
