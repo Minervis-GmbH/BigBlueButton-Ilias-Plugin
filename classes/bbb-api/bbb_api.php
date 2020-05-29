@@ -35,6 +35,17 @@ function bbb_wrap_simplexml_load_file($url){
 		curl_setopt( $ch, CURLOPT_URL, $url );
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+		
+		//Add Proxy
+		require_once('Services/Http/classes/class.ilProxySettings.php');
+		if(ilProxySettings::_getInstance()->isActive())
+		{
+			$proxyHost = ilProxySettings::_getInstance()->getHost();
+			$proxyPort = ilProxySettings::_getInstance()->getPort();
+			$proxyURL = $proxyHost . ":" . $proxyPort;
+			curl_setopt($ch, CURLOPT_PROXY, $proxyURL);
+		}
+		
 		$data = curl_exec( $ch );
 		curl_close( $ch );
 		
