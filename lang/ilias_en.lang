@@ -22,15 +22,15 @@ root_create_xbbb#:#Create Big Blue Button Virtual Classroom
 cat_create_xbbb#:#Create Big Blue Button Virtual Classroom
 content#:#Content#:#Create Big Blue Button Virtual Classroom
 class_not_started_yet#:#This class has not started yet. Please try again later when the class is running.
-click_to_open_class#:#Click here to open your Virtual Classroom in a new window.
-no_class_running#:#There is no class running,
-start_class#:#click here to start the class.
-class_running#:#There is a class running,
-end_class#:#click here to end the class.
+click_to_open_class#:#Open Virtual Classroom
+no_class_running#:#Your Virtual Classrom has not been activated yet. Other users cannot enter the Virtual Classroom until you have started it.
+start_class#:#Start Virtual Classroom
+class_running#:#There is a virtual classroom running, click here to end the class: 
+end_class#:#Close Virtual Classroom
 end_class_comment#:#(Note that all participants will be kicked if they are still connected to the class).
 new_class_created#:#A new Virtual Clasroom has been created and it will be opened automatically in a new window.
 new_class_created_warning#:#You MUST join the class before the attendees. No one will be able to join until a moderator does.
-new_class_created_join_manual#:#Click here to join your Virtual Classroom if it did not open automatically.
+new_class_created_join_manual#:#Join Virtual Classroom manually if it did not open automatically
 class_ended#:#The class has been ended.
 publicurl#:#Public URL (e.g. http://mybbbserver.com)
 publicport#:#Public Port (e.g. 80)

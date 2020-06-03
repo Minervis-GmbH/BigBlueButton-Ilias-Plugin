@@ -63,15 +63,17 @@
 </script>
 
 
-<a id="openClassLink" href="{bbbURL}" target="_blank">{clickToOpenClass}</a>
+<button id="openClassLink" class="btn btn-primary" type="button" onclick="window.open('{bbbURL}')">{clickToOpenClass}</button>
 
 <div id="startClassDiv">
-{noClassRunning} <a id="startClassLink" href="#">{startClass}</a>
+{noClassRunning}<br/><br/>
+<a id="startClassLink" href="#" class="btn btn-primary">{startClass}</a><br/>
 </div>
+<p>
 <input type="checkbox" id="recordmeeting_visible" /><span id="recordmeeting_label">{checkbox_record_meeting}</span>
-
+<p>
 <div id="endClassDiv">
-{classRunning} <a id="endClassLink" href="#">{endClass}</a> {endClassComment}
+{classRunning} <a id="endClassLink" href="#" class="btn btn-default">{endClass}</a><br/><i> {endClassComment}</i>
 </div>
 
 <form id="endClassForm" action="{FORMACTION}" method="post">

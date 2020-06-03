@@ -13,7 +13,7 @@ save#:#Speichern
 properties#:#Eigenschaften
 edit_properties#:#Eigenschaften bearbeiten
 description#:#Beschreibung
-welcometext#:#Wilkommenstext
+welcometext#:#Willkommenstext
 title#:#Titel
 status#:#Status
 offline#:#Offline
@@ -31,15 +31,15 @@ root_create_xbbb#:#Create Big Blue Button Virtual Classroom
 cat_create_xbbb#:#Create Big Blue Button Virtual Classroom
 content#:#Content#:#Create Big Blue Button Virtual Classroom
 class_not_started_yet#:#Bislang ist noch kein Raum gestartet, versuchen Sie es zu einem späteren Zeitpunkt erneut.
-click_to_open_class#:#Klicken Sie hier um den virtuellen Raum in einem neuen Fenster zu öffnen.
-no_class_running#:#Derzeit ist kein virtueller Raum gestartet,
-start_class#:#klicken Sie hier, um einen virtuellen Raum zu starten.
-class_running#:#Es ist bereits ein virtueller Raum gestartet,
-end_class#:#klicken Sie hier um den virtuellen Raum zu beenden.
-end_class_comment#:#(Beachten Sie, dass alle Teilnehmer getrennt werden wenn Sie sich noch in den Raum befinden).
+click_to_open_class#:#Virtuellen Raum öffnen
+no_class_running#:#Ihr virtueller Raum wurde noch nicht aktiviert. Damit andere Teilnehmer*innen den Raum betreten können, müssen Sie ihn zunächst starten.
+start_class#:#Virtuellen Raum starten
+class_running#:#Der virtuelle Raum ist angelegt und aktiv. Klicken Sie hier um den virtuellen Raum zu beenden: 
+end_class#:#Virtuellen Raum beenden
+end_class_comment#:#Beachten Sie, dass durch das Beenden des Raumes (a) alle Teilnehmer getrennt werden, die sich noch in dem Raum befinden und (b) die geteilten Notizen und Whiteboardinhalte gelöscht werden.
 new_class_created#:#Es wurde ein neuer virtueller Raum erstellt, dieser wird gleich in einem neuen Fenster geöffnet.
 new_class_created_warning#:#Sie müssen den Raum vor Ihren Teilnehmern betreten, es kann sich kein Teilnehmer anmelden, bis ein Moderator den Raum betreten hat.
-new_class_created_join_manual#:#Klicken Sie hier um den virtuellen Raum manuell beizutreten, falls er nicht automatisch geöffnet wurde.
+new_class_created_join_manual#:#Virtuellem Raum manuell beitreten, falls er nicht automatisch geöffnet wurde.
 class_ended#:#Der Raum wurde beendet.
 publicurl#:#Public URL (e.g. http://mybbbserver.com)
 publicport#:#Public Port (e.g. 80)
@@ -51,7 +51,7 @@ Link_Title#:#Link
 DeleteLink_Title#:#Aufnahme löschen
 Length_Title#:#Dauer
 Headline_Recordings#:#bisherige Aufnahmen
-checkbox_record_meeting#:#Sitzung aufzeichen
+checkbox_record_meeting#:#Sitzung aufzeichnen
 meetingRecordedMessage#:#Die aktuelle Sitzung wird aufgezeichnet!
 saving_invoked#:#Eintrag gespeichert
 
