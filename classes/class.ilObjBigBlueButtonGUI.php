@@ -74,6 +74,8 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 	 */
 	function performCommand($cmd)
 	{
+		$this->setTitleAndDescription();
+		
 		switch ($cmd)
 		{
 			case "editProperties":		// list all commands that need write permission here
@@ -407,11 +409,13 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 		
 		$tpl->setContent($my_tpl->get());
 	}
-        
-        function deleteRecording(){
-            	global $ilTabs;
+	
+	function deleteRecording(){
 		
-		$ilTabs->clearTargets();
+		global $tpl, $ilTabs;
+		
+		//$ilTabs->clearTargets();
+		$ilTabs->activateTab("content");
                 include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
 		
                 $BBBHelper=new ilBigBlueButtonProtocol();
