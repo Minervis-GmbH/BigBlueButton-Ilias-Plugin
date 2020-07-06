@@ -53,8 +53,7 @@ On your ILIAS Server:
 - look for BigBlueButton from the table of plugins and click a drop down button
 - install and activate
 - now hit the `configure` link and enter your 
-    - public/private URL
-    - public/private port 
+    - public and private server URL
     - BBB security salt
 - finally you can create "Big Blue Button" Virtual Classrooms as regular repository object
 
