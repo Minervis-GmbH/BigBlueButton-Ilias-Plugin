@@ -25,7 +25,7 @@ It is assumed you already have a ILIAS Intallation [up and running](https://docu
 On your ILIAS Server:
 
 - copy the content of this folder into `<ILIAS_directory>/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton`
-- log in to ILIAS as `root` and go to the administration page
+- log in to ILIAS as `administrator` and go to the administration page
 - select `Modules, Services and Plugins` in the menu on the right
 - hits the `Services` tab and ILIAS will show a service list
 - look for the `Repository` and hit the `Show Details` link that is located next to the title
@@ -37,7 +37,7 @@ On your ILIAS Server:
     - BBB security salt
 - finally you can create "Big Blue Button" Virtual Classrooms as regular repository object
 
-### ILIAS 5.3, 5.4
+### ILIAS 5.3, 5.4, 6.0
 
 On your ILIAS Server:
 
@@ -48,9 +48,8 @@ On your ILIAS Server:
 - `git clone https://github.com/Minervis-GmbH/BigBlueButton-Ilias-Plugin.git `
 - `mv BigBlueButton-Ilias-Plugin/ BigBlueButton/`
 - `cd BigBlueButton`
-- `rm -rf .git`
-- log in to ILIAS as `root` and go to the administration page
-- select `Plugins` in the menu on the right
+- log in to ILIAS as `administrator` and go to the administration page
+- select `Plugins` in the menu on the right (for ILIAS6.x go to `Administration>Extending ILIAS>Plugins`)
 - look for BigBlueButton from the table of plugins and click a drop down button
 - install and activate
 - now hit the `configure` link and enter your 
@@ -70,6 +69,8 @@ Tested with ILIAS
 - 5.2.1
 - 5.3.16
 - 5.4.6
+- 5.4.10
+- 6.0
 
 
 
