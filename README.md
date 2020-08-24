@@ -37,7 +37,7 @@ On your ILIAS Server:
     - BBB security salt
 - finally you can create "Big Blue Button" Virtual Classrooms as regular repository object
 
-### ILIAS 5.3, 5.4, 6.0
+### ILIAS 5.3, 5.4, 6.x
 
 On your ILIAS Server:
 
@@ -45,17 +45,23 @@ On your ILIAS Server:
 
 - `mkdir -p Customizing/global/plugins/Services/Repository/RepositoryObject`
 - `cd Customizing/global/plugins/Services/Repository/RepositoryObject`
-- `git clone https://github.com/Minervis-GmbH/BigBlueButton-Ilias-Plugin.git `
-- `mv BigBlueButton-Ilias-Plugin/ BigBlueButton/`
+- `git clone https://github.com/Minervis-GmbH/BigBlueButton-Ilias-Plugin.git BigBlueButton/`
 - `cd BigBlueButton`
 - log in to ILIAS as `administrator` and go to the administration page
 - select `Plugins` in the menu on the right (for ILIAS6.x go to `Administration>Extending ILIAS>Plugins`)
 - look for BigBlueButton from the table of plugins and click a drop down button
 - install and activate
 - now hit the `configure` link and enter your 
-    - public and private server URL
+    - public and private server URL : {PROTOCOL}://{SERVER_ADDRESS}{:PORT}/{BBB_SUBPATH}/. Where 
+        - {PROTOCOL}: http or https
+        - {SERVER_ADDRESS}: The Server adress
+        - {:PORT}: the port Eg.: 9003
+        - {BBB_SUBPATH}: The subpath of BBB Server. Eg.: /bigbluebutton/
+        - E.g:  https://my.bbb-server.com:9003/bigbluebutton
+        
     - BBB security salt
 - finally you can create "Big Blue Button" Virtual Classrooms as regular repository object
+**Note:** In case the subpath is not given, an error will be thrown!
 
 
 # Compatibility
@@ -70,6 +76,7 @@ Tested with ILIAS
 - 5.4.6
 - 5.4.10
 - 6.0
+- 6.1, 6.2
 
 
 
