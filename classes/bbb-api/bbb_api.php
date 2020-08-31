@@ -27,7 +27,7 @@ Versions:
 */
 
 function bbb_wrap_simplexml_load_file($url){
-	
+
 	if (extension_loaded('curl')) {
 		$ch = curl_init() or die ( curl_error() );
 		$timeout = 10;
@@ -76,7 +76,6 @@ $logout = logout url (url)
 // TODO::
 // create some set methods 
 class BigBlueButton {
-	
 	var $userName = array();
 	var $meetingID; // the meeting id
 	
@@ -97,7 +96,6 @@ class BigBlueButton {
 	// Use is either 0 arguments or all 7 arguments
 	public function __construct() {
 		$numargs = func_num_args();
-
 		if( $numargs == 0 ) {
 		#	echo "Constructor created";
 		}

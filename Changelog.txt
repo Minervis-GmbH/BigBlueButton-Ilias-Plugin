@@ -30,11 +30,16 @@ BigBLueButton-ILIAS Plugin Changelog
 	- fixed some Javascript problems
 	- Support ILIAS 5.1
 
-2019-11-06 Version 1.1.0
+2019-11-06 Version 1.0.9
 	- Update doc
 	- Fixed PHP Errors for PHP Versions 7.2+
 	- Support for ILIAS v5.3.0
-2020-7-06 Version 1.1.10
+2020-7-06 Version 1.0.10
 	- Fixed Server url issue
 	-support for ILIAS6
 
+2020-8-31 Version 1.0.12
+	- Display a message during configurations to inform about the server reachability
+	- support for ILIAS6.2 and ILIAS6.3
+	- improve the hint message on the configuration form
+	- Shorten the name of the plugin from "Big Blue Button Virtual Classroom" to "Bigbluebutton"

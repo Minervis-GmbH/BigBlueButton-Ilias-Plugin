@@ -61,7 +61,7 @@ On your ILIAS Server:
         
     - BBB security salt
 - finally you can create "Big Blue Button" Virtual Classrooms as regular repository object
-**Note:** In case the subpath is not given, an error will be thrown!
+**Note:** If the server is not reachable, during configuration a message will be displayed. After correcting the error, make sure to press the save button twice.
 
 
 # Compatibility
@@ -76,7 +76,7 @@ Tested with ILIAS
 - 5.4.6
 - 5.4.10
 - 6.0
-- 6.1, 6.2
+- 6.1, 6.2, 6.3
 
 
 
