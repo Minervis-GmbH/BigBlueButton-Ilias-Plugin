@@ -1,6 +1,7 @@
 <?php
 
 include_once("./Services/Component/classes/class.ilPluginConfigGUI.php");
+include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/bbb-api/bbb_api.php");
  
 /**
  * BigBlueButton configuration class
@@ -46,7 +47,8 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 	 */
 	public function initConfigurationForm()
 	{
-		global $lng, $ilCtrl, $ilDB;
+		global $lng, $ilCtrl, $ilDB,$DIC;
+		$log=$DIC->logger()->root();
 		 
 		$values = array();
 		$result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
@@ -59,6 +61,13 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 
 		
 		$pl = $this->getPluginObject();
+		if($values["svrpublicurl"] != '' && $values["svrprivateurl"] != '' && $values["svrsalt"] != ''){
+			$server_reachable=$this->isServerReachable($values["svrpublicurl"], $values["svrsalt"]);
+			$log->info("Server status: ". $server_reachable);
+			if(!$server_reachable){
+				ilUtil::sendFailure("server not reachable", true);
+			}
+		}
 	
 		include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
 		$form = new ilPropertyFormGUI();
@@ -154,6 +163,22 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 			$url .="/";
 		}
 		return $url;
+	}
+
+	private function isServerReachable(string $url, string $salt){
+
+		global $tpl;
+		$pl = $this->getPluginObject();
+		
+		try{
+			$response = BigBlueButton::getMeetings($url, $salt);
+				// if (!$response){			
+				// 	return false;
+				// }
+		}catch(Exception $e){
+			return false;
+		}
+		return true;
 	}
 	
 

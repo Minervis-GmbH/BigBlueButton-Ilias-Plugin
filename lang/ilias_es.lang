@@ -3,25 +3,25 @@
 // Translators: mgalan@ujaen.es, jrbalsas@ujaen.es, lina@ujaen.es, alonso@ujaen.es
 //
 <!-- language file start -->
-obj_xbbb#:#Aula Virtual de Big Blue Button
-objs_xbbb#:#Aulas Virtuales de Big Blue Button
+obj_xbbb#:#Bigbluebutton
+objs_xbbb#:#Aulas Virtuales de Bigbluebutton
 obj_xbbb_duplicate#:#Copiar 
-objs_xbbb_duplicate#:#Copiar Aula Virtual de Big Blue Button
-obj_xbbb_select#:#Seleccionar Aula Virtual de Big Blue Button
-xbbb_add#:#Añadir Aula Virtual de Big Blue Button
-xbbb_new#:#Añadir Nueva Aula Virtual de Big Blue Button
-xbbb_read#:#Acceso de lectura a Aula Virtual de Big Blue Button
-xbbb_write#:#Editar Aula Virtual de Big Blue Button
-xbbb_delete#:#Borrar Aula Virtual de Big Blue Button
-xbbb_visible#:#El Aula Virtual de Big Blue Button está visible
+objs_xbbb_duplicate#:#Copiar Aula Virtual de Bigbluebutton
+obj_xbbb_select#:#Seleccionar Aula Virtual de Bigbluebutton
+xbbb_add#:#Añadir Aula Virtual de Bigbluebutton
+xbbb_new#:#Añadir Nueva Aula Virtual de Bigbluebutton
+xbbb_read#:#Acceso de lectura a Aula Virtual de Bigbluebutton
+xbbb_write#:#Editar Aula Virtual de Bigbluebutton
+xbbb_delete#:#Borrar Aula Virtual de Bigbluebutton
+xbbb_visible#:#El Aula Virtual de Bigbluebutton está visible
 xbbb_edit_permission#:#Cambiar configuración de permisos
-BigBlueButton_plugin_configuration#:#Configuración de conexion de Big Blue Button
-crs_create_xbbb#:#Crear Aula Virtual de Big Blue Button
-grp_create_xbbb#:#Crear Aula Virtual de Big Blue Button
-fold_create_xbbb#:#Crear Aula Virtual de Big Blue Button
-root_create_xbbb#:#Crear Aula Virtual de Big Blue Button
-cat_create_xbbb#:#Crear Aula Virtual de Big Blue Button
-content#:#Content#:#Crear Aula Virtual de Big Blue Button
+BigBlueButton_plugin_configuration#:#Configuración de conexion de Bigbluebutton
+crs_create_xbbb#:#Crear Aula Virtual de Bigbluebutton
+grp_create_xbbb#:#Crear Aula Virtual de Bigbluebutton
+fold_create_xbbb#:#Crear Aula Virtual de Bigbluebutton
+root_create_xbbb#:#Crear Aula Virtual de Bigbluebutton
+cat_create_xbbb#:#Crear Aula Virtual de Bigbluebutton
+content#:#Content#:#Crear Aula Virtual de Bigbluebutton
 class_not_started_yet#:#Esta clase aún no ha comenzado. Por favor inténtelo de nuevo más adelante cuando la clase esté en marcha.
 click_to_open_class#:#Pulse aquí para abrir su Clase Virtual en una nueva ventana.
 no_class_running#:#No hay ninguna clase en curso,
@@ -33,9 +33,9 @@ new_class_created#:#Se ha creado una nueva Clase Virtual y esta se abrirá autom
 new_class_created_warning#:#DEBE entrar en la clase antes que el resto de asistentes. Nadie podrá entrar a la clase hasta que un moderador entre primero.
 new_class_created_join_manual#:#Pulse aquí para abrir su Clase Virtual si no se ha abierto automáticamente.
 class_ended#:#La clase ha finalizado
-publicurl#:#URL Pública (p.e. http://mibbbserver.com)
+publicurl#:#URL Pública (p.e. https://my.bbb-server.com:9005/bigbluebutton/)
 publicport#:#Puerto Público (p.e. 80)
-privateurl#:#URL Privada (p.e. http://192.168.1.100)
+privateurl#:#URL Privada (p.e. http://192.168.1.100/bigbluebutton/)
 privateport#:#Puerto Privado (p.e. 8080)
 salt#:#Sal de seguridad
 Date_Title#:#fecha

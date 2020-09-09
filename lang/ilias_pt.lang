@@ -1,26 +1,26 @@
 // 
-// Portugues Language File for Big Blue Button Plugin
+// Portugues Language File for Bigbluebutton Plugin
 //
 <!-- language file start -->
-obj_xbbb#:#Big Blue Button Sala Virtual
-objs_xbbb#:#Big Blue Button Sala Virtual
+obj_xbbb#:#Bigbluebutton
+objs_xbbb#:#Bigbluebutton Sala Virtual
 obj_xbbb_duplicate#:#Copiar 
-objs_xbbb_duplicate#:#Copiar Big Blue Button Sala Virtual
-obj_xbbb_select#:#Selecionar Big Blue Button Sala Virtual
-xbbb_add#:#Adicionar Big Blue Button Sala Virtual
-xbbb_new#:#Adicionar Nova Big Blue Button Sala Virtual
-xbbb_read#:#Acesso de ler de Big Blue Button Sala Virtual
-xbbb_write#:#Editar Big Blue Button Sala Virtual
-xbbb_delete#:#Deletar Big Blue Button Sala Virtual
-xbbb_visible#:#Big Blue Button Sala Virtual é visível
+objs_xbbb_duplicate#:#Copiar Bigbluebutton Sala Virtual
+obj_xbbb_select#:#Selecionar Bigbluebutton Sala Virtual
+xbbb_add#:#Adicionar Bigbluebutton Sala Virtual
+xbbb_new#:#Adicionar Nova Bigbluebutton Sala Virtual
+xbbb_read#:#Acesso de ler de Bigbluebutton Sala Virtual
+xbbb_write#:#Editar Bigbluebutton Sala Virtual
+xbbb_delete#:#Deletar Bigbluebutton Sala Virtual
+xbbb_visible#:#Bigbluebutton Sala Virtual é visível
 xbbb_edit_permission#:#Alterar Configurações de Permissão
-BigBlueButton_plugin_configuration#:#Big Blue Button Propriedades de Conexão
-crs_create_xbbb#:#Criar Big Blue Button Sala Virtual
-grp_create_xbbb#:#Criar Big Blue Button Sala Virtual
-fold_create_xbbb#:#Criar Big Blue Button Sala Virtual
-root_create_xbbb#:#Criar Big Blue Button Sala Virtual
-cat_create_xbbb#:#Criar Big Blue Button Sala Virtual
-content#:#Content#:#Criar Big Blue Button Sala Virtual
+BigBlueButton_plugin_configuration#:#Bigbluebutton Propriedades de Conexão
+crs_create_xbbb#:#Criar Bigbluebutton Sala Virtual
+grp_create_xbbb#:#Criar Bigbluebutton Sala Virtual
+fold_create_xbbb#:#Criar Bigbluebutton Sala Virtual
+root_create_xbbb#:#Criar Bigbluebutton Sala Virtual
+cat_create_xbbb#:#Criar Bigbluebutton Sala Virtual
+content#:#Content#:#Criar Bigbluebutton Sala Virtual
 class_not_started_yet#:#Esta aula ainda não começou. Tente novamente mais tarde quando a aula estiver em andamento.
 click_to_open_class#:#Clique aqui para abrir sua sala de aula virtual em uma nova janela.
 no_class_running#:#Não há aula em execução,
@@ -32,9 +32,9 @@ new_class_created#:#Uma nova sala de aula virtual foi criada e será aberta auto
 new_class_created_warning#:#Você DEVE participar da aula antes dos participantes. Ninguém poderá participar até que um moderador participe.
 new_class_created_join_manual#:#Clique aqui para se juntar à sua sala de aula virtual se ela não abrir automaticamente.
 class_ended#:#A aula foi encerrada.
-publicurl#:#URL Público (ex. http://mybbbserver.com)
+publicurl#:#URL Público (ex. https://my.bbb-server.com:9005/bigbluebutton/)
 publicport#:#Porta Pública (ex. 80)
-privateurl#:#URL Privado (ex. http://192.168.1.100)
+privateurl#:#URL Privado (ex. http://192.168.1.100/bigbluebutton/)
 privateport#:#Porta Privada (ex. 8080)
 salt#:#Security Salt
 Date_Title#:#data

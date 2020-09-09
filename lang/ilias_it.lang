@@ -2,25 +2,25 @@
 // Italian Language File for Big Blue Button Plugin
 //
 <!-- language file start -->
-obj_xbbb#:#Big Blue Button Virtual Classroom
-objs_xbbb#:#Big Blue Button Virtual Classrooms
+obj_xbbb#:#Bigbluebutton
+objs_xbbb#:#Bigbluebutton Virtual Classrooms
 obj_xbbb_duplicate#:#Copia 
-objs_xbbb_duplicate#:#Copia Big Blue Button Virtual Classroom
-obj_xbbb_select#:#Seleziona Big Blue Button Virtual Classroom
-xbbb_add#:#Aggiungi Big Blue Button Virtual Classroom
-xbbb_new#:#Aggiungi una Nuova Big Blue Button Virtual Classroom
-xbbb_read#:#Accesso in Lettura a Big Blue Button Virtual Classroom
-xbbb_write#:#Modifica Big Blue Button Virtual Classroom
-xbbb_delete#:#Elimina Big Blue Button Virtual Classroom
-xbbb_visible#:#Big Blue Button Virtual Classroom è visibile
+objs_xbbb_duplicate#:#Copia Bigbluebutton Virtual Classroom
+obj_xbbb_select#:#Seleziona Bigbluebutton Virtual Classroom
+xbbb_add#:#Aggiungi Bigbluebutton Virtual Classroom
+xbbb_new#:#Aggiungi una Nuova Bigbluebutton Virtual Classroom
+xbbb_read#:#Accesso in Lettura a Bigbluebutton Virtual Classroom
+xbbb_write#:#Modifica Bigbluebutton Virtual Classroom
+xbbb_delete#:#Elimina Bigbluebutton Virtual Classroom
+xbbb_visible#:#Bigbluebutton Virtual Classroom è visibile
 xbbb_edit_permission#:#Cambia le impostazioni sui permessi
 BigBlueButton_plugin_configuration#:#Proprietà di Connessione a Big Blue Button
-crs_create_xbbb#:#Crea Big Blue Button Virtual Classroom
-grp_create_xbbb#:#Crea Big Blue Button Virtual Classroom
-fold_create_xbbb#:#Crea Big Blue Button Virtual Classroom
-root_create_xbbb#:#Crea Big Blue Button Virtual Classroom
-cat_create_xbbb#:#Crea Big Blue Button Virtual Classroom
-content#:#Content#:#Crea Big Blue Button Virtual Classroom
+crs_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
+grp_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
+fold_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
+root_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
+cat_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
+content#:#Content#:#Crea Bigbluebutton Virtual Classroom
 class_not_started_yet#:#Questa classe non è ancora iniziata. Riprova più tardi.
 click_to_open_class#:#Clicca qui per aprire la Virtual Classroom in una nuova finestra.
 no_class_running#:#Non c'è nessuna classe in corso,
@@ -32,9 +32,9 @@ new_class_created#:#E' stata creata una nuova Virtual Clasroom che verrà aperta
 new_class_created_warning#:#DEVI entrare nella classe PRIMA degli iscritti. Nessuno può accedere senza un moderatore.
 new_class_created_join_manual#:#Clicca qui per entrare nella tua Virtual Classroom se non sia apre automaticamente.
 class_ended#:#La classe è stata chiusa.
-publicurl#:#URL Pubblico (es. http://mybbbserver.com)
+publicurl#:#URL Pubblico (es. https://my.bbb-server.com:9005/bigbluebutton/)
 publicport#:#Porta Pubblica (es. 80)
-privateurl#:#URL Privato (es. http://192.168.1.100)
+privateurl#:#URL Privato (es. http://192.168.1.100/bigbluebutton/)
 privateport#:#Porta Privata (es. 8080)
 salt#:#Security Salt
 edit#:#Modifica
