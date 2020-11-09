@@ -4,7 +4,7 @@ BigBLueButton-ILIAS Plugin Changelog
 2011-05-02 Version 0.0.1 
 
 	- First version available in the "Release early, release often" sense.
-	- Provides a Big Blue Button Virtual Class ILIAS Repository Object.
+	- Provides a Bigbluebutton Virtual Class ILIAS Repository Object.
 	- Moderators(users with write permission over the object) can start and end the Virtual Classroom.
 	- Attendees(users with read permission over the object) can join a class that has started.
 	
@@ -42,4 +42,4 @@ BigBLueButton-ILIAS Plugin Changelog
 	- Display a message during configurations to inform about the server reachability
 	- support for ILIAS6.2 and ILIAS6.3
 	- improve the hint message on the configuration form
-	- Shorten the name of the plugin from "Big Blue Button Virtual Classroom" to "Bigbluebutton"
+	- Shorten the name of the plugin from "Bigbluebutton Virtual Classroom" to "Bigbluebutton"

@@ -49,12 +49,26 @@ class ilBigBlueButtonProtocol
 	*/
 	
 	
+	
+	
 	function createMeeting($object, $record = false){
-		
+		global $DIC; /** @var Container $DIC */
+		$dic=$DIC;		
 		
 		$meetingID=$object->getBBBId();
 		
 		$welcomeString=$object->getWelcomeText();
+		if(!$object->isWelcomeTextSet()){
+			$welcomeString=str_replace(
+				[
+					'{MEETING_TITLE}'
+                ],
+                [
+					$object->getTitle()
+                ],
+                $dic->language()->txt('rep_robj_xbbb_welcome_text_content')
+			);
+		}
 		
 		$mPW=$object->getModeratorPwd();
 		

@@ -48,7 +48,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 	public function initConfigurationForm()
 	{
 		global $lng, $ilCtrl, $ilDB,$DIC;
-		$log=$DIC->logger()->root();
+		/*$log=$DIC->logger()->root();*/
 		 
 		$values = array();
 		$result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
@@ -63,7 +63,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 		$pl = $this->getPluginObject();
 		if($values["svrpublicurl"] != '' && $values["svrprivateurl"] != '' && $values["svrsalt"] != ''){
 			$server_reachable=$this->isServerReachable($values["svrpublicurl"], $values["svrsalt"]);
-			$log->info("Server status: ". $server_reachable);
+			/*$log->info("Server status: ". $server_reachable);*/
 			if(!$server_reachable){
 				ilUtil::sendFailure("server not reachable", true);
 			}

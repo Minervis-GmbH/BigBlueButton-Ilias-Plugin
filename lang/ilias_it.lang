@@ -1,5 +1,5 @@
 // 
-// Italian Language File for Big Blue Button Plugin
+// Italian Language File for Bigbluebutton Plugin
 //
 <!-- language file start -->
 obj_xbbb#:#Bigbluebutton
@@ -14,7 +14,7 @@ xbbb_write#:#Modifica Bigbluebutton Virtual Classroom
 xbbb_delete#:#Elimina Bigbluebutton Virtual Classroom
 xbbb_visible#:#Bigbluebutton Virtual Classroom è visibile
 xbbb_edit_permission#:#Cambia le impostazioni sui permessi
-BigBlueButton_plugin_configuration#:#Proprietà di Connessione a Big Blue Button
+BigBlueButton_plugin_configuration#:#Proprietà di Connessione a Bigbluebutton
 crs_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
 grp_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
 fold_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
