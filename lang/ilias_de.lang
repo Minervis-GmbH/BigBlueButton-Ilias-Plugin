@@ -14,7 +14,7 @@ properties#:#Eigenschaften
 edit_properties#:#Eigenschaften bearbeiten
 description#:#Beschreibung
 welcometext#:#Willkommenstext
-welcome_text_content#:#Herzlich Willkommen<br />im Virtuellen Meetingraum<br /><b>{MEETING_TITLE}</b><br /><br />Hilfe zur Verwendung von BigBlueButton finden Sie in diesen kurzen (englischen) <a href="http://www.bigbluebutton.org/html5" target="_blank"><u>Videos</u></a>.<br /><br />Sollte unten etwa in der Mitte ein durchgestrichener Telefonhörer zu sehen sein, werden andere Sie nicht hören und auch Sie hören nichts. Klicken Sie dann zum Starten der Audioverbindung auf den durchgestrichenen Telefonhörer. Verwenden Sie ein Headset, um Hintergrundgeräusche und Rückkopplungen zu vermeiden.
+welcome_text_content#:#Herzlich Willkommen<br />im <br /><b>{MEETING_TITLE}</b><br /><br />Hilfe zur Verwendung von BigBlueButton finden Sie in diesen kurzen (englischen) <a href="http://www.bigbluebutton.org/html5" target="_blank"><u>Videos</u></a>.<br /><br />Sollte unten etwa in der Mitte ein durchgestrichener Telefonhörer zu sehen sein, werden andere Sie nicht hören und auch Sie hören nichts. Klicken Sie dann zum Starten der Audioverbindung auf den durchgestrichenen Telefonhörer. Verwenden Sie ein Headset, um Hintergrundgeräusche und Rückkopplungen zu vermeiden.
 title#:#Titel
 status#:#Status
 offline#:#Offline
