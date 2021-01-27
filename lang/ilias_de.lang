@@ -2,12 +2,12 @@
 // Deutsch Language File for Bigbluebutton Plugin
 //
 <!-- language file start -->
-obj_xbbb#:#Bigbluebutton
-objs_xbbb#:#Bigbluebutton Virtual Classrooms
-obj_xbbb_duplicate#:#Copy 
-objs_xbbb_duplicate#:#Copy Bigbluebutton Virtual Classroom
-obj_xbbb_select#:#Select Bigbluebutton Virtual Classroom
-xbbb_add#:#Add Bigbluebutton Virtual Classroom
+obj_xbbb#:#BigBlueButton
+objs_xbbb#:#BigBlueButton-Räume
+obj_xbbb_duplicate#:#Duplizieren
+objs_xbbb_duplicate#:#BigBlueButton-Raum duplizieren
+obj_xbbb_select#:#BigBlueButton-Raum auswählen
+xbbb_add#:#BigBlueButton-Raum erstellen
 edit#:#Bearbeiten
 save#:#Speichern
 properties#:#Eigenschaften
@@ -18,19 +18,19 @@ welcome_text_content#:#Herzlich Willkommen<br />im <br /><b>{MEETING_TITLE}</b><
 title#:#Titel
 status#:#Status
 offline#:#Offline
-xbbb_new#:#Add New Bigbluebutton Virtual Classroom
-xbbb_read#:#Read access to Bigbluebutton Virtual Classroom
-xbbb_write#:#Edit Bigbluebutton Virtual Classroom
-xbbb_delete#:#Delete Bigbluebutton Virtual Classroom
-xbbb_visible#:#Bigbluebutton Virtual Classroom is visible
-xbbb_edit_permission#:#Change permission settings
-BigBlueButton_plugin_configuration#:#Bigbluebutton Connection Properties
-crs_create_xbbb#:#Create Bigbluebutton Virtual Classroom
-grp_create_xbbb#:#Create Bigbluebutton Virtual Classroom
-fold_create_xbbb#:#Create Bigbluebutton Virtual Classroom
-root_create_xbbb#:#Create Bigbluebutton Virtual Classroom
-cat_create_xbbb#:#Create Bigbluebutton Virtual Classroom
-content#:#Content#:#Create Bigbluebutton Virtual Classroom
+xbbb_new#:#Neuen BigBlueButton-Raum erstellen
+xbbb_read#:#Lesezugriff auf BigBlueButton-Räume
+xbbb_write#:#BigBlueButton-Raum bearbeiten
+xbbb_delete#:#BigBlueButton-Raum löschen
+xbbb_visible#:#BigBlueButton-Raum ist sichtbar
+xbbb_edit_permission#:#Rechteeinstellungen ändern
+BigBlueButton_plugin_configuration#:#BigBlueButton-Verbindungsoptionen
+crs_create_xbbb#:#Neuen BigBlueButton-Raum erstellen
+grp_create_xbbb#:#Neuen BigBlueButton-Raum erstellen
+fold_create_xbbb#:#Neuen BigBlueButton-Raum erstellen
+root_create_xbbb#:#Neuen BigBlueButton-Raum erstellen
+cat_create_xbbb#:#Neuen BigBlueButton-Raum erstellen
+content#:#Inhalt#:#Neuen BigBlueButton-Raum erstellen 
 class_not_started_yet#:#Bislang ist noch kein Raum gestartet, versuchen Sie es zu einem späteren Zeitpunkt erneut.
 click_to_open_class#:#Virtuellen Raum öffnen
 no_class_running#:#Ihr virtueller Raum wurde noch nicht aktiviert. Damit andere Teilnehmer*innen den Raum betreten können, müssen Sie ihn zunächst starten.
@@ -42,10 +42,10 @@ new_class_created#:#Es wurde ein neuer virtueller Raum erstellt, dieser wird gle
 new_class_created_warning#:#Sie müssen den Raum vor Ihren Teilnehmern betreten, es kann sich kein Teilnehmer anmelden, bis ein Moderator den Raum betreten hat.
 new_class_created_join_manual#:#Virtuellem Raum manuell beitreten, falls er nicht automatisch geöffnet wurde.
 class_ended#:#Der Raum wurde beendet.
-publicurl#:#Public URL (e.g. https://my.bbb-server.com:9005/bigbluebutton/)
-publicport#:#Public Port (e.g. 80)
-privateurl#:#Private URL (e.g. http://192.168.1.100/bigbluebutton/)
-privateport#:#Private Port (e.g. 8080)
+publicurl#:#Öffentliche URL (z. B. https://my.bbb-server.com:9005/bigbluebutton/)
+publicport#:#Öffentlicher Port (z. B. 80)
+privateurl#:#Private URL (z. B. http://192.168.1.100/bigbluebutton/)
+privateport#:#Privater Port (z. B. 8080)
 salt#:#Security Salt
 Date_Title#:#Datum
 Link_Title#:#Link
