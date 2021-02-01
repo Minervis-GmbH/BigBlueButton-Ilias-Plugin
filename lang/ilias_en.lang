@@ -54,3 +54,5 @@ edit#:#Edit
 title#:#title
 status#:#status
 saving_invoked#:#saved
+choose_recording#:#Allow recordings globally
+choose_recording_info#:#Activate this option if you want users with write permissions to select 'Allow capturing' under Settings. Since the URL for the recording is known to be distributed to unintended persons, this option should not be activated in most cases.

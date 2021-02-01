@@ -55,4 +55,6 @@ Headline_Recordings#:#bisherige Aufnahmen
 checkbox_record_meeting#:#Sitzung aufzeichnen
 meetingRecordedMessage#:#Die aktuelle Sitzung wird aufgezeichnet!
 saving_invoked#:#Eintrag gespeichert
+choose_recording#:#Aufnahmen erlauben: Auswahlmöglichkeit
+choose_recording_info#:#Aktivieren Sie diese Option, wenn Benutzer mit Schreibrechten unter Einstellungen die Auswahl 'Aufnahmen erlauben' haben sollen. Da bei Bekanntwerden der URL zur Aufnahme eine Verbreitung an nicht vorgesehene Personen gegeben ist, sollte diese Option in den meisten Fällen nicht aktiviert sein.
 

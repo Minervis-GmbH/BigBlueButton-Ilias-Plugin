@@ -43,3 +43,6 @@ BigBLueButton-ILIAS Plugin Changelog
 	- support for ILIAS6.2 and ILIAS6.3
 	- improve the hint message on the configuration form
 	- Shorten the name of the plugin from "Bigbluebutton Virtual Classroom" to "Bigbluebutton"
+2021 Version 1.0.14
+	- conffigure globally the option to choose whether recordings should be taken or not
+	- improve German translations

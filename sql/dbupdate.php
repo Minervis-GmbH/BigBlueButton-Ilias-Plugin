@@ -166,10 +166,18 @@ if(!$ilDB->tableExists('rep_robj_xbbb_conf')){
 					'notnull' => true
 			)
 	);
-
-
-
 	$ilDB->createTable("rep_robj_xbbb_conf", $fields_conf);
 	$ilDB->addPrimaryKey("rep_robj_xbbb_conf", array("id"));
+}
+?>
+<#3>
+<?php
+if (!$ilDB->tableColumnExists("rep_robj_xbbb_conf", "choose_recording")){
+	$ilDB->addTableColumn('rep_robj_xbbb_conf', 'choose_recording', array(
+		'type' => 'integer',
+		'length' => 1,
+		'notnull' => true,
+		'default' => 1
+	));
 }
 ?>

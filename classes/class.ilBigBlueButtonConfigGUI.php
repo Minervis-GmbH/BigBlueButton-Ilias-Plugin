@@ -56,14 +56,14 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 		{
 	        $values["svrpublicurl"] = $record["svrpublicurl"];
 	        $values["svrprivateurl"] = $record["svrprivateurl"];
-	        $values["svrsalt"] = $record["svrsalt"];
+			$values["svrsalt"] = $record["svrsalt"];
+			$values["choose_recording"] = $record["choose_recording"];
 		}
 
 		
 		$pl = $this->getPluginObject();
 		if($values["svrpublicurl"] != '' && $values["svrprivateurl"] != '' && $values["svrsalt"] != ''){
 			$server_reachable=$this->isServerReachable($values["svrpublicurl"], $values["svrsalt"]);
-			/*$log->info("Server status: ". $server_reachable);*/
 			if(!$server_reachable){
 				ilUtil::sendFailure("server not reachable", true);
 			}
@@ -91,12 +91,20 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 		$form->addItem($ti);
 
 		// salt (text)
-		$ti = new ilTextInputGUI($pl->txt("salt"), "frmsalt");
-		$ti->setRequired(true);
-		$ti->setMaxLength(256);
-		$ti->setSize(40);
-		$ti->setValue( $values["svrsalt"]);
-		$form->addItem($ti);
+		$pi = new ilPasswordInputGUI($pl->txt("salt"), "frmsalt");
+		$pi->setRequired(true);
+		$pi->setMaxLength(256);
+		$pi->setSize(40);
+		$pi->setRetype(false);
+		$pi->setValue( $values["svrsalt"]);
+		$form->addItem($pi);
+
+		//recording configuration
+		$choose_recording = new ilCheckboxInputGUI($pl->txt("choose_recording"), "choose_recording");
+		$choose_recording->setRequired(false);
+		$choose_recording->setInfo($pl->txt("choose_recording_info"));
+		$choose_recording->setChecked((int) $values['choose_recording']);
+		$form->addItem($choose_recording);
 		
 	
 		$form->addCommandButton("save", $lng->txt("save"));
@@ -124,6 +132,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 			$setPublicURL = $this->checkUrl($form->getInput("frmpublicurl"));
 			$setPrivateURL = $this->checkUrl($form->getInput("frmprivateurl"));
 			$setSalt= $form->getInput("frmsalt");
+			$choose_recording = (int) $form->getInput("choose_recording");
 			
 			// check if data exisits decide to update or insert
 			$result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
@@ -132,18 +141,20 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 
 
 				$ilDB->manipulate("INSERT INTO rep_robj_xbbb_conf ".
-				"(id, svrpublicurl , svrprivateurl, svrsalt) VALUES (".
+				"(id, svrpublicurl , svrprivateurl, svrsalt, choose_recording) VALUES (".
 				$ilDB->quote(1, "integer").",". // id
 				$ilDB->quote($setPublicURL, "text").",". //public url
 				$ilDB->quote($setPrivateURL, "text").",". //private url
 
-	            $ilDB->quote($setSalt, "text"). //salt
+				$ilDB->quote($setSalt, "text"). //salt
+				$ilDB->quote($choose_recording, "integer").
 				")");
 			}else{
 				$ilDB->manipulate($up = "UPDATE rep_robj_xbbb_conf  SET ".
 				" svrpublicurl = ".$ilDB->quote($setPublicURL, "text").",".
 				" svrprivateurl = ".$ilDB->quote($setPublicURL, "text").",".
-				" svrsalt = ".$ilDB->quote($setSalt, "text").
+				" svrsalt = ".$ilDB->quote($setSalt, "text"). ",".
+				" choose_recording = ".$ilDB->quote($choose_recording, "integer").
 				" WHERE id = ".$ilDB->quote(1, "integer")
 				);
 			}
@@ -172,9 +183,6 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 		
 		try{
 			$response = BigBlueButton::getMeetings($url, $salt);
-				// if (!$response){			
-				// 	return false;
-				// }
 		}catch(Exception $e){
 			return false;
 		}

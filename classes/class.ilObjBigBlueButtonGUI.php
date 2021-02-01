@@ -247,13 +247,14 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 	{
 		global $tpl, $ilTabs, $ilUser, $ilCtrl, $ilDB;;
 
-
+		$values = array();
 		$result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
 
 		while ($record = $ilDB->fetchAssoc($result))
 		{
 			$svrPublicURL = $record["svrpublicurl"];
 			$svrPublicPort = $record["svrpublicport"];
+			$values["choose_recording"] = $record["choose_recording"];
 		}
 
 
@@ -286,7 +287,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 			$my_tpl->setVariable("START_CLASS",$this->txt('start_bbb_class'));
 			$my_tpl->setVariable("FORMACTION2",$this->ctrl->getFormAction($this));
 
-                        $my_tpl->setVariable("CMD_DELETE_RECORDING","cmd[deleteRecording]");
+            $my_tpl->setVariable("CMD_DELETE_RECORDING","cmd[deleteRecording]");
 			$my_tpl->setVariable("DELETE_RECORDING",$this->txt('delete_bbb_recording'));
 			$my_tpl->setVariable("FORMACTION3",$this->ctrl->getFormAction($this));
                         
@@ -328,6 +329,11 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 			$table_template->setVariable("Link_Title", $this->txt("Link_Title"));
 			$my_tpl->setVariable("recordings", $table_template->get());  
 			$my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
+			if ($values["choose_recording"]){
+				$my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "visible");
+			}else{
+				$my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "hidden");
+			}
 			$my_tpl->setVariable("checkbox_record_meeting", $this->txt("checkbox_record_meeting"));
 			$my_tpl->setVariable("hasMeetingRecordings", $recordcount > 0?"true":"false");
 
@@ -342,8 +348,6 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 		
 		$my_tpl->setVariable("clickToOpenClass", $this->txt("click_to_open_class"));
 		
-		//include JQuery Libraries
-		//$tpl->addJavaScript("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/js/jquery-1.5.2.min.js");
 		
 		$isMeetingRunning=$BBBHelper->isMeetingRunning($this->object);
                 
