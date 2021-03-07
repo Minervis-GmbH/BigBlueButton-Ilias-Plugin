@@ -146,7 +146,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 				$ilDB->quote($setPublicURL, "text").",". //public url
 				$ilDB->quote($setPrivateURL, "text").",". //private url
 
-				$ilDB->quote($setSalt, "text"). //salt
+				$ilDB->quote($setSalt, "text").",". //salt
 				$ilDB->quote($choose_recording, "integer").
 				")");
 			}else{
@@ -154,7 +154,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 				" svrpublicurl = ".$ilDB->quote($setPublicURL, "text").",".
 				" svrprivateurl = ".$ilDB->quote($setPublicURL, "text").",".
 				" svrsalt = ".$ilDB->quote($setSalt, "text"). ",".
-				" choose_recording = ".$ilDB->quote($choose_recording, "integer").
+				" choose_recording = ".$ilDB->quote($choose_recording, "integer").",".
 				" WHERE id = ".$ilDB->quote(1, "integer")
 				);
 			}
