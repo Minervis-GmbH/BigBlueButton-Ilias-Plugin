@@ -1,5 +1,5 @@
 // 
-// English Language File for Big Blue Button Plugin
+// English Language File for Bigbluebutton Plugin
 //
 <!-- language file start -->
 obj_xbbb#:#Bigbluebutton
@@ -14,7 +14,7 @@ xbbb_write#:#Edit Bigbluebutton Virtual Classroom
 xbbb_delete#:#Delete Bigbluebutton Virtual Classroom
 xbbb_visible#:#Bigbluebutton Virtual Classroom is visible
 xbbb_edit_permission#:#Change permission settings
-BigBlueButton_plugin_configuration#:#Big Blue Button Connection Properties
+BigBlueButton_plugin_configuration#:#Bigbluebutton Connection Properties
 crs_create_xbbb#:#Create Bigbluebutton Virtual Classroom
 grp_create_xbbb#:#Create Bigbluebutton Virtual Classroom
 fold_create_xbbb#:#Create Bigbluebutton Virtual Classroom
@@ -48,8 +48,11 @@ properties#:#Properties
 edit_properties#:#edit properties
 description#:#description
 welcometext#:#welcome text
+welcome_text_content#:#Welcome<br />to <br /><b>{MEETING_TITLE}</b><br /><br />For help on using BigBlueButton see these (short) <a href="http://www.bigbluebutton.org/html5" target="_blank"><u>tutorial videos</u></a>.<br /><br />To join the audio bridge click the phone button. Use a headset to avoid causing background noise for others.
 save#:#Save
 edit#:#Edit
 title#:#title
 status#:#status
 saving_invoked#:#saved
+choose_recording#:#Allow recordings globally
+choose_recording_info#:#Activate this option if you want users with write permissions to select 'Allow capturing' under Settings. Since the URL for the recording is known to be distributed to unintended persons, this option should not be activated in most cases.

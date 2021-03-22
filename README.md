@@ -35,7 +35,7 @@ On your ILIAS Server:
     - public/private URL
     - public/private port 
     - BBB security salt
-- finally you can create "Big Blue Button" Virtual Classrooms as regular repository object
+- finally you can create "Bigbluebutton" Virtual Classrooms as regular repository object
 
 ### ILIAS 5.3, 5.4, 6.x
 
@@ -60,7 +60,7 @@ On your ILIAS Server:
         - E.g:  https://my.bbb-server.com:9003/bigbluebutton
         
     - BBB security salt
-- finally you can create "Big Blue Button" Virtual Classrooms as regular repository object
+- finally you can create "Bigbluebutton" Virtual Classrooms as regular repository object
 **Note:** If the server is not reachable, during configuration a message will be displayed. After correcting the error, make sure to press the save button twice.
 
 

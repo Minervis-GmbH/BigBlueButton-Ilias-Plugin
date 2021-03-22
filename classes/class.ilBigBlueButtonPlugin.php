@@ -3,7 +3,7 @@
 include_once("./Services/Repository/classes/class.ilRepositoryObjectPlugin.php");
  
 /**
-* Big Blue Button repository object plugin
+* Bigbluebutton repository object plugin
 *
 *
 */

@@ -300,6 +300,13 @@ class ilObjBigBlueButton extends ilObjectPlugin
 	function getBBBId(){
 		return "ilias-bbb_".CLIENT_ID."_".$this->getId()."_".$this->getSequence();
 	}
+
+	function isWelcomeTextSet(){
+		if($this->welcomeText!==''){
+			return true;
+		}
+		return false;
+	}
 	
 	
 }
