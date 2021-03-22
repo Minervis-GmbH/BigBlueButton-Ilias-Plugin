@@ -47,6 +47,10 @@ include_once("./Services/Repository/classes/class.ilObjectPluginGUI.php");
 class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 {
 	/**
+         * @var ilLogger
+         */
+        private $logger = null;
+	/**
 	 * Initialisation
 	 */
 	protected function afterConstructor()
@@ -295,6 +299,8 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 			$my_tpl->setVariable("startClass", $this->txt("start_class"));
 			$my_tpl->setVariable("endClass", $this->txt("end_class"));
 			$my_tpl->setVariable("endClassComment", $this->txt("end_class_comment"));
+                	$my_tpl->setVariable("isPluginOnline", $this->object->getOnline());
+                	$my_tpl->setVariable("pluginOfflineMsg",$this->object->getOnline()? "":"Switch to online, to start meeting");
                         
 			$table_template = new ilTemplate("tpl.BigBlueButtonRecordTable.html",
 								true,
@@ -348,8 +354,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 		$isMeetingRunning=$BBBHelper->isMeetingRunning($this->object);
                 
 		$my_tpl->setVariable("isMeetingRunning", $isMeetingRunning?"true":"false");
-                
-                $isMeetingRecorded = $BBBHelper->isMeetingRecorded($this->object);
+		$isMeetingRecorded = $BBBHelper->isMeetingRecorded($this->object);
                 
                 $my_tpl->setVariable("isMeetingRecorded", $isMeetingRecorded?"true":"false");
 		
@@ -385,9 +390,8 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 	}
 	
 	function startClass(){
-	
+		$this->logger = ilLoggerFactory::getLogger('ilObjBigBlueButtonGUI');
 		global $tpl, $ilTabs;
-		
 		//$ilTabs->clearTargets();
 		$ilTabs->activateTab("content");
                 

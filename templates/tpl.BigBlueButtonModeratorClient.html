@@ -30,6 +30,19 @@
 				$('#endClassDiv').hide();
 				$('#startClassDiv').show();
 			}
+                        var isPluginOnline={isPluginOnline};
+			if(isPluginOnline){
+				$('#recordmeeting_visible').show();
+				$('#startClassDiv').show();
+				$('#recordmeeting_label').show();
+				$('#pluginOfflineMsg').hide();
+//recordmeeting_label
+			}else{
+				$('#recordmeeting_visible').hide();
+				$('#startClassDiv').hide();
+				$('#recordmeeting_label').hide();
+				$('#pluginOfflineMsg').show();
+			}
                         
             var hasMeetingRecordings = {hasMeetingRecordings};
 			if(hasMeetingRecordings){
@@ -64,7 +77,7 @@
 
 
 <button id="openClassLink" class="btn btn-primary" type="button" onclick="window.open('{bbbURL}')">{clickToOpenClass}</button>
-
+<span id="pluginOfflineMsg">{pluginOfflineMsg}</span>
 <div id="startClassDiv">
 {noClassRunning}<br/><br/>
 <a id="startClassLink" href="#" class="btn btn-primary">{startClass}</a><br/>
