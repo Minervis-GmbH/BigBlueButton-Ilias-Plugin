@@ -330,6 +330,11 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 			$table_template->setVariable("Link_Title", $this->txt("Link_Title"));
 			$my_tpl->setVariable("recordings", $table_template->get());  
 			$my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
+			if ($values["choose_recording"]){
+ 				$my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "visible");
+ 			}else{
+ 				$my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "hidden");
+ 			}
 			$my_tpl->setVariable("checkbox_record_meeting", $this->txt("checkbox_record_meeting"));
 			$my_tpl->setVariable("hasMeetingRecordings", $recordcount > 0?"true":"false");
 
