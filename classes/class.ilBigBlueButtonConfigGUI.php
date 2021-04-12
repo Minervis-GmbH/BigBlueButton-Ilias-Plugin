@@ -92,6 +92,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 
 		// salt (text)
 		$pi = new ilPasswordInputGUI($pl->txt("salt"), "frmsalt");
+		$pi->setSkipSyntaxCheck(true);
 		$pi->setRequired(true);
 		$pi->setMaxLength(256);
 		$pi->setSize(40);
@@ -154,7 +155,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 				" svrpublicurl = ".$ilDB->quote($setPublicURL, "text").",".
 				" svrprivateurl = ".$ilDB->quote($setPublicURL, "text").",".
 				" svrsalt = ".$ilDB->quote($setSalt, "text"). ",".
-				" choose_recording = ".$ilDB->quote($choose_recording, "integer").",".
+				" choose_recording = ".$ilDB->quote($choose_recording, "integer").
 				" WHERE id = ".$ilDB->quote(1, "integer")
 				);
 			}
