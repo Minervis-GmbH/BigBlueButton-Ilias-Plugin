@@ -47,10 +47,6 @@ include_once("./Services/Repository/classes/class.ilObjectPluginGUI.php");
 class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 {
 	/**
-         * @var ilLogger
-         */
-        private $logger = null;
-	/**
 	 * Initialisation
 	 */
 	protected function afterConstructor()
@@ -251,7 +247,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 	{
 		global $tpl, $ilTabs, $ilUser, $ilCtrl, $ilDB;;
 
-
+		$values = array();
 		$result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
 
 		while ($record = $ilDB->fetchAssoc($result))
@@ -390,7 +386,6 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 	}
 	
 	function startClass(){
-		$this->logger = ilLoggerFactory::getLogger('ilObjBigBlueButtonGUI');
 		global $tpl, $ilTabs;
 		//$ilTabs->clearTargets();
 		$ilTabs->activateTab("content");
