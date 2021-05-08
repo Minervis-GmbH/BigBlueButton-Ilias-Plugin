@@ -154,7 +154,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 				" svrpublicurl = ".$ilDB->quote($setPublicURL, "text").",".
 				" svrprivateurl = ".$ilDB->quote($setPublicURL, "text").",".
 				" svrsalt = ".$ilDB->quote($setSalt, "text"). ",".
-				" choose_recording = ".$ilDB->quote($choose_recording, "integer").",".
+				" choose_recording = ".$ilDB->quote($choose_recording, "integer").
 				" WHERE id = ".$ilDB->quote(1, "integer")
 				);
 			}
