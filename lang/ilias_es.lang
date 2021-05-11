@@ -1,11 +1,11 @@
-// 
+//
 // Spanish Language File for BigBlueButton Plugin
 // Translators: mgalan@ujaen.es, jrbalsas@ujaen.es, lina@ujaen.es, alonso@ujaen.es
 //
 <!-- language file start -->
 obj_xbbb#:#Bigbluebutton
 objs_xbbb#:#Aulas Virtuales de Bigbluebutton
-obj_xbbb_duplicate#:#Copiar 
+obj_xbbb_duplicate#:#Copiar
 objs_xbbb_duplicate#:#Copiar Aula Virtual de Bigbluebutton
 obj_xbbb_select#:#Seleccionar Aula Virtual de Bigbluebutton
 xbbb_add#:#Añadir Aula Virtual de Bigbluebutton
@@ -39,9 +39,12 @@ privateurl#:#URL Privada (p.e. http://192.168.1.100/bigbluebutton/)
 privateport#:#Puerto Privado (p.e. 8080)
 salt#:#Sal de seguridad
 Date_Title#:#fecha
-Link_Title#:#enlace
+Date_Format#:#%H:%I:%S
 DeleteLink_Title#:#eliminar grabación
-Length_Title#:#longitud
+Duration_Title#:#longitud
+Link_Title#:#formats
+Recording_type_presentation#:#presentación
+Recording_type_notes#:#notas
 Headline_Recordings#:#grabaciones anteriores
 checkbox_record_meeting#:#grabar la sesión
 meetingRecordedMessage#:#¡La sesión actual se está grabando!

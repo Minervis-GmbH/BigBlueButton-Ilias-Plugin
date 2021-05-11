@@ -75,19 +75,19 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 	function performCommand($cmd)
 	{
 		$this->setTitleAndDescription();
-		
+
 		switch ($cmd)
 		{
 			case "editProperties":		// list all commands that need write permission here
 			case "updateProperties":
 			case "endClass":
 			case "startClass":
-                        case "deleteRecording":    
+                        case "deleteRecording":
 				//case "...":
 				$this->checkPermission("write");
 				$this->$cmd();
 				break;
-					
+
 			case "showContent":			// list all commands that need read permission here
 				//case "...":
 				//case "...":
@@ -192,7 +192,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 
 
 		$this->form->addCommandButton("updateProperties", $this->txt("save"));
-		 
+
 		$this->form->setTitle($this->txt("edit_properties"));
 		$this->form->setFormAction($ilCtrl->getFormAction($this));
 	}
@@ -234,7 +234,11 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 		$tpl->setContent($this->form->getHtml());
 	}
 
-
+	private function formatTimeDiff($seconds) {
+		$dtF = new \DateTime('@0');
+    $dtT = new \DateTime("@$seconds");
+    return $dtF->diff($dtT)->format( $this->txt("Date_Format") );
+	}
 
 	//
 	// Show content
@@ -273,36 +277,36 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 		$BBBHelper=new ilBigBlueButtonProtocol();
 
 		//$bbbURL=$BBBHelper->createAndGetURL($this->object,$isModerator);
-		
-		
+
+
 		if($isModerator){
 			$my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorClient.html", true, true);
-			
+
 			$my_tpl->setVariable("CMD_END_CLASS","cmd[endClass]");
 			$my_tpl->setVariable("END_CLASS",$this->txt('end_bbb_class'));
 			$my_tpl->setVariable("FORMACTION",$this->ctrl->getFormAction($this));
-			
-			
+
+
 			$my_tpl->setVariable("CMD_START_CLASS","cmd[startClass]");
 			$my_tpl->setVariable("START_CLASS",$this->txt('start_bbb_class'));
 			$my_tpl->setVariable("FORMACTION2",$this->ctrl->getFormAction($this));
 
-            $my_tpl->setVariable("CMD_DELETE_RECORDING","cmd[deleteRecording]");
+			$my_tpl->setVariable("CMD_DELETE_RECORDING","cmd[deleteRecording]");
 			$my_tpl->setVariable("DELETE_RECORDING",$this->txt('delete_bbb_recording'));
 			$my_tpl->setVariable("FORMACTION3",$this->ctrl->getFormAction($this));
-                        
+
 			$my_tpl->setVariable("classRunning", $this->txt("class_running"));
 			$my_tpl->setVariable("noClassRunning", $this->txt("no_class_running"));
 			$my_tpl->setVariable("startClass", $this->txt("start_class"));
 			$my_tpl->setVariable("endClass", $this->txt("end_class"));
 			$my_tpl->setVariable("endClassComment", $this->txt("end_class_comment"));
-                        
+
 			$table_template = new ilTemplate("tpl.BigBlueButtonRecordTable.html",
 								true,
 								true,
 								"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
-			
-			$table_content ="";
+
+			$table_content = [];
 			$recordcount=0;
 			$all_recordings=$BBBHelper->getRecordings($this->object)->recordings->recording;
 			if ($all_recordings){
@@ -312,22 +316,33 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 									true,
 									"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
 					$table_row_template->setVariable("Date",date("d.m.Y H:i",  substr ($recording->startTime,0,10)));
-					$table_row_template->setVariable("Length",$recording->playback->format->length);
-					$table_row_template->setVariable("Link",$recording->playback->format->url);
+					$seconds = round(($recording->endTime - $recording->startTime)/1000);
+					$table_row_template->setVariable("Duration", $this->formatTimeDiff( $seconds ));
+
+					$table_links = [];
+					foreach($recording->playback->format as $format) {
+						$table_link_template = new ilTemplate("tpl.BigBlueButtonRecordTableLink.html",
+										true,
+										true,
+										"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+						$table_link_template->setVariable("URL",$format->url);
+						$table_link_template->setVariable("Link_Title", $this->txt('Recording_type_' . $format->type));
+						$table_links[] = $table_link_template->get();
+					}
+					$table_row_template->setVariable("Links", implode(' · ', $table_links));
 					$table_row_template->setVariable("DeleteLink", $recording->recordID);
-					
-					$table_row_template->setVariable("Link_Title", $this->txt("link_title"));
 					$table_row_template->setVariable("DeleteLink_Title", $this->txt("deletelink_title"));
-					
-					$table_content .= $table_row_template->get();
+
+					$table_content[] = $table_row_template->get();
 					$recordcount++;
 				}
-			}                        
-			$table_template->setVariable("BBB_RECORD_CONTENT", $table_content);
+			}
+			$table_template->setVariable("BBB_RECORD_CONTENT", implode($table_content));
 			$table_template->setVariable("Date_Title", $this->txt("Date_Title"));
-			$table_template->setVariable("Length_Title", $this->txt("Length_Title"));
+			$table_template->setVariable("Duration_Title", $this->txt("Duration_Title"));
 			$table_template->setVariable("Link_Title", $this->txt("Link_Title"));
-			$my_tpl->setVariable("recordings", $table_template->get());  
+
+			$my_tpl->setVariable("recordings", $table_template->get());
 			$my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
 			if ($values["choose_recording"]){
 				$my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "visible");
@@ -342,91 +357,89 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 			$my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonClient.html", true, true);
 
 			$my_tpl->setVariable("classNotStartedText", $this->txt("class_not_started_yet"));
-			
+
 			$bbbURL=$BBBHelper->joinURL($this->object);
 		}
-		
+
 		$my_tpl->setVariable("clickToOpenClass", $this->txt("click_to_open_class"));
-		
-		
+
+
 		$isMeetingRunning=$BBBHelper->isMeetingRunning($this->object);
-                
+
 		$my_tpl->setVariable("isMeetingRunning", $isMeetingRunning?"true":"false");
-                
+
                 $isMeetingRecorded = $BBBHelper->isMeetingRecorded($this->object);
-                
+
                 $my_tpl->setVariable("isMeetingRecorded", $isMeetingRecorded?"true":"false");
-		
+
 		$my_tpl->setVariable("bbbURL", $bbbURL);
-                
+
                 $my_tpl->setVariable("meetingRecordedMessage", $this->txt("meetingRecordedMessage"));
-                
-                
+
+
 
 		$tpl->setContent($my_tpl->get());
 	}
 
 	function endClass(){
-		
+
 		global $tpl, $ilTabs;
-		
+
 		//$ilTabs->clearTargets();
                 $ilTabs->activateTab("content");
-	
+
 		include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
 		$BBBHelper=new ilBigBlueButtonProtocol();
 		$BBBHelper->endMeeting($this->object);
-		
+
 		//$this->object->incSequence();
-		
+
 		$my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorMeetingEnded.html", true, true);
-		
+
 		$my_tpl->setVariable("classEnded", $this->txt("class_ended"));
-		
+
 		$tpl->setContent($my_tpl->get());
-                
+
                 $this->showContent();
 	}
-	
+
 	function startClass(){
-	
+
 		global $tpl, $ilTabs;
-		
+
 		//$ilTabs->clearTargets();
 		$ilTabs->activateTab("content");
-                
+
 		include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
 		$BBBHelper=new ilBigBlueButtonProtocol();
-		
+
 		$BBBHelper->createMeeting($this->object, isset($_POST["recordmeeting"]));
-		
+
 		$my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorMeetingCreated.html", true, true);
-		
+
 		//$tpl->addJavaScript("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/js/jquery-1.5.2.min.js");
-		
+
 		$bbbURL=$BBBHelper->joinURLModerator($this->object);
 
 		$my_tpl->setVariable("newClassCreated", $this->txt("new_class_created"));
 		$my_tpl->setVariable("newClassCreatedWarning", $this->txt("new_class_created_warning"));
 		$my_tpl->setVariable("newClassCreatedJoinManual", $this->txt("new_class_created_join_manual"));
 		$my_tpl->setVariable("bbbURL", $bbbURL);
-		
+
 		$tpl->setContent($my_tpl->get());
 	}
-	
+
 	function deleteRecording(){
-		
+
 		global $tpl, $ilTabs;
-		
+
 		//$ilTabs->clearTargets();
 		$ilTabs->activateTab("content");
                 include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
-		
+
                 $BBBHelper=new ilBigBlueButtonProtocol();
                 $BBBHelper->deleteRecording($this->object, $_POST["recordID"]);
                 $this->showContent();
-        
-        }
 
+	}
 }
-?>

@@ -1,10 +1,10 @@
-// 
+//
 // Portugues Language File for Bigbluebutton Plugin
 //
 <!-- language file start -->
 obj_xbbb#:#Bigbluebutton
 objs_xbbb#:#Bigbluebutton Sala Virtual
-obj_xbbb_duplicate#:#Copiar 
+obj_xbbb_duplicate#:#Copiar
 objs_xbbb_duplicate#:#Copiar Bigbluebutton Sala Virtual
 obj_xbbb_select#:#Selecionar Bigbluebutton Sala Virtual
 xbbb_add#:#Adicionar Bigbluebutton Sala Virtual
@@ -38,9 +38,12 @@ privateurl#:#URL Privado (ex. http://192.168.1.100/bigbluebutton/)
 privateport#:#Porta Privada (ex. 8080)
 salt#:#Security Salt
 Date_Title#:#data
-Link_Title#:#link
+Date_Format#:#%H:%I:%S
 DeleteLink_Title#:#deletar gravação
-Length_Title#:#extensão
+Duration_Title#:#extensão
+Link_Title#:#formatos
+Recording_type_presentation#:#apresentação
+Recording_type_notes#:#notas
 Headline_Recordings#:#gravações
 checkbox_record_meeting#:#Gravar próxima sessão
 meetingRecordedMessage#:#A sessão atual será gravada!

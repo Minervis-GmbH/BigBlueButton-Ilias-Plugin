@@ -1,10 +1,10 @@
-// 
+//
 // Dutch Language File for Bigbluebutton Plugin
 //
 <!-- language file start -->
 obj_xbbb#:#Bigbluebutton
 objs_xbbb#:#Bigbluebutton Virtuele Klaslokalen
-obj_xbbb_duplicate#:#Kopieer 
+obj_xbbb_duplicate#:#Kopieer
 objs_xbbb_duplicate#:#Kopieer Bigbluebutton Virtueel Klaslokaal
 obj_xbbb_select#:#Selecteer Bigbluebutton Virtueel Klaslokaal
 xbbb_add#:#Voeg Bigbluebutton Virtueel Klaslokaal toe
@@ -38,9 +38,12 @@ privateurl#:#Private URL (b.v. http://192.168.1.100/bigbluebutton/)
 privateport#:#Private Poort (b.v. 8080)
 salt#:#Security Salt
 Date_Title#:#datum
-Link_Title#:#link
+Date_Format#:#%H:%I:%S
 DeleteLink_Title#:#Verwijder opname
-Length_Title#:#lengte
+Duration_Title#:#lengte
+Link_Title#:#formaten
+Recording_type_presentation#:#voorstelling
+Recording_type_notes#:#notities
 Headline_Recordings#:#opnames
 checkbox_record_meeting#:#Neem de volgende sessie op
 meetingRecordedMessage#:#De huidige sessie wordt opgenomen!
