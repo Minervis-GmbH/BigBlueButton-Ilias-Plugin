@@ -1,10 +1,10 @@
-// 
+//
 // Italian Language File for Bigbluebutton Plugin
 //
 <!-- language file start -->
 obj_xbbb#:#Bigbluebutton
 objs_xbbb#:#Bigbluebutton Virtual Classrooms
-obj_xbbb_duplicate#:#Copia 
+obj_xbbb_duplicate#:#Copia
 objs_xbbb_duplicate#:#Copia Bigbluebutton Virtual Classroom
 obj_xbbb_select#:#Seleziona Bigbluebutton Virtual Classroom
 xbbb_add#:#Aggiungi Bigbluebutton Virtual Classroom
@@ -43,9 +43,12 @@ title#:#Titolo
 description#:#Descrizione
 welcometext#:#Testo di benvenuto
 Date_Title#:#data
-Link_Title#:#link
+Date_Format#:#%H:%I:%S
 DeleteLink_Title#:#eliminare la registrazione
-Length_Title#:#lunghezza
+Duration_Title#:#lunghezza
+Link_Title#:#formati
+Recording_type_presentation#:#presentazione
+Recording_type_notes#:#appunti
 Headline_Recordings#:#registrazioni precedenti
 checkbox_record_meeting#:#sessione di registrazione
 meetingRecordedMessage#:#La sessione corrente viene registrato
