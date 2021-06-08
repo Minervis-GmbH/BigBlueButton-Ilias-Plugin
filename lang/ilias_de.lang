@@ -1,4 +1,4 @@
-// 
+// user_invite_info#:#Mit dem folgenden Link k&ouml;nnen Sie G&auml;ste zum Meeting einladen:
 // Deutsch Language File for Bigbluebutton Plugin
 //
 <!-- language file start -->
@@ -37,7 +37,7 @@ no_class_running#:#Ihr virtueller Raum wurde noch nicht aktiviert. Damit andere 
 start_class#:#Virtuellen Raum starten
 class_running#:#Der virtuelle Raum ist angelegt und aktiv. Klicken Sie hier um den virtuellen Raum zu beenden: 
 end_class#:#Virtuellen Raum beenden
-end_class_comment#:#Beachten Sie, dass durch das Beenden des Raumes (a) alle Teilnehmer getrennt werden, die sich noch in dem Raum befinden und (b) die geteilten Notizen und Whiteboardinhalte gelöscht werden.
+end_class_comment#:#Beachten Sie, dass durch das Beenden des Raumes (a) alle Teilnehmer getrenuser_invite_info#:#Mit dem folgeuser_invite_info#:#Mit dem folgeuser_invite_info#:#Mit dem folgenden Link k&ouml;nnen Sie G&auml;ste zum Meeting einladen:nden Link k&ouml;nnen Sie G&auml;ste zum Meeting einladen:nden Link k&ouml;nnen Sie G&auml;ste zum Meeting einladen:nt werden, die sich noch in dem Raum befinden und (b) die geteilten Notizen und Whiteboardinhalte gelöscht werden.
 new_class_created#:#Es wurde ein neuer virtueller Raum erstellt, dieser wird gleich in einem neuen Fenster geöffnet.
 new_class_created_warning#:#Sie müssen den Raum vor Ihren Teilnehmern betreten, es kann sich kein Teilnehmer anmelden, bis ein Moderator den Raum betreten hat.
 new_class_created_join_manual#:#Virtuellem Raum manuell beitreten, falls er nicht automatisch geöffnet wurde.
@@ -57,4 +57,24 @@ meetingRecordedMessage#:#Die aktuelle Sitzung wird aufgezeichnet!
 saving_invoked#:#Eintrag gespeichert
 choose_recording#:#Aufnahmen erlauben: Auswahlmöglichkeit
 choose_recording_info#:#Aktivieren Sie diese Option, wenn Benutzer mit Schreibrechten unter Einstellungen die Auswahl 'Aufnahmen erlauben' haben sollen. Da bei Bekanntwerden der URL zur Aufnahme eine Verbreitung an nicht vorgesehene Personen gegeben ist, sollte diese Option in den meisten Fällen nicht aktiviert sein.
-
+configurations#:# Konfiguration
+advanced_configurations#:#Erweiterte Konfiguration
+join_info#:#<br/>Wichtige Hinweise:<ul><li>Bitte <b>nutzen Sie ein Headset</b> zur Vermeidung von störenden Rückkopplungen oder Echos!</li><li><b>Bei schlechter Internetverbindung</b> sollten Sie Ihre Kamera (Webcam) abschalten und bei noch schlechterer Verbindung sollten Sie für die Übertragung des Tons eine Telefonkonferenz nutzen.</li></ul>
+tech_requirements_info#:#Technische Voraussetzungen:<ul><li>BigBlueButton nutzt den offenen Standard WebRTC, der von immer mehr Browsern unterstützt wird. Aktuell wird Google Chrome, der auf Chromium basierende Browser Microsoft Edge oder mit Einschränkungen Mozilla Firefox empfohlen. Ferner können Sie Safari Mobile ab iOS 12.2 und Chrome Mobile ab Android 6.0 nutzen. Microsoft Internet Explorer und ältere Edge-Versionen werden nicht unterstützt.</li><li>Die von Ihnen genutzte Firewall darf folgende Ports nicht blockieren: TCP/IP-Ports 80/443 (für HTTP/HTTPS) und UDP-Ports im Bereich 16384 - 32768 (<a href="https://docs.bigbluebutton.org/2.2/configure-firewall.html" target="_blank">Weiterführende Hinweise</a>).</li><li>Um Ihren Bildschirm übertragen zu können (Desktopsharing), sollten Sie Google Chrome nutzen und über eine performante Internetverbindung verfügen. Wir empfehlen Moderatoren und Präsentatoren darüberhinaus, ein kabelgebundenes Netzwerk (kein WLAN) zu nutzen.
+wait_join_meeting#:#<b>Aktuell ist noch keine Person mit Moderatorfunktion im virtuellen Meetingraum anwesend.<br/>Bitte warten Sie und rufen Sie diese Seite in einer Minute erneut auf.</b>
+wait_join_meeting_guest#:#<b>Aktuell ist noch keine Person mit Moderatorfunktion im virtuellen Meetingraum anwesend.<br/>Bitte warten Sie und klicken Sie in einer Minute erneut auf die Schaltfläche 'Meeting beitreten'.</b>
+top_moderator#:#Willkommen im Meetingraum!<br/>&nbsp;<br/><b>Dies ist ein moderierter Raum und Sie haben in diesem Raum die Moderatorfunktion.</b><br/>Personen ohne Moderatorfunktion können erst dann in den Meetingraum gelangen, wenn eine Person mit Moderatorfunktion im Raum ist.
+guest_displayname_input#:#Titel Vorname Nachname
+btntext_join_meeting#:#Meeting beitreten
+top_moderated_m_bbb#:#Willkommen im Meetingraum!<br/>&nbsp;<br/>Dies ist ein moderierter Raum und Sie können stets erst dann in den Meetingraum gelangen, wenn eine Person mit Moderatorfunktion im Raum ist.
+guest_invite_info#:#Mit dem folgenden Link k&ouml;nnen Sie G&auml;ste zum Meeting einladen:
+dialnumber#:# Dial Number
+accesscode#:# Access Code
+guestchoose#:# Allow to invite Guests
+maxparticipants#:# Max. Teilnehmer
+maxparticipants_info#:#Maximale Anzahl Teilnehmer je Meeting. Bei unbegrenzter Anzahl bitte '0' angeben.
+presentationurl#:#Startpräsentation
+presentationurl_info#:#Eigene Startpräsentation über URL laden. Der URL-Aufbau mu
+guest_global_choose#:# Gastlink Voreinstellung
+guest_global_choose_info#:#Diese Option sollte in den meisten Fällen deaktiviert sein. Eine Nutzung durch Unbefugte sollte weitgehend ausgeschlossen werden können. Gäste kommen stets nur als Teilnehmer in einen moderierten Raum. Dort muss ein Moderierender bereits anwesend sein. Gäste müssen Nutzungsbedingungen zustimmen, die als ILIAS-Sprachvariable gespeichert sind. Wechseln Sie zum Editieren zu Administration -> Sprachen. Klicken Sie auf die gewünschte 'Sprache' und tippen Sie bei 'Identifier' 'rep_robj_bbb_terms_of_use' ein. Klicken Sie dann auf 'Filter anwenden' und editieren Sie den Text.
+terms_of_use#:#<b>Schutzrechte</b><br/>Die in BigBlueButton-Konferenzen enthaltenen Informationen und Materialien wie z.B. Texte oder Bilder sind in der Regel durch Urheber-, Marken- oder Patentrechte geschützt.<br/>Die gesetzlichen Vorschriften zum Datenschutz sind zu beachten. Dies gilt insbesondere für die Aufzeichnung von BigBlueButton-Konferenzen. Das heimliche Aufzeichnen von Video- oder Audiokonferenzen ist ein Straftatbestand.<br/><br/><b>Verhaltensregeln</b><br/>Sie dürfen keine gegen gesetzliche Bestimmungen verstoßende, pornographische, obszöne, diffamierende, verleumderische, beleidigende, bedrohende, volksverhetzende oder rassistische Inhalte einstellen. Auch das Einstellen von Werbung ohne Genehmigung sowie die Übermittlung von Informationen, welche einen Virus, Manipulationen oder ähnliche schädigende Elemente enthalten, ist untersagt.<br/><br/><b>Verarbeitete Daten</b><br/>Bei der Nutzung von BigBlueButton werden folgende Daten erhoben:<ul><li>Verbindungsdaten (z. B. IP-Adresse, Browsertyp, Datum und Uhrzeit des Zugriffs)</li><li>Gegebenenfalls Zugangsdaten: Benutzername, Passwort in verschlüsselter Form</li><li>Inhaltsdaten (z. B. hochgeladene Dateien, Chatbeiträge, Umfragen)</li></ul>Die vorübergehende Speicherung der Verbindungsdaten, insbesondere der IP-Adresse, durch das System ist notwendig, um eine Auslieferung von BigBlueButton an den Rechner des Nutzers zu ermöglichen. Hierfür muss die IP-Adresse des Nutzers für die Dauer der Sitzung gespeichert bleiben. Rechtsgrundlage für die vorübergehende Speicherung der Daten ist Art. 6 Abs. 1 lit. f DSGVO.<br/>Die Verbindungsdaten werden ebenfalls in der Regel in Logfiles gespeichert. Der Löschzeitpunkt wird durch den Betreiber des Servers für BigBlueButton festgelegt.

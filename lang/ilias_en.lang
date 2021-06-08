@@ -56,3 +56,16 @@ status#:#status
 saving_invoked#:#saved
 choose_recording#:#Allow recordings globally
 choose_recording_info#:#Activate this option if you want users with write permissions to select 'Allow capturing' under Settings. Since the URL for the recording is known to be distributed to unintended persons, this option should not be activated in most cases.
+configurations#:# Konfiguration
+advanced_configurations#:#Erweiterte Konfiguration
+join_info#:#<br/>Wichtige Hinweise:<ul><li>Bitte <b>nutzen Sie ein Headset</b> zur Vermeidung von störenden Rückkopplungen oder Echos!</li><li><b>Bei schlechter Internetverbindung</b> sollten Sie Ihre Kamera (Webcam) abschalten und bei noch schlechterer Verbindung sollten Sie für die Übertragung des Tons eine Telefonkonferenz nutzen.</li></ul>
+tech_requirements_info#:#Technische Voraussetzungen:<ul><li>BigBlueButton nutzt den offenen Standard WebRTC, der von immer mehr Browsern unterstützt wird. Aktuell wird Google Chrome, der auf Chromium basierende Browser Microsoft Edge oder mit Einschränkungen Mozilla Firefox empfohlen. Ferner können Sie Safari Mobile ab iOS 12.2 und Chrome Mobile ab Android 6.0 nutzen. Microsoft Internet Explorer und ältere Edge-Versionen werden nicht unterstützt.</li><li>Die von Ihnen genutzte Firewall darf folgende Ports nicht blockieren: TCP/IP-Ports 80/443 (für HTTP/HTTPS) und UDP-Ports im Bereich 16384 - 32768 (<a href="https://docs.bigbluebutton.org/2.2/configure-firewall.html" target="_blank">Weiterführende Hinweise</a>).</li><li>Um Ihren Bildschirm übertragen zu können (Desktopsharing), sollten Sie Google Chrome nutzen und über eine performante Internetverbindung verfügen. Wir empfehlen Moderatoren und Präsentatoren darüberhinaus, ein kabelgebundenes Netzwerk (kein WLAN) zu nutzen.
+wait_join_meeting#:#<b>Aktuell ist noch keine Person mit Moderatorfunktion im virtuellen Meetingraum anwesend.<br/>Bitte warten Sie und rufen Sie diese Seite in einer Minute erneut auf.</b>
+wait_join_meeting_guest#:#<b>Aktuell ist noch keine Person mit Moderatorfunktion im virtuellen Meetingraum anwesend.<br/>Bitte warten Sie und klicken Sie in einer Minute erneut auf die Schaltfläche 'Meeting beitreten'.</b>
+top_moderator#:#Willkommen im Meetingraum!<br/>&nbsp;<br/><b>Dies ist ein moderierter Raum und Sie haben in diesem Raum die Moderatorfunktion.</b><br/>Personen ohne Moderatorfunktion können erst dann in den Meetingraum gelangen, wenn eine Person mit Moderatorfunktion im Raum ist.
+guest_displayname_input#:#Titel Vorname Nachname
+btntext_join_meeting#:#Meeting beitreten
+top_moderated_m_bbb#:#Willkommen im Meetingraum!<br/>&nbsp;<br/>Dies ist ein moderierter Raum und Sie können stets erst dann in den Meetingraum gelangen, wenn eine Person mit Moderatorfunktion im Raum ist.
+dialnumber#:# Dial Number
+accesscode#:# Access Code
+guestchoose#:# Allow to invite Guests

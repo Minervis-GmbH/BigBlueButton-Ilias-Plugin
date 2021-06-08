@@ -36,7 +36,9 @@ if(!$ilDB->tableExists('rep_robj_xbbb_data')){
 			'type' => 'integer',
 			'length' => 8,
 			'notnull' => false
-		)
+		),
+
+
 		
 	);
 
@@ -180,4 +182,115 @@ if (!$ilDB->tableColumnExists("rep_robj_xbbb_conf", "choose_recording")){
 		'default' => 1
 	));
 }
+?>
+<#4>
+<?php
+if (!$ilDB->tableColumnExists("rep_robj_xbbb_data", "dialnumber") &&
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "duration") &&
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "accesstoken") &&
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "refreshtoken") &&
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "guestlink") &&
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "guestchoose") &&
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "accesscode")){
+	$ilDB->addTableColumn('rep_robj_xbbb_data','dialnumber', array(
+		'type' => 'text',
+		'length' => 256,
+		'notnull' => false
+	));
+	$ilDB->addTableColumn('rep_robj_xbbb_data','accesstoken', array(
+		'type' => 'text',
+		'length' => 256,
+		'notnull' => false
+	));
+	$ilDB->addTableColumn('rep_robj_xbbb_data','refreshtoken', array(
+		'type' => 'text',
+		'length' => 256,
+		'notnull' => false
+	));
+	$ilDB->addTableColumn('rep_robj_xbbb_data','guestlink', array(
+		'type' => 'text',
+		'length' => 256,
+		'notnull' => false
+	));
+	
+	$ilDB->addTableColumn('rep_robj_xbbb_data','accesscode', array(
+		'type' => 'integer',
+		'length' => 8,
+		'notnull' => false
+	));
+	$ilDB->addTableColumn('rep_robj_xbbb_data', 'duration', array(
+		'type' => 'integer',
+		'length' => 8,
+		'notnull' => false,
+		'default' => 0
+	));
+	$ilDB->addTableColumn('rep_robj_xbbb_data', 'guestchoose', array(
+		'type' => 'integer',
+		'length' => 2,
+		'notnull' => true,
+		'default' => 0
+	));
+
+	
+}
+	if(!$ilDB->tableColumnExists('rep_robj_xbbb_conf', 'guestglobalchoose')){
+		$ilDB->addTableColumn('rep_robj_xbbb_conf', 'guestglobalchoose', array(
+			'type' => 'integer',
+			'length' => 2,
+			'notnull' => true,
+			'default' => 0
+		));
+		
+	}
+?>
+<#5>
+<?php
+if (
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "accesstoken") &&
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "refreshtoken") &&
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "guestlink") &&
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "guestchoose")){
+
+	$ilDB->addTableColumn('rep_robj_xbbb_data','accesstoken', array(
+		'type' => 'text',
+		'length' => 256,
+		'notnull' => false
+	));
+	$ilDB->addTableColumn('rep_robj_xbbb_data','refreshtoken', array(
+		'type' => 'text',
+		'length' => 256,
+		'notnull' => false
+	));
+	$ilDB->addTableColumn('rep_robj_xbbb_data','guestlink', array(
+		'type' => 'text',
+		'length' => 256,
+		'notnull' => false
+	));
+	
+
+	$ilDB->addTableColumn('rep_robj_xbbb_data', 'guestchoose', array(
+		'type' => 'integer',
+		'length' => 2,
+		'notnull' => true,
+		'default' => 0
+	));
+
+	
+}
+
+?>
+<#6>
+<?php
+if (
+	
+	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "presentationurl")){
+	$ilDB->addTableColumn('rep_robj_xbbb_data','presentationurl', array(
+		'type' => 'text',
+		'length' => 256,
+		'notnull' => false,
+		'default' => ''
+	));
+	
+}
+
 ?>
