@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // user_invite_info#:#Mit dem folgenden Link k&ouml;nnen Sie G&auml;ste zum Meeting einladen:
+=======
+//
+>>>>>>> origin/master
 // Deutsch Language File for Bigbluebutton Plugin
 //
 <!-- language file start -->
@@ -30,12 +34,12 @@ grp_create_xbbb#:#Neuen BigBlueButton-Raum erstellen
 fold_create_xbbb#:#Neuen BigBlueButton-Raum erstellen
 root_create_xbbb#:#Neuen BigBlueButton-Raum erstellen
 cat_create_xbbb#:#Neuen BigBlueButton-Raum erstellen
-content#:#Inhalt#:#Neuen BigBlueButton-Raum erstellen 
+content#:#Inhalt#:#Neuen BigBlueButton-Raum erstellen
 class_not_started_yet#:#Bislang ist noch kein Raum gestartet, versuchen Sie es zu einem späteren Zeitpunkt erneut.
 click_to_open_class#:#Virtuellen Raum öffnen
 no_class_running#:#Ihr virtueller Raum wurde noch nicht aktiviert. Damit andere Teilnehmer*innen den Raum betreten können, müssen Sie ihn zunächst starten.
 start_class#:#Virtuellen Raum starten
-class_running#:#Der virtuelle Raum ist angelegt und aktiv. Klicken Sie hier um den virtuellen Raum zu beenden: 
+class_running#:#Der virtuelle Raum ist angelegt und aktiv. Klicken Sie hier um den virtuellen Raum zu beenden:
 end_class#:#Virtuellen Raum beenden
 end_class_comment#:#Beachten Sie, dass durch das Beenden des Raumes (a) alle Teilnehmer getrenuser_invite_info#:#Mit dem folgeuser_invite_info#:#Mit dem folgeuser_invite_info#:#Mit dem folgenden Link k&ouml;nnen Sie G&auml;ste zum Meeting einladen:nden Link k&ouml;nnen Sie G&auml;ste zum Meeting einladen:nden Link k&ouml;nnen Sie G&auml;ste zum Meeting einladen:nt werden, die sich noch in dem Raum befinden und (b) die geteilten Notizen und Whiteboardinhalte gelöscht werden.
 new_class_created#:#Es wurde ein neuer virtueller Raum erstellt, dieser wird gleich in einem neuen Fenster geöffnet.
@@ -48,9 +52,12 @@ privateurl#:#Private URL (z. B. http://192.168.1.100/bigbluebutton/)
 privateport#:#Privater Port (z. B. 8080)
 salt#:#Security Salt
 Date_Title#:#Datum
-Link_Title#:#Link
+Date_Format#:#%H:%I:%S
 DeleteLink_Title#:#Aufnahme löschen
-Length_Title#:#Dauer
+Duration_Title#:#Dauer
+Link_Title#:#Formate
+Recording_type_presentation#:#Präsentation
+Recording_type_notes#:#Notizen
 Headline_Recordings#:#bisherige Aufnahmen
 checkbox_record_meeting#:#Sitzung aufzeichnen
 meetingRecordedMessage#:#Die aktuelle Sitzung wird aufgezeichnet!

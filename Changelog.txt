@@ -46,3 +46,6 @@ BigBLueButton-ILIAS Plugin Changelog
 2021 Version 1.0.14
 	- conffigure globally the option to choose whether recordings should be taken or not
 	- improve German translations
+2021 Version 1.0.15
+	- Add commas (a fix to the db error)
+	- update version

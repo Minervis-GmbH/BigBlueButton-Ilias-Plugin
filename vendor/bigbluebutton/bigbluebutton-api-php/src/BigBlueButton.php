@@ -491,6 +491,7 @@ class BigBlueButton
                 preg_match('/(?:JSESSIONID\s*)(?<JSESSIONID>.*)/', $cookies, $output_array);
                 $this->setJSessionId($output_array['JSESSIONID']);
             }
+            echo $data;
 
             return new SimpleXMLElement($data);
         } else {

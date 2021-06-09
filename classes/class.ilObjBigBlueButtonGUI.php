@@ -357,8 +357,19 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                     );
                     $table_row_template->setVariable("Date", $recording["startTime"]);
                     $seconds = round(($recording["endTime"]- $recording["startTime"])/1000);
-                    $table_row_template->setVariable("Duration", $seconds);
-                    $table_row_template->setVariable("Links", $recording["playback"]);
+                    $table_row_template->setVariable("Duration", $this->formatTimeDiff($seconds));
+
+                    $table_links = [];
+					foreach($recording->playback->format as $format) {
+						$table_link_template = new ilTemplate("tpl.BigBlueButtonRecordTableLink.html",
+										true,
+										true,
+										"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+						$table_link_template->setVariable("URL",$format->url);
+						$table_link_template->setVariable("Link_Title", $this->txt('Recording_type_' . $format->type));
+						$table_links[] = $table_link_template->get();
+					}
+                    $table_row_template->setVariable("Links", implode(' · ', $table_links));
                     $table_row_template->setVariable("DeleteLink", $recordID);
 
                     $table_row_template->setVariable("Link_Title", $this->txt("link_title"));
@@ -471,5 +482,11 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         $BBBHelper->deleteRecording($this->object, $_POST["recordID"]);
         $this->showContent();
     }
+
+    private function formatTimeDiff($seconds) {
+		$dtF = new \DateTime('@0');
+    $dtT = new \DateTime("@$seconds");
+    return $dtF->diff($dtT)->format( $this->txt("Date_Format") );
+	}
     
 }
