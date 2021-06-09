@@ -344,7 +344,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                 "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton"
             );
 
-            $table_content ="";
+            $table_content = [];
             $recordcount=0;
             $all_recordings=$BBBHelper->getRecordings($this->object);
             if ($all_recordings) {
@@ -356,8 +356,9 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                         "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton"
                     );
                     $table_row_template->setVariable("Date", $recording["startTime"]);
-                    $table_row_template->setVariable("LENGTH", $recording["playback_length"]);
-                    $table_row_template->setVariable("Link", $recording["playback"]);
+                    $seconds = round(($recording["endTime"]- $recording["startTime"])/1000);
+                    $table_row_template->setVariable("Duration", $seconds);
+                    $table_row_template->setVariable("Links", $recording["playback"]);
                     $table_row_template->setVariable("DeleteLink", $recordID);
 
                     $table_row_template->setVariable("Link_Title", $this->txt("link_title"));
