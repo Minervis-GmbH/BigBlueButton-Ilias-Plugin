@@ -118,7 +118,6 @@ class ilObjBigBlueButton extends ilObjectPlugin
             " WHERE id = ".$ilDB->quote($this->getId(), "integer")
         );
         while ($rec = $ilDB->fetchAssoc($set)) {
-            $logger->dump($rec);
             $this->setOnline($rec["is_online"]);
             $this->setAttendeePwd($rec["attendeepwd"]);
             $this->setModeratorPwd($rec["moderatorpwd"]);

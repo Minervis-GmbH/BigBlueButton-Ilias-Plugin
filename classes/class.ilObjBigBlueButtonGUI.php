@@ -346,43 +346,46 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 
             $table_content = [];
             $recordcount=0;
-            $all_recordings=$BBBHelper->getRecordings($this->object);
-            if ($all_recordings) {
-                foreach ($all_recordings as $recordID=> $recording) {
-                    $table_row_template = new ilTemplate(
-                        "tpl.BigBlueButtonRecordTableRow.html",
-                        true,
-                        true,
-                        "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton"
-                    );
-                    $table_row_template->setVariable("Date", $recording["startTime"]);
-                    $seconds = round(($recording["endTime"]- $recording["startTime"])/1000);
-                    $table_row_template->setVariable("Duration", $this->formatTimeDiff($seconds));
+            $all_recordings=$BBBHelper->getRecordings($this->object)->recordings->recording;
+            
+            if ($all_recordings){
+				foreach($all_recordings as $recording){
 
-                    $table_links = [];
+					$table_row_template = new ilTemplate("tpl.BigBlueButtonRecordTableRow.html",
+									true,
+									true,
+									"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+					$table_row_template->setVariable("Date",date("d.m.Y H:i",  substr ($recording->startTime,0,10)));
+					$seconds = round(($recording->endTime - $recording->startTime)/1000);
+					$table_row_template->setVariable("Duration", $this->formatTimeDiff( $seconds ));
+
+					$table_links = [];
 					foreach($recording->playback->format as $format) {
 						$table_link_template = new ilTemplate("tpl.BigBlueButtonRecordTableLink.html",
 										true,
 										true,
 										"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
 						$table_link_template->setVariable("URL",$format->url);
+                        if($format->type=="presentation"){
+                            $table_row_template->setVariable("DownloadLink", $BBBHelper->getVideoDownloadStreamUrl($format->url));
+                            $table_row_template->setVariable("DownloadText", $this->txt("download_text"));
+                        }
 						$table_link_template->setVariable("Link_Title", $this->txt('Recording_type_' . $format->type));
 						$table_links[] = $table_link_template->get();
 					}
-                    $table_row_template->setVariable("Links", implode(' · ', $table_links));
-                    $table_row_template->setVariable("DeleteLink", $recordID);
+					$table_row_template->setVariable("Links", implode(' · ', $table_links));
+					$table_row_template->setVariable("DeleteLink", $recording->recordID);
+					$table_row_template->setVariable("DeleteLink_Title", $this->txt("deletelink_title"));
 
-                    $table_row_template->setVariable("Link_Title", $this->txt("link_title"));
-                    $table_row_template->setVariable("DeleteLink_Title", $this->txt("deletelink_title"));
-
-                    $table_content .= $table_row_template->get();
-                    $recordcount++;
-                }
-            }
-            $table_template->setVariable("BBB_RECORD_CONTENT", $table_content);
-            $table_template->setVariable("Date_Title", $this->txt("Date_Title"));
-            $table_template->setVariable("LENGTH_TITLE", $this->txt("Length_Title"));
-            $table_template->setVariable("Link_Title", $this->txt("Link_Title"));
+					$table_content[] = $table_row_template->get();
+					$recordcount++;
+				}
+			}
+			$table_template->setVariable("BBB_RECORD_CONTENT", implode($table_content));
+			$table_template->setVariable("Date_Title", $this->txt("Date_Title"));
+			$table_template->setVariable("Duration_Title", $this->txt("Duration_Title"));
+			$table_template->setVariable("Link_Title", $this->txt("Link_Title"));
+            //$table_template->setVariable("Download_Title", $this->txt("Download_Title"));
             $my_tpl->setVariable("recordings", $table_template->get());
             $my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
             if ($values["choose_recording"]) {

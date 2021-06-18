@@ -41,6 +41,7 @@ salt#:#Sal de seguridad
 Date_Title#:#fecha
 Date_Format#:#%H:%I:%S
 DeleteLink_Title#:#eliminar grabación
+DownloadText#:#descargue
 Duration_Title#:#longitud
 Link_Title#:#formats
 Recording_type_presentation#:#presentación
@@ -60,3 +61,23 @@ saving_invoked#:#Guardado
 offline#:#Desactivado
 choose_recording#:#Allow recordings globally
 choose_recording_info#:#Activate this option if you want users with write permissions to select 'Allow capturing' under Settings. Since the URL for the recording is known to be distributed to unintended persons, this option should not be activated in most cases.
+configurations#:# Konfiguration
+advanced_configurations#:# Advanced configuration.
+join_info#:#<br/>Important notes:<ul><li>Please <b>use a headset</b> to avoid annoying feedback or echoes!</li><li><b>If you have a poor internet connection</b> you should turn off your camera (webcam) and if you have an even poorer connection you should use a conference call to transmit the audio.</li></ul>.
+tech_requirements_info#:#Technical requirements:<ul><li>BigBlueButton uses the open standard WebRTC, which is supported by more and more browsers. Currently Google Chrome, the Chromium-based browser Microsoft Edge or with restrictions Mozilla Firefox are recommended. Furthermore, you can use Safari Mobile from iOS 12.2 and Chrome Mobile from Android 6.0. Microsoft Internet Explorer and older Edge versions are not supported.</li><li>The firewall you use must not block the following ports: TCP/IP ports 80/443 (for HTTP/HTTPS) and UDP ports in the range 16384 - 32768 (<a href="https://docs.bigbluebutton.org/2.2/configure-firewall.html" target="_blank">Advanced Notes</a>).</li><li>In order to be able to transfer your screen (desktop sharing), you should use Google Chrome and have a high-performance Internet connection. In addition, we recommend that presenters and moderators use a wired network (not WLAN).
+wait_join_meeting#:#<b>Currently there is no presenter in the virtual meeting room.<br/>Please wait and access this page again in one minute.</b>
+wait_join_meeting_guest#:#<b>Currently there is no person with moderator function present in the virtual meeting room.<br/>Please wait and click the 'Join Meeting' button again in one minute.</b>
+top_moderator#:#Welcome to the meeting room!<br/>&nbsp;<br/><b>This is a moderated room and you have the moderator function in this room.</b><br/>People without moderator function cannot enter the meeting room until a person with moderator function is in the room.
+guest_displayname_input#:#title firstname lastname
+btntext_join_meeting#:#join meeting
+top_moderated_m_bbb#:#Welcome to the meeting room!<br/>&nbsp;<br/>This is a moderated room and you can always join the meeting room only when a moderator person is in the room.
+dialnumber#:# Telefonnummer
+accesscode#:# Zugangscode
+guestchoose#:# Einladen von Gästen zulassen
+maxparticipants#:# Max. Teilnehmer
+maxparticipants_info#:#Maximale Anzahl Teilnehmer je Meeting. Bei unbegrenzter Anzahl bitte '0' angeben.
+presentationurl#:#Startpräsentation
+presentationurl_info#:#Eigene Startpräsentation über URL laden. Der URL-Aufbau mu
+guest_global_choose#:# Gastlink Voreinstellung
+guest_global_choose_info#:#Diese Option sollte in den meisten Fällen deaktiviert sein. Eine Nutzung durch Unbefugte sollte weitgehend ausgeschlossen werden können. Gäste kommen stets nur als Teilnehmer in einen moderierten Raum. Dort muss ein Moderierender bereits anwesend sein. Gäste müssen Nutzungsbedingungen zustimmen, die als ILIAS-Sprachvariable gespeichert sind. Wechseln Sie zum Editieren zu Administration -> Sprachen. Klicken Sie auf die gewünschte 'Sprache' und tippen Sie bei 'Identifier' 'rep_robj_bbb_terms_of_use' ein. Klicken Sie dann auf 'Filter anwenden' und editieren Sie den Text.
+terms_of_use#:#<b>Schutzrechte</b><br/>Die in BigBlueButton-Konferenzen enthaltenen Informationen und Materialien wie z.B. Texte oder Bilder sind in der Regel durch Urheber-, Marken- oder Patentrechte geschützt.<br/>Die gesetzlichen Vorschriften zum Datenschutz sind zu beachten. Dies gilt insbesondere für die Aufzeichnung von BigBlueButton-Konferenzen. Das heimliche Aufzeichnen von Video- oder Audiokonferenzen ist ein Straftatbestand.<br/><br/><b>Verhaltensregeln</b><br/>Sie dürfen keine gegen gesetzliche Bestimmungen verstoßende, pornographische, obszöne, diffamierende, verleumderische, beleidigende, bedrohende, volksverhetzende oder rassistische Inhalte einstellen. Auch das Einstellen von Werbung ohne Genehmigung sowie die Übermittlung von Informationen, welche einen Virus, Manipulationen oder ähnliche schädigende Elemente enthalten, ist untersagt.<br/><br/><b>Verarbeitete Daten</b><br/>Bei der Nutzung von BigBlueButton werden folgende Daten erhoben:<ul><li>Verbindungsdaten (z. B. IP-Adresse, Browsertyp, Datum und Uhrzeit des Zugriffs)</li><li>Gegebenenfalls Zugangsdaten: Benutzername, Passwort in verschlüsselter Form</li><li>Inhaltsdaten (z. B. hochgeladene Dateien, Chatbeiträge, Umfragen)</li></ul>Die vorübergehende Speicherung der Verbindungsdaten, insbesondere der IP-Adresse, durch das System ist notwendig, um eine Auslieferung von BigBlueButton an den Rechner des Nutzers zu ermöglichen. Hierfür muss die IP-Adresse des Nutzers für die Dauer der Sitzung gespeichert bleiben. Rechtsgrundlage für die vorübergehende Speicherung der Daten ist Art. 6 Abs. 1 lit. f DSGVO.<br/>Die Verbindungsdaten werden ebenfalls in der Regel in Logfiles gespeichert. Der Löschzeitpunkt wird durch den Betreiber des Servers für BigBlueButton festgelegt.
