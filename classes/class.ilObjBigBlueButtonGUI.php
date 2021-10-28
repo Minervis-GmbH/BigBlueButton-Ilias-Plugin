@@ -259,6 +259,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 			$svrPublicURL = $record["svrpublicurl"];
 			$svrPublicPort = $record["svrpublicport"];
 			$values["choose_recording"] = $record["choose_recording"];
+			$values["enable_learningdashboard"] = $record["enable_learningdashboard"];
 		}
 
 
@@ -348,6 +349,11 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 				$my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "visible");
 			}else{
 				$my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "hidden");
+			}
+			if ($values["enable_learningdashboard"]){
+				$my_tpl->setVariable("ENABLE_LEARNINGDASHBOARD_VISIBLE", "visible");
+			}else{
+				$my_tpl->setVariable("ENABLE_LEARNINGDASHBOARD_VISIBLE", "hidden");
 			}
 			$my_tpl->setVariable("checkbox_record_meeting", $this->txt("checkbox_record_meeting"));
 			$my_tpl->setVariable("hasMeetingRecordings", $recordcount > 0?"true":"false");
