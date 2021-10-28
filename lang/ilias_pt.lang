@@ -58,3 +58,6 @@ status#:#status
 saving_invoked#:#salvo
 choose_recording#:#Allow recordings globally
 choose_recording_info#:#Activate this option if you want users with write permissions to select 'Allow capturing' under Settings. Since the URL for the recording is known to be distributed to unintended persons, this option should not be activated in most cases.
+checkbox_enable_learningdashboard#:#Enable Learning Dashboard
+enable_learningdashboard#:#Enable Learning Dashboard
+enable_learningdashboard_info#:#When this option is enabled BigBlueButton generates a Dashboard where moderators can view a summary of the activities of the meeting. Please review your actual privacy policy. (Version 2.4)
