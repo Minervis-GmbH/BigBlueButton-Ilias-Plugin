@@ -60,3 +60,6 @@ meetingRecordedMessage#:#Die aktuelle Sitzung wird aufgezeichnet!
 saving_invoked#:#Eintrag gespeichert
 choose_recording#:#Aufnahmen erlauben: Auswahlmöglichkeit
 choose_recording_info#:#Aktivieren Sie diese Option, wenn Benutzer mit Schreibrechten unter Einstellungen die Auswahl 'Aufnahmen erlauben' haben sollen. Da bei Bekanntwerden der URL zur Aufnahme eine Verbreitung an nicht vorgesehene Personen gegeben ist, sollte diese Option in den meisten Fällen nicht aktiviert sein.
+checkbox_enable_learningdashboard#:#Aktivitäten-Übersicht aktivieren
+enable_learningdashboard#:#Aktivitäten-Übersicht aktivieren
+enable_learningdashboard_info#:#Wenn diese Funktion aktiviert ist, können Moderatoren eine Zusammenfassung der Aktivitäten der Teilnehmenden sehen. Bitte beachten Sie die geltenden Datenschutzbestimmungen. (Verfügbar ab Version 2.4)
