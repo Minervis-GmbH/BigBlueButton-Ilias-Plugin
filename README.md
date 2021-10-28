@@ -60,6 +60,8 @@ On your ILIAS Server:
         - E.g:  https://my.bbb-server.com:9003/bigbluebutton
         
     - BBB security salt
+    - Enable global recording option
+    - Enable global Learning Dashboard
 - finally you can create "Bigbluebutton" Virtual Classrooms as regular repository object
 **Note:** If the server is not reachable, during configuration a message will be displayed. After correcting the error, make sure to press the save button twice.
 
