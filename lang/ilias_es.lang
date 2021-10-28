@@ -60,3 +60,6 @@ saving_invoked#:#Guardado
 offline#:#Desactivado
 choose_recording#:#Allow recordings globally
 choose_recording_info#:#Activate this option if you want users with write permissions to select 'Allow capturing' under Settings. Since the URL for the recording is known to be distributed to unintended persons, this option should not be activated in most cases.
+checkbox_enable_learningdashboard#:#Habilitar el panel de aprendizaje
+enable_learningdashboard#:#Habilitar el panel de aprendizaje
+enable_learningdashboard_info#:#Cuando esta opción está habilitada, BigBlueButton genera un Tablero donde los moderadores pueden ver un resumen de las actividades de la reunión. Revise su política de privacidad actual. (Version 2.4)
