@@ -58,6 +58,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 	        $values["svrprivateurl"] = $record["svrprivateurl"];
 			$values["svrsalt"] = $record["svrsalt"];
 			$values["choose_recording"] = $record["choose_recording"];
+			$values["enable_learningdashboard"] = $record["enable_learningdashboard"];
 		}
 
 		
@@ -106,6 +107,12 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 		$choose_recording->setChecked((int) $values['choose_recording']);
 		$form->addItem($choose_recording);
 		
+		//Learning Dashboard configuration
+		$enable_learningdashboard = new ilCheckboxInputGUI($pl->txt("enable_learningdashboard"), "enable_learningdashboard");
+		$enable_learningdashboard->setRequired(false);
+		$enable_learningdashboard->setInfo($pl->txt("enable_learningdashboard_info"));
+		$enable_learningdashboard->setChecked((int) $values['enable_learningdashboard']);
+		$form->addItem($enable_learningdashboard);
 	
 		$form->addCommandButton("save", $lng->txt("save"));
 	                
@@ -133,6 +140,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 			$setPrivateURL = $this->checkUrl($form->getInput("frmprivateurl"));
 			$setSalt= $form->getInput("frmsalt");
 			$choose_recording = (int) $form->getInput("choose_recording");
+			$enable_learningdashboard = (int) $form->getInput("enable_learningdashboard");
 			
 			// check if data exisits decide to update or insert
 			$result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
@@ -141,20 +149,22 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 
 
 				$ilDB->manipulate("INSERT INTO rep_robj_xbbb_conf ".
-				"(id, svrpublicurl , svrprivateurl, svrsalt, choose_recording) VALUES (".
+				"(id, svrpublicurl , svrprivateurl, svrsalt, choose_recording, enable_learningdashboard) VALUES (".
 				$ilDB->quote(1, "integer").",". // id
 				$ilDB->quote($setPublicURL, "text").",". //public url
 				$ilDB->quote($setPrivateURL, "text").",". //private url
 
 				$ilDB->quote($setSalt, "text").",". //salt
-				$ilDB->quote($choose_recording, "integer").
+				$ilDB->quote($choose_recording, "integer").",".
+				$ilDB->quote($enable_learningdashboard, "integer").
 				")");
 			}else{
 				$ilDB->manipulate($up = "UPDATE rep_robj_xbbb_conf  SET ".
 				" svrpublicurl = ".$ilDB->quote($setPublicURL, "text").",".
 				" svrprivateurl = ".$ilDB->quote($setPublicURL, "text").",".
 				" svrsalt = ".$ilDB->quote($setSalt, "text"). ",".
-				" choose_recording = ".$ilDB->quote($choose_recording, "integer").
+				" choose_recording = ".$ilDB->quote($choose_recording, "integer"). ",".
+				" enable_learningdashboard = ".$ilDB->quote($enable_learningdashboard, "integer").
 				" WHERE id = ".$ilDB->quote(1, "integer")
 				);
 			}
