@@ -51,7 +51,7 @@ class ilBigBlueButtonProtocol
 	
 	
 	
-	function createMeeting($object, $record = false){
+	function createMeeting($object, $record = false, $enable_learningdashboard = false){
 		global $DIC; /** @var Container $DIC */
 		$dic=$DIC;		
 		
@@ -87,7 +87,7 @@ class ilBigBlueButtonProtocol
 		$logoutURL = ilLink::_getLink($object->getRefId());
 		
 		
-		$response=BigBlueButton::createMeetingArray($meetingTitle, $meetingID, $welcomeString, $mPW, $aPW, $SALT, $srvURL, $logoutURL, $record );
+		$response=BigBlueButton::createMeetingArray($meetingTitle, $meetingID, $welcomeString, $mPW, $aPW, $SALT, $srvURL, $logoutURL, $record, $enable_learningdashboard);
 		
 		return $response;
 		
