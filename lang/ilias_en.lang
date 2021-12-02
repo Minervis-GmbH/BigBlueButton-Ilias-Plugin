@@ -67,16 +67,23 @@ tech_requirements_info#:#Technical requirements:<ul><li>BigBlueButton uses the o
 wait_join_meeting#:#<b>Currently there is no presenter in the virtual meeting room.<br/>Please wait and access this page again in one minute.</b>
 wait_join_meeting_guest#:#<b>Currently there is no person with moderator function present in the virtual meeting room.<br/>Please wait and click the 'Join Meeting' button again in one minute.</b>
 top_moderator#:#Welcome to the meeting room!<br/>&nbsp;<br/><b>This is a moderated room and you have the moderator function in this room.</b><br/>People without moderator function cannot enter the meeting room until a person with moderator function is in the room.
-guest_displayname_input#:#title firstname lastname
+guest_displayname_input#:#Enter your name!
 btntext_join_meeting#:#join meeting
-top_moderated_m_bbb#:#Welcome to the meeting room!<br/>&nbsp;<br/>This is a moderated room and you can always join the meeting room only when a moderator person is in the room.
-dialnumber#:# Telefonnummer
-accesscode#:# Zugangscode
-guestchoose#:# Einladen von Gästen zulassen
-maxparticipants#:# Max. Teilnehmer
-maxparticipants_info#:#Maximale Anzahl Teilnehmer je Meeting. Bei unbegrenzter Anzahl bitte '0' angeben.
-presentationurl#:#Startpräsentation
-presentationurl_info#:#Eigene Startpräsentation über URL laden. Der URL-Aufbau mu
-guest_global_choose#:# Gastlink Voreinstellung
-guest_global_choose_info#:#Diese Option sollte in den meisten Fällen deaktiviert sein. Eine Nutzung durch Unbefugte sollte weitgehend ausgeschlossen werden können. Gäste kommen stets nur als Teilnehmer in einen moderierten Raum. Dort muss ein Moderierender bereits anwesend sein. Gäste müssen Nutzungsbedingungen zustimmen, die als ILIAS-Sprachvariable gespeichert sind. Wechseln Sie zum Editieren zu Administration -> Sprachen. Klicken Sie auf die gewünschte 'Sprache' und tippen Sie bei 'Identifier' 'rep_robj_bbb_terms_of_use' ein. Klicken Sie dann auf 'Filter anwenden' und editieren Sie den Text.
-terms_of_use#:#<b>Schutzrechte</b><br/>Die in BigBlueButton-Konferenzen enthaltenen Informationen und Materialien wie z.B. Texte oder Bilder sind in der Regel durch Urheber-, Marken- oder Patentrechte geschützt.<br/>Die gesetzlichen Vorschriften zum Datenschutz sind zu beachten. Dies gilt insbesondere für die Aufzeichnung von BigBlueButton-Konferenzen. Das heimliche Aufzeichnen von Video- oder Audiokonferenzen ist ein Straftatbestand.<br/><br/><b>Verhaltensregeln</b><br/>Sie dürfen keine gegen gesetzliche Bestimmungen verstoßende, pornographische, obszöne, diffamierende, verleumderische, beleidigende, bedrohende, volksverhetzende oder rassistische Inhalte einstellen. Auch das Einstellen von Werbung ohne Genehmigung sowie die Übermittlung von Informationen, welche einen Virus, Manipulationen oder ähnliche schädigende Elemente enthalten, ist untersagt.<br/><br/><b>Verarbeitete Daten</b><br/>Bei der Nutzung von BigBlueButton werden folgende Daten erhoben:<ul><li>Verbindungsdaten (z. B. IP-Adresse, Browsertyp, Datum und Uhrzeit des Zugriffs)</li><li>Gegebenenfalls Zugangsdaten: Benutzername, Passwort in verschlüsselter Form</li><li>Inhaltsdaten (z. B. hochgeladene Dateien, Chatbeiträge, Umfragen)</li></ul>Die vorübergehende Speicherung der Verbindungsdaten, insbesondere der IP-Adresse, durch das System ist notwendig, um eine Auslieferung von BigBlueButton an den Rechner des Nutzers zu ermöglichen. Hierfür muss die IP-Adresse des Nutzers für die Dauer der Sitzung gespeichert bleiben. Rechtsgrundlage für die vorübergehende Speicherung der Daten ist Art. 6 Abs. 1 lit. f DSGVO.<br/>Die Verbindungsdaten werden ebenfalls in der Regel in Logfiles gespeichert. Der Löschzeitpunkt wird durch den Betreiber des Servers für BigBlueButton festgelegt.
+top_moderated_m#:#Welcome to the meeting room!<br/>&nbsp;<br/>This is a moderated room and you can always join the meeting room only when a moderator person is in the room.
+dialnumber#:# phone number
+accesscode#:# access code
+guestchoose#:# Allow inviting guests
+maxparticipants#:# Max. Participants
+maxparticipants_info#:#Maximum number of participants per meeting. If unlimited, please specify '0'.
+presentationurl#:#Start presentation
+presentationurl_info#:#Load your own start presentation via URL. The URL structure must be
+guest_global_choose#:#Guest link preset
+guest_global_choose_info#:#This option should be disabled in most cases. It should be possible to largely exclude use by unauthorized persons. Guests always enter a moderated room only as participants. A moderator must already be present there. Guests must agree to terms of use, which are stored as ILIAS language variable. To edit, switch to Administration -> Languages. Click on the desired 'Language' and type 'rep_robj_bbb_terms_of_use' for 'Identifier'. Then click on 'Apply filter' and edit the text.
+terms_of_use#:#<b>Protection rights</b><br/>The information and materials contained in BigBlueButton conferences, such as texts or images, are usually protected by copyright, trademark or patent rights.<br/>The legal regulations regarding data protection must be observed. This applies in particular to the recording of BigBlueButton conferences. Surreptitious recording of video or audio conferences is a criminal offense.<br/><br/><b>Rules of Conduct</b><br/>You may not post any content that violates any law, including but not limited to pornographic, obscene, defamatory, libelous, abusive, threatening, hateful, or racially-inciting material. Also the posting of advertisements without permission as well as the transmission of information containing a virus, manipulations or similar harmful elements is prohibited.<br/><br/><b>Processed Data</b><br/>When using BigBlueButton, the following data will be collected:<ul><li>Connection data (e.g. IP address, browser type, date and time of access)</li><li>If applicable, access data: Username, password in encrypted form</li><li>Content data (e.g. uploaded files, chat posts, surveys)</li></ul>The temporary storage of connection data, in particular the IP address, by the system is necessary to enable delivery of BigBlueButton to the user's computer. For this purpose, the user's IP address must remain stored for the duration of the session. The legal basis for the temporary storage of the data is Art. 6 (1) lit. f DSGVO.<br/>The connection data is also usually stored in log files. The deletion time is determined by the operator of the server for BigBlueButton.
+err_msg_displayname#:# Display name should never be empty.
+publish_link#:#publish the recording
+unpublish_link#:#unpublish the recording
+max_duration#:#Max. duration of the meeting
+guest_invite_info#:#You can invite guests using the following link:
+allow_download#:#Allow Download
+allow_download_info#:#For the download feature to work, an addon should be installed at the bbb-server. Please check the script at <a href="https://github.com/Minervis-GmbH/video-export">https://github.com/Minervis-GmbH/video-export</a>

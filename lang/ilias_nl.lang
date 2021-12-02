@@ -67,7 +67,7 @@ wait_join_meeting_guest#:#<b>Currently there is no person with moderator functio
 top_moderator#:#Welcome to the meeting room!<br/>&nbsp;<br/><b>This is a moderated room and you have the moderator function in this room.</b><br/>People without moderator function cannot enter the meeting room until a person with moderator function is in the room.
 guest_displayname_input#:#title firstname lastname
 btntext_join_meeting#:#join meeting
-top_moderated_m_bbb#:#Welcome to the meeting room!<br/>&nbsp;<br/>This is a moderated room and you can always join the meeting room only when a moderator person is in the room.
+top_moderated_m#:#Welcome to the meeting room!<br/>&nbsp;<br/>This is a moderated room and you can always join the meeting room only when a moderator person is in the room.
 dialnumber#:# Telefonnummer
 accesscode#:# Zugangscode
 guestchoose#:# Einladen von Gästen zulassen

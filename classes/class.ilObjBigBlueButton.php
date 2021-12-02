@@ -38,9 +38,12 @@ class ilObjBigBlueButton extends ilObjectPlugin
     private $dialNumber;
     private $guestChooseEnabled;
     private $guestGlobalEnabled;
+    private $maxParticipants;
 
     private $accessToken;
     private $refreshToken;
+    private $publish = true;
+    private $allow_download = false;
     /**
     * Constructor
     *
@@ -76,7 +79,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
         $this->generateCode();
 
         $ilDB->manipulate("INSERT INTO rep_robj_xbbb_data ".
-            "(id, is_online, attendeepwd, moderatorpwd, welcometext, maxparticipants, sequence, dialnumber, accesscode, duration, presentationurl, guestchoose) VALUES (".
+            "(id, is_online, attendeepwd, moderatorpwd, welcometext, maxparticipants, sequence, dialnumber, accesscode, duration, presentationurl, allow_download, guestchoose) VALUES (".
             $ilDB->quote($this->getId(), "integer").",".
             $ilDB->quote($this->getOnline(), "integer").",".
             $ilDB->quote($this->getAttendeePwd(), "text").",".
@@ -88,6 +91,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $ilDB->quote($this->getAccessCode(), "text"). ",".
             $ilDB->quote($this->getMeetingDuration(), "integer"). ",".
             $ilDB->quote($this->getPresentationUrl(), "text"). ",".
+            $ilDB->quote((int)$this->isDownloadAllowed(), "integer"). ",".
             $ilDB->quote((int)$this->isGuestLinkAllowed(), "integer").
             ")");
 
@@ -110,8 +114,6 @@ class ilObjBigBlueButton extends ilObjectPlugin
     public function doRead()
     {
         global $ilDB;
-        global $DIC;
-        $logger =$DIC->logger()->root();
 
         $set = $ilDB->query(
             "SELECT * FROM rep_robj_xbbb_data ".
@@ -124,11 +126,13 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $this->setWelcomeText($rec["welcometext"]);
             $this->setMaxParticipants($rec["maxparticipants"]);
             $this->setSequence($rec["sequence"]);
-            $this->setDialNumber($rec["dialnumber"]);
+            $this->setDialNumber($rec["dialnumber"] !==null ? $rec["dialnumber"]: '');
             $this->setAccessCode($rec["accesscode"]);
             $this->setMeetingDuration($rec["duration"]);
             $this->setGuestLinkAllowed((bool)$rec["guestchoose"]);
+            $this->setDownloadAllowed((bool)$rec["allow_download"]);
             $this->setPresentationUrl($rec["presentationurl"]!==null? $rec["presentationurl"]: '');
+            $this->setPublish((bool)$rec["publish"]);
         }
 
         $result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
@@ -171,9 +175,13 @@ class ilObjBigBlueButton extends ilObjectPlugin
             " moderatorpwd = ".$ilDB->quote($this->getModeratorPwd(), "text").",".
             " welcometext = ".$ilDB->quote($this->getWelcomeText(), "text").",".
             " maxparticipants = ".$ilDB->quote($this->getMaxParticipants(), "integer").",".
+            " duration = ".$ilDB->quote($this->getMeetingDuration(), "integer").",".
+            " dialnumber = ".$ilDB->quote($this->getDialNumber(), "text").",".
             " sequence = ".$ilDB->quote($this->getSequence(), "integer"). "," .
-            "guestchoose = ".$ilDB->quote((int)$this->isGuestLinkAllowed()). ",".
-            "presentationurl = ". $ilDB->quote($this->getPresentationUrl()) .
+            " guestchoose = ".$ilDB->quote((int)$this->isGuestLinkAllowed()). ",".
+            " allow_download = ".$ilDB->quote((int)$this->isDownloadAllowed()). ",".
+            " publish = ".$ilDB->quote((int)$this->getPublish()). ",".
+            " presentationurl = ". $ilDB->quote($this->getPresentationUrl()) .
             " WHERE id = ".$ilDB->quote($this->getId(), "integer")
         );
     }
@@ -208,6 +216,8 @@ class ilObjBigBlueButton extends ilObjectPlugin
         $new_obj->setMaxParticipants($this->getMaxParticipants());
         $new_obj->setSequence($this->getSequence());
         $new_obj->setGuestLinkAllowed($this->isGuestLinkAllowed());
+        $new_obj->setPublish($this->getPublish());
+        $new_obj->setDownloadAllowed($this->isDownloadAllowed());
 
         $new_obj->update();
     }
@@ -389,12 +399,14 @@ class ilObjBigBlueButton extends ilObjectPlugin
     {
         $this->refreshToken = $refreshToken;
     }
-    public function setDialNumber($dialNumber) {
+    public function setDialNumber(string $dialNumber) 
+    {
         $this->dialNumber = $dialNumber;
+        
     }
     public function getDialNumber()
     {
-        $this->dialNumber;
+        return $this->dialNumber;
     }
 
     public function generateCode()
@@ -421,15 +433,23 @@ class ilObjBigBlueButton extends ilObjectPlugin
     {
         return $this->is_guest_link;
     }
-    public function getGuestLink()
+    public function getPublish()
     {
-
+        return $this->publish ? $this->publish : true;
     }
-    public function setGuestLink()
+    public function setPublish($publish)
     {
-
+        $this->publish = $publish;
     }
 
+    public function isDownloadAllowed()
+    {
+        return $this->allow_download;
+    }
+    public function setDownloadAllowed($allow_download)
+    {
+        $this->allow_download = $allow_download;
+    }
     
 
     

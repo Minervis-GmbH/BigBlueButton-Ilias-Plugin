@@ -52,8 +52,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
      */
     public function initConfigurationForm()
     {
-        global $lng, $ilCtrl, $ilDB,$DIC;
-        /*$log=$DIC->logger()->root();*/
+        global $lng, $ilCtrl, $ilDB;
 
         $values = array();
         $result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");

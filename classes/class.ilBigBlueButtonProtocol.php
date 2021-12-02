@@ -45,17 +45,9 @@ class ilBigBlueButtonProtocol
     public function getVideoDownloadStreamUrl(string $url)
     {
         $record_part = explode('playback/presentation/2.3/', $url);
-        $video_path = $record_part[0] . $record_part[1] . "/" . $record_part[1] . ".mp4";
-        $video_url = str_replace("playback", "download", $video_path);
-        //Check if the MP4 exists
-        //$ch = curl_init($video_url);
-        //curl_exec($ch);
-        $http_status = 400;
-        // if (!curl_errno($ch)) {
-        //     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        // }
-        // curl_close($ch);
-        return  (int)$http_status ===200 ? $video_url : '';
+        $recordID = trim($record_part[1]);
+        $video_path = trim($record_part[0]) . "presentation/" . $recordID . "/" . $recordID . "_full.webm";
+        return $video_path ;
     }
 
     public function getInviteUrl($title = "Guest")
@@ -69,10 +61,7 @@ class ilBigBlueButtonProtocol
 
     public function createMeeting($object, $record = false)
     {
-        global $DIC; /** @var Container $DIC */
 
-
-        $logger =  $DIC->logger()->root();
         $meetingID=$object->getBBBId();
         $meetingTitle=$object->getTitle();
 
@@ -109,7 +98,7 @@ class ilBigBlueButtonProtocol
         if ($object->getMaxParticipants()>0){
             $this->createMeetingParam->setMaxParticipants($object->getMaxParticipants());
         }
-        if( (bool)(strlen($pdf = $this->object->getPresentationUrl())) ) {
+        if( (bool)(strlen($pdf = $this->object->getPresentationUrl())) && $this->isPDFValid($pdf)) {         
             $this->createMeetingParam->addPresentation($pdf);
         }
         $this->bbb->createMeeting($this->createMeetingParam);
@@ -119,7 +108,7 @@ class ilBigBlueButtonProtocol
 
     public function joinURL($object)
     {
-        global $ilUser;
+        global $ilUser, $DIC;
         $userName=$ilUser->getFullname();
         $meetingID=$object->getBBBId();
         $aPW=$object->getAttendeePwd();
@@ -164,17 +153,16 @@ class ilBigBlueButtonProtocol
         $endMeetingResponse = $this->bbb->endMeeting($endParams);
     }
 
-    public function getRecordings($object)
+    public function getRecordingsRaw()
     {
-        require_once "./Services/Calendar/classes/class.ilDateTime.php";
-
-        $meetingID=$object->getBBBId();
+        return $this->getRecordings()->getRawXml();
+    }
+    public function getRecordings()
+    {
+        $meetingID=$this->object->getBBBId();
         $recordParameters = new GetRecordingsParameters();
         $recordParameters->setMeetingID($meetingID);
-        
-		$all_records = $this->bbb->getRecordings($recordParameters);
-		
-        return $all_records->getRawXml();
+		return $this->bbb->getRecordings($recordParameters);    
     }
 
 
@@ -197,6 +185,17 @@ class ilBigBlueButtonProtocol
         return $this->bbb->deleteRecordings($deletRecordParameters);
     }
 
+    public function getPublishRecordingsUrl($object, $recordID, $publish = true)
+    {
+        $parameters = new BigBlueButton\Parameters\PublishRecordingsParameters($recordID, $publish);
+        return $this->bbb->getPublishRecordingsUrl($parameters);
+    }
+
+    public function publishRecordings($object, $recordID, $publish = true){
+        $parameters = new BigBlueButton\Parameters\PublishRecordingsParameters($recordID, $publish);
+        return $this->bbb->publishRecordings($parameters);
+    }
+
     public function isMeetingRunning($object)
     {
         $meetingID=$object->getBBBId();
@@ -213,6 +212,10 @@ class ilBigBlueButtonProtocol
     {
         $apiVersion = $this->bbb->getApiVersion();
         return $apiVersion->success();
+    }
+    private function isPDFValid(string $pdf){
+        
+        return filter_var($pdf, FILTER_VALIDATE_URL) ? true : false;
     }
 }
 

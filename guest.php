@@ -19,7 +19,7 @@ require_once './Customizing/global/plugins/Services/Repository/RepositoryObject/
 require_once './Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/vendor/autoload.php';
 
 
-class ilInitialisationIlias4GuestLink extends ilInitialisation
+class ilInitialisationGuest extends ilInitialisation
 {
 
     protected static function getIniHost() {
@@ -96,7 +96,7 @@ class ilInitialisationIlias4GuestLink extends ilInitialisation
         }
     }
 
-    //UK
+
     public static function initLog() {
         if (!isset($GLOBALS['ilLog'])) {
             parent::initLog();
@@ -106,13 +106,13 @@ class ilInitialisationIlias4GuestLink extends ilInitialisation
 }
 
 
-class JoinMeetingByGuestLink
+class GuestLink
 {
     const DEFAULT_LANG = 'de';
 
     const PLUGIN_DIR = 'Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
 
-    /** @var JoinMeetingByGuestLink|null $instance */
+    /** @var GuestLink|null $instance */
     static private $instance;
 
     /** @var Container $dic */
@@ -219,16 +219,13 @@ class JoinMeetingByGuestLink
     private function getUrlJoinMeeting(): bool
     {
         global $DIC;
-        $logger =$DIC->logger()->root();
         if( !$this->isMeetingRunning() ) {
-            $logger->info("Not running...");
             return false;
         }
         $joinParams = new \BigBlueButton\Parameters\JoinMeetingParameters($this->meetingId, trim($this->userTitle . ' ') . $this->displayName, $this->attendeePwd);
         $joinParams->setJoinViaHtml5(true);
         $joinParams->setRedirect(true);
         $joinParams->setClientURL($this->dic->http()->request()->getUri());
-        $logger->info($this->bbb->getJoinMeetingURL($joinParams));
         if( (bool)strlen($this->urlJoinMeeting = $this->bbb->getJoinMeetingURL($joinParams)) )
         {
             return true;
@@ -276,8 +273,7 @@ class JoinMeetingByGuestLink
         $this->htmlTpl->setVariable('USER_LANG', $this->isoLangCode[$this->userLang]);
         $this->htmlTpl->setVariable('HTTP_BASE', $http_base);
         $this->htmlTpl->setVariable('MEETING_TITLE', $this->getMeetingTitle());// . ' - ' . $this->getLangVar('big_blue_button'));
-        $this->htmlTpl->setVariable('H1', $this->getMeetingTitle());// . ' - ' . $this->getLangVar('big_blue_button'));
-        $this->htmlTpl->setVariable('INFO_TOP_MODERATED_M', $this->getLangVar('info_top_moderated_m'));
+        $this->htmlTpl->setVariable('INFO_TOP_MODERATED_M', $this->getLangVar('top_moderated_m'));
         $this->htmlTpl->setVariable('ERR_STATE_INPUT_FIELD', (int)$this->errState['displayname']);
         $this->htmlTpl->setVariable('ERR_MSG_INPUT_FIELD', !$this->errState['displayname'] ? '' : $this->getLangVar('err_msg_displayname'));
         $this->htmlTpl->setVariable('ERR_STATE_TERMSOFUSE', (int)$this->errState['termsOfUse']);
@@ -293,7 +289,6 @@ class JoinMeetingByGuestLink
         if( $this->isUserLoggedIn() ) {
             #ilSession::set('guestLoggedIn', false);
             $this->htmlTpl->setVariable('INPUT_FIELD', $this->getFormField('display_name'));
-            $this->htmlTpl->setVariable('INPUT_FIELD_INFO', $this->getLangVar('guest_displayname_info'));
             $this->htmlTpl->setVariable('SUBMIT_BUTTON', $this->getFormField('guest_password_hidden') . $this->getFormField('submit'));
         }
         // GUEST PASSWORD/LOGIN
@@ -403,36 +398,18 @@ class JoinMeetingByGuestLink
             }
         }
     }
-
-
-
     // validation checks
 
     private function checkPostRequest()
     {
         $score = 0;
-        global $DIC;
-        $logger =$DIC->logger()->root();
-       // $logger->info($score);
-       $logger->dump($_POST);
 
         if( is_array($_POST) ) {
             foreach($_POST as $key => $val) {
-               /* if( filter_var($key, FILTER_SANITIZE_STRING) === 'user_title' ) {
-                    $this->userTitle = filter_var($val, FILTER_SANITIZE_STRING);
-                    $score += 1;
-                }*/
                 if( filter_var($key, FILTER_SANITIZE_STRING) === 'display_name' ) {
                     $this->displayName = filter_var($val, FILTER_SANITIZE_STRING);
                     $score += 2;
                 }
-               /* if( filter_var($key, FILTER_SANITIZE_STRING) === 'terms_of_use' ) {
-                    if($this->userAccept['termsOfUse'] = (bool)filter_var($val, FILTER_SANITIZE_NUMBER_INT)) {
-                        $score += 4;
-                    } else {
-                        $this->errState['termsOfUse'] = true;
-                    }
-                }*/
             }
             if( !(bool)strlen($this->displayName) ) {
                 $score -= 2;
@@ -446,10 +423,6 @@ class JoinMeetingByGuestLink
     private function validateInvitation()
     {
         switch( true ) {
-            /*case !$this->pluginObject->get_moderated():
-                $this->httpExit(403);
-                break;*/
-            //case $this->pluginConfig->isGuestlinkDefault():
             case $this->pluginConfig->isGuestGlabalAllowed() && $this->pluginObject->isGuestLinkAllowed():
                 break;
             default:
@@ -469,15 +442,11 @@ class JoinMeetingByGuestLink
         exit;
     }
 
-
-
-    // Constructor & initz
-
     private function __construct()
     {
         $this->client = filter_var($_GET['client'], FILTER_SANITIZE_STRING);
         $this->refId = filter_var($_GET['ref_id'], FILTER_SANITIZE_NUMBER_INT);
-        ilInitialisationIlias4GuestLink::initIlias($this->client);
+        ilInitialisationGuest::initIlias($this->client);
         global $DIC; /** @var Container $DIC */
         $this->dic = $DIC;
         
@@ -492,15 +461,9 @@ class JoinMeetingByGuestLink
         // exit if not valid
         $this->validateInvitation();
 
-        #var_dump($_SESSION);
-
         $this->setGuestLoginState();
-        #echo ilSession::get('guestLoggedIn');
-        #var_dump($_SESSION); exit;
 
         $this->setUserLangBySvrParam();
-        //$this->setLangVars();
-
         // redirect to BBB if valid
         if( $this->checkPostRequest() ) {
             if( !$this->errState['displayname'] ) {
@@ -521,7 +484,7 @@ class JoinMeetingByGuestLink
 
     public static function init()
     {
-        if( self::$instance instanceof JoinMeetingByGuestLink) {
+        if( self::$instance instanceof GuestLink) {
             return self::$instance;
         }
         return self::$instance = new self();
@@ -534,7 +497,7 @@ class JoinMeetingByGuestLink
 
 }
 
-echo JoinMeetingByGuestLink::init();
+echo GuestLink::init();
 
 
 

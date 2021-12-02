@@ -281,9 +281,7 @@ if (
 ?>
 <#6>
 <?php
-if (
-	
-	!$ilDB->tableColumnExists("rep_robj_xbbb_data", "presentationurl")){
+if (!$ilDB->tableColumnExists("rep_robj_xbbb_data", "presentationurl")){
 	$ilDB->addTableColumn('rep_robj_xbbb_data','presentationurl', array(
 		'type' => 'text',
 		'length' => 256,
@@ -292,5 +290,28 @@ if (
 	));
 	
 }
-
+?>
+<#7>
+<?php
+if (!$ilDB->tableColumnExists("rep_robj_xbbb_data", "publish")){
+	$ilDB->addTableColumn('rep_robj_xbbb_data','publish', array(
+		'type' => 'integer',
+		'length' => 2,
+		'notnull' => false,
+		'default' => 1
+	));
+	
+}
+?>
+<#8>
+<?php
+if (!$ilDB->tableColumnExists("rep_robj_xbbb_data", "allow_download")){
+	$ilDB->addTableColumn('rep_robj_xbbb_data','allow_download', array(
+		'type' => 'integer',
+		'length' => 2,
+		'notnull' => false,
+		'default' => 0
+	));
+	
+}
 ?>

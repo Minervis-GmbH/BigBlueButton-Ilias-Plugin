@@ -39,7 +39,7 @@ include_once("./Services/Repository/classes/class.ilObjectPluginGUI.php");
  * - GUI classes used by this class are ilPermissionGUI (provides the rbac
  *   screens) and ilInfoScreenGUI (handles the info screen).
  *
- * @ilCtrl_isCalledBy ilObjBigBlueButtonGUI: ilRepositoryGUI, ilAdministrationGUI, ilObjPluginDispatchGUI
+ * @ilCtrl_isCalledBy ilObjBigBlueButtonGUI: ilRepositoryGUI, ilAdministrationGUI, ilObjPluginDispatchGUI, ilUIPluginRouterGUI
  * @ilCtrl_Calls ilObjBigBlueButtonGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI
  * @ilCtrl_Calls ilObjBigBlueButtonGUI: ilCommonActionDispatcherGUI
  *
@@ -72,16 +72,20 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
     /**
      * Handles all commmands of this class, centralizes permission checks
      */
-    public function performCommand($cmd)
+    function performCommand($cmd)
     {
         $this->setTitleAndDescription();
 
         switch ($cmd) {
+            case "publish":
+                $this->checkPermission("write");
+                $this->$cmd();
+                break;
             case "editProperties":		// list all commands that need write permission here
             case "updateProperties":
             case "endClass":
             case "startClass":
-                        case "deleteRecording":
+            case "deleteRecording":
                 //case "...":
                 $this->checkPermission("write");
                 $this->$cmd();
@@ -93,6 +97,9 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                     $this->checkPermission("read");
                     $this->$cmd();
                     break;
+
+            default:
+                //nothing
         }
     }
 
@@ -181,32 +188,36 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         $this->form->addItem($cb);
 
         // welcometext
-        $ti = new ilTextInputGUI($this->txt("welcometext"), "welcometext");
-        $ti->setMaxLength(1000);
-        $ti->setSize(120);
+        $ti = new ilTextAreaInputGUI($this->txt("welcometext"), "welcometext");
         $this->form->addItem($ti);
 
         //dial number
-        $ti = new ilTextInputGUI($this->txt("dialnumber"), "dialnumber");
-        $this->form->addItem($ti);
+        $ti_dial = new ilTextInputGUI($this->txt("dialnumber"), "dialnumber");
+        //$ti_dial->setSize();
+        $this->form->addItem($ti_dial);
 
         //access code
-        $ti = new ilNonEditableValueGUI($this->txt("accesscode"));
-        $ti->setValue($this->object->getAccessCode());
-        $this->form->addItem($ti);
+        $ti_access = new ilNonEditableValueGUI($this->txt("accesscode"));
+        $ti_access->setValue($this->object->getAccessCode());
+        $this->form->addItem($ti_access);
 
-       /* //duration
-        $ni = new ilNumberInputGUI($this->txt("dialnumber"), "dialnumber");
-        $this->form->addItem($ni);*/
+        //duration
+        $ni_duration = new ilNumberInputGUI($this->txt("max_duration"), "duration");
+        $this->form->addItem($ni_duration);
 
         //Guest Link allow
         $cb = new ilCheckboxInputGUI($this->txt("guestchoose"), "guestchoose");
         $this->form->addItem($cb);
 
         //Participants
-        $ni=new ilNumberInputGUI($this->txt("maxparticipants", "maxparticipants"));
-        $ni->setInfo($this->txt("maxparticipants_info"));
-        $this->form->addItem($ni);
+        $ni_participants=new ilNumberInputGUI($this->txt("maxparticipants"), "maxparticipants");
+        $ni_participants->setInfo($this->txt("maxparticipants_info"));
+        $this->form->addItem($ni_participants);
+
+        //Download allow
+        $cb_download = new ilCheckboxInputGUI($this->txt("allow_download"), "allow_download");
+        $cb_download->setInfo($this->txt("allow_download_info"));
+        $this->form->addItem($cb_download);
 
         //PresentationUrl
         $ti = new ilTextInputGUI($this->txt("presentationurl"), "presentationurl");
@@ -236,6 +247,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         $values['guestchoose'] = $this->object->isGuestLinkAllowed();
         $values['maxparticipants'] =$this->object->getMaxParticipants();
         $values['presentationurl'] = $this->object->getPresentationUrl();
+        $values['allow_download'] = $this->object->isDownloadAllowed();
         $this->form->setValuesByArray($values);
     }
 
@@ -244,7 +256,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
      */
     public function updateProperties()
     {
-        global $tpl, $lng, $ilCtrl;
+        global $tpl, $lng, $ilCtrl, $DIC;
 
         $this->initPropertiesForm();
         if ($this->form->checkInput()) {
@@ -255,10 +267,9 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $this->object->setMeetingDuration($this->form->getInput("duration"));
             $this->object->setMaxParticipants($this->form->getInput("maxparticipants"));
             $this->object->setPresentationUrl($this->form->getInput("presentationurl"));
-            if ($this->form->getInput("dialnumber")){
-                $this->object->setDialnumber($this->form->getInput("dialnumber"));
-            }
+            $this->object->setDialNumber($this->form->getInput("dialnumber"));
             $this->object->setGuestLinkAllowed(($this->form->getInput("guestchoose")));
+            $this->object->setDownloadAllowed(($this->form->getInput("allow_download")));
 
             $this->object->update();
             ilUtil::sendSuccess($lng->txt("msg_obj_modified"), true);
@@ -346,11 +357,11 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 
             $table_content = [];
             $recordcount=0;
-            $all_recordings=$BBBHelper->getRecordings($this->object)->recordings->recording;
+            $all_recordings=$BBBHelper->getRecordingsRaw()->recordings->recording;
+            
             
             if ($all_recordings){
 				foreach($all_recordings as $recording){
-
 					$table_row_template = new ilTemplate("tpl.BigBlueButtonRecordTableRow.html",
 									true,
 									true,
@@ -366,16 +377,38 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 										true,
 										"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
 						$table_link_template->setVariable("URL",$format->url);
-                        if($format->type=="presentation"){
-                            $table_row_template->setVariable("DownloadLink", $BBBHelper->getVideoDownloadStreamUrl($format->url));
-                            $table_row_template->setVariable("DownloadText", $this->txt("download_text"));
+                        if($format->type=="presentation" && $this->object->isDownloadAllowed() ){
+                            $node = '<a href="'.$BBBHelper->getVideoDownloadStreamUrl($format->url).'" download>' .$this->txt("DownloadText") . '</a>';
+                            // $table_row_template->setVariable("DownloadLink", $BBBHelper->getVideoDownloadStreamUrl($format->url));
+                            // $table_row_template->setVariable("DownloadText", $this->txt("DownloadText"));
+                            $table_row_template->setVariable("Download", $node);
                         }
 						$table_link_template->setVariable("Link_Title", $this->txt('Recording_type_' . $format->type));
 						$table_links[] = $table_link_template->get();
 					}
+                    //Actions
+                    
+                    $actions = array(
+                        $DIC->ui()->factory()->button()->shy($this->txt("deletelink_title"), $this->editLink($recording->recordID, true, true))
+                    );
+                    $isPublished = $recording->published->__toString() === 'true';
+                    
+                    if ($isPublished){
+                        if ($this->object->isDownloadAllowed()){
+                            $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("DownloadText"), $BBBHelper->getVideoDownloadStreamUrl($format->url));
+                        }
+                        $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("unpublish_link"), $this->editLink($recording->recordID, 0));
+                        $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("publish_link"), $this->editLink($recording->recordID, 1)); 
+                    }else{
+                        $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("publish_link"), $this->editLink($recording->recordID, 1));
+                                           
+                    }
+
+                    $actions_html = $DIC->ui()->renderer()->render($DIC->ui()->factory()->dropdown()->standard($actions)->withAriaLabel("Actions"));
 					$table_row_template->setVariable("Links", implode(' · ', $table_links));
-					$table_row_template->setVariable("DeleteLink", $recording->recordID);
-					$table_row_template->setVariable("DeleteLink_Title", $this->txt("deletelink_title"));
+                    $table_row_template->setVariable("Actions", $actions_html);
+					/*$table_row_template->setVariable("DeleteLink", $recording->recordID);
+					$table_row_template->setVariable("DeleteLink_Title", $this->txt("deletelink_title"));*/
 
 					$table_content[] = $table_row_template->get();
 					$recordcount++;
@@ -480,16 +513,47 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         //$ilTabs->clearTargets();
         $ilTabs->activateTab("content");
         include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
+        $recordID = filter_input(INPUT_GET, "recordID");
 
         $BBBHelper=new ilBigBlueButtonProtocol($this->object);
-        $BBBHelper->deleteRecording($this->object, $_POST["recordID"]);
+        $BBBHelper->deleteRecording($this->object, $recordID);
         $this->showContent();
     }
 
     private function formatTimeDiff($seconds) {
 		$dtF = new \DateTime('@0');
-    $dtT = new \DateTime("@$seconds");
-    return $dtF->diff($dtT)->format( $this->txt("Date_Format") );
+        $dtT = new \DateTime("@$seconds");
+        return $dtF->diff($dtT)->format( $this->txt("Date_Format") );
 	}
     
+    public function publish()
+    {
+        global $ilCtrl;
+
+        include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
+        $BBBHelper= new ilBigBlueButtonProtocol($this->object);
+         $recordID = filter_input(INPUT_GET, "recordID");
+         $publish = boolval(filter_input(INPUT_GET, "publish"));
+
+        $BBBHelper->publishRecordings($this->object,$recordID, $publish );
+        $this->object=$bbb_obj;
+        $ilCtrl->redirect($this, "showContent");
+
+    }
+
+    private function editLink($recordID, $publish, $delete_link = false){
+        global $ilCtrl;
+        $cmd = 'publish';
+        if ($delete_link){
+            $cmd = 'deleteRecording';
+        }else{
+            $ilCtrl->setParameterByClass(ilObjBigBlueButtonGUI::class, "publish", $publish);
+        }
+        $ilCtrl->setParameterByClass(ilObjBigBlueButtonGUI::class, "recordID", $recordID);
+        $link = $ilCtrl->getLinkTargetByClass([
+            ilObjPluginDispatchGUI::class,
+            ilObjBigBlueButtonGUI::class
+        ], $cmd);
+        return $link;
+    }
 }
