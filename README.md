@@ -20,24 +20,7 @@ It is assumed you already have a ILIAS Intallation [up and running](https://docu
 
 # Installation
 
-### ILIAS <= 5.2
-
-On your ILIAS Server:
-
-- copy the content of this folder into `<ILIAS_directory>/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton`
-- log in to ILIAS as `administrator` and go to the administration page
-- select `Modules, Services and Plugins` in the menu on the right
-- hits the `Services` tab and ILIAS will show a service list
-- look for the `Repository` and hit the `Show Details` link that is located next to the title
-- look for the BigBlueButton plugin on the table and hit the `update` link
-- when ILIAS has updated the plugin, hit the `activate` link that will appear instead of the `update` link
-- now hit the `configure` link and enter your 
-    - public/private URL
-    - public/private port 
-    - BBB security salt
-- finally you can create "Bigbluebutton" Virtual Classrooms as regular repository object
-
-### ILIAS 5.3, 5.4, 6.x
+### ILIAS 5.4, 6.x, 7.x
 
 On your ILIAS Server:
 
@@ -60,6 +43,7 @@ On your ILIAS Server:
         - E.g:  https://my.bbb-server.com:9003/bigbluebutton
         
     - BBB security salt
+    - Choose, if record the session should be allowed, or not
 - finally you can create "Bigbluebutton" Virtual Classrooms as regular repository object
 **Note:** If the server is not reachable, during configuration a message will be displayed. After correcting the error, make sure to press the save button twice.
 
@@ -68,15 +52,7 @@ On your ILIAS Server:
 
 Tested with ILIAS
 
-- 4.3.1
-- 5.0.x
-- 5.1.2
-- 5.2.1
-- 5.3.16
-- 5.4.6
-- 5.4.10
+- 5.4.x
 - 6.0
 - 6.1, 6.2, 6.3
-
-
-
+- 7.6
