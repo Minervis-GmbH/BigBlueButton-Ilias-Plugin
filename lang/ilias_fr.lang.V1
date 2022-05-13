@@ -1,0 +1,61 @@
+//
+// French Language File for Bigbluebutton Plugin
+//
+<!-- language file start -->
+obj_xbbb#:#Bigbluebutton
+objs_xbbb#:#Classes virtuelles Bigbluebutton
+obj_xbbb_duplicate#:#Copier
+objs_xbbb_duplicate#:#Copier une classe virtuelle Bigbluebutton
+obj_xbbb_select#:#Selectionner une classe virtuelle Bigbluebutton
+xbbb_add#:#Ajouter une classe virtuelle Bigbluebutton
+xbbb_new#:#Ajouter une nouvelle classe virtuelle Bigbluebutton
+xbbb_read#:#Lire les accès à  une classe virtuelle Bigbluebutton
+xbbb_write#:#Editer une classe virtuelle Bigbluebutton
+xbbb_delete#:#Supprimer une classe virtuelle Bigbluebutton
+xbbb_visible#:#La classe virtuelle est visible
+xbbb_edit_permission#:#Changer les permissions
+BigBlueButton_plugin_configuration#:#Configuration du plugin
+crs_create_xbbb#:#Créer une classe virtuelle Bigbluebutton
+grp_create_xbbb#:#Créer une classe virtuelle Bigbluebutton
+fold_create_xbbb#:#Créer une classe virtuelle Bigbluebutton
+root_create_xbbb#:#Créer une classe virtuelle Bigbluebutton
+cat_create_xbbb#:#Créer une classe virtuelle Bigbluebutton
+content#:#Content#:#Créer une classe virtuelle Bigbluebutton
+class_not_started_yet#:#Cette classe n'est pas encore démarrée. Essayez plus tard quand la classe sera lancée.
+click_to_open_class#:#Lancer la classe
+no_class_running#:#Votre classe n'est pas active. Les autres utilisateurs ne pourront pas y accéder tant qu'elle ne sera pas lancée.
+start_class#:#Démarrer la classe
+class_running#:#Il y a déjà  une classe en route, cliquer ici pour y mettre fin:
+end_class#:#Fermer la classe
+end_class_comment#:#(Tous les participants encore connectés seront déconnectés).
+new_class_created#:#Une nouvelle classe virtuelle a été créée et sera lancée dans une nouvelle fenêtre.
+new_class_created_warning#:#Vous devez rejoindre la classe avant les élèves. Personne ne sera en mesure d'accéder à la classe tant qu'un modérateur ne l'aura pas fait.
+new_class_created_join_manual#:#Rejoindre la classe
+class_ended#:#La classe a été fermée.
+publicurl#:#URL publique (Ex. https://my.bbb-server.com:9005/bigbluebutton/)
+publicport#:#Port public (Ex. 9005)
+privateurl#:#URL privée (Ex. http://192.168.1.100/bigbluebutton/)
+privateport#:#Port privé (Ex. 8080)
+salt#:#Clé de sécurité
+Date_Title#:#date
+Date_Format#:#%H:%I:%S
+DeleteLink_Title#:#Supprimer l'enregistrement
+Duration_Title#:#Longueur
+Link_Title#:#formats
+Recording_type_presentation#:#presentation
+Recording_type_notes#:#notes
+Headline_Recordings#:#enregistrements
+checkbox_record_meeting#:#enregistrer la prochaine session
+meetingRecordedMessage#:#La session courante va être enregistrée!
+properties#:#Paramètres
+edit_properties#:#Modifier les paramètres
+description#:#Description
+welcometext#:#Texte de bienvenue
+welcome_text_content#:#Bienvenue<br />dans la classe <br /><b>{MEETING_TITLE}</b><br /><br />Si vous avez besoin d'aide pour utiliser BigBlueButton regarder ces<a href="http://www.bigbluebutton.org/html5" target="_blank"><u>tutoriels videos</u></a>.<br /><br />
+save#:#Sauvegarder
+edit#:#Editer
+title#:#Titre
+status#:#Etat
+saving_invoked#:#Sauvegardé
+choose_recording#:#Autoriser les enregistrements
+choose_recording_info#:#Activer cette option si vous voulez donner la possibiliter d'enregistrer les classes.
