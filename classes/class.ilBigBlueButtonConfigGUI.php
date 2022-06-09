@@ -92,6 +92,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 
 		// salt (text)
 		$pi = new ilPasswordInputGUI($pl->txt("salt"), "frmsalt");
+		$pi->setSkipSyntaxCheck(true);
 		$pi->setRequired(true);
 		$pi->setMaxLength(256);
 		$pi->setSize(40);
