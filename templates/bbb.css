@@ -16,3 +16,7 @@
 #isMeetingRecorded{
     color: red;
 }
+
+.ilInfoScreenSec.form-horizontal.hide{
+    display: none;
+}
