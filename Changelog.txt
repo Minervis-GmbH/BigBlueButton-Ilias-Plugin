@@ -46,10 +46,12 @@ BigBLueButton-ILIAS Plugin Changelog
 2021 Version 1.0.14
 	- conffigure globally the option to choose whether recordings should be taken or not
 	- improve German translations
-2021 Version 1.0.15
-	- Add commas (a fix to the db error)
-	- update version
-2021 Version 2.0_Beta
+
+2021 Version 1.0.15 
+	- add commas(Mysql error fix)
+	- Server salt checks the Password Guidelines which makes it impossible to save salts without special symbols in case the policy enforces special characters
+	- Add redirects
+2012 Version 2.0_Beta
 	- Many Bug Fixes(commans in DB, Disable syntax chack whole saving a password,...)
 	- Enable phone calls
 	- Enable to upload presenations
