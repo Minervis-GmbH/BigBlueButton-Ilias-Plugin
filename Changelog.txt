@@ -60,10 +60,7 @@ BigBLueButton-ILIAS Plugin Changelog
 	- set the maximum number of participants
 	- set the maximum duration of the meeting
 	- Add a Guest link  and a guest page
-<<<<<<< HEAD
-=======
 2022 Version 2.0
 	- Fix phone calls
 	- delete recording messages when the meeting is not being recorded
 	- Add proxy to the new client
->>>>>>> release2_video_download
