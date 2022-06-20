@@ -101,6 +101,10 @@ class ilBigBlueButtonProtocol
         if( (bool)(strlen($pdf = $this->object->getPresentationUrl())) && $this->isPDFValid($pdf)) {         
             $this->createMeetingParam->addPresentation($pdf);
         }
+        if(trim($object->getDialNumber())){
+            $this->createMeetingParam->setDialNumber($object->getDialNumber());
+            $this->createMeetingParam->setVoiceBridge($object->getAccessCode());//voicebridge
+        }
         $this->bbb->createMeeting($this->createMeetingParam);
     }
 
@@ -227,5 +231,13 @@ class BBB extends \BigBlueButton\BigBlueButton
         $this->securitySecret = $securitySecret;
         $this->bbbServerBaseUrl = $baseUrl;
         $this->urlBuilder       = new UrlBuilder($this->securitySecret, $this->bbbServerBaseUrl);
+        //Add Proxy
+		require_once('Services/Http/classes/class.ilProxySettings.php');
+		if(ilProxySettings::_getInstance()->isActive())
+		{
+			$proxyHost = ilProxySettings::_getInstance()->getHost();
+			$proxyPort = ilProxySettings::_getInstance()->getPort();
+			$this->proxyurl = $proxyHost . ":" . $proxyPort;
+		}
     }
 }

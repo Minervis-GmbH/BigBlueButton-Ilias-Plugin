@@ -348,86 +348,15 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                 $my_tpl->setVariable("HIDE_GUESTLINK", "hide");
             }
 
-            $table_template = new ilTemplate(
-                "tpl.BigBlueButtonRecordTable.html",
-                true,
-                true,
-                "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton"
-            );
-
-            $table_content = [];
-            $recordcount=0;
-            $all_recordings=$BBBHelper->getRecordingsRaw()->recordings->recording;
-            
-            
-            if ($all_recordings){
-				foreach($all_recordings as $recording){
-					$table_row_template = new ilTemplate("tpl.BigBlueButtonRecordTableRow.html",
-									true,
-									true,
-									"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
-					$table_row_template->setVariable("Date",date("d.m.Y H:i",  substr ($recording->startTime,0,10)));
-					$seconds = round(($recording->endTime - $recording->startTime)/1000);
-					$table_row_template->setVariable("Duration", $this->formatTimeDiff( $seconds ));
-
-					$table_links = [];
-					foreach($recording->playback->format as $format) {
-						$table_link_template = new ilTemplate("tpl.BigBlueButtonRecordTableLink.html",
-										true,
-										true,
-										"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
-						$table_link_template->setVariable("URL",$format->url);
-                        if($format->type=="presentation" && $this->object->isDownloadAllowed() ){
-                            $node = '<a href="'.$BBBHelper->getVideoDownloadStreamUrl($format->url).'" download>' .$this->txt("DownloadText") . '</a>';
-                            // $table_row_template->setVariable("DownloadLink", $BBBHelper->getVideoDownloadStreamUrl($format->url));
-                            // $table_row_template->setVariable("DownloadText", $this->txt("DownloadText"));
-                            $table_row_template->setVariable("Download", $node);
-                        }
-						$table_link_template->setVariable("Link_Title", $this->txt('Recording_type_' . $format->type));
-						$table_links[] = $table_link_template->get();
-					}
-                    //Actions
-                    
-                    $actions = array(
-                        $DIC->ui()->factory()->button()->shy($this->txt("deletelink_title"), $this->editLink($recording->recordID, true, true))
-                    );
-                    $isPublished = $recording->published->__toString() === 'true';
-                    
-                    if ($isPublished){
-                        if ($this->object->isDownloadAllowed()){
-                            $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("DownloadText"), $BBBHelper->getVideoDownloadStreamUrl($format->url));
-                        }
-                        $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("unpublish_link"), $this->editLink($recording->recordID, 0));
-                        $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("publish_link"), $this->editLink($recording->recordID, 1)); 
-                    }else{
-                        $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("publish_link"), $this->editLink($recording->recordID, 1));
-                                           
-                    }
-
-                    $actions_html = $DIC->ui()->renderer()->render($DIC->ui()->factory()->dropdown()->standard($actions)->withAriaLabel("Actions"));
-					$table_row_template->setVariable("Links", implode(' · ', $table_links));
-                    $table_row_template->setVariable("Actions", $actions_html);
-					/*$table_row_template->setVariable("DeleteLink", $recording->recordID);
-					$table_row_template->setVariable("DeleteLink_Title", $this->txt("deletelink_title"));*/
-
-					$table_content[] = $table_row_template->get();
-					$recordcount++;
-				}
-			}
-			$table_template->setVariable("BBB_RECORD_CONTENT", implode($table_content));
-			$table_template->setVariable("Date_Title", $this->txt("Date_Title"));
-			$table_template->setVariable("Duration_Title", $this->txt("Duration_Title"));
-			$table_template->setVariable("Link_Title", $this->txt("Link_Title"));
-            //$table_template->setVariable("Download_Title", $this->txt("Download_Title"));
-            $my_tpl->setVariable("recordings", $table_template->get());
-            $my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
-            if ($values["choose_recording"]) {
-                $my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "visible");
-            } else {
+            if ($values["choose_recording"]){
+                $my_tpl->setVariable("recordings", $this->buildRecordingUI());
+                $my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
+                $my_tpl->setVariable("checkbox_record_meeting", $this->txt("checkbox_record_meeting"));
+            }else{
                 $my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "hidden");
-            }
-            $my_tpl->setVariable("checkbox_record_meeting", $this->txt("checkbox_record_meeting"));
-            $my_tpl->setVariable("hasMeetingRecordings", $recordcount > 0 ? "true" : "false");
+
+            }           
+            $my_tpl->setVariable("hasMeetingRecordings", $this->has_meeting_recordings  && boolval($values["choose_recording"]) ? "true" : "false");
 
             $bbbURL=$BBBHelper->joinURLModerator($this->object);
         } else {
@@ -439,23 +368,91 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         }
 
         $my_tpl->setVariable("clickToOpenClass", $this->txt("click_to_open_class"));
-
-
         $isMeetingRunning=$BBBHelper->isMeetingRunning($this->object);
-
         $my_tpl->setVariable("isMeetingRunning", $isMeetingRunning ? "true" : "false");
-
         $isMeetingRecorded = $BBBHelper->isMeetingRecorded($this->object);
-
         $my_tpl->setVariable("isMeetingRecorded", $isMeetingRecorded ? "true" : "false");
-
         $my_tpl->setVariable("bbbURL", $bbbURL);
 
-        $my_tpl->setVariable("meetingRecordedMessage", $this->txt("meetingRecordedMessage"));
-
-
-
         $tpl->setContent($my_tpl->get());
+    }
+    private function buildRecordingUI()
+    {
+        global $DIC;
+        $BBBHelper=new ilBigBlueButtonProtocol($this->object);
+        $table_template = new ilTemplate(
+                "tpl.BigBlueButtonRecordTable.html",
+                true,
+                true,
+                "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton"
+        );
+        $table_content = [];
+        $recordcount=0;
+        $all_recordings=$BBBHelper->getRecordingsRaw()->recordings->recording;
+        
+        
+        if ($all_recordings){
+            foreach($all_recordings as $recording){
+                $table_row_template = new ilTemplate("tpl.BigBlueButtonRecordTableRow.html",
+                                true,
+                                true,
+                                "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+                $table_row_template->setVariable("Date",date("d.m.Y H:i",  substr ($recording->startTime,0,10)));
+                $seconds = round(($recording->endTime - $recording->startTime)/1000);
+                $table_row_template->setVariable("Duration", $this->formatTimeDiff( $seconds ));
+
+                $table_links = [];
+                foreach($recording->playback->format as $format) {
+                    $table_link_template = new ilTemplate("tpl.BigBlueButtonRecordTableLink.html",
+                                    true,
+                                    true,
+                                    "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+                    $table_link_template->setVariable("URL",$format->url);
+                    if($format->type=="presentation" && $this->object->isDownloadAllowed() ){
+                        $node = '<a href="'.$BBBHelper->getVideoDownloadStreamUrl($format->url).'" download>' .$this->txt("DownloadText") . '</a>';
+                        // $table_row_template->setVariable("DownloadLink", $BBBHelper->getVideoDownloadStreamUrl($format->url));
+                        // $table_row_template->setVariable("DownloadText", $this->txt("DownloadText"));
+                        $table_row_template->setVariable("Download", $node);
+                    }
+                    $table_link_template->setVariable("Link_Title", $this->txt('Recording_type_' . $format->type));
+                    $table_links[] = $table_link_template->get();
+                }
+                //Actions
+                
+                $actions = array(
+                    $DIC->ui()->factory()->button()->shy($this->txt("deletelink_title"), $this->editLink($recording->recordID, true, true))
+                );
+                $isPublished = $recording->published->__toString() === 'true';
+                
+                if ($isPublished){
+                    if ($this->object->isDownloadAllowed()){
+                        $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("DownloadText"), $BBBHelper->getVideoDownloadStreamUrl($format->url));
+                    }
+                    // $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("unpublish_link"), $this->editLink($recording->recordID, 0));
+                    // $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("publish_link"), $this->editLink($recording->recordID, 1)); 
+                }else{
+                    // $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("publish_link"), $this->editLink($recording->recordID, 1));
+                                        
+                }
+
+                $actions_html = $DIC->ui()->renderer()->render($DIC->ui()->factory()->dropdown()->standard($actions)->withAriaLabel("Actions"));
+                $table_row_template->setVariable("Links", implode(' · ', $table_links));
+                $table_row_template->setVariable("Actions", $actions_html);
+                /*$table_row_template->setVariable("DeleteLink", $recording->recordID);
+                $table_row_template->setVariable("DeleteLink_Title", $this->txt("deletelink_title"));*/
+
+                $table_content[] = $table_row_template->get();
+                $recordcount++;
+            }
+        }
+        $this->has_meeting_recordings = $recordcount > 0;
+        $table_template->setVariable("BBB_RECORD_CONTENT", implode($table_content));
+        $table_template->setVariable("Date_Title", $this->txt("Date_Title"));
+        $table_template->setVariable("Duration_Title", $this->txt("Duration_Title"));
+        $table_template->setVariable("Link_Title", $this->txt("Link_Title"));
+        
+        return $table_template->get();
+        
     }
 
     public function endClass()
@@ -472,11 +469,8 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         //$this->object->incSequence();
 
         $my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorMeetingEnded.html", true, true);
-
         $my_tpl->setVariable("classEnded", $this->txt("class_ended"));
-
         $tpl->setContent($my_tpl->get());
-
         $this->showContent();
     }
 
