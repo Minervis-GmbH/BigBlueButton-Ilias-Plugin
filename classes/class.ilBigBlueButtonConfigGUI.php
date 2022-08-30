@@ -58,7 +58,6 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
         $result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
         while ($record = $ilDB->fetchAssoc($result)) {
             $values["svrpublicurl"] = $record["svrpublicurl"];
-            $values["svrprivateurl"] = $record["svrprivateurl"];
             $values["svrsalt"] = $record["svrsalt"];
             $values["choose_recording"] = $record["choose_recording"];
             $values["guest_global_choose"] = $record["guestglobalchoose"];
@@ -66,7 +65,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 
 
         $pl = $this->getPluginObject();
-        if ($values["svrpublicurl"] != '' && $values["svrprivateurl"] != '' && $values["svrsalt"] != '') {
+        if ($values["svrpublicurl"] != '' && $values["svrsalt"] != '') {
             $server_reachable=$this->isServerReachable($values["svrpublicurl"], $values["svrsalt"]);
             if (!$server_reachable) {
                 ilUtil::sendFailure("server not reachable", true);
@@ -84,14 +83,6 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
         $ti->setMaxLength(256);
         $ti->setSize(60);
         $ti->setValue($values["svrpublicurl"]);
-        $form->addItem($ti);
-
-        // private url (text)
-        $ti = new ilTextInputGUI($pl->txt("privateurl"), "frmprivateurl");
-        $ti->setRequired(true);
-        $ti->setMaxLength(256);
-        $ti->setSize(60);
-        $ti->setValue($values["svrprivateurl"]);
         $form->addItem($ti);
 
         // salt (text)
@@ -139,7 +130,6 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
         $form = $this->initConfigurationForm();
         if ($form->checkInput()) {
             $setPublicURL = $this->checkUrl($form->getInput("frmpublicurl"));
-            $setPrivateURL = $this->checkUrl($form->getInput("frmprivateurl"));
             $setSalt= $form->getInput("frmsalt");
             $choose_recording = (int) $form->getInput("choose_recording");
             $guest_global_choose = (int) $form->getInput("guest_global_choose");
@@ -152,17 +142,14 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
                 "(id, svrpublicurl , svrprivateurl, svrsalt, choose_recording) VALUES (".
                 $ilDB->quote(1, "integer").",". // id
                 $ilDB->quote($setPublicURL, "text").",". //public url
-                $ilDB->quote($setPrivateURL, "text").",". //private url
-
                 $ilDB->quote($setSalt, "text").",". //salt
-                $ilDB->quote($choose_recording, "integer").
+                $ilDB->quote($choose_recording, "integer").",".
                 $ilDB->quote($guest_global_choose, "integer").
                 ")");
             } else {
                 $ilDB->manipulate(
                     $up = "UPDATE rep_robj_xbbb_conf  SET ".
                 " svrpublicurl = ".$ilDB->quote($setPublicURL, "text").",".
-                " svrprivateurl = ".$ilDB->quote($setPublicURL, "text").",".
                 " svrsalt = ".$ilDB->quote($setSalt, "text"). ",".
                 " choose_recording = ".$ilDB->quote($choose_recording, "integer"). ",".
                 "guestglobalchoose = ". $ilDB->quote($guest_global_choose, "integer").
