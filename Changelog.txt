@@ -51,3 +51,16 @@ BigBLueButton-ILIAS Plugin Changelog
 	- add commas(Mysql error fix)
 	- Server salt checks the Password Guidelines which makes it impossible to save salts without special symbols in case the policy enforces special characters
 	- Add redirects
+2012 Version 2.0_Beta
+	- Many Bug Fixes(commans in DB, Disable syntax chack whole saving a password,...)
+	- Enable phone calls
+	- Enable to upload presenations
+	- Display multiple formats
+	- Enable mp4 download in case available
+	- set the maximum number of participants
+	- set the maximum duration of the meeting
+	- Add a Guest link  and a guest page
+2022 Version 2.0
+	- Fix phone calls
+	- delete recording messages when the meeting is not being recorded
+	- Add proxy to the new client
