@@ -100,9 +100,6 @@ class ilObjBigBlueButton extends ilObjectPlugin
 
         while ($record = $ilDB->fetchAssoc($result)) {
             $this->setSvrPublicURL($record["svrpublicurl"]);
-            //$this->setSvrPublicPort($record["svrpublicport"]);
-            $this->setSvrPrivateURL($record["svrprivateurl"]);
-            //$this->setSvrPrivatePort($record["svrprivateport"]);
             $this->setSvrSalt($record["svrsalt"]);
             $this->setGuestGlobalEnabled((bool)$record["guestglobalchoose"]);
         }
@@ -139,12 +136,8 @@ class ilObjBigBlueButton extends ilObjectPlugin
 
         while ($record = $ilDB->fetchAssoc($result)) {
             $this->setSvrPublicURL($record["svrpublicurl"]);
-            //$this->setSvrPublicPort($record["svrpublicport"]);
-            $this->setSvrPrivateURL($record["svrprivateurl"]);
-            //$this->setSvrPrivatePort($record["svrprivateport"]);
             $this->setSvrSalt($record["svrsalt"]);
             $this->setGuestGlobalEnabled((bool)$record["guestglobalchoose"]);
-            
         }
     }
 
@@ -154,19 +147,6 @@ class ilObjBigBlueButton extends ilObjectPlugin
     public function doUpdate()
     {
         global $ilDB;
-
-        /*
-        include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/Openmeetings/classes/class.ilOpenmeetingsSOAP.php");
-
-        $svURL = $this->getsvrURL();
-        $svPort = $this->getsvrPort();
-        $svUsername = $this->getsvrUsername();
-        $svPassword = $this->getsvrPassword();
-
-        $this->WSDL = new ilOpenmeetingsSOAP();
-        $this->WSDL->Openmeetings_loginuser($svURL,$svPort, $svUsername,$svPassword );
-        $rmNum = $this->WSDL->Openmeetings_createroomwithmod($this->getsvrUsername(),$this->getsvrPassword(), $this->getrmComment() , 2 , 'ILIAS ROOM' , 20 , true , false , false , 0 , 1);
-        */
 
         $ilDB->manipulate(
             $up = "UPDATE rep_robj_xbbb_data SET ".
@@ -205,10 +185,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     public function doClone($a_target_id, $a_copy_id, $new_obj)
     {
         $new_obj->setOnline($this->getOnline());
-        //$new_obj->setSvrPublicPort($this->getSvrPubicPort());
         $new_obj->setSvrPublicURL($this->getSvrPublicURL());
-        //$new_obj->setSvrPrivatePort($this->getSvrPrivatePort());
-        $new_obj->setSvrPrivateURL($this->getSvrPrivateURL());
         $new_obj->setSvrSalt($this->getSvrSalt());
         $new_obj->setAttendeePwd($this->getAttendeePwd());
         $new_obj->setModeratorPwd($this->getModeratorPwd());
@@ -253,33 +230,6 @@ class ilObjBigBlueButton extends ilObjectPlugin
     {
         return $this->svrPublicUrl;
     }
-
-    /*
-    function setSvrPublicPort($a_val){
-        $this->svrPublicPort = $a_val;
-    }
-    function getSvrPublicPort(){
-        return $this->svrPublicPort;
-    }
-    */
-
-    public function setSvrPrivateURL($a_val)
-    {
-        $this->svrPrivateURL = $a_val;
-    }
-    public function getSvrPrivateURL()
-    {
-        return $this->svrPrivateURL;
-    }
-
-    /*
-    function setSvrPrivatePort($a_val){
-        $this->svrPrivatePort = $a_val;
-    }
-    function getSvrPrivatePort(){
-        return $this->svrPrivatePort;
-    }
-    */
 
     public function setSvrSalt($a_val)
     {
@@ -450,7 +400,5 @@ class ilObjBigBlueButton extends ilObjectPlugin
     {
         $this->allow_download = $allow_download;
     }
-    
 
-    
 }
