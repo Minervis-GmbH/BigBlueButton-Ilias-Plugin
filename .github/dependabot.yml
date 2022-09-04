@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "/"
+    target-branch: "master"
+    schedule:
+      interval: "daily"
+      time: "12:00"
+      timezone: "Europe/Berlin"
