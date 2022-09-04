@@ -33,9 +33,6 @@ new_class_created_warning#:#Vous devez rejoindre la classe avant les élèves. P
 new_class_created_join_manual#:#Rejoindre la classe
 class_ended#:#La classe a été fermée.
 publicurl#:#URL publique (Ex. https://my.bbb-server.com:9005/bigbluebutton/)
-publicport#:#Port public (Ex. 9005)
-privateurl#:#URL privée (Ex. http://192.168.1.100/bigbluebutton/)
-privateport#:#Port privé (Ex. 8080)
 salt#:#Clé de sécurité
 Date_Title#:#date
 Date_Format#:#%H:%I:%S
