@@ -44,9 +44,6 @@ new_class_created_warning#:#Sie müssen den Raum vor Ihren Teilnehmern betreten,
 new_class_created_join_manual#:#Virtuellem Raum manuell beitreten, falls er nicht automatisch geöffnet wurde.
 class_ended#:#Der Raum wurde beendet.
 publicurl#:#Öffentliche URL (z. B. https://my.bbb-server.com:9005/bigbluebutton/)
-publicport#:#Öffentlicher Port (z. B. 80)
-privateurl#:#Private URL (z. B. http://192.168.1.100/bigbluebutton/)
-privateport#:#Privater Port (z. B. 8080)
 salt#:#Security Salt
 Date_Title#:#Datum
 Date_Format#:#%H:%I:%S
