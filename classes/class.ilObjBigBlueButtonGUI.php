@@ -365,6 +365,56 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $my_tpl->setVariable("classNotStartedText", $this->txt("class_not_started_yet"));
 
             $bbbURL=$BBBHelper->joinURL($this->object);
+
+            $table_template = new ilTemplate("tpl.BigBlueButtonRecordTable.html",
+								true,
+								true,
+								"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+
+			$table_content = [];
+			$recordcount=0;
+			$all_recordings=$BBBHelper->getRecordings($this->object)->recordings->recording;
+			if ($all_recordings){
+				foreach($all_recordings as $recording){
+					$table_row_template = new ilTemplate("tpl.BigBlueButtonRecordTableRow.html",
+									true,
+									true,
+									"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+					$table_row_template->setVariable("Date",date("d.m.Y H:i",  substr ($recording->startTime,0,10)));
+					$seconds = round(($recording->endTime - $recording->startTime)/1000);
+					$table_row_template->setVariable("Duration", $this->formatTimeDiff( $seconds ));
+
+					$table_links = [];
+					    foreach($recording->playback->format as $format) {
+						    $table_link_template = new ilTemplate("tpl.BigBlueButtonRecordTableLink.html",
+										true,
+										true,
+										"Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+						    $table_link_template->setVariable("URL",$format->url);
+						    $table_link_template->setVariable("Link_Title", $this->txt('Recording_type_' . $format->type));
+						    $table_links[] = $table_link_template->get();
+					    }
+					$table_row_template->setVariable("Links", implode(' · ', $table_links));
+					$table_content[] = $table_row_template->get();
+					$recordcount++;
+				}
+			}
+			$table_template->setVariable("BBB_RECORD_CONTENT", implode($table_content));
+			$table_template->setVariable("Date_Title", $this->txt("Date_Title"));
+			$table_template->setVariable("Duration_Title", $this->txt("Duration_Title"));
+			$table_template->setVariable("Link_Title", $this->txt("Link_Title"));
+
+			$my_tpl->setVariable("recordings", $table_template->get());
+			$my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
+                if ($values["choose_recording"]){
+                    $my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "visible");
+                }else{
+                    $my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "hidden");
+                }
+			$my_tpl->setVariable("checkbox_record_meeting", $this->txt("checkbox_record_meeting"));
+			$my_tpl->setVariable("hasMeetingRecordings", $recordcount > 0?"true":"false");
+            $bbbURL=$BBBHelper->joinURLModerator($this->object);
+
         }
 
         $my_tpl->setVariable("clickToOpenClass", $this->txt("click_to_open_class"));
