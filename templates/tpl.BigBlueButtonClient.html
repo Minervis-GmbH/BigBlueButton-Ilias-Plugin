@@ -16,12 +16,7 @@
 				$('#classNotStarted').show();
 			}
                         
-                        var isMeetingRecorded={isMeetingRecorded};
-			if(isMeetingRecorded){
-				$('#isMeetingRecorded').show();
-			}else{
-				$('#isMeetingRecorded').hide();
-			}
+			
                         
 		});
 </script>
@@ -32,5 +27,14 @@
 {classNotStartedText}
 </div>
 <div id="isMeetingRecorded">{meetingRecordedMessage}</div>
+<div id="recordings">
+	<h1><span>{Headline_Recordings}</span></h1>
+	<div>{recordings}</div>
+</div>
+<style>
+	.dropup, .dropdown{
+		visibility: hidden;
+	}
+</style>
 
 
