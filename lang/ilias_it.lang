@@ -33,9 +33,6 @@ new_class_created_warning#:#DEVI entrare nella classe PRIMA degli iscritti. Ness
 new_class_created_join_manual#:#Clicca qui per entrare nella tua Virtual Classroom se non sia apre automaticamente.
 class_ended#:#La classe è stata chiusa.
 publicurl#:#URL Pubblico (es. https://my.bbb-server.com:9005/bigbluebutton/)
-publicport#:#Porta Pubblica (es. 80)
-privateurl#:#URL Privato (es. http://192.168.1.100/bigbluebutton/)
-privateport#:#Porta Privata (es. 8080)
 salt#:#Security Salt
 edit#:#Modifica
 properties#:Proprietà
