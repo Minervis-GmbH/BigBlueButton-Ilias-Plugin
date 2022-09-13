@@ -58,7 +58,6 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         //$this->deactivateCreationForm(ilObject2GUI::CFORM_IMPORT);
         //$this->deactivateCreationForm(ilObject2GUI::CFORM_CLONE);
         $this->tpl->addCss("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/bbb.css");
-        //$my_tpl->addCss( "./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/bbb.css");
     }
 
     /**
@@ -291,7 +290,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
      */
     public function showContent()
     {
-        global $tpl, $ilTabs, $ilUser, $ilCtrl, $ilDB, $DIC;
+        global $tpl, $ilTabs, $ilUser, $ilCtrl, $ilDB, $DIC, $ilAccess;
 
         $values = array();
         $result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
@@ -302,10 +301,6 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $values["choose_recording"] = $record["choose_recording"];
         }
 
-
-
-        global $ilCtrl, $ilAccess;
-        //$ilTabs->clearTargets();
         $ilTabs->activateTab("content");
 
         $isModerator=false;
@@ -317,16 +312,12 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
         $BBBHelper=new ilBigBlueButtonProtocol($this->object);
 
-        //$bbbURL=$BBBHelper->createAndGetURL($this->object,$isModerator);
-
-
         if ($isModerator) {
             $my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorClient.html", true, true);
 
             $my_tpl->setVariable("CMD_END_CLASS", "cmd[endClass]");
             $my_tpl->setVariable("END_CLASS", $this->txt('end_bbb_class'));
             $my_tpl->setVariable("FORMACTION", $this->ctrl->getFormAction($this));
-
 
             $my_tpl->setVariable("CMD_START_CLASS", "cmd[startClass]");
             $my_tpl->setVariable("START_CLASS", $this->txt('start_bbb_class'));
