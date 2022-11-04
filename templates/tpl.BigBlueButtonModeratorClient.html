@@ -5,8 +5,8 @@
         
         function deleteRecord (link){
 			
-             $('#recordID').val(link);
-	     $('#deleteRecordingInput').click();
+            $('#recordID').val(link);
+			$('#deleteRecordingInput').click();
 
         }
         
@@ -81,11 +81,11 @@
 <button id="openClassLink" class="btn btn-primary" type="button" onclick="window.open('{bbbURL}')">{clickToOpenClass}</button>
 
 <div id="startClassDiv">
-{noClassRunning}<br/><br/>
-<a id="startClassLink" href="#" class="btn btn-primary">{startClass}</a><br/>
+	{noClassRunning}<br/><br/>
+	<a id="startClassLink" href="#" class="btn btn-primary">{startClass}</a><br/>
 </div>
 <p class="choose_recording" style='visibility: {CHOOSE_RECORDING_VISIBLE};'>
-<input type="checkbox" id="recordmeeting_visible" /><span id="recordmeeting_label">{checkbox_record_meeting}</span>
+	<input type="checkbox" id="recordmeeting_visible" /><span id="recordmeeting_label">{checkbox_record_meeting}</span>
 <p>
 <div id="endClassDiv">
     {classRunning} 
@@ -121,25 +121,7 @@
                 </span>
             </div>
         </div>
-        
     </div>
-    <!-- <div class="form-group{guestLinkPwHidden}">
-        <div class="il_InfoScreenProperty control-label col-xs-3">{guestLinkPwInfo}</div>
-        <div class="il_InfoScreenPropertyValue col-xs-9">
-            <div class="ilPermalinkContainer input-group">
-                <input class="form-control" readonly="readonly" id="guestLinkPw" type="text" value="{guestLinkPw}" onclick="return false;">
-                <span class="input-group-btn">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default" id="copyGuestLinkPw">
-                            <span></span>
-                            <span class="sr-only">Copy to clipboard</span>
-                            <span class="glyphicon glyphicon-copy"></span>
-                        </button>
-                    </div>
-                </span>
-            </div>
-        </div>
-    </div> -->
 </div>
 <form id="deleteRecording" action="{FORMACTION3}" method="post">
     <input id="deleteRecordingInput" class="submit" type="submit" name="{CMD_DELETE_RECORDING}" value="{DELETE_RECORDING}" >
@@ -148,8 +130,8 @@
 <br/>
 <div id="isMeetingRecorded">{meetingRecordedMessage}</div>
 <div id="recordings">
-<h1><span>{Headline_Recordings}</span></h1>
-<div>{recordings}</div>
+	<h1><span>{Headline_Recordings}</span></h1>
+	<div>{recordings}</div>
 </div>
 
 
