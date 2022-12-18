@@ -53,7 +53,7 @@ class ilBigBlueButtonProtocol
     public function getInviteUrl($title = "Guest")
     {
         $link = ILIAS_HTTP_PATH . "/" . substr(dirname(__FILE__), strpos(dirname(__FILE__), 'Customizing'), -8) . '/guest.php?';
-        $query = "ref_id=" . $this->object->getRefId() . "&client=" . CLIENT_ID;
+        $query = "ref_id=" . $this->object->getRefId() . "&client_id=" . CLIENT_ID;
         return $link . $query;
     }
 
