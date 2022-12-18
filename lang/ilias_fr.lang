@@ -58,6 +58,7 @@ edit#:#Editer
 title#:#Titre
 status#:#Etat
 saving_invoked#:#Sauvegardé
+sever_not_reachable#:#Une erreur s'est produite lors de la tentative d'accès au serveur. Veuillez vérifier la validité de l'URL et du sel saisis.
 choose_recording#:#Autoriser les enregistrements
 choose_recording_info#:#Activer cette option si vous voulez donner la possibiliter d'enregistrer les classes.
 configurations#:# Configuration
