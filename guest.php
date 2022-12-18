@@ -10,7 +10,13 @@ use BigBlueButton\Responses\GetRecordingsResponse;
 use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use ILIAS\DI\Container;
 
-chdir("../../../../../../../");
+$directory = strstr($_SERVER['SCRIPT_FILENAME'], 'Customizing', true);
+if(empty($directory))
+{
+	$directory = getcwd();
+}
+chdir($directory);
+
 require_once('./Services/Context/classes/class.ilContext.php');
 require_once("./Services/Init/classes/class.ilInitialisation.php");
 require_once("./Services/Utilities/classes/class.ilUtil.php");
@@ -450,7 +456,7 @@ class GuestLink
 
     private function __construct()
     {
-        $this->client = filter_var($_GET['client'], FILTER_SANITIZE_STRING);
+        $this->client = filter_var($_GET['client_id'], FILTER_SANITIZE_STRING);
         $this->refId = filter_var($_GET['ref_id'], FILTER_SANITIZE_NUMBER_INT);
         ilInitialisationGuest::initIlias($this->client);
         global $DIC; /** @var Container $DIC */
