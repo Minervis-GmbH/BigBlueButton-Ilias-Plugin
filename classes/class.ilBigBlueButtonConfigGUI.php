@@ -191,12 +191,11 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
         include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
         $bbb_helper=new BBB($salt,$url);
         try{
-            $bbb_helper->getApiVersion();
+            $apiVersion = $bbb_helper->getApiVersion();
+	    return $apiVersion->success();
         }catch (Exception $e) {
             return false;
         }
-        return true;
-
     }
 
 
