@@ -69,7 +69,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
         if ($values["svrpublicurl"] != '' && $values["svrprivateurl"] != '' && $values["svrsalt"] != '') {
             $server_reachable=$this->isServerReachable($values["svrpublicurl"], $values["svrsalt"]);
             if (!$server_reachable) {
-                ilUtil::sendFailure("server not reachable", true);
+                ilUtil::sendFailure($pl->txt("sever_not_reachable"), true);
             }
         }
 
