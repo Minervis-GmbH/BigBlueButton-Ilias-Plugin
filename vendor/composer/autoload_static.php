@@ -4,9 +4,13 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6b1274c0046e79f1499c53bb22663b6d
+class ComposerStaticInit979a6816c03d86bb5663f72d7eccc525
 {
     public static $prefixLengthsPsr4 = array (
+        'M' => 
+        array (
+            'MabeEnum\\' => 9,
+        ),
         'B' => 
         array (
             'BigBlueButton\\' => 14,
@@ -14,17 +18,27 @@ class ComposerStaticInit6b1274c0046e79f1499c53bb22663b6d
     );
 
     public static $prefixDirsPsr4 = array (
+        'MabeEnum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/marc-mabe/php-enum/src',
+        ),
         'BigBlueButton\\' => 
         array (
             0 => __DIR__ . '/..' . '/bigbluebutton/bigbluebutton-api-php/src',
         ),
     );
 
+    public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Stringable' => __DIR__ . '/..' . '/marc-mabe/php-enum/stubs/Stringable.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6b1274c0046e79f1499c53bb22663b6d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6b1274c0046e79f1499c53bb22663b6d::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit979a6816c03d86bb5663f72d7eccc525::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit979a6816c03d86bb5663f72d7eccc525::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit979a6816c03d86bb5663f72d7eccc525::$classMap;
 
         }, null, ClassLoader::class);
     }

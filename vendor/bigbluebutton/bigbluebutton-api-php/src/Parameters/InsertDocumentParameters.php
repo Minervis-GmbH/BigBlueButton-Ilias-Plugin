@@ -1,8 +1,9 @@
 <?php
-/**
+
+/*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2018 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -16,31 +17,25 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace BigBlueButton\Parameters;
 
 /**
- * Class SetConfigXMLParameters
- * @package BigBlueButton\Parameters
+ * Class EndMeetingParameters.
  */
-class SetConfigXMLParameters extends BaseParameters
+class InsertDocumentParameters extends BaseParameters
 {
-    /**
-     * @var string
-     */
-    private $meetingId;
+    use DocumentableTrait;
 
     /**
-     * @var \SimpleXMLElement
-     */
-    private $rawXml;
-
-    /**
-     * SetConfigXMLParameters constructor.
+     * EndMeetingParameters constructor.
      *
-     * @param $meetingId
+     * @param string $meetingId
+     * @param string $password
      */
-    public function __construct($meetingId)
+    public function __construct($meetingId, $password = '')
     {
+        $this->password  = $password;
         $this->meetingId = $meetingId;
     }
 
@@ -53,8 +48,9 @@ class SetConfigXMLParameters extends BaseParameters
     }
 
     /**
-     * @param  string                 $meetingId
-     * @return SetConfigXMLParameters
+     * @param string $meetingId
+     *
+     * @return EndMeetingParameters
      */
     public function setMeetingId($meetingId)
     {
@@ -64,20 +60,25 @@ class SetConfigXMLParameters extends BaseParameters
     }
 
     /**
+     * @deprecated
+     *
      * @return string
      */
-    public function getRawXml()
+    public function getPassword()
     {
-        return $this->rawXml;
+        return $this->password;
     }
 
     /**
-     * @param  \SimpleXMLElement      $rawXml
-     * @return SetConfigXMLParameters
+     * @param string $password
+     *
+     * @deprecated
+     *
+     * @return EndMeetingParameters
      */
-    public function setRawXml($rawXml)
+    public function setPassword($password)
     {
-        $this->rawXml = $rawXml;
+        $this->password = $password;
 
         return $this;
     }
@@ -89,8 +90,8 @@ class SetConfigXMLParameters extends BaseParameters
     {
         return $this->buildHTTPQuery(
             [
-                'configXML' => urlencode($this->rawXml->asXML()),
                 'meetingID' => $this->meetingId,
+                'password'  => $this->password,
             ]
         );
     }

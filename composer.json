@@ -1,5 +1,5 @@
 {
     "require": {
-        "bigbluebutton/bigbluebutton-api-php": "^2.0"
+        "bigbluebutton/bigbluebutton-api-php": "dev-master"
     }
 }
