@@ -1,5 +1,6 @@
 <?php
-ini_set('display_errors', 1);
+// enable display errors only on dev systems
+//ini_set('display_errors', 1);
 ini_set('error_reporting', 5);
 
 use BigBlueButton\Core\Record;
@@ -9,7 +10,13 @@ use BigBlueButton\Responses\GetRecordingsResponse;
 use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use ILIAS\DI\Container;
 
-chdir("../../../../../../../");
+$directory = strstr($_SERVER['SCRIPT_FILENAME'], 'Customizing', true);
+if(empty($directory))
+{
+	$directory = getcwd();
+}
+chdir($directory);
+
 require_once('./Services/Context/classes/class.ilContext.php');
 require_once("./Services/Init/classes/class.ilInitialisation.php");
 require_once("./Services/Utilities/classes/class.ilUtil.php");
@@ -37,7 +44,12 @@ class ilInitialisationGuest extends ilInitialisation
         return $http_path;
     }
 
-    public static function initIlias($client_id, $client_token = '') {
+    public static function initIlias($client_id=null, $client_token=null) {
+	    
+	if(empty($client_id))
+	{
+		throw new \Exception("There has been an error. Try it again.");
+	}
         define ("CLIENT_ID", $client_id);
         define('IL_COOKIE_HTTPONLY', true); // Default Value
         define('IL_COOKIE_EXPIRE', 0);
@@ -444,7 +456,7 @@ class GuestLink
 
     private function __construct()
     {
-        $this->client = filter_var($_GET['client'], FILTER_SANITIZE_STRING);
+        $this->client = filter_var($_GET['client_id'], FILTER_SANITIZE_STRING);
         $this->refId = filter_var($_GET['ref_id'], FILTER_SANITIZE_NUMBER_INT);
         ilInitialisationGuest::initIlias($this->client);
         global $DIC; /** @var Container $DIC */
