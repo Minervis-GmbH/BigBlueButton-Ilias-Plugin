@@ -1,8 +1,9 @@
 <?php
-/**
+
+/*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2018 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -16,6 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace BigBlueButton;
 
 use BigBlueButton\Core\ApiMethod;
@@ -27,8 +29,10 @@ use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
 
 /**
- * Class BigBlueButtonTest
- * @package BigBlueButton
+ * Class BigBlueButtonTest.
+ *
+ * @internal
+ * @coversNothing
  */
 class BigBlueButtonTest extends TestCase
 {
@@ -38,9 +42,9 @@ class BigBlueButtonTest extends TestCase
     private $bbb;
 
     /**
-     * Setup test class
+     * Setup test class.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -54,10 +58,10 @@ class BigBlueButtonTest extends TestCase
         $this->bbb = new BigBlueButton();
     }
 
-    /* API Version */
+    // API Version
 
     /**
-     * Test API version call
+     * Test API version call.
      */
     public function testApiVersion()
     {
@@ -67,10 +71,10 @@ class BigBlueButtonTest extends TestCase
         $this->assertTrue($apiVersion->success());
     }
 
-    /* Create Meeting */
+    // Create Meeting
 
     /**
-     * Test create meeting URL
+     * Test create meeting URL.
      */
     public function testCreateMeetingUrl()
     {
@@ -80,12 +84,12 @@ class BigBlueButtonTest extends TestCase
             if (is_bool($value)) {
                 $value = $value ? 'true' : 'false';
             }
-            $this->assertContains('=' . urlencode($value), $url);
+            $this->assertStringContainsString('=' . urlencode($value), $url);
         }
     }
 
     /**
-     * Test create meeting
+     * Test create meeting.
      */
     public function testCreateMeeting()
     {
@@ -96,7 +100,7 @@ class BigBlueButtonTest extends TestCase
     }
 
     /**
-     * Test create meeting with a document URL
+     * Test create meeting with a document URL.
      */
     public function testCreateMeetingWithDocumentUrl()
     {
@@ -111,7 +115,7 @@ class BigBlueButtonTest extends TestCase
     }
 
     /**
-     * Test create meeting with a document URL and filename
+     * Test create meeting with a document URL and filename.
      */
     public function testCreateMeetingWithDocumentUrlAndFileName()
     {
@@ -126,7 +130,7 @@ class BigBlueButtonTest extends TestCase
     }
 
     /**
-     * Test create meeting with a document URL
+     * Test create meeting with a document URL.
      */
     public function testCreateMeetingWithDocumentEmbedded()
     {
@@ -141,7 +145,7 @@ class BigBlueButtonTest extends TestCase
     }
 
     /**
-     * Test create meeting with a multiple documents
+     * Test create meeting with a multiple documents.
      */
     public function testCreateMeetingWithMultiDocument()
     {
@@ -156,10 +160,10 @@ class BigBlueButtonTest extends TestCase
         $this->assertTrue($result->success());
     }
 
-    /* Join Meeting */
+    // Join Meeting
 
     /**
-     * Test create join meeting URL
+     * Test create join meeting URL.
      */
     public function testCreateJoinMeetingUrl()
     {
@@ -172,7 +176,7 @@ class BigBlueButtonTest extends TestCase
             if (is_bool($value)) {
                 $value = $value ? 'true' : 'false';
             }
-            $this->assertContains('=' . urlencode($value), $url);
+            $this->assertStringContainsString('=' . urlencode($value), $url);
         }
     }
 
@@ -196,57 +200,10 @@ class BigBlueButtonTest extends TestCase
         $this->assertNotEmpty($joinMeeting->getUrl());
     }
 
-    /* Get Default Config XML */
-
-    public function testGetDefaultConfigXMLUrl()
-    {
-        $url = $this->bbb->getDefaultConfigXMLUrl();
-        $this->assertContains(ApiMethod::GET_DEFAULT_CONFIG_XML, $url);
-    }
-
-    public function testGetDefaultConfigXML()
-    {
-        $result = $this->bbb->getDefaultConfigXML();
-        $this->assertNotEmpty($result->getRawXml());
-    }
-
-    /* Set Config XML */
-
-    public function testSetConfigXMLUrl()
-    {
-        $url = $this->bbb->setConfigXMLUrl();
-        $this->assertContains(ApiMethod::SET_CONFIG_XML, $url);
-    }
-
-    public function testSetConfigXML()
-    {
-        // Fetch the Default Config XML file
-        $defaultConfigXMLResponse = $this->bbb->getDefaultConfigXML();
-
-        // Modify the XML file if required
-
-        // Create a meeting
-        $params                = $this->generateCreateParams();
-        $createMeetingResponse = $this->bbb->createMeeting($this->getCreateMock($params));
-        $this->assertEquals('SUCCESS', $createMeetingResponse->getReturnCode());
-        $this->assertTrue($createMeetingResponse->success());
-
-        // Execute setConfigXML request
-        $params             = ['meetingId' => $createMeetingResponse->getMeetingId()];
-        $setConfigXMLParams = $this->getSetConfigXMLMock($params);
-        $setConfigXMLParams = $setConfigXMLParams->setRawXml($defaultConfigXMLResponse->getRawXml());
-        $this->assertEquals($setConfigXMLParams->getRawXml(), $defaultConfigXMLResponse->getRawXml());
-
-        $result = $this->bbb->setConfigXML($setConfigXMLParams);
-        $this->assertEquals('SUCCESS', $result->getReturnCode());
-        $this->assertTrue($result->success());
-        $this->assertNotEmpty($result->getToken());
-    }
-
-    /* End Meeting */
+    // End Meeting
 
     /**
-     * Test generate end meeting URL
+     * Test generate end meeting URL.
      */
     public function testCreateEndMeetingUrl()
     {
@@ -256,7 +213,7 @@ class BigBlueButtonTest extends TestCase
             if (is_bool($value)) {
                 $value = $value ? 'true' : 'false';
             }
-            $this->assertContains('=' . urlencode($value), $url);
+            $this->assertStringContainsString('=' . urlencode($value), $url);
         }
     }
 
@@ -278,7 +235,7 @@ class BigBlueButtonTest extends TestCase
         $this->assertTrue($result->failed());
     }
 
-    /* Is Meeting Running */
+    // Is Meeting Running
 
     public function testIsMeetingRunning()
     {
@@ -288,12 +245,12 @@ class BigBlueButtonTest extends TestCase
         $this->assertEquals(false, $result->isRunning());
     }
 
-    /* Get Meetings */
+    // Get Meetings
 
     public function testGetMeetingsUrl()
     {
         $url = $this->bbb->getMeetingsUrl();
-        $this->assertContains(ApiMethod::GET_MEETINGS, $url);
+        $this->assertStringContainsString(ApiMethod::GET_MEETINGS, $url);
     }
 
     public function testGetMeetings()
@@ -302,22 +259,21 @@ class BigBlueButtonTest extends TestCase
         $this->assertNotEmpty($result->getMeetings());
     }
 
-    /* Get meeting info */
+    // Get meeting info
 
     public function testGetMeetingInfoUrl()
     {
         $meeting = $this->createRealMeeting($this->bbb);
 
-        $url = $this->bbb->getMeetingInfoUrl(new GetMeetingInfoParameters($meeting->getMeetingId(), $meeting->getModeratorPassword()));
-        $this->assertContains('=' . urlencode($meeting->getMeetingId()), $url);
-        $this->assertContains('=' . urlencode($meeting->getModeratorPassword()), $url);
+        $url = $this->bbb->getMeetingInfoUrl(new GetMeetingInfoParameters($meeting->getMeetingId()));
+        $this->assertStringContainsString('=' . urlencode($meeting->getMeetingId()), $url);
     }
 
     public function testGetMeetingInfo()
     {
         $meeting = $this->createRealMeeting($this->bbb);
 
-        $result = $this->bbb->getMeetingInfo(new GetMeetingInfoParameters($meeting->getMeetingId(), $meeting->getModeratorPassword()));
+        $result = $this->bbb->getMeetingInfo(new GetMeetingInfoParameters($meeting->getMeetingId()));
         $this->assertEquals('SUCCESS', $result->getReturnCode());
         $this->assertTrue($result->success());
     }
@@ -325,7 +281,7 @@ class BigBlueButtonTest extends TestCase
     public function testGetRecordingsUrl()
     {
         $url = $this->bbb->getRecordingsUrl(new GetRecordingsParameters());
-        $this->assertContains(ApiMethod::GET_RECORDINGS, $url);
+        $this->assertStringContainsString(ApiMethod::GET_RECORDINGS, $url);
     }
 
     public function testGetRecordings()
@@ -338,7 +294,7 @@ class BigBlueButtonTest extends TestCase
     public function testPublishRecordingsUrl()
     {
         $url = $this->bbb->getPublishRecordingsUrl(new PublishRecordingsParameters($this->faker->sha1, true));
-        $this->assertContains(ApiMethod::PUBLISH_RECORDINGS, $url);
+        $this->assertStringContainsString(ApiMethod::PUBLISH_RECORDINGS, $url);
     }
 
     public function testPublishRecordings()
@@ -351,7 +307,7 @@ class BigBlueButtonTest extends TestCase
     public function testDeleteRecordingsUrl()
     {
         $url = $this->bbb->getDeleteRecordingsUrl(new DeleteRecordingsParameters($this->faker->sha1));
-        $this->assertContains(ApiMethod::DELETE_RECORDINGS, $url);
+        $this->assertStringContainsString(ApiMethod::DELETE_RECORDINGS, $url);
     }
 
     public function testDeleteRecordings()
@@ -369,7 +325,7 @@ class BigBlueButtonTest extends TestCase
             if (is_bool($value)) {
                 $value = $value ? 'true' : 'false';
             }
-            $this->assertContains('=' . urlencode($value), $url);
+            $this->assertStringContainsString('=' . urlencode($value), $url);
         }
     }
 

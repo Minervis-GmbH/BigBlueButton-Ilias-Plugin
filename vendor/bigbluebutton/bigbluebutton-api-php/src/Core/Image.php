@@ -1,8 +1,9 @@
 <?php
-/**
+
+/*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2018 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -16,34 +17,49 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
  */
-namespace BigBlueButton\Responses;
+
+namespace BigBlueButton\Core;
 
 /**
- * Class GetDefaultConfigXMLUrlResponse
- * @package BigBlueButton\Responses
+ * Class Record.
  */
-class GetDefaultConfigXMLResponse
+class Image
 {
-    /**
-     * @var \SimpleXMLElement
-     */
-    protected $rawXml;
+    private $alt;
+    private $height;
+    private $width;
+    private $url;
 
     /**
-     * BaseResponse constructor.
+     * Record constructor.
      *
-     * @param \SimpleXMLElement $xml
+     * @param $xml \SimpleXMLElement
      */
-    public function __construct(\SimpleXMLElement $xml)
+    public function __construct($xml)
     {
-        $this->rawXml = $xml;
+        $this->alt    = $xml['alt']->__toString();
+        $this->height = (int) $xml['height'];
+        $this->width  = (int) $xml['width'];
+        $this->url    = $xml->__toString();
     }
 
-    /**
-     * @return \SimpleXMLElement
-     */
-    public function getRawXml()
+    public function getAlt(): string
     {
-        return $this->rawXml;
+        return $this->alt;
+    }
+
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
+
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }

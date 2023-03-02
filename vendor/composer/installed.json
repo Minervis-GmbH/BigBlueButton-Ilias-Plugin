@@ -1,60 +1,148 @@
-[
-    {
-        "name": "bigbluebutton/bigbluebutton-api-php",
-        "version": "2.0.12",
-        "version_normalized": "2.0.12.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/bigbluebutton/bigbluebutton-api-php.git",
-            "reference": "f594331b15a14e93a64ec26e8b8bc56d2a7215a3"
+{
+    "packages": [
+        {
+            "name": "bigbluebutton/bigbluebutton-api-php",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bigbluebutton/bigbluebutton-api-php.git",
+                "reference": "46330a9300614a5c1f4a3d7a97fd70583ffb40a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bigbluebutton/bigbluebutton-api-php/zipball/46330a9300614a5c1f4a3d7a97fd70583ffb40a5",
+                "reference": "46330a9300614a5c1f4a3d7a97fd70583ffb40a5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-mbstring": "*",
+                "ext-simplexml": "*",
+                "marc-mabe/php-enum": "^4.7",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "bmitch/churn-php": "^1.7",
+                "fakerphp/faker": "^1.17",
+                "friendsofphp/php-cs-fixer": "^3.9.2",
+                "nunomaduro/phpinsights": "^v2.4.0",
+                "phploc/phploc": "^7.0.2",
+                "phpmetrics/phpmetrics": "^v2.8.1",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "^3.7.1",
+                "wapmorgan/php-deprecation-detector": "^2.0"
+            },
+            "time": "2022-11-23T15:29:35+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "BigBlueButton\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Ghazi Triki",
+                    "email": "ghazi.triki@riadvice.tn",
+                    "role": "Developer"
+                }
+            ],
+            "description": "BigBlueButton PHP API Library for PHP",
+            "homepage": "http://bigbluebutton.org/",
+            "keywords": [
+                "api",
+                "bbb",
+                "bigbluebutton"
+            ],
+            "support": {
+                "issues": "https://github.com/bigbluebutton/bigbluebutton-api-php/issues",
+                "source": "https://github.com/bigbluebutton/bigbluebutton-api-php/tree/master"
+            },
+            "install-path": "../bigbluebutton/bigbluebutton-api-php"
         },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/bigbluebutton/bigbluebutton-api-php/zipball/f594331b15a14e93a64ec26e8b8bc56d2a7215a3",
-            "reference": "f594331b15a14e93a64ec26e8b8bc56d2a7215a3",
-            "shasum": ""
-        },
-        "require": {
-            "ext-curl": "*",
-            "ext-mbstring": "*",
-            "ext-simplexml": "*",
-            "php": ">=5.4"
-        },
-        "require-dev": {
-            "composer/composer": "1.7.*@dev",
-            "ext-mbstring": "*",
-            "friendsofphp/php-cs-fixer": "2.*",
-            "fzaninotto/faker": "~1.8.0",
-            "php": ">=7.0",
-            "php-coveralls/php-coveralls": "2.1.*",
-            "phpunit/phpunit": "6.*",
-            "squizlabs/php_codesniffer": "3.*"
-        },
-        "time": "2021-04-25T20:15:10+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "BigBlueButton\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-3.0"
-        ],
-        "authors": [
-            {
-                "name": "Ghazi Triki",
-                "email": "ghazi.nocturne@gmail.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "BigBlueButton PHP API Library for PHP",
-        "homepage": "http://bigbluebutton.org/",
-        "keywords": [
-            "api",
-            "bbb",
-            "bigbluebutton"
-        ]
-    }
-]
+        {
+            "name": "marc-mabe/php-enum",
+            "version": "v4.7.0",
+            "version_normalized": "4.7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marc-mabe/php-enum.git",
+                "reference": "3da42cc1daceaf98c858e56f59d1ccd52b011fdc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marc-mabe/php-enum/zipball/3da42cc1daceaf98c858e56f59d1ccd52b011fdc",
+                "reference": "3da42cc1daceaf98c858e56f59d1ccd52b011fdc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-reflection": "*",
+                "php": "^7.1 | ^8.0"
+            },
+            "require-dev": {
+                "phpbench/phpbench": "^0.16.10 || ^1.0.4",
+                "phpstan/phpstan": "^1.3.1",
+                "phpunit/phpunit": "^7.5.20 | ^8.5.22 | ^9.5.11",
+                "vimeo/psalm": "^4.17.0"
+            },
+            "time": "2022-04-19T02:21:46+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.6-dev",
+                    "dev-3.x": "3.2-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "MabeEnum\\": "src/"
+                },
+                "classmap": [
+                    "stubs/Stringable.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Bennewitz",
+                    "email": "dev@mabe.berlin",
+                    "homepage": "https://mabe.berlin/",
+                    "role": "Lead"
+                }
+            ],
+            "description": "Simple and fast implementation of enumerations with native PHP",
+            "homepage": "https://github.com/marc-mabe/php-enum",
+            "keywords": [
+                "enum",
+                "enum-map",
+                "enum-set",
+                "enumeration",
+                "enumerator",
+                "enummap",
+                "enumset",
+                "map",
+                "set",
+                "type",
+                "type-hint",
+                "typehint"
+            ],
+            "support": {
+                "issues": "https://github.com/marc-mabe/php-enum/issues",
+                "source": "https://github.com/marc-mabe/php-enum/tree/v4.7.0"
+            },
+            "install-path": "../marc-mabe/php-enum"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}
