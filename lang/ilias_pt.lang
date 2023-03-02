@@ -33,9 +33,6 @@ new_class_created_warning#:#Você DEVE participar da aula antes dos participante
 new_class_created_join_manual#:#Clique aqui para se juntar à sua sala de aula virtual se ela não abrir automaticamente.
 class_ended#:#A aula foi encerrada.
 publicurl#:#URL Público (ex. https://my.bbb-server.com:9005/bigbluebutton/)
-publicport#:#Porta Pública (ex. 80)
-privateurl#:#URL Privado (ex. http://192.168.1.100/bigbluebutton/)
-privateport#:#Porta Privada (ex. 8080)
 salt#:#Security Salt
 Date_Title#:#data
 Date_Format#:#%H:%I:%S

@@ -34,9 +34,6 @@ new_class_created_warning#:#DEBE entrar en la clase antes que el resto de asiste
 new_class_created_join_manual#:#Pulse aquí para abrir su Clase Virtual si no se ha abierto automáticamente.
 class_ended#:#La clase ha finalizado
 publicurl#:#URL Pública (p.e. https://my.bbb-server.com:9005/bigbluebutton/)
-publicport#:#Puerto Público (p.e. 80)
-privateurl#:#URL Privada (p.e. http://192.168.1.100/bigbluebutton/)
-privateport#:#Puerto Privado (p.e. 8080)
 salt#:#Sal de seguridad
 Date_Title#:#fecha
 Date_Format#:#%H:%I:%S

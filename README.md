@@ -14,6 +14,8 @@ The following data from BBB is required to configure this ILIAS Plugin:
 - public/private URL: e.g. `https://bbb.myserver.com:9000/bigbluebutton/`
 - BBB security salt
 
+**Note:** To use this plugin you need at least BigBlueButton version 2.3 or higher.
+
 ## ILIAS
 
 It is assumed you already have a ILIAS Intallation [up and running](https://docu.ilias.de/goto_docu_pg_116903_367.html).
@@ -31,12 +33,12 @@ On your ILIAS Server:
 - `git clone https://github.com/Minervis-GmbH/BigBlueButton-Ilias-Plugin.git BigBlueButton/`
 - `cd BigBlueButton`
 - log in to ILIAS as `administrator` and go to the administration page
-- select `Plugins` in the menu on the right (for ILIAS6.x go to `Administration>Extending ILIAS>Plugins`)
+- select `Plugins` in the menu on the right (for ILIAS6.x and above go to `Administration>Extending ILIAS>Plugins`)
 - look for BigBlueButton from the table of plugins and click a drop down button
 - install and activate
 - now hit the `configure` link and enter your 
-    - public and private server URL : {PROTOCOL}://{SERVER_ADDRESS}{:PORT}/{BBB_SUBPATH}/. Where 
-        - {PROTOCOL}: http or https
+    - public or private server URL : {PROTOCOL}://{SERVER_ADDRESS}{:PORT}/{BBB_SUBPATH}/. Where 
+        - {PROTOCOL}: https
         - {SERVER_ADDRESS}: The Server adress
         - {:PORT}: the port Eg.: 9003
         - {BBB_SUBPATH}: The subpath of BBB Server. Eg.: /bigbluebutton/

@@ -1,0 +1,21 @@
+name: PHP Syntax Check
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: ['ubuntu-latest']
+        php-versions: ['7.4', '8.0', '8.1'] 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+      - name: Check Syntax (Lint)
+        run: |
+          find . -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v 'No syntax errors detected')

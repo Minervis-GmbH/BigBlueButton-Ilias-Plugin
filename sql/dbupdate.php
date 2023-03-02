@@ -315,3 +315,15 @@ if (!$ilDB->tableColumnExists("rep_robj_xbbb_data", "allow_download")){
 	
 }
 ?>
+<#9>
+<?php
+if ($ilDB->tableColumnExists("rep_robj_xbbb_conf", "svrpublicport")){
+	$ilDB->dropTableColumn('rep_robj_xbbb_conf','svrpublicport');	
+}
+if ($ilDB->tableColumnExists("rep_robj_xbbb_conf", "svrprivateport")){
+	$ilDB->dropTableColumn('rep_robj_xbbb_conf','svrprivateport');	
+}
+if ($ilDB->tableColumnExists("rep_robj_xbbb_conf", "svrprivateurl")){
+	$ilDB->dropTableColumn('rep_robj_xbbb_conf','svrprivateurl');	
+}
+?>

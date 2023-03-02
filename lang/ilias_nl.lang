@@ -33,9 +33,6 @@ new_class_created_warning#:#U MOET deelnemen aan de klas voor de deelnemers. Nie
 new_class_created_join_manual#:#Klik hier om deel te nemen aan het virtuele klaslokaal indien dit niet automatisch is geopend.
 class_ended#:#De klas is afgelopen.
 publicurl#:#Publieke URL (b.v. https://my.bbb-server.com:9005/bigbluebutton/)
-publicport#:#Publieke Poort (b.v. 80)
-privateurl#:#Private URL (b.v. http://192.168.1.100/bigbluebutton/)
-privateport#:#Private Poort (b.v. 8080)
 salt#:#Security Salt
 Date_Title#:#datum
 Date_Format#:#%H:%I:%S
