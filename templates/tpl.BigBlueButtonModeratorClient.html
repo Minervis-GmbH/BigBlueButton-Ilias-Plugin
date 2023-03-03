@@ -16,10 +16,15 @@
 
 			$('#endClassForm').hide();
 			$('#startClassForm').hide();
-                        $('#deleteRecording').hide();
+            $('#deleteRecording').hide();
+			$('#maxNumberofSessionsExceeded').hide();
 			
 			var isMeetingRunning={isMeetingRunning};
+			var isMaxNumberOfSessionsExceeded = {isMaxNumberOfSessionsExceeded};
 			if(isMeetingRunning){
+				if(isMaxNumberOfSessionsExceeded){
+					$('#maxNumberofSessionsExceeded').show();
+				}
 				$('#openClassLink').show();
 				$('#endClassDiv').show();
 				$('#startClassDiv').hide();
@@ -101,6 +106,9 @@
     <input id="startClassFormInput" class="submit" type="submit" name="{CMD_START_CLASS}" value="{START_CLASS}" >
     <input type="checkbox" id="recordmeeting" name="recordmeeting" />
 </form>
+<div class="bbb_error_msg" id="maxNumberofSessionsExceeded">
+	{maxNumberofSessionsExceededText}
+</div>
 
 <div class="ilInfoScreenSec form-horizontal {HIDE_GUESTLINK}" id="infoscreen_section_2">
     <h3 class="ilHeader">{GUEST_INVITE_INFO}&nbsp;</h3>

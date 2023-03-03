@@ -20,3 +20,9 @@
 .ilInfoScreenSec.form-horizontal.hide{
     display: none;
 }
+
+.bbb_error_msg{
+    padding-top: 10px;
+    color: red;
+    font-weight: 700;
+}

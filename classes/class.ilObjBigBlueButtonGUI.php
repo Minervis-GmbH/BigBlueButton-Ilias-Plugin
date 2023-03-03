@@ -312,6 +312,9 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
         $BBBHelper=new ilBigBlueButtonProtocol($this->object);
 
+        $available_sessions = $BBBHelper->getMaximumSessionsAvailable();
+        //$BBBHelper->getMeetings();
+
         if ($isModerator) {
             $my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorClient.html", true, true);
 
@@ -356,6 +359,14 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $my_tpl->setVariable("classNotStartedText", $this->txt("class_not_started_yet"));
 
             $bbbURL=$BBBHelper->joinURL($this->object);
+        }
+
+        $my_tpl->setVariable('isMaxNumberOfSessionsExceeded', 'false');
+        if($this->object->isMaxConcurrentSessionEnabled()){
+            if($available_sessions['max_sessions'] ||  (  key_exists($this->object->getBBBId(), $available_sessions['meetings']) && $available_sessions['meetings'][$this->object->getBBBId()]['userlimit'])){
+                $my_tpl->setVariable('isMaxNumberOfSessionsExceeded', 'true');
+                $my_tpl->setVariable('maxNumberofSessionsExceededText', $this->object->getMaxConcurrentSessionsMsg());
+            }
         }
 
         $my_tpl->setVariable("clickToOpenClass", $this->txt("click_to_open_class"));

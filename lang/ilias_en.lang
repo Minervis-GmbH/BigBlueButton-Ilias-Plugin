@@ -67,6 +67,13 @@ top_moderator#:#Welcome to the meeting room!<br/>&nbsp;<br/><b>This is a moderat
 guest_displayname_input#:#Enter your name!
 btntext_join_meeting#:#join meeting
 top_moderated_m#:#Welcome to the meeting room!<br/>&nbsp;<br/>This is a moderated room and you can always join the meeting room only when a moderator person is in the room.
+sess_max_concurrent_sessions#:#Limited number of concurrent sessions
+sess_enable_userlimit#:# Allow to set user limit in session settings
+sess_msg_userlimit#:#The number of users allowed per  session has been reached.
+sess_msg_concurrent_limit#:#The allowed number of simultaneous sessions was exceeded 
+sess_msg_concurrent_limit_title#:#Error message
+sess_msg_concurrent_limit_info#:#This text message is displayed when the number of sessions is exceeded
+sess_management_header#:#Session management (Experimental)
 dialnumber#:# phone number
 accesscode#:# access code
 guestchoose#:# Allow inviting guests

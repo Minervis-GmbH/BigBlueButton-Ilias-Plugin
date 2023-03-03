@@ -44,6 +44,10 @@ class ilObjBigBlueButton extends ilObjectPlugin
     private $refreshToken;
     private $publish = true;
     private $allow_download = false;
+    private $enable_userlimit = false;
+    private $enable_max_concurrent = false;
+    private $max_concurrent_sessions = 0;
+    private $max_concurrent_sessions_msg;
     /**
     * Constructor
     *
@@ -102,6 +106,10 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $this->setSvrPublicURL($record["svrpublicurl"]);
             $this->setSvrSalt($record["svrsalt"]);
             $this->setGuestGlobalEnabled((bool)$record["guestglobalchoose"]);
+            $this->enableUserLimit((bool) $record['enable_userlimit']);
+            $this->enableMaxConcurrentSession((bool) $record['sess_enable_max_concurrent']);
+            $this->setMaxConcurrentSessions((int) $record['sess_max_concurrent']);
+            $this->setMaxConcurrentSessionsMsg($record['sess_msg_concurrent']);
         }
     }
 
@@ -138,6 +146,10 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $this->setSvrPublicURL($record["svrpublicurl"]);
             $this->setSvrSalt($record["svrsalt"]);
             $this->setGuestGlobalEnabled((bool)$record["guestglobalchoose"]);
+            $this->enableUserLimit((bool) $record['enable_userlimit']);
+            $this->enableMaxConcurrentSession((bool) $record['sess_enable_max_concurrent']);
+            $this->setMaxConcurrentSessions((int) $record['sess_max_concurrent']);
+            $this->setMaxConcurrentSessionsMsg($record['sess_msg_concurrent']);
         }
     }
 
@@ -195,6 +207,10 @@ class ilObjBigBlueButton extends ilObjectPlugin
         $new_obj->setGuestLinkAllowed($this->isGuestLinkAllowed());
         $new_obj->setPublish($this->getPublish());
         $new_obj->setDownloadAllowed($this->isDownloadAllowed());
+        $new_obj->enableMaxConcurrentSession($this->isMaxConcurrentSessionEnabled());
+        $new_obj->enableUserLimit($this->isUserLimitEnabled());
+        $new_obj->setMaxConcurrentSession($this->getMaxConcurrentSessions());
+        $new_obj->setMaxConcurrentSessionsMsg($this->getMaxConcurrentSessionsMsg());
 
         $new_obj->update();
     }
@@ -399,6 +415,40 @@ class ilObjBigBlueButton extends ilObjectPlugin
     public function setDownloadAllowed($allow_download)
     {
         $this->allow_download = $allow_download;
+    }
+    public function isMaxConcurrentSessionEnabled()
+    {
+        return $this->enable_max_concurrent;
+
+    }
+    public function enableMaxConcurrentSession($enabled = false)
+    {
+        $this->enable_max_concurrent = $enabled;
+
+    }
+    public function getMaxConcurrentSessions()
+    {
+        return $this->max_concurrent_sessions;
+    }
+    public function setMaxConcurrentSessions($max_concurrent_sess = 0)
+    {
+        $this->max_concurrent_sessions = $max_concurrent_sess;
+    }
+    public function isUserLimitEnabled()
+    {
+        return $this->enable_userlimit;
+    }
+    public function enableUserLimit( $enabled = false)
+    {
+        $this->enable_userlimit = $enabled;
+    }
+    public function setMaxConcurrentSessionsMsg($message = "")
+    {
+        $this->max_concurrent_sessions_msg = $message;
+    }
+    public function getMaxConcurrentSessionsMsg()
+    {
+        return $this->max_concurrent_sessions_msg;
     }
 
 }
