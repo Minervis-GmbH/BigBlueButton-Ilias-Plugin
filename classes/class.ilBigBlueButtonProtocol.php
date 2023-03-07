@@ -27,11 +27,13 @@ class ilBigBlueButtonProtocol
     private $createMeetingParam;
     private $avatar;
     private $user;
+    private $meetings;
 
     public function __construct($object)
     {
         $this->object = $object;
         $this->bbb = new BBB($this->object->getSvrSalt(), $this->object->getSvrPublicURL());
+        $this->meetings = $this->bbb->getMeetings();
     }
     public function getAvatar()
     {
@@ -220,6 +222,37 @@ class ilBigBlueButtonProtocol
     private function isPDFValid(string $pdf){
         
         return filter_var($pdf, FILTER_VALIDATE_URL) ? true : false;
+    }
+
+    
+    public function getMaximumSessionsAvailable($meeting_id = null)
+    {
+        $participants_count = 0;
+        $sessions_available = array(
+            "current_meeting_userlimit" => false,
+            "max_sessions" => false,
+        );
+        $available = array();
+        foreach($this->meetings->getMeetings() as $meeting){
+            $participants_count = $participants_count + $meeting->getParticipantCount();
+            $userlimit_exceeded =( $this->object->getMaxParticipants() > 0 && ($meeting->getMaxUsers() - $meeting->getParticipantCount() -1 <= 0));
+               $available[$meeting->getMeetingId()] = [
+                
+                'participants' => $meeting->getParticipantCount(),
+                'max_users' => $meeting->getMaxUsers(),
+                'userlimit' => $userlimit_exceeded
+                
+            ];
+            if($meeting_id && $meeting->getMeetingId() == $meeting_id && $userlimit_exceeded){
+                $sessions_available['current_meeting_userlimit'] = true;
+            }
+        }
+        $sessions_available['meetings'] = $available;
+        if ($this->object->getMaxConcurrentSessions() > 0 && $participants_count >= $this->object->getMaxConcurrentSessions() - 1){
+            $sessions_available["max_sessions"] = true;
+        }
+        return $sessions_available;
+
     }
 }
 

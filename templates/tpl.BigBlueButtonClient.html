@@ -8,7 +8,12 @@
 		{
                     
 			var isMeetingRunning={isMeetingRunning};
-			if(isMeetingRunning){
+			var isMaxNumberOfSessionsExceeded = {isMaxNumberOfSessionsExceeded};
+			if (isMaxNumberOfSessionsExceeded){
+				$('#openClassLink').hide();
+				$('#classNotStarted').hide();
+				$('#maxNumberofSessionsExceeded').show();
+			}else if(isMeetingRunning){
 				$('#openClassLink').show();
 				$('#classNotStarted').hide();
 			}else{
@@ -30,6 +35,9 @@
 
 <div id="classNotStarted">
 	{classNotStartedText}
+</div>
+<div class="bbb_error_msg" id="maxNumberofSessionsExceeded">
+	{maxNumberofSessionsExceededText}
 </div>
 <div id="isMeetingRecorded">{meetingRecordedMessage}</div>
 

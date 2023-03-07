@@ -70,6 +70,13 @@ guest_displayname_input#:#Geben Sie Ihren Namen ein!
 btntext_join_meeting#:#Meeting beitreten
 top_moderated_m#:#Willkommen im Meetingraum!<br/>&nbsp;<br/>Dies ist ein moderierter Raum und Sie können stets erst dann in den Meetingraum gelangen, wenn eine Person mit Moderatorfunktion im Raum ist.
 guest_invite_info#:#Mit dem folgenden Link k&ouml;nnen Sie G&auml;ste zum Meeting einladen:
+sess_max_concurrent_sessions#:#Begrenzte Anzahl gleichzeitiger Sitzungen
+sess_enable_userlimit#:#Benutzerlimit in den Sitzungseinstellungen festlegen
+sess_msg_userlimit#:# Die Anzahl der für eine Sitzung zulässigen Benutzer wurde erreicht.
+sess_msg_concurrent_limit#:#Die zulässige Anzahl der gleichzeitigen Sitzungen wurde überschritten 
+sess_msg_concurrent_limit_title#:#Error-Message
+sess_msg_concurrent_limit_info#:#Diese Textnachricht wird bei überschrittener Anzahl von Sitzungen angezeigt
+sess_management_header#:#Sitzungsmanagement (experimentell)
 dialnumber#:# Telefonnummer
 accesscode#:# Zugangscode
 guestchoose#:# Einladen von Gästen zulassen

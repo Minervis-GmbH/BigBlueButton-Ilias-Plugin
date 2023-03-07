@@ -61,6 +61,10 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
             $values["svrsalt"] = $record["svrsalt"];
             $values["choose_recording"] = $record["choose_recording"];
             $values["guest_global_choose"] = $record["guestglobalchoose"];
+            $values["sess_enable_max_concurrent"] = $record["sess_enable_max_concurrent"];
+            $values["enable_userlimit"] = $record["enable_userlimit"];
+            $values["sess_max_concurrent"] = $record["sess_max_concurrent"];
+            $values["sess_msg_concurrent"] = $record["sess_msg_concurrent"];
         }
 
 
@@ -109,6 +113,39 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
         $choose_recording->setChecked((int) $values['guest_global_choose']);
         $form->addItem($choose_recording);
 
+        //Session management
+        $sess_header = new ilFormSectionHeaderGUI();
+        $sess_header->setTitle($pl->txt("sess_management_header"));
+
+        $form->addItem($sess_header);
+        $sess = new ilCheckboxInputGUI($pl->txt("sess_max_concurrent_sessions"), "sess_enable_max_concurrent");
+        $sess->setValue(1);
+        $sess->setChecked((int) $values["sess_enable_max_concurrent"]);
+        $sess->setInfo("");
+
+        $sess_userlimit = new ilCheckboxInputGUI($pl->txt("sess_enable_userlimit"), "enable_userlimit");
+        $sess_userlimit->setValue(1);
+        $sess_userlimit->setChecked((int) $values["enable_userlimit"]);
+        //$sess_userlimit->setInfo($pl->txt("sess_userlimit_info"));
+        $sess->addSubItem($sess_userlimit);
+
+        
+        $sess_concurrent_sessions = new ilNumberInputGUI($pl->txt("sess_max_concurrent_sessions"), "sess_max_concurrent");
+        $sess_concurrent_sessions->setSize(30);
+        $sess_concurrent_sessions->setRequired(false);
+        $sess_concurrent_sessions->setValue($values["sess_max_concurrent"]);
+        $sess_concurrent_sessions->setInfo("");
+
+        $sess->addSubItem($sess_concurrent_sessions);
+
+        $sess_msg_concurrent = new ilTextAreaInputGUI($pl->txt("sess_msg_concurrent_limit_title"), "sess_msg_concurrent");
+        $sess_msg_concurrent->setInfo($pl->txt("sess_msg_concurrent_limit_info"));
+        $sess_msg_concurrent->setValue($values["sess_msg_concurrent"] ? $values["sess_msg_concurrent"]: $pl->txt("sess_msg_concurrent_limit"));
+        //$sess_msg_concurrent->setSize(256);
+
+        $sess->addSubItem($sess_msg_concurrent);
+
+        $form->addItem($sess);
 
         $form->addCommandButton("save", $lng->txt("save"));
 
@@ -133,6 +170,10 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
             $setSalt= $form->getInput("frmsalt");
             $choose_recording = (int) $form->getInput("choose_recording");
             $guest_global_choose = (int) $form->getInput("guest_global_choose");
+            $sess_enable_max_concurrent = (int) $form->getInput("sess_enable_max_concurrent");
+            $enable_userlimit = (int) $form->getInput("enable_userlimit");
+            $sess_max_concurrent = (int) $form->getInput("sess_max_concurrent");
+            $sess_msg_concurrent = $form->getInput("sess_msg_concurrent");
 
             // check if data exisits decide to update or insert
             $result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
@@ -144,7 +185,11 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
                 $ilDB->quote($setPublicURL, "text").",". //public url
                 $ilDB->quote($setSalt, "text").",". //salt
                 $ilDB->quote($choose_recording, "integer").",".
-                $ilDB->quote($guest_global_choose, "integer").
+                $ilDB->quote($guest_global_choose, "integer"). ", ".
+                $ilDB->quote($sess_enable_max_concurrent, "integer"). ", ".
+                $ilDB->quote($enable_userlimit, "integer"). ", ".
+                $ilDB->quote($sess_max_concurrent, "integer"). ", ".
+                $ilDB->quote($sess_msg_concurrent, "text"). 
                 ")");
             } else {
                 $ilDB->manipulate(
@@ -152,7 +197,11 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
                 " svrpublicurl = ".$ilDB->quote($setPublicURL, "text").",".
                 " svrsalt = ".$ilDB->quote($setSalt, "text"). ",".
                 " choose_recording = ".$ilDB->quote($choose_recording, "integer"). ",".
-                "guestglobalchoose = ". $ilDB->quote($guest_global_choose, "integer").
+                "guestglobalchoose = ". $ilDB->quote($guest_global_choose, "integer"). ", ".
+                "sess_enable_max_concurrent = ". $ilDB->quote($sess_enable_max_concurrent, "integer"). ", ".
+                "enable_userlimit = ". $ilDB->quote($enable_userlimit, "integer"). ", ".
+                "sess_max_concurrent = ". $ilDB->quote($sess_max_concurrent, "integer"). ", ".
+                "sess_msg_concurrent = ". $ilDB->quote($sess_msg_concurrent, "text"). 
                 " WHERE id = ".$ilDB->quote(1, "integer")
                 );
             }

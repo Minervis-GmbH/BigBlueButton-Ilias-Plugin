@@ -144,6 +144,8 @@ class GuestLink
 
     /** @var ilObjBigBlueButton $object */
     private $pluginObject;
+    /** @var ilBigBlueButtonProtocol $object */
+    private $pluginHelper;
 
     /** @var ilBigBlueButtonConfig $settings */
     private $pluginConfig;
@@ -180,7 +182,8 @@ class GuestLink
     private $errState = [
         'displayname'  => false,
         'termsOfUse' => false,
-        'moderator' => false
+        'moderator' => false,
+        'userLimit' => false
     ];
 
     /** @var string $userLang */
@@ -287,6 +290,8 @@ class GuestLink
         $this->htmlTpl->setVariable('INFO_TOP_MODERATED_M', $this->getLangVar('top_moderated_m'));
         $this->htmlTpl->setVariable('ERR_STATE_INPUT_FIELD', (int)$this->errState['displayname']);
         $this->htmlTpl->setVariable('ERR_MSG_INPUT_FIELD', !$this->errState['displayname'] ? '' : $this->getLangVar('err_msg_displayname'));
+        $this->htmlTpl->setVariable('ERR_STATE_USER_LIMIT', (int)$this->errState['userLimit'] );
+        $this->htmlTpl->setVariable('ERR_MSG_USER_LIMIT', !$this->errState['userLimit'] ? '': $this->pluginConfig->getMaxConcurrentSessionsMsg());
         $this->htmlTpl->setVariable('ERR_STATE_TERMSOFUSE', (int)$this->errState['termsOfUse']);
         $this->htmlTpl->setVariable('VAL_TERMSOFUSE', (int)$this->userAccept['termsOfUse']);
         $this->htmlTpl->setVariable('TXT_ACCEPT_TERMSOFUSE', $this->getLangVar('terms_of_use') );
@@ -468,6 +473,7 @@ class GuestLink
             $this->httpExit(404);
         }
         $this->pluginConfig = $this->pluginObject;
+        $this->pluginHelper = new ilBigBlueButtonProtocol($this->pluginObject);
 
         // exit if not valid
         $this->validateInvitation();
@@ -477,7 +483,12 @@ class GuestLink
         $this->setUserLangBySvrParam();
         // redirect to BBB if valid
         if( $this->checkPostRequest() ) {
-            if( !$this->errState['displayname'] ) {
+            if($this->pluginObject->isMaxConcurrentSessionEnabled()){
+                $available_sessions = $this->pluginHelper->getMaximumSessionsAvailable();
+                if($available_sessions['max_sessions'] ||  (  key_exists($this->pluginObject->getBBBId(), $available_sessions['meetings']) && $available_sessions['meetings'][$this->pluginObject->getBBBId()]['userlimit'])){
+                    $this->errState['userLimit'] = true;
+                }
+            }else if( !$this->errState['displayname'] ) {
                 $this->bbb = new BBB($this->pluginConfig->getSvrSalt(), $this->pluginConfig->getSvrPublicUrl());
                 $this->attendeePwd = $this->pluginObject->getAttendeePwd();
                 $this->setMeetingId();
@@ -487,6 +498,7 @@ class GuestLink
                 $this->errState['moderator'] = true;
             }
         }
+
 
         $this->setFormElements();
         $this->setHtmlDocument();

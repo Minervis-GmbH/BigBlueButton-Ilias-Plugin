@@ -327,3 +327,36 @@ if ($ilDB->tableColumnExists("rep_robj_xbbb_conf", "svrprivateurl")){
 	$ilDB->dropTableColumn('rep_robj_xbbb_conf','svrprivateurl');	
 }
 ?>
+<#10>
+<?php
+if (!$ilDB->tableColumnExists("rep_robj_xbbb_conf", "sess_msg_concurrent")
+  && !$ilDB->tableColumnExists("rep_robj_xbbb_conf", "sess_max_concurrent")
+  && !$ilDB->tableColumnExists("rep_robj_xbbb_conf", "sess_enable_max_concurrent")
+  && !$ilDB->tableColumnExists("rep_robj_xbbb_conf", "enable_userlimit")
+){
+	$ilDB->addTableColumn('rep_robj_xbbb_conf','sess_enable_max_concurrent', array(
+		'type' => 'integer',
+		'length' => 2,
+		'notnull' => false,
+		'default' => 0
+	));
+	$ilDB->addTableColumn('rep_robj_xbbb_conf','enable_userlimit', array(
+		'type' => 'integer',
+		'length' => 2,
+		'notnull' => false,
+		'default' => 0
+	));
+	$ilDB->addTableColumn('rep_robj_xbbb_conf','sess_max_concurrent', array(
+		'type' => 'integer',
+		'length' => 2,
+		'notnull' => false,
+		'default' => 0
+	));
+	$ilDB->addTableColumn('rep_robj_xbbb_conf','sess_msg_concurrent', array(
+		'type' => 'text',
+		'length' => 1000,
+		'notnull' => false
+	));
+	
+}
+?>

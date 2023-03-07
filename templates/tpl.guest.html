@@ -9,6 +9,7 @@
     <h1>{MEETING_TITLE}</h1>
     <div id="info_top">{INFO_TOP_MODERATED_M}</div>
     <div id="err_messages" class="messages">
+        <div class="err_userlimit_{ERR_STATE_USER_LIMIT} alert alert-danger">{ERR_MSG_USER_LIMIT}</div>
         <div class="err_displayname_{ERR_STATE_INPUT_FIELD} alert alert-danger">{ERR_MSG_INPUT_FIELD}</div>
         <div class="err_moderator_{ERR_STATE_MODERATOR} alert alert-info">{ERR_MSG_MODERATOR}</div>
     </div>
@@ -84,7 +85,8 @@
     }
     .err_displayname_1,
     .err_termsofuse_1,
-    .err_moderator_1 {
+    .err_moderator_1,
+    .err_userlimit_1 {
         display: block;
         width: 67%;
         margin: auto;
