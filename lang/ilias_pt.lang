@@ -53,6 +53,7 @@ edit#:#Editar
 title#:#titulo
 status#:#status
 saving_invoked#:#salvo
+sever_not_reachable#:#Ocorreu um erro ao tentar acessar o servidor. Por favor, verifique a validade do URL inserido e do salt.
 choose_recording#:#Allow recordings globally
 choose_recording_info#:#Activate this option if you want users with write permissions to select 'Allow capturing' under Settings. Since the URL for the recording is known to be distributed to unintended persons, this option should not be activated in most cases.
 configurations#:# Konfiguration

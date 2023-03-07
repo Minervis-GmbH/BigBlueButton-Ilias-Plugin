@@ -57,6 +57,7 @@ Headline_Recordings#:#bisherige Aufnahmen
 checkbox_record_meeting#:#Sitzung aufzeichnen
 meetingRecordedMessage#:#Die aktuelle Sitzung wird aufgezeichnet!
 saving_invoked#:#Eintrag gespeichert
+sever_not_reachable#:#Bei dem Versuch den Server zu erreichen ist ein Fehler aufgetreten. Bitte überprüfe die eingegebene URL sowie den Salt auf Gültigkeit.
 choose_recording#:#Aufnahmen erlauben: Auswahlmöglichkeit
 choose_recording_info#:#Aktivieren Sie diese Option, wenn Benutzer mit Schreibrechten unter Einstellungen die Auswahl 'Aufnahmen erlauben' haben sollen. Da bei Bekanntwerden der URL zur Aufnahme eine Verbreitung an nicht vorgesehene Personen gegeben ist, sollte diese Option in den meisten Fällen nicht aktiviert sein.
 configurations#:# Konfiguration
