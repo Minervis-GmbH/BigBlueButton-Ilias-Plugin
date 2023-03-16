@@ -270,7 +270,9 @@ class BBB extends \BigBlueButton\BigBlueButton
 		{
 			$proxyHost = ilProxySettings::_getInstance()->getHost();
 			$proxyPort = ilProxySettings::_getInstance()->getPort();
-			$this->proxyurl = $proxyHost . ":" . $proxyPort;
+            $this->curlopts         = [
+                CURLOPT_PROXY => $proxyHost . ":" . $proxyPort
+            ];
 		}
     }
 }
