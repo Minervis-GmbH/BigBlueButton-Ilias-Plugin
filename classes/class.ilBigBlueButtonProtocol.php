@@ -235,7 +235,7 @@ class ilBigBlueButtonProtocol
         $available = array();
         foreach($this->meetings->getMeetings() as $meeting){
             $participants_count = $participants_count + $meeting->getParticipantCount();
-            $userlimit_exceeded = ($meeting->getMaxUsers() - $meeting->getParticipantCount() -1 <= 0);
+            $userlimit_exceeded =( $this->object->getMaxParticipants() > 0 && ($meeting->getMaxUsers() - $meeting->getParticipantCount() -1 <= 0));
                $available[$meeting->getMeetingId()] = [
                 
                 'participants' => $meeting->getParticipantCount(),
