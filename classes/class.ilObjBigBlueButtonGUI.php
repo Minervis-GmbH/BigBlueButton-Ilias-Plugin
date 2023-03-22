@@ -353,12 +353,17 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $my_tpl->setVariable("hasMeetingRecordings", $this->has_meeting_recordings  && boolval($values["choose_recording"]) ? "true" : "false");
 
             $bbbURL=$BBBHelper->joinURLModerator($this->object);
-        } else {
+        } 
+        else {
             $my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonClient.html", true, true);
 
             $my_tpl->setVariable("classNotStartedText", $this->txt("class_not_started_yet"));
-
-            $bbbURL=$BBBHelper->joinURL($this->object);
+           
+                $my_tpl->setVariable("recordings", $this->buildRecordingUI());
+                $my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
+           
+            $bbbURL=$BBBHelper->joinURL($this->object); 
+            
         }
 
         $my_tpl->setVariable('isMaxNumberOfSessionsExceeded', 'false');
