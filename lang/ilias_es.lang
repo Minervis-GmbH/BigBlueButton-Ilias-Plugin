@@ -71,7 +71,6 @@ btntext_join_meeting#:#join meeting
 top_moderated_m#:#Welcome to the meeting room!<br/>&nbsp;<br/>This is a moderated room and you can always join the meeting room only when a moderator person is in the room.
 dialnumber#:# Telefonnummer
 accesscode#:# Zugangscode
-guestchoose#:# Einladen von Gästen zulassen
 maxparticipants#:# Max. Teilnehmer
 maxparticipants_info#:#Maximale Anzahl Teilnehmer je Meeting. Bei unbegrenzter Anzahl bitte '0' angeben.
 presentationurl#:#Startpräsentation
