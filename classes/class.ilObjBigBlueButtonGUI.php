@@ -204,8 +204,9 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         $ni_duration = new ilNumberInputGUI($this->txt("max_duration"), "duration");
         $this->form->addItem($ni_duration);
 
-        //Guest Link allow
-        $cb = new ilCheckboxInputGUI($this->txt("guestchoose"), "guestchoose");
+        //Guest policy
+        $cb = new ilSelectInputGUI($this->txt("guestpolicy"), "guestpolicy");
+	$cb->setInfo($this->txt("guestpolicy_info"));
         $this->form->addItem($cb);
 
         //Participants
@@ -243,7 +244,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         $values['accesscode'] =$this->object->getAccessCode();
         $values['dialnumber'] = $this->object->getDialNumber();
         $values['duration'] = $this->object->getMeetingDuration();
-        $values['guestchoose'] = $this->object->isGuestLinkAllowed();
+        $values['guestpolicy'] = $this->object->getGuestPolicy();
         $values['maxparticipants'] =$this->object->getMaxParticipants();
         $values['presentationurl'] = $this->object->getPresentationUrl();
         $values['allow_download'] = $this->object->isDownloadAllowed();
@@ -267,7 +268,8 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $this->object->setMaxParticipants($this->form->getInput("maxparticipants"));
             $this->object->setPresentationUrl($this->form->getInput("presentationurl"));
             $this->object->setDialNumber($this->form->getInput("dialnumber"));
-            $this->object->setGuestLinkAllowed(($this->form->getInput("guestchoose")));
+            $this->object->setGuestPolicy(($this->form->getInput("guestpolicy")));
+	    $this->object->setGuestLinkAllowed(($this->form->getInput("guestpolicy")));
             $this->object->setDownloadAllowed(($this->form->getInput("allow_download")));
 
             $this->object->update();
