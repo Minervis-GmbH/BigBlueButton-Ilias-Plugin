@@ -205,8 +205,10 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         $this->form->addItem($ni_duration);
 
         //Guest policy
+	$guestPolicyOptions = array('ALWAYS_ACCEPT' => $this->txt("guestpolicy_option_accept"), 'ALWAYS_DENY' => $this->txt("guestpolicy_option_deny"), 'ASK_MODERATOR' => $this->txt("guestpolicy_option_ask"));
         $cb = new ilSelectInputGUI($this->txt("guestpolicy"), "guestpolicy");
 	$cb->setInfo($this->txt("guestpolicy_info"));
+	$cb->setOptions($guestPolicyOptions);
         $this->form->addItem($cb);
 
         //Participants
