@@ -91,6 +91,7 @@ class ilBigBlueButtonProtocol
             ->setAutoStartRecording(false)
             ->setAllowStartStopRecording($record)
             ->setRecord($record)
+	    ->setGuestPolicy($this->object->getGuestPolicy())
             ->setDuration($this->object->getMeetingDuration())
             ;
 
