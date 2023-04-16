@@ -36,6 +36,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     private $duration;
     private $accessCode;
     private $dialNumber;
+    private $guestPolicy;
     private $guestChooseEnabled;
     private $guestGlobalEnabled;
     private $maxParticipants;
@@ -81,9 +82,16 @@ class ilObjBigBlueButton extends ilObjectPlugin
         //$this->setMaxParticipants(1000);
         $this->setSequence(1);
         $this->generateCode();
+        
+        if(isGuestGlabalAllowed())
+        {
+            $this->setGuestPolicy("ASK_MODERATOR");
+        } else {
+            $this->setGuestPolicy("ALWAYS_DENY");
+        }
 
         $ilDB->manipulate("INSERT INTO rep_robj_xbbb_data ".
-            "(id, is_online, attendeepwd, moderatorpwd, welcometext, maxparticipants, sequence, dialnumber, accesscode, duration, presentationurl, allow_download, guestchoose) VALUES (".
+            "(id, is_online, attendeepwd, moderatorpwd, welcometext, maxparticipants, sequence, dialnumber, accesscode, duration, presentationurl, allow_download, guestpolicy) VALUES (".
             $ilDB->quote($this->getId(), "integer").",".
             $ilDB->quote($this->getOnline(), "integer").",".
             $ilDB->quote($this->getAttendeePwd(), "text").",".
@@ -96,7 +104,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $ilDB->quote($this->getMeetingDuration(), "integer"). ",".
             $ilDB->quote($this->getPresentationUrl(), "text"). ",".
             $ilDB->quote((int)$this->isDownloadAllowed(), "integer"). ",".
-            $ilDB->quote((int)$this->isGuestLinkAllowed(), "integer").
+            $ilDB->quote((int)$this->getGuestPolicy(), "text").
             ")");
 
 
@@ -134,7 +142,8 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $this->setDialNumber($rec["dialnumber"] !==null ? $rec["dialnumber"]: '');
             $this->setAccessCode($rec["accesscode"]);
             $this->setMeetingDuration($rec["duration"]);
-            $this->setGuestLinkAllowed((bool)$rec["guestchoose"]);
+            $this->setGuestPolicy($rec["guestpolicy"]);
+            $this->setGuestLinkAllowed($rec["guestpolicy"]);
             $this->setDownloadAllowed((bool)$rec["allow_download"]);
             $this->setPresentationUrl($rec["presentationurl"]!==null? $rec["presentationurl"]: '');
             $this->setPublish((bool)$rec["publish"]);
@@ -170,7 +179,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
             " duration = ".$ilDB->quote($this->getMeetingDuration(), "integer").",".
             " dialnumber = ".$ilDB->quote($this->getDialNumber(), "text").",".
             " sequence = ".$ilDB->quote($this->getSequence(), "integer"). "," .
-            " guestchoose = ".$ilDB->quote((int)$this->isGuestLinkAllowed()). ",".
+            " guestpolicy = ".$ilDB->quote($this->getGuestPolicy(), "text"). ",".
             " allow_download = ".$ilDB->quote((int)$this->isDownloadAllowed()). ",".
             " publish = ".$ilDB->quote((int)$this->getPublish()). ",".
             " presentationurl = ". $ilDB->quote($this->getPresentationUrl()) .
@@ -204,7 +213,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
         $new_obj->setWelcomeText($this->getWelcomeText());
         $new_obj->setMaxParticipants($this->getMaxParticipants());
         $new_obj->setSequence($this->getSequence());
-        $new_obj->setGuestLinkAllowed($this->isGuestLinkAllowed());
+        $new_obj->setGuestPolicy($this->getGuestPolicy());
         $new_obj->setPublish($this->getPublish());
         $new_obj->setDownloadAllowed($this->isDownloadAllowed());
         $new_obj->enableMaxConcurrentSession($this->isMaxConcurrentSessionEnabled());
@@ -383,9 +392,17 @@ class ilObjBigBlueButton extends ilObjectPlugin
     {
         return $this->guestChooseEnabled;
     }
-    public function setGuestLinkAllowed( bool $allowed)
+    public function setGuestLinkAllowed($guestpolicy)
     {
-        $this->guestChooseEnabled = $allowed;
+        $this->guestChooseEnabled = $guestpolicy == "ALWAYS_DENY" ? false : true;
+    }
+    public function setGuestPolicy($guestpolicy)
+    {
+        $this->guestPolicy = $guestpolicy;
+    }
+    public function getGuestPolicy()
+    {
+        return $this->guestPolicy;
     }
     public function isGuestGlabalAllowed()
     {
