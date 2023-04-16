@@ -77,7 +77,6 @@ sess_msg_concurrent_limit_info#:#This text message is displayed when the number 
 sess_management_header#:#Session management (Experimental)
 dialnumber#:# phone number
 accesscode#:# access code
-guestchoose#:# Allow inviting guests
 maxparticipants#:# Max. Participants
 maxparticipants_info#:#Maximum number of participants per meeting. If unlimited, please specify '0'.
 presentationurl#:#Start presentation
@@ -92,3 +91,8 @@ max_duration#:#Max. duration of the meeting
 guest_invite_info#:#You can invite guests using the following link:
 allow_download#:#Allow Download
 allow_download_info#:#For the download feature to work, an addon should be installed at the bbb-server. Please check the script at <a href="https://github.com/Minervis-GmbH/video-export">https://github.com/Minervis-GmbH/video-export</a>
+guestpolicy#:#Dealing with guests
+guestpolicy_info#:#This option regulates the handling of guests. It can be decided whether guests are allowed or not and whether the moderator has to admit a guest first.
+guestpolicy_option_accept#:#Allow all guests
+guestpolicy_option_deny#:#Do not allow guests
+guestpolicy_option_ask#:#Moderator must admit each guest
