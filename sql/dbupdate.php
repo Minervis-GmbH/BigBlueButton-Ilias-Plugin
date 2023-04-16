@@ -360,3 +360,20 @@ if (!$ilDB->tableColumnExists("rep_robj_xbbb_conf", "sess_msg_concurrent")
 	
 }
 ?>
+<#11>
+<?php
+	if ($ilDB->tableColumnExists("rep_robj_xbbb_data", "guestchoose")){
+		$ilDB->dropTableColumn('rep_robj_xbbb_data','guestchoose');	
+	}
+	
+	if (!$ilDB->tableColumnExists("rep_robj_xbbb_data", "guestpolicy")){
+	$ilDB->addTableColumn('rep_robj_xbbb_data','guestpolicy', array(
+		'type' => 'text',
+		'length' => 256,
+		'notnull' => false,
+		'default' => ''
+	));
+	}
+	
+	$ilDB->manipulate("UPDATE rep_robj_xbbb_data SET guestpolicy = ".$ilDB->quote("ASK_MODERATOR", "text"));
+?>
