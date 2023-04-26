@@ -180,7 +180,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
             $num = $ilDB->numRows($result);
             if ($num == 0) {
                 $ilDB->manipulate("INSERT INTO rep_robj_xbbb_conf ".
-                "(id, svrpublicurl, svrsalt, choose_recording) VALUES (".
+                "(id, svrpublicurl, svrsalt, choose_recording, guestglobalchoose, sess_enable_max_concurrent, enable_userlimit, sess_max_concurrent, sess_msg_concurrent ) VALUES (".
                 $ilDB->quote(1, "integer").",". // id
                 $ilDB->quote($setPublicURL, "text").",". //public url
                 $ilDB->quote($setSalt, "text").",". //salt
