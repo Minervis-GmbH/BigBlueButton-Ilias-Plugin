@@ -146,8 +146,15 @@ class ilBigBlueButtonProtocol
         $meetingID=$object->getBBBId();
         $mPW=$object->getModeratorPwd();
         ;
-        $meetingInfo = $this->bbb->getMeetingInfo(new GetMeetingInfoParameters($meetingID, $mPW));
-        return $meetingInfo->success();
+        $meetingInfo= null;
+        try{
+            $meetingInfo = $this->bbb->getMeetingInfo(new GetMeetingInfoParameters($meetingID, $mPW));
+            return $meetingInfo->success();
+        }catch(Exception $e){
+            return $meetingInfo;
+        }
+        
+       
     }
 
 
