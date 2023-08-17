@@ -21,8 +21,6 @@
     +-----------------------------------------------------------------------------+
 */
 
-include_once("./Services/Repository/classes/class.ilObjectPlugin.php");
-
 
 /**
 * Application class for BigBlueButton repository object.
@@ -32,22 +30,76 @@ include_once("./Services/Repository/classes/class.ilObjectPlugin.php");
 */
 class ilObjBigBlueButton extends ilObjectPlugin
 {
+    /**
+     * @var
+     */
     private $objSession;
-    private $duration;
+    /**
+     * @var
+     */
+    private int $duration = 0;
+    /**
+     * @var
+     */
     private $accessCode;
-    private $dialNumber;
-    private $guestChooseEnabled;
-    private $guestGlobalEnabled;
-    private $maxParticipants;
+    /**
+     * @var
+     */
+    private string $dialNumber = '';
+    /**
+     * @var
+     */
+    private bool $guestChooseEnabled = false;
+    /**
+     * @var
+     */
+    private bool $guestGlobalEnabled = false;
+    /**
+     * @var int
+     */
+    private int $maxParticipants = 0;
 
-    private $accessToken;
-    private $refreshToken;
+    /**
+     * @var string
+     */
+    private string $accessToken = '';
+    /**
+     * @var
+     */
+    private $refreshToken = '';
+    /**
+     * @var bool
+     */
     private $publish = true;
+    /**
+     * @var bool
+     */
     private $allow_download = false;
+    /**
+     * @var bool
+     */
     private $enable_userlimit = false;
+    /**
+     * @var bool
+     */
     private $enable_max_concurrent = false;
+    /**
+     * @var int
+     */
     private $max_concurrent_sessions = 0;
+    /**
+     * @var
+     */
     private $max_concurrent_sessions_msg;
+    private bool $online = false;
+    private string $svrPublicUrl = '';
+    private string $svrSalt = '';
+    private string $attendeePwd = '';
+    private string $moderatorPwd = '';
+    private string $welcomeText = '';
+    private string $sequence = '';
+    private string $presentationUrl = '';
+
     /**
     * Constructor
     *
@@ -62,7 +114,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Get type.
     */
-    final public function initType()
+    final public function initType(): void
     {
         $this->setType("xbbb");
     }
@@ -70,7 +122,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Create object
     */
-    public function doCreate()
+    public function doCreate(bool $clone_mode = false): void
     {
         global $ilDB;
 
@@ -116,7 +168,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Read data from db
     */
-    public function doRead()
+    public function doRead(): void
     {
         global $ilDB;
 
@@ -156,7 +208,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Update data
     */
-    public function doUpdate()
+    public function doUpdate(): void
     {
         global $ilDB;
 
@@ -181,7 +233,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Delete data from db
     */
-    public function doDelete()
+    public function doDelete(): void
     {
         global $ilDB;
 
@@ -194,7 +246,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Do Cloning
     */
-    public function doClone($a_target_id, $a_copy_id, $new_obj)
+    public function doClone($a_target_id, $a_copy_id, $new_obj): void
     {
         $new_obj->setOnline($this->getOnline());
         $new_obj->setSvrPublicURL($this->getSvrPublicURL());
@@ -221,7 +273,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Set online
     *
-    * @param	boolean		online
+    * @param	boolean $a_val online
     */
     public function setOnline($a_val)
     {
@@ -238,70 +290,129 @@ class ilObjBigBlueButton extends ilObjectPlugin
         return $this->online;
     }
 
+    /**
+     * @param $a_val
+     * @return void
+     */
     public function setSvrPublicURL($a_val)
     {
         $this->svrPublicUrl = $a_val;
     }
+
+    /**
+     * @return mixed
+     */
     public function getSvrPublicURL()
     {
         return $this->svrPublicUrl;
     }
 
+    /**
+     * @param $a_val
+     * @return void
+     */
     public function setSvrSalt($a_val)
     {
         $this->svrSalt = $a_val;
     }
+
+    /**
+     * @return mixed
+     */
     public function getSvrSalt()
     {
         return $this->svrSalt;
     }
 
+    /**
+     * @param $a_val
+     * @return void
+     */
     public function setAttendeePwd($a_val)
     {
         $this->attendeePwd = $a_val;
     }
+
+    /**
+     * @return mixed
+     */
     public function getAttendeePwd()
     {
         return $this->attendeePwd;
     }
 
+    /**
+     * @param $a_val
+     * @return void
+     */
     public function setModeratorPwd($a_val)
     {
         $this->moderatorPwd = $a_val;
     }
+
+    /**
+     * @return mixed
+     */
     public function getModeratorPwd()
     {
         return $this->moderatorPwd;
     }
 
+    /**
+     * @param $a_val
+     * @return void
+     */
     public function setWelcomeText($a_val)
     {
         $this->welcomeText = $a_val;
     }
+
+    /**
+     * @return mixed
+     */
     public function getWelcomeText()
     {
         return $this->welcomeText;
     }
 
+    /**
+     * @param $a_val
+     * @return void
+     */
     public function setMaxParticipants($a_val)
     {
         $this->maxParticipants = $a_val;
     }
+
+    /**
+     * @return mixed
+     */
     public function getMaxParticipants()
     {
         return $this->maxParticipants;
     }
 
+    /**
+     * @param $a_val
+     * @return void
+     */
     public function setSequence($a_val)
     {
         $this->sequence = $a_val;
     }
-    public function getSequence()
+
+    /**
+     * @return int
+     */
+    public function getSequence(): int
     {
         return $this->sequence;
     }
 
-    public function incSequence()
+    /**
+     * @return int
+     */
+    public function incSequence(): int
     {
         //No synchronization... who cares at this stage of the development...
         $this->sequence=$this->sequence+1;
@@ -309,143 +420,277 @@ class ilObjBigBlueButton extends ilObjectPlugin
         return $this->sequence;
     }
 
-    public function getBBBId()
+    /**
+     * @return string
+     */
+    public function getBBBId(): string
     {
         return "ilias-bbb_".CLIENT_ID."_".$this->getId()."_".$this->getSequence();
     }
 
-    public function isWelcomeTextSet()
+    /**
+     * @return bool
+     */
+    public function isWelcomeTextSet(): bool
     {
         if ($this->welcomeText!=='') {
             return true;
         }
         return false;
     }
-    public function setMeetingDuration(  $duration)
+
+    /**
+     * @param $duration
+     * @return void
+     */
+    public function setMeetingDuration($duration)
     {
         $this->duration = $duration;
 
     }
+
+    /**
+     * @return mixed
+     */
     public function getMeetingDuration()
     {
         return $this->duration;
     }
 
-    public function getPresentationUrl()
+    /**
+     * @return string
+     */
+    public function getPresentationUrl(): string
     {
         return $this->presentationUrl;
     }
+
+    /**
+     * @param string $presentationUrl
+     * @return void
+     */
     public function setPresentationUrl(string $presentationUrl)
     {
         $this->presentationUrl = $presentationUrl;
     }
+
+    /**
+     * @return mixed
+     */
     public function getAccessCode()
     {
         return $this->accessCode;
 
     }
-    public function setAccessCode( $code){
+
+    /**
+     * @param $code
+     * @return void
+     */
+    public function setAccessCode($code){
         $this->accessCode= $code;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAccessToken()
     {
         return $this->accessToken;
     }
+
+    /**
+     * @param string $accessToken
+     * @return void
+     */
     public function setAccessToken(string $accessToken)
     {
         $this->accessToken = $accessToken;
     }
 
+    /**
+     * @return mixed
+     */
     public function getRefreshToken(){
         return $this->refreshToken;
     }
 
+    /**
+     * @param string $refreshToken
+     * @return void
+     */
     public function setRefreshToken(string $refreshToken)
     {
         $this->refreshToken = $refreshToken;
     }
-    public function setDialNumber(string $dialNumber) 
+
+    /**
+     * @param string $dialNumber
+     * @return void
+     */
+    public function setDialNumber(string $dialNumber)
     {
         $this->dialNumber = $dialNumber;
         
     }
+
+    /**
+     * @return mixed
+     */
     public function getDialNumber()
     {
         return $this->dialNumber;
     }
 
+    /**
+     * @return void
+     */
     public function generateCode()
     {
         $this->accessCode = mt_rand(10000, 99999);
     }
+
+    /**
+     * @return mixed
+     */
     public function isGuestLinkAllowed()
     {
         return $this->guestChooseEnabled;
     }
-    public function setGuestLinkAllowed( bool $allowed)
+
+    /**
+     * @param bool $allowed
+     * @return void
+     */
+    public function setGuestLinkAllowed(bool $allowed)
     {
         $this->guestChooseEnabled = $allowed;
     }
+
+    /**
+     * @return mixed
+     */
     public function isGuestGlabalAllowed()
     {
         return $this->guestGlobalEnabled;
     }
+
+    /**
+     * @param bool $enabled
+     * @return void
+     */
     public function setGuestGlobalEnabled(bool $enabled)
     {
         $this->guestGlobalEnabled = $enabled;
     }
+
+    /**
+     * @return mixed
+     */
     public function isGuestLink()
     {
         return $this->is_guest_link;
     }
-    public function getPublish()
+
+    /**
+     * @return bool
+     */
+    public function getPublish(): bool
     {
         return $this->publish ? $this->publish : true;
     }
+
+    /**
+     * @param $publish
+     * @return void
+     */
     public function setPublish($publish)
     {
         $this->publish = $publish;
     }
 
-    public function isDownloadAllowed()
+    /**
+     * @return bool
+     */
+    public function isDownloadAllowed(): bool
     {
         return $this->allow_download;
     }
+
+    /**
+     * @param $allow_download
+     * @return void
+     */
     public function setDownloadAllowed($allow_download)
     {
         $this->allow_download = $allow_download;
     }
-    public function isMaxConcurrentSessionEnabled()
+
+    /**
+     * @return bool
+     */
+    public function isMaxConcurrentSessionEnabled(): bool
     {
         return $this->enable_max_concurrent;
 
     }
-    public function enableMaxConcurrentSession($enabled = false)
+
+    /**
+     * @param bool $enabled
+     * @return void
+     */
+    public function enableMaxConcurrentSession(bool $enabled = false)
     {
         $this->enable_max_concurrent = $enabled;
 
     }
-    public function getMaxConcurrentSessions()
+
+    /**
+     * @return int
+     */
+    public function getMaxConcurrentSessions(): int
     {
         return $this->max_concurrent_sessions;
     }
-    public function setMaxConcurrentSessions($max_concurrent_sess = 0)
+
+    /**
+     * @param int $max_concurrent_sess
+     * @return void
+     */
+    public function setMaxConcurrentSessions(int $max_concurrent_sess = 0)
     {
         $this->max_concurrent_sessions = $max_concurrent_sess;
     }
-    public function isUserLimitEnabled()
+
+    /**
+     * @return bool
+     */
+    public function isUserLimitEnabled(): bool
     {
         return $this->enable_userlimit;
     }
-    public function enableUserLimit( $enabled = false)
+
+    /**
+     * @param bool $enabled
+     * @return void
+     */
+    public function enableUserLimit(bool $enabled = false)
     {
         $this->enable_userlimit = $enabled;
     }
-    public function setMaxConcurrentSessionsMsg($message = "")
+
+    /**
+     * @param string $message
+     * @return void
+     */
+    public function setMaxConcurrentSessionsMsg(string $message = "")
     {
         $this->max_concurrent_sessions_msg = $message;
     }
+
+    /**
+     * @return mixed
+     */
     public function getMaxConcurrentSessionsMsg()
     {
         return $this->max_concurrent_sessions_msg;

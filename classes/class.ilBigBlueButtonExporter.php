@@ -10,18 +10,18 @@
  */
 class ilBigBlueButtonExporter extends ilXmlExporter
 {
-    public function getXmlRepresentation($a_entity, $a_schema_version, $a_id)
+    public function getXmlRepresentation($a_entity, $a_schema_version, $a_id): string
     {
         //include_once './Modules/TestQuestionPool/classes/class.ilObjQuestionPool.php';
         $bbb = new ilObjBigBlueButton($a_id);
     }
 
-    public function init()
+    public function init(): void
     {
         // TODO: Implement init() method.
     }
 
-    public function getValidSchemaVersions($a_entity)
+    public function getValidSchemaVersions($a_entity): array
     {
         return array(
             "5.2.0" => array(

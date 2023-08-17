@@ -2,34 +2,6 @@
 
 
 
-<script type="text/javascript">
-	il.Util.addOnLoad(
-		function()
-		{
-                    
-			var isMeetingRunning={isMeetingRunning};
-			var isMaxNumberOfSessionsExceeded = {isMaxNumberOfSessionsExceeded};
-			if (isMaxNumberOfSessionsExceeded){
-				$('#openClassLink').hide();
-				$('#classNotStarted').hide();
-				$('#maxNumberofSessionsExceeded').show();
-			}else if(isMeetingRunning){
-				$('#openClassLink').show();
-				$('#classNotStarted').hide();
-			}else{
-				$('#openClassLink').hide();
-				$('#classNotStarted').show();
-			}
-                        
-                        var isMeetingRecorded={isMeetingRecorded};
-			if(isMeetingRecorded){
-				$('#isMeetingRecorded').show();
-			}else{
-				$('#isMeetingRecorded').hide();
-			}
-                        
-		});
-</script>
 
 <button id="openClassLink" class="btn btn-default" type="button" onclick="window.open('{bbbURL}')">{clickToOpenClass}</button>
 

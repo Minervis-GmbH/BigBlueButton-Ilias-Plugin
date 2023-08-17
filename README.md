@@ -22,7 +22,7 @@ It is assumed you already have a ILIAS Intallation [up and running](https://docu
 
 # Installation
 
-### ILIAS 5.4, 6.x, 7.x
+### ILIAS 5.4, 6.x, 7.x, 8.x
 
 On your ILIAS Server:
 
@@ -49,7 +49,9 @@ On your ILIAS Server:
 - finally you can create "Bigbluebutton" Virtual Classrooms as regular repository object
 **Note:** If the server is not reachable, during configuration a message will be displayed. After correcting the error, make sure to press the save button twice.
 
-
+# Notes  
+- In ILIAS 8 you had to build plugin artifacts before you can be able to install the plugin. You can follow the guidelines in the ILIAS 8 setup documentation.
+- It is recommended to refresh languages if you use the guest feature.
 # Compatibility
 
 Tested with ILIAS
@@ -58,6 +60,7 @@ Tested with ILIAS
 - 6.0
 - 6.1, 6.2, 6.3
 - 7.x
+- 8.x
 
 
 

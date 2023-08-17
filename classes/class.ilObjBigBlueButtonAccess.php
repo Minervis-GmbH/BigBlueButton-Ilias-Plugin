@@ -21,7 +21,6 @@
     +-----------------------------------------------------------------------------+
 */
 
-include_once("./Services/Repository/classes/class.ilObjectPluginAccess.php");
 
 /**
 * Access/Condition checking for BigBlueButton object
@@ -45,7 +44,7 @@ class ilObjBigBlueButtonAccess extends ilObjectPluginAccess
     *
     * @return	boolean		true, if everything is ok
     */
-    public function _checkAccess($a_cmd, $a_permission, $a_ref_id, $a_obj_id, $a_user_id = "")
+    public function _checkAccess($a_cmd, $a_permission, $a_ref_id, $a_obj_id, $a_user_id = ""): bool
     {
         global $ilUser, $ilAccess;
 
