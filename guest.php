@@ -1,7 +1,7 @@
 <?php
 // enable display errors only on dev systems
-//ini_set('display_errors', 1);
-ini_set('error_reporting', 5);
+ini_set('display_errors', 1);
+//ini_set('error_reporting', 5);
 
 use BigBlueButton\Core\Record;
 use BigBlueButton\Parameters\CreateMeetingParameters;
@@ -53,14 +53,10 @@ class ilInitialisationGuest extends ilInitialisation
 		throw new \Exception("There has been an error. Try it again.");
 	}
         define ("CLIENT_ID", $client_id);
-        define('IL_COOKIE_HTTPONLY', true); // Default Value
-        define('IL_COOKIE_EXPIRE', 0);
-        define('IL_COOKIE_PATH', '/');
-        define('IL_COOKIE_DOMAIN', '');
-        \ilContext::init(\ilContext::CONTEXT_SCORM);
+        ilContext::init(\ilContext::CONTEXT_SCORM);
         //UK
-        \ilInitialisation::initILIAS();
-        \ilInitialisation::buildHTTPPath();
+        ilInitialisation::initILIAS();
+        ilInitialisation::buildHTTPPath();
     }
 
     /**
