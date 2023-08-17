@@ -29,7 +29,8 @@ require_once './Customizing/global/plugins/Services/Repository/RepositoryObject/
 class ilInitialisationGuest extends ilInitialisation
 {
 
-    protected static function getIniHost() {
+    protected static function getIniHost(): string
+    {
         // Create ini-handler (onces)
         self::initIliasIniFile();
         global $ilIliasIniFile;
@@ -44,7 +45,8 @@ class ilInitialisationGuest extends ilInitialisation
         return $http_path;
     }
 
-    public static function initIlias($client_id=null, $client_token=null) {
+    public static function initIlias($client_id=null, $client_token=null): void
+    {
 	    
 	if(empty($client_id))
 	{
@@ -67,8 +69,9 @@ class ilInitialisationGuest extends ilInitialisation
      *
      * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file)
      */
-    public static function initGlobal($a_name, $a_class, $a_source_file = null) {
-        return parent::initGlobal($a_name, $a_class, $a_source_file);
+    public static function initGlobal($a_name, $a_class, $a_source_file = null): void
+    {
+        parent::initGlobal($a_name, $a_class, $a_source_file);
     }
 
     /**
@@ -77,7 +80,8 @@ class ilInitialisationGuest extends ilInitialisation
      *
      * @see \ilInitialisation::initDatabase()
      */
-    public static function initDatabase() {
+    public static function initDatabase(): void
+    {
         if (!isset($GLOBALS['ilDB'])) {
             parent::initGlobal("ilBench", "ilBenchmark", "./Services/Utilities/classes/class.ilBenchmark.php");
             parent::initDatabase();
@@ -90,7 +94,8 @@ class ilInitialisationGuest extends ilInitialisation
      *
      * @see \ilInitialisation::initIliasIniFile()
      */
-    public static function initIliasIniFile() {
+    public static function initIliasIniFile(): void
+    {
         if (!isset($GLOBALS['ilIliasIniFile'])) {
             parent::initIliasIniFile();
         }
@@ -102,14 +107,16 @@ class ilInitialisationGuest extends ilInitialisation
      *
      * @see \ilInitialisation::initIliasIniFile()
      */
-    public static function initClientIniFile() {
+    public static function initClientIniFile(): void
+    {
         if (!isset($GLOBALS['initClientIniFile'])) {
             parent::initClientIniFile();
         }
     }
 
 
-    public static function initLog() {
+    public static function initLog(): void
+    {
         if (!isset($GLOBALS['ilLog'])) {
             parent::initLog();
             parent::initGlobal("ilAppEventHandler", "ilAppEventHandler", "./Services/EventHandling/classes/class.ilAppEventHandler.php");

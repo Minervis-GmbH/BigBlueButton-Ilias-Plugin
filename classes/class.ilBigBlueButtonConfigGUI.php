@@ -1,6 +1,6 @@
 <?php
 
-include_once("./Services/Component/classes/class.ilPluginConfigGUI.php");
+//include_once("./Services/Component/classes/class.ilPluginConfigGUI.php");
 
 
 
@@ -9,7 +9,7 @@ include_once("./Services/Component/classes/class.ilPluginConfigGUI.php");
  *
  * @version $Id$
  * 
- *@ilCtrl_isCalledBy srag\DevTools\DevToolsCtrl: ilBigBlueButtonConfigGUI
+ *@ilCtrl_IsCalledBy ilBigBlueButtonConfigGUI: ilObjComponentSettingsGUI
  */
 class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 {
@@ -18,10 +18,22 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 
 	private $pl_object;
     /**
+     * @var ilGlobalTemplateInterface|mixed
+     */
+    public ilGlobalTemplateInterface $tpl;
+
+    /**
     * Handles all commmands, default is "configure"
     */
-	function performCommand($cmd)
-	{
+    
+    public function __construct()
+    {
+        global $tpl;
+        $this->tpl = $tpl;
+    }
+
+    function performCommand($cmd): void
+    {
 
 		switch ($cmd)
 		{
@@ -54,7 +66,19 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
     {
         global $lng, $ilCtrl, $ilDB;
 
-        $values = array();
+        $values = array(
+            'svrpublicurl' => '',
+            'svrsalt'      => '',
+            'choose_recording' => 0,
+            'guest_global_choose' => 0,
+            'sess_enable_max_concurrent' => 0,
+            'enable_userlimit' => 0,
+            'sess_max_concurrent' => 0,
+            'sess_msg_concurrent' => ''
+
+
+
+        );
         $result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
         while ($record = $ilDB->fetchAssoc($result)) {
             $values["svrpublicurl"] = $record["svrpublicurl"];
@@ -69,14 +93,14 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 
 
         $pl = $this->getPluginObject();
-        if ($values["svrpublicurl"] != '' && $values["svrsalt"] != '') {
+        if (count($values) > 0 && $values["svrpublicurl"] != '' && $values["svrsalt"] != '') {
             $server_reachable=$this->isServerReachable($values["svrpublicurl"], $values["svrsalt"]);
             if (!$server_reachable) {
-                ilUtil::sendFailure($pl->txt("sever_not_reachable"), true);
+                $this->tpl->setOnScreenMessage(ilGlobalTemplateInterface::MESSAGE_TYPE_FAILURE, "sever_not_reachable", true );
             }
         }
 
-        include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
+        //include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
         $form = new ilPropertyFormGUI();
 
         //
@@ -96,7 +120,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
         $pi->setMaxLength(256);
         $pi->setSize(40);
         $pi->setRetype(false);
-        $pi->setValue($values["svrsalt"]);
+        if ($values["svrsalt"]) $pi->setValue($values["svrsalt"]);
         $form->addItem($pi);
 
         //recording configuration
@@ -205,8 +229,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
                 " WHERE id = ".$ilDB->quote(1, "integer")
                 );
             }
-
-            ilUtil::sendSuccess($pl->txt("saving_invoked"), true);
+            $this->tpl->setOnScreenMessage(ilGlobalTemplateInterface::MESSAGE_TYPE_SUCCESS, $pl->txt("saving_invoked"), true);
             $ilCtrl->redirect($this, "configure");
         } else {
             $form->setValuesByPost();
@@ -224,7 +247,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
 
     private function isServerReachable(string $url, string $salt)
     {
-        include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
+        //include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
         $bbb_helper=new BBB($salt,$url);
         try{
             $apiVersion = $bbb_helper->getApiVersion();
