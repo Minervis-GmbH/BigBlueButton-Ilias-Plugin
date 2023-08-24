@@ -12,8 +12,7 @@ class ilBigBlueButtonExporter extends ilXmlExporter
 {
     public function getXmlRepresentation($a_entity, $a_schema_version, $a_id): string
     {
-        //include_once './Modules/TestQuestionPool/classes/class.ilObjQuestionPool.php';
-        $bbb = new ilObjBigBlueButton($a_id);
+        return ''; // Currently no export possible
     }
 
     public function init(): void
