@@ -430,7 +430,10 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                 
                 if ($isPublished){
                     if ($this->object->isDownloadAllowed()){
-                        $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("DownloadText"), $BBBHelper->getVideoDownloadStreamUrl($format->url));
+                        $actions[] = $DIC->ui()->factory()->button()->shy(
+                            $this->txt("DownloadText"),
+                            $BBBHelper->getVideoDownloadStreamUrl($format->url ?? '')
+                        );
                     }
                     // $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("unpublish_link"), $this->editLink($recording->recordID, 0));
                     // $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("publish_link"), $this->editLink($recording->recordID, 1)); 
