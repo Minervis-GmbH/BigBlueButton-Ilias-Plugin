@@ -1,9 +1,12 @@
 <?php
 
+use BigBlueButton\Util\UrlBuilder;
+use BigBlueButton\BigBlueButton;
+
 /**
  * Class ilBBB
  */
-class ilBBB extends \BigBlueButton\BigBlueButton
+class ilBBB extends BigBlueButton
 {
     public function __construct($securitySecret=null, $baseUrl=null)
     {
@@ -12,7 +15,6 @@ class ilBBB extends \BigBlueButton\BigBlueButton
         $this->bbbServerBaseUrl = $baseUrl;
         $this->urlBuilder       = new UrlBuilder($this->securitySecret, $this->bbbServerBaseUrl);
         //Add Proxy
-        require_once('Services/Http/classes/class.ilProxySettings.php');
         if(ilProxySettings::_getInstance()->isActive())
         {
             $proxyHost = ilProxySettings::_getInstance()->getHost();

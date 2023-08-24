@@ -1,7 +1,5 @@
 <?php
 
-//include_once("./Services/Component/classes/class.ilPluginConfigGUI.php");
-
 /**
  * BigBlueButton exporter class
  *

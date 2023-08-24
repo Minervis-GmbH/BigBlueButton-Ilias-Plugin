@@ -81,7 +81,6 @@ class ilObjBigBlueButtonListGUI extends ilObjectPluginListGUI
 
         $props = array();
 
-        //$this->plugin->includeClass("class.ilObjBigBlueButtonAccess.php");
         if (!ilObjBigBlueButtonAccess::checkOnline($this->obj_id)) {
             $props[] = array("alert" => true, "property" => $this->txt("status"),
                 "value" => $this->txt("offline"));
