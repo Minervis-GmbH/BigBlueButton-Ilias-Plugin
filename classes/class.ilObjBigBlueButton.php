@@ -114,7 +114,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Get type.
     */
-    final public function initType(): void
+    final protected function initType(): void
     {
         $this->setType("xbbb");
     }
@@ -122,7 +122,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Create object
     */
-    public function doCreate(bool $clone_mode = false): void
+    protected function doCreate(bool $clone_mode = false): void
     {
         global $ilDB;
 
@@ -168,7 +168,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Read data from db
     */
-    public function doRead(): void
+    protected function doRead(): void
     {
         global $ilDB;
 
@@ -208,7 +208,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Update data
     */
-    public function doUpdate(): void
+    protected function doUpdate(): void
     {
         global $ilDB;
 
@@ -233,7 +233,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Delete data from db
     */
-    public function doDelete(): void
+    protected function doDelete(): void
     {
         global $ilDB;
 

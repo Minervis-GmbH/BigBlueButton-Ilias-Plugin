@@ -120,7 +120,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
     /**
      * Set tabs
      */
-    public function setTabs(): void
+    protected function setTabs(): void
     {
         global $ilTabs, $ilCtrl, $ilAccess;
 
