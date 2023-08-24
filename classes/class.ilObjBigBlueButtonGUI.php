@@ -534,7 +534,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
          $publish = boolval(filter_input(INPUT_GET, "publish"));
 
         $BBBHelper->publishRecordings($this->object,$recordID, $publish );
-        $this->object=$bbb_obj;
+
         $ilCtrl->redirect($this, "showContent");
 
     }
