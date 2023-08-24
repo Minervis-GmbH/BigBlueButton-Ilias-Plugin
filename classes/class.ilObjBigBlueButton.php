@@ -584,13 +584,6 @@ class ilObjBigBlueButton extends ilObjectPlugin
         $this->guestGlobalEnabled = $enabled;
     }
 
-    /**
-     * @return mixed
-     */
-    public function isGuestLink()
-    {
-        return $this->is_guest_link;
-    }
 
     /**
      * @return bool

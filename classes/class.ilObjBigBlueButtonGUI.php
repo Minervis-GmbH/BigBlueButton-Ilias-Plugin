@@ -45,6 +45,7 @@
  */
 class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 {
+    private ?ilPropertyFormGUI $form = null;
     public bool $has_meeting_recordings = false;
 
     /**
