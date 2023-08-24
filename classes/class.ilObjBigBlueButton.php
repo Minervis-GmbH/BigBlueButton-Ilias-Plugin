@@ -183,12 +183,12 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $this->setWelcomeText($rec["welcometext"]);
             $this->setMaxParticipants($rec["maxparticipants"]);
             $this->setSequence($rec["sequence"]);
-            $this->setDialNumber($rec["dialnumber"] !==null ? $rec["dialnumber"]: '');
+            $this->setDialNumber($rec["dialnumber"] ?? '');
             $this->setAccessCode($rec["accesscode"]);
             $this->setMeetingDuration($rec["duration"]);
             $this->setGuestLinkAllowed((bool)$rec["guestchoose"]);
             $this->setDownloadAllowed((bool)$rec["allow_download"]);
-            $this->setPresentationUrl($rec["presentationurl"]!==null? $rec["presentationurl"]: '');
+            $this->setPresentationUrl($rec["presentationurl"] ?? '');
             $this->setPublish((bool)$rec["publish"]);
         }
 
