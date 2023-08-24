@@ -32,7 +32,7 @@ class ilBigBlueButtonProtocol
     public function __construct($object)
     {
         $this->object = $object;
-        $this->bbb = new BBB($this->object->getSvrSalt(), $this->object->getSvrPublicURL());
+        $this->bbb = new ilBBB($this->object->getSvrSalt(), $this->object->getSvrPublicURL());
         $this->meetings = $this->bbb->getMeetings();
     }
     public function getAvatar()
@@ -263,23 +263,3 @@ class ilBigBlueButtonProtocol
     }
 }
 
-class BBB extends \BigBlueButton\BigBlueButton
-{
-    public function __construct($securitySecret=null, $baseUrl=null)
-    {
-        parent::__construct();
-        $this->securitySecret = $securitySecret;
-        $this->bbbServerBaseUrl = $baseUrl;
-        $this->urlBuilder       = new UrlBuilder($this->securitySecret, $this->bbbServerBaseUrl);
-        //Add Proxy
-		require_once('Services/Http/classes/class.ilProxySettings.php');
-		if(ilProxySettings::_getInstance()->isActive())
-		{
-			$proxyHost = ilProxySettings::_getInstance()->getHost();
-			$proxyPort = ilProxySettings::_getInstance()->getPort();
-            $this->curlopts         = [
-                CURLOPT_PROXY => $proxyHost . ":" . $proxyPort
-            ];
-		}
-    }
-}

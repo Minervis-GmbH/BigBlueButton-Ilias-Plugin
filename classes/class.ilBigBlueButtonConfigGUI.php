@@ -248,7 +248,7 @@ class ilBigBlueButtonConfigGUI extends ilPluginConfigGUI
     private function isServerReachable(string $url, string $salt)
     {
         //include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
-        $bbb_helper=new BBB($salt,$url);
+        $bbb_helper=new ilBBB($salt,$url);
         try{
             $apiVersion = $bbb_helper->getApiVersion();
 	    return $apiVersion->success();
