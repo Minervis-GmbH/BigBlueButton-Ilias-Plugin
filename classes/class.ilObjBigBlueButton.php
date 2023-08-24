@@ -161,7 +161,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $this->enableUserLimit((bool) $record['enable_userlimit']);
             $this->enableMaxConcurrentSession((bool) $record['sess_enable_max_concurrent']);
             $this->setMaxConcurrentSessions((int) $record['sess_max_concurrent']);
-            $this->setMaxConcurrentSessionsMsg($record['sess_msg_concurrent']);
+            $this->setMaxConcurrentSessionsMsg($record['sess_msg_concurrent'] ?? '');
         }
     }
 
@@ -201,7 +201,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $this->enableUserLimit((bool) $record['enable_userlimit']);
             $this->enableMaxConcurrentSession((bool) $record['sess_enable_max_concurrent']);
             $this->setMaxConcurrentSessions((int) $record['sess_max_concurrent']);
-            $this->setMaxConcurrentSessionsMsg($record['sess_msg_concurrent']);
+            $this->setMaxConcurrentSessionsMsg($record['sess_msg_concurrent'] ?? '');
         }
     }
 
