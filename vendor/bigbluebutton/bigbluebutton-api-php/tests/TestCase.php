@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -37,6 +37,7 @@ use Faker\Generator;
  * Class TestCase.
  *
  * @internal
+ *
  * @coversNothing
  */
 class TestCase extends \PHPUnit\Framework\TestCase
@@ -46,9 +47,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected $faker;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -186,8 +184,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
             'meta_endCallbackUrl'                    => $this->faker->url,
             'meta_bbb-recording-ready-url'           => $this->faker->url,
             'notifyRecordingIsOn'                    => $this->faker->boolean(50),
-            'uploadExternalUrl'                      => $this->faker->url,
-            'uploadExternalDescription'              => $this->faker->text,
+            'presentationUploadExternalUrl'          => $this->faker->url,
+            'presentationUploadExternalDescription'  => $this->faker->text,
         ];
     }
 
@@ -203,7 +201,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param $createParams
+     * @param mixed $createParams
      *
      * @return array
      */
@@ -284,15 +282,15 @@ class TestCase extends \PHPUnit\Framework\TestCase
             ->setPreUploadedPresentationOverrideDefault($params['preUploadedPresentationOverrideDefault'])
             ->setDisabledFeatures($params['disabledFeatures'])
             ->addMeta('presenter', $params['meta_presenter'])
-            ->addMeta('bbb-recording-ready-url', $params['meta_bbb-recording-ready-url'])     
+            ->addMeta('bbb-recording-ready-url', $params['meta_bbb-recording-ready-url'])
             ->setNotifyRecordingIsOn($params['notifyRecordingIsOn'])
-            ->setUploadExternalUrl($params['uploadExternalUrl'])
-            ->setUploadExternalDescription($params['uploadExternalDescription'])
+            ->setPresentationUploadExternalUrl($params['presentationUploadExternalUrl'])
+            ->setPresentationUploadExternalDescription($params['presentationUploadExternalDescription'])
         ;
     }
 
     /**
-     * @param $params
+     * @param mixed $params
      *
      * @return CreateMeetingParameters
      */
@@ -334,7 +332,9 @@ class TestCase extends \PHPUnit\Framework\TestCase
 
         return $joinMeetingParams->setUserId($params['userId'])->setWebVoiceConf($params['webVoiceConf'])
             ->setCreationTime($params['creationTime'])->addUserData('countrycode', $params['userdata_countrycode'])
-            ->setRole($params['role'])->addUserData('email', $params['userdata_email'])->addUserData('commercial', $params['userdata_commercial']);
+            ->setRole($params['role'])->addUserData('email', $params['userdata_email'])->addUserData('commercial', $params['userdata_commercial'])
+            ->setExcludeFromDashboard($params['excludeFromDashboard'])
+        ;
     }
 
     /**
@@ -397,6 +397,11 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function loadXmlFile($path)
     {
         return simplexml_load_string(file_get_contents($path));
+    }
+
+    protected function loadJsonFile($path)
+    {
+        return file_get_contents($path);
     }
 
     protected function minifyString($string)
