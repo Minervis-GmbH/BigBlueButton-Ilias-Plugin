@@ -177,19 +177,19 @@ class ilObjBigBlueButton extends ilObjectPlugin
             " WHERE id = ".$ilDB->quote($this->getId(), "integer")
         );
         while ($rec = $ilDB->fetchAssoc($set)) {
-            $this->setOnline($rec["is_online"]);
-            $this->setAttendeePwd($rec["attendeepwd"]);
-            $this->setModeratorPwd($rec["moderatorpwd"]);
-            $this->setWelcomeText($rec["welcometext"]);
-            $this->setMaxParticipants($rec["maxparticipants"]);
-            $this->setSequence($rec["sequence"]);
-            $this->setDialNumber($rec["dialnumber"] ?? '');
-            $this->setAccessCode($rec["accesscode"]);
-            $this->setMeetingDuration($rec["duration"]);
-            $this->setGuestLinkAllowed((bool)$rec["guestchoose"]);
-            $this->setDownloadAllowed((bool)$rec["allow_download"]);
-            $this->setPresentationUrl($rec["presentationurl"] ?? '');
-            $this->setPublish((bool)$rec["publish"]);
+            $this->setOnline((bool) ($rec["is_online"] ?? false));
+            $this->setAttendeePwd((string) ($rec["attendeepwd"] ?? ''));
+            $this->setModeratorPwd((string) ($rec["moderatorpwd"] ?? ''));
+            $this->setWelcomeText((string) $rec["welcometext"]);
+            $this->setMaxParticipants((int) ($rec["maxparticipants"] ?? 0));
+            $this->setSequence((string) ($rec["sequence"] ?? ''));
+            $this->setDialNumber((string) ($rec["dialnumber"] ?? ''));
+            $this->setAccessCode((string) ($rec["accesscode"] ?? ''));
+            $this->setMeetingDuration((int) ($rec["duration"] ?? 0));
+            $this->setGuestLinkAllowed((bool) $rec["guestchoose"]);
+            $this->setDownloadAllowed((bool) $rec["allow_download"]);
+            $this->setPresentationUrl((string) ($rec["presentationurl"] ?? ''));
+            $this->setPublish((bool) ($rec["publish"] ?? false));
         }
 
         $result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
