@@ -8,4 +8,14 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Stringable' => $vendorDir . '/marc-mabe/php-enum/stubs/Stringable.php',
+    'ilBBB' => $baseDir . '/classes/class.ilBBB.php',
+    'ilBigBlueButtonConfigGUI' => $baseDir . '/classes/class.ilBigBlueButtonConfigGUI.php',
+    'ilBigBlueButtonExporter' => $baseDir . '/classes/class.ilBigBlueButtonExporter.php',
+    'ilBigBlueButtonImporter' => $baseDir . '/classes/class.ilBigBlueButtonImporter.php',
+    'ilBigBlueButtonPlugin' => $baseDir . '/classes/class.ilBigBlueButtonPlugin.php',
+    'ilBigBlueButtonProtocol' => $baseDir . '/classes/class.ilBigBlueButtonProtocol.php',
+    'ilObjBigBlueButton' => $baseDir . '/classes/class.ilObjBigBlueButton.php',
+    'ilObjBigBlueButtonAccess' => $baseDir . '/classes/class.ilObjBigBlueButtonAccess.php',
+    'ilObjBigBlueButtonGUI' => $baseDir . '/classes/class.ilObjBigBlueButtonGUI.php',
+    'ilObjBigBlueButtonListGUI' => $baseDir . '/classes/class.ilObjBigBlueButtonListGUI.php',
 );

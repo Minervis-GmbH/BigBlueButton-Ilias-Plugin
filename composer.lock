@@ -12,31 +12,31 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigbluebutton/bigbluebutton-api-php.git",
-                "reference": "46330a9300614a5c1f4a3d7a97fd70583ffb40a5"
+                "reference": "1434c046680d83d824318f076f22cdf67559b303"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigbluebutton/bigbluebutton-api-php/zipball/46330a9300614a5c1f4a3d7a97fd70583ffb40a5",
-                "reference": "46330a9300614a5c1f4a3d7a97fd70583ffb40a5",
+                "url": "https://api.github.com/repos/bigbluebutton/bigbluebutton-api-php/zipball/1434c046680d83d824318f076f22cdf67559b303",
+                "reference": "1434c046680d83d824318f076f22cdf67559b303",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-mbstring": "*",
                 "ext-simplexml": "*",
-                "marc-mabe/php-enum": "^4.7",
-                "php": ">=7.1"
+                "marc-mabe/php-enum": "^v4.7.0",
+                "php": ">=7.4"
             },
             "require-dev": {
-                "bmitch/churn-php": "^1.7",
-                "fakerphp/faker": "^1.17",
-                "friendsofphp/php-cs-fixer": "^3.9.2",
-                "nunomaduro/phpinsights": "^v2.4.0",
+                "bmitch/churn-php": "^1.7.1",
+                "fakerphp/faker": "^v1.22.0",
+                "friendsofphp/php-cs-fixer": "^v3.16.0",
+                "nunomaduro/phpinsights": "^v2.7.0",
                 "phploc/phploc": "^7.0.2",
                 "phpmetrics/phpmetrics": "^v2.8.1",
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "^3.7.1",
-                "wapmorgan/php-deprecation-detector": "^2.0"
+                "phpunit/phpunit": "^9.6.8",
+                "squizlabs/php_codesniffer": "^3.7.2",
+                "wapmorgan/php-deprecation-detector": "^2.0.33"
             },
             "default-branch": true,
             "type": "library",
@@ -67,7 +67,7 @@
                 "issues": "https://github.com/bigbluebutton/bigbluebutton-api-php/issues",
                 "source": "https://github.com/bigbluebutton/bigbluebutton-api-php/tree/master"
             },
-            "time": "2022-11-23T15:29:35+00:00"
+            "time": "2023-12-15T20:55:29+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
@@ -153,5 +153,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
