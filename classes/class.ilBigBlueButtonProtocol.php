@@ -1,7 +1,5 @@
 <?php
 
-require_once './Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/vendor/autoload.php';
-
 use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
@@ -9,7 +7,6 @@ use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
 use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
-use BigBlueButton\Util\UrlBuilder;
 
 /**
 * BigBlueButton comunication helper class
@@ -32,7 +29,7 @@ class ilBigBlueButtonProtocol
     public function __construct($object)
     {
         $this->object = $object;
-        $this->bbb = new BBB($this->object->getSvrSalt(), $this->object->getSvrPublicURL());
+        $this->bbb = new ilBBB($this->object->getSvrSalt(), $this->object->getSvrPublicURL());
         $this->meetings = $this->bbb->getMeetings();
     }
     public function getAvatar()
@@ -42,7 +39,7 @@ class ilBigBlueButtonProtocol
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
-    }    
+    }
 
     public function getVideoDownloadStreamUrl(string $url)
     {
@@ -81,7 +78,6 @@ class ilBigBlueButtonProtocol
         }*/
 
 
-        include_once('./Services/Link/classes/class.ilLink.php');
         $logoutURL = ilLink::_getLink($object->getRefId());
 
         $this->createMeetingParam = new CreateMeetingParameters($meetingID, $meetingTitle);
@@ -101,7 +97,7 @@ class ilBigBlueButtonProtocol
         if ($object->getMaxParticipants()>0){
             $this->createMeetingParam->setMaxParticipants($object->getMaxParticipants());
         }
-        if( (bool)(strlen($pdf = $this->object->getPresentationUrl())) && $this->isPDFValid($pdf)) {         
+        if( (bool)(strlen($pdf = $this->object->getPresentationUrl())) && $this->isPDFValid($pdf)) {
             $this->createMeetingParam->addPresentation($pdf);
         }
         if(trim($object->getDialNumber())){
@@ -147,8 +143,15 @@ class ilBigBlueButtonProtocol
         $meetingID=$object->getBBBId();
         $mPW=$object->getModeratorPwd();
         ;
-        $meetingInfo = $this->bbb->getMeetingInfo(new GetMeetingInfoParameters($meetingID, $mPW));
-        return $meetingInfo->success();
+        $meetingInfo= null;
+        try{
+            $meetingInfo = $this->bbb->getMeetingInfo(new GetMeetingInfoParameters($meetingID, $mPW));
+            return $meetingInfo->success();
+        }catch(Exception $e){
+            return $meetingInfo;
+        }
+
+
     }
 
 
@@ -169,7 +172,7 @@ class ilBigBlueButtonProtocol
         $meetingID=$this->object->getBBBId();
         $recordParameters = new GetRecordingsParameters();
         $recordParameters->setMeetingID($meetingID);
-		return $this->bbb->getRecordings($recordParameters);    
+		return $this->bbb->getRecordings($recordParameters);
     }
 
 
@@ -221,11 +224,11 @@ class ilBigBlueButtonProtocol
         return $apiVersion->success();
     }
     private function isPDFValid(string $pdf){
-        
+
         return filter_var($pdf, FILTER_VALIDATE_URL) ? true : false;
     }
 
-    
+
     public function getMaximumSessionsAvailable($meeting_id = null)
     {
         $participants_count = 0;
@@ -238,11 +241,11 @@ class ilBigBlueButtonProtocol
             $participants_count = $participants_count + $meeting->getParticipantCount();
             $userlimit_exceeded =( $this->object->getMaxParticipants() > 0 && ($meeting->getMaxUsers() - $meeting->getParticipantCount() -1 <= 0));
                $available[$meeting->getMeetingId()] = [
-                
+
                 'participants' => $meeting->getParticipantCount(),
                 'max_users' => $meeting->getMaxUsers(),
                 'userlimit' => $userlimit_exceeded
-                
+
             ];
             if($meeting_id && $meeting->getMeetingId() == $meeting_id && $userlimit_exceeded){
                 $sessions_available['current_meeting_userlimit'] = true;
@@ -257,23 +260,3 @@ class ilBigBlueButtonProtocol
     }
 }
 
-class BBB extends \BigBlueButton\BigBlueButton
-{
-    public function __construct($securitySecret=null, $baseUrl=null)
-    {
-        parent::__construct();
-        $this->securitySecret = $securitySecret;
-        $this->bbbServerBaseUrl = $baseUrl;
-        $this->urlBuilder       = new UrlBuilder($this->securitySecret, $this->bbbServerBaseUrl);
-        //Add Proxy
-		require_once('Services/Http/classes/class.ilProxySettings.php');
-		if(ilProxySettings::_getInstance()->isActive())
-		{
-			$proxyHost = ilProxySettings::_getInstance()->getHost();
-			$proxyPort = ilProxySettings::_getInstance()->getPort();
-            $this->curlopts         = [
-                CURLOPT_PROXY => $proxyHost . ":" . $proxyPort
-            ];
-		}
-    }
-}

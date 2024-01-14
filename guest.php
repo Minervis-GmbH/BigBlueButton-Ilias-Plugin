@@ -1,7 +1,7 @@
 <?php
 // enable display errors only on dev systems
-//ini_set('display_errors', 1);
-ini_set('error_reporting', 5);
+ini_set('display_errors', 1);
+//ini_set('error_reporting', 5);
 
 use BigBlueButton\Core\Record;
 use BigBlueButton\Parameters\CreateMeetingParameters;
@@ -29,7 +29,8 @@ require_once './Customizing/global/plugins/Services/Repository/RepositoryObject/
 class ilInitialisationGuest extends ilInitialisation
 {
 
-    protected static function getIniHost() {
+    protected static function getIniHost(): string
+    {
         // Create ini-handler (onces)
         self::initIliasIniFile();
         global $ilIliasIniFile;
@@ -44,21 +45,18 @@ class ilInitialisationGuest extends ilInitialisation
         return $http_path;
     }
 
-    public static function initIlias($client_id=null, $client_token=null) {
-	    
+    public static function initIlias($client_id=null, $client_token=null): void
+    {
+
 	if(empty($client_id))
 	{
 		throw new \Exception("There has been an error. Try it again.");
 	}
         define ("CLIENT_ID", $client_id);
-        define('IL_COOKIE_HTTPONLY', true); // Default Value
-        define('IL_COOKIE_EXPIRE', 0);
-        define('IL_COOKIE_PATH', '/');
-        define('IL_COOKIE_DOMAIN', '');
-        \ilContext::init(\ilContext::CONTEXT_SCORM);
+        ilContext::init(\ilContext::CONTEXT_SCORM);
         //UK
-        \ilInitialisation::initILIAS();
-        \ilInitialisation::buildHTTPPath();
+        ilInitialisation::initILIAS();
+        ilInitialisation::buildHTTPPath();
     }
 
     /**
@@ -67,8 +65,9 @@ class ilInitialisationGuest extends ilInitialisation
      *
      * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file)
      */
-    public static function initGlobal($a_name, $a_class, $a_source_file = null) {
-        return parent::initGlobal($a_name, $a_class, $a_source_file);
+    public static function initGlobal($a_name, $a_class, $a_source_file = null): void
+    {
+        parent::initGlobal($a_name, $a_class, $a_source_file);
     }
 
     /**
@@ -77,7 +76,8 @@ class ilInitialisationGuest extends ilInitialisation
      *
      * @see \ilInitialisation::initDatabase()
      */
-    public static function initDatabase() {
+    public static function initDatabase(): void
+    {
         if (!isset($GLOBALS['ilDB'])) {
             parent::initGlobal("ilBench", "ilBenchmark", "./Services/Utilities/classes/class.ilBenchmark.php");
             parent::initDatabase();
@@ -90,7 +90,8 @@ class ilInitialisationGuest extends ilInitialisation
      *
      * @see \ilInitialisation::initIliasIniFile()
      */
-    public static function initIliasIniFile() {
+    public static function initIliasIniFile(): void
+    {
         if (!isset($GLOBALS['ilIliasIniFile'])) {
             parent::initIliasIniFile();
         }
@@ -102,14 +103,16 @@ class ilInitialisationGuest extends ilInitialisation
      *
      * @see \ilInitialisation::initIliasIniFile()
      */
-    public static function initClientIniFile() {
+    public static function initClientIniFile(): void
+    {
         if (!isset($GLOBALS['initClientIniFile'])) {
             parent::initClientIniFile();
         }
     }
 
 
-    public static function initLog() {
+    public static function initLog(): void
+    {
         if (!isset($GLOBALS['ilLog'])) {
             parent::initLog();
             parent::initGlobal("ilAppEventHandler", "ilAppEventHandler", "./Services/EventHandling/classes/class.ilAppEventHandler.php");
@@ -133,7 +136,7 @@ class GuestLink
     /** @var ilUtil $ilUtil */
     private $ilUtil;
 
-    
+
     private $bbb;
 
     /** @var int $refId */
@@ -282,7 +285,7 @@ class GuestLink
 		if (strpos($http_base,'/m/')) {
 			$http_base = strstr($http_base,'/m/',true).'/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
 		}
-		
+
         $this->htmlTpl = new ilTemplate( dirname(__FILE__) . '/' . 'templates/tpl.guest.html', true, true);
         $this->htmlTpl->setVariable('USER_LANG', $this->isoLangCode[$this->userLang]);
         $this->htmlTpl->setVariable('HTTP_BASE', $http_base);
@@ -432,7 +435,7 @@ class GuestLink
                 $this->errState['displayname'] = isset($_POST['display_name']);
             }
         }
-        
+
         return $score >= 0;
     }
 
@@ -465,7 +468,7 @@ class GuestLink
         ilInitialisationGuest::initIlias($this->client);
         global $DIC; /** @var Container $DIC */
         $this->dic = $DIC;
-        
+
         try {
             $this->pluginObject = ilObjectFactory::getInstanceByRefId($this->refId);
         } catch (ilDatabaseException $e) {
@@ -489,7 +492,7 @@ class GuestLink
                     $this->errState['userLimit'] = true;
                 }
             }else if( !$this->errState['displayname'] ) {
-                $this->bbb = new BBB($this->pluginConfig->getSvrSalt(), $this->pluginConfig->getSvrPublicUrl());
+                $this->bbb = new ilBBB($this->pluginConfig->getSvrSalt(), $this->pluginConfig->getSvrPublicUrl());
                 $this->attendeePwd = $this->pluginObject->getAttendeePwd();
                 $this->setMeetingId();
                 if( $this->getUrlJoinMeeting() ) {

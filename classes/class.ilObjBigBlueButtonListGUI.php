@@ -21,8 +21,6 @@
     +-----------------------------------------------------------------------------+
 */
 
-include_once "./Services/Repository/classes/class.ilObjectPluginListGUI.php";
-
 /**
 * ListGUI implementation for BigBlueButton object plugin. This one
 * handles the presentation in container items (categories, courses, ...)
@@ -38,7 +36,7 @@ class ilObjBigBlueButtonListGUI extends ilObjectPluginListGUI
     /**
     * Init type
     */
-    public function initType()
+    public function initType(): void
     {
         $this->setType("xbbb");
     }
@@ -46,7 +44,7 @@ class ilObjBigBlueButtonListGUI extends ilObjectPluginListGUI
     /**
     * Get name of gui class handling the commands
     */
-    public function getGuiClass()
+    public function getGuiClass(): string
     {
         return "ilObjBigBlueButtonGUI";
     }
@@ -54,7 +52,7 @@ class ilObjBigBlueButtonListGUI extends ilObjectPluginListGUI
     /**
     * Get commands
     */
-    public function initCommands()
+    public function initCommands(): array
     {
         return array(
             array(
@@ -77,13 +75,12 @@ class ilObjBigBlueButtonListGUI extends ilObjectPluginListGUI
     *						"property" (string) => property name
     *						"value" (string) => property value
     */
-    public function getProperties()
+    public function getProperties(): array
     {
         global $lng, $ilUser;
 
         $props = array();
 
-        $this->plugin->includeClass("class.ilObjBigBlueButtonAccess.php");
         if (!ilObjBigBlueButtonAccess::checkOnline($this->obj_id)) {
             $props[] = array("alert" => true, "property" => $this->txt("status"),
                 "value" => $this->txt("offline"));

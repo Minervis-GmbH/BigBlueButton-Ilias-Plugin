@@ -22,7 +22,6 @@
  */
 
 
-include_once("./Services/Repository/classes/class.ilObjectPluginGUI.php");
 
 
 /**
@@ -46,24 +45,21 @@ include_once("./Services/Repository/classes/class.ilObjectPluginGUI.php");
  */
 class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 {
+    private ?ilPropertyFormGUI $form = null;
+    public bool $has_meeting_recordings = false;
+
     /**
      * Initialisation
      */
-    protected function afterConstructor()
+    protected function afterConstructor(): void
     {
-        // anything needed after object has been constructed
-        // - example: append my_id GET parameter to each request
-        //   $ilCtrl->saveParameter($this, array("my_id"));
-
-        //$this->deactivateCreationForm(ilObject2GUI::CFORM_IMPORT);
-        //$this->deactivateCreationForm(ilObject2GUI::CFORM_CLONE);
         $this->tpl->addCss("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/bbb.css");
     }
 
     /**
      * Get type.
      */
-    final public function getType()
+    final public function getType(): string
     {
         return "xbbb";
     }
@@ -71,7 +67,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
     /**
      * Handles all commmands of this class, centralizes permission checks
      */
-    function performCommand($cmd)
+    function performCommand($cmd): void
     {
         $this->setTitleAndDescription();
 
@@ -105,7 +101,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
     /**
      * After object has been created -> jump to this command
      */
-    public function getAfterCreationCmd()
+    public function getAfterCreationCmd(): string
     {
         return "editProperties";
     }
@@ -113,7 +109,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
     /**
      * Get standard command
      */
-    public function getStandardCmd()
+    public function getStandardCmd(): string
     {
         return "showContent";
     }
@@ -125,7 +121,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
     /**
      * Set tabs
      */
-    public function setTabs()
+    protected function setTabs(): void
     {
         global $ilTabs, $ilCtrl, $ilAccess;
 
@@ -275,7 +271,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $this->object->setDownloadAllowed(($this->form->getInput("allow_download")));
 
             $this->object->update();
-            ilUtil::sendSuccess($lng->txt("msg_obj_modified"), true);
+            $this->tpl->setOnScreenMessage(ilGlobalTemplateInterface::MESSAGE_TYPE_SUCCESS, $lng->txt("msg_obj_modified"), true);
             $ilCtrl->redirect($this, "editProperties");
         }
 
@@ -301,7 +297,6 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 
         while ($record = $ilDB->fetchAssoc($result)) {
             $svrPublicURL = $record["svrpublicurl"];
-            $svrPublicPort = $record["svrpublicport"];
             $values["choose_recording"] = $record["choose_recording"];
         }
 
@@ -313,11 +308,12 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $isModerator=true;
         }
 
-        include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
         $BBBHelper=new ilBigBlueButtonProtocol($this->object);
 
         $available_sessions = $BBBHelper->getMaximumSessionsAvailable();
         //$BBBHelper->getMeetings();
+
+        $client_js = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/client.js", true, true);
 
         if ($isModerator) {
             $my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorClient.html", true, true);
@@ -354,7 +350,11 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                 $my_tpl->setVariable("CHOOSE_RECORDING_VISIBLE", "hidden");
 
             }           
-            $my_tpl->setVariable("hasMeetingRecordings", $this->has_meeting_recordings  && boolval($values["choose_recording"]) ? "true" : "false");
+            $client_js->setVariable("hasMeetingRecordings", $this->has_meeting_recordings  && boolval($values["choose_recording"]) ? "true" : "false");
+            $client_js->setCurrentBlock('moderator');
+            $client_js->setVariable("DUMMY_VAL", 1);
+            $client_js->parseCurrentBlock();
+
 
             $bbbURL=$BBBHelper->joinURLModerator($this->object);
         } else {
@@ -365,20 +365,22 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $bbbURL=$BBBHelper->joinURL($this->object);
         }
 
-        $my_tpl->setVariable('isMaxNumberOfSessionsExceeded', 'false');
+        $client_js->setVariable('isMaxNumberOfSessionsExceeded', 'false');
         if($this->object->isMaxConcurrentSessionEnabled()){
             if($available_sessions['max_sessions'] ||  (  key_exists($this->object->getBBBId(), $available_sessions['meetings']) && $available_sessions['meetings'][$this->object->getBBBId()]['userlimit'])){
-                $my_tpl->setVariable('isMaxNumberOfSessionsExceeded', 'true');
+                $client_js->setVariable('isMaxNumberOfSessionsExceeded', 'true');
                 $my_tpl->setVariable('maxNumberofSessionsExceededText', $this->object->getMaxConcurrentSessionsMsg());
             }
         }
 
         $my_tpl->setVariable("clickToOpenClass", $this->txt("click_to_open_class"));
         $isMeetingRunning=$BBBHelper->isMeetingRunning($this->object);
-        $my_tpl->setVariable("isMeetingRunning", $isMeetingRunning ? "true" : "false");
+        $client_js->setVariable("isMeetingRunning", $isMeetingRunning ? "true" : "false");
         $isMeetingRecorded = $BBBHelper->isMeetingRecorded($this->object);
-        $my_tpl->setVariable("isMeetingRecorded", $isMeetingRecorded ? "true" : "false");
+        $client_js->setVariable("isMeetingRecorded", $isMeetingRecorded ? "true" : "false");
         $my_tpl->setVariable("bbbURL", $bbbURL);
+        $tpl->addOnLoadCode($client_js->get());
+
 
         $tpl->setContent($my_tpl->get());
     }
@@ -432,7 +434,10 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                 
                 if ($isPublished){
                     if ($this->object->isDownloadAllowed()){
-                        $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("DownloadText"), $BBBHelper->getVideoDownloadStreamUrl($format->url));
+                        $actions[] = $DIC->ui()->factory()->button()->shy(
+                            $this->txt("DownloadText"),
+                            $BBBHelper->getVideoDownloadStreamUrl($format->url ?? '')
+                        );
                     }
                     // $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("unpublish_link"), $this->editLink($recording->recordID, 0));
                     // $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("publish_link"), $this->editLink($recording->recordID, 1)); 
@@ -468,7 +473,6 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         //$ilTabs->clearTargets();
         $ilTabs->activateTab("content");
 
-        include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
         $BBBHelper=new ilBigBlueButtonProtocol($this->object);
         $BBBHelper->endMeeting($this->object);
 
@@ -487,7 +491,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         //$ilTabs->clearTargets();
         $ilTabs->activateTab("content");
 
-        include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
+
         $BBBHelper=new ilBigBlueButtonProtocol($this->object);
 
         $BBBHelper->createMeeting($this->object, isset($_POST["recordmeeting"]));
@@ -510,7 +514,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 
         //$ilTabs->clearTargets();
         $ilTabs->activateTab("content");
-        include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
+
         $recordID = filter_input(INPUT_GET, "recordID");
 
         $BBBHelper=new ilBigBlueButtonProtocol($this->object);
@@ -528,13 +532,13 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
     {
         global $ilCtrl;
 
-        include_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/classes/class.ilBigBlueButtonProtocol.php");
+
         $BBBHelper= new ilBigBlueButtonProtocol($this->object);
          $recordID = filter_input(INPUT_GET, "recordID");
          $publish = boolval(filter_input(INPUT_GET, "publish"));
 
         $BBBHelper->publishRecordings($this->object,$recordID, $publish );
-        $this->object=$bbb_obj;
+
         $ilCtrl->redirect($this, "showContent");
 
     }
