@@ -22,7 +22,7 @@
         'bigbluebutton/bigbluebutton-api-php' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '1434c046680d83d824318f076f22cdf67559b303',
+            'reference' => 'aaa77710d5e352fce2c96e59293e3bdeae8b6f77',
             'type' => 'library',
             'install_path' => __DIR__ . '/../bigbluebutton/bigbluebutton-api-php',
             'aliases' => array(

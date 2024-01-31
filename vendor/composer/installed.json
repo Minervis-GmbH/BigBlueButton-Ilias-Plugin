@@ -7,12 +7,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigbluebutton/bigbluebutton-api-php.git",
-                "reference": "1434c046680d83d824318f076f22cdf67559b303"
+                "reference": "aaa77710d5e352fce2c96e59293e3bdeae8b6f77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigbluebutton/bigbluebutton-api-php/zipball/1434c046680d83d824318f076f22cdf67559b303",
-                "reference": "1434c046680d83d824318f076f22cdf67559b303",
+                "url": "https://api.github.com/repos/bigbluebutton/bigbluebutton-api-php/zipball/aaa77710d5e352fce2c96e59293e3bdeae8b6f77",
+                "reference": "aaa77710d5e352fce2c96e59293e3bdeae8b6f77",
                 "shasum": ""
             },
             "require": {
@@ -24,16 +24,16 @@
             },
             "require-dev": {
                 "bmitch/churn-php": "^1.7.1",
-                "fakerphp/faker": "^v1.22.0",
-                "friendsofphp/php-cs-fixer": "^v3.16.0",
-                "nunomaduro/phpinsights": "^v2.7.0",
+                "fakerphp/faker": "^v1.23.1",
+                "friendsofphp/php-cs-fixer": "^v3.48.0",
+                "nunomaduro/phpinsights": "^v2.11.0",
                 "phploc/phploc": "^7.0.2",
-                "phpmetrics/phpmetrics": "^v2.8.1",
-                "phpunit/phpunit": "^9.6.8",
-                "squizlabs/php_codesniffer": "^3.7.2",
+                "phpmetrics/phpmetrics": "^v2.8.2",
+                "phpunit/phpunit": "^9.6.16",
+                "squizlabs/php_codesniffer": "^3.8.1",
                 "wapmorgan/php-deprecation-detector": "^2.0.33"
             },
-            "time": "2023-12-15T20:55:29+00:00",
+            "time": "2024-01-22T16:40:46+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
