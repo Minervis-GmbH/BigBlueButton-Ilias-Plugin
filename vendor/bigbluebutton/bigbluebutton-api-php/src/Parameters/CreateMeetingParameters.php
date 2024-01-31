@@ -425,7 +425,7 @@ class CreateMeetingParameters extends MetaParameters
      * value, then when the length of the meeting exceeds the duration value the server will immediately end the
      * meeting (equivalent to receiving an end API request at that moment).
      */
-    public function setDuration(int $duration): self
+    public function setDuration(?int $duration): self
     {
         $this->duration = $duration;
 
