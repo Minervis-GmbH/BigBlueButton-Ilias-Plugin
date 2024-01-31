@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -22,25 +22,16 @@ namespace BigBlueButton\Parameters;
 
 class HooksCreateParameters extends BaseParameters
 {
-    /**
-     * @var string
-     */
-    private $callbackUrl;
+    private ?string $callbackUrl = null;
 
-    /**
-     * @var string
-     */
-    private $meetingId;
+    private ?string $meetingId = null;
 
-    /**
-     * @var bool
-     */
-    private $getRaw;
+    private ?bool $getRaw = null;
 
     /**
      * HooksCreateParameters constructor.
      *
-     * @param $callbackUrl
+     * @param mixed $callbackUrl
      */
     public function __construct($callbackUrl)
     {
@@ -115,7 +106,7 @@ class HooksCreateParameters extends BaseParameters
         $queries = [
             'callbackURL' => $this->callbackUrl,
             'meetingID'   => $this->meetingId,
-            'getRaw'      => $this->getRaw ? 'true' : 'false',
+            'getRaw'      => !is_null($this->getRaw) ? ($this->getRaw ? 'true' : 'false') : $this->getRaw,
         ];
 
         return $this->buildHTTPQuery($queries);

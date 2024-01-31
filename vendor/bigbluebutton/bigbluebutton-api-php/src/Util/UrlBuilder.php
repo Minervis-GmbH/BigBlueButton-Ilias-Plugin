@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -25,6 +25,8 @@ namespace BigBlueButton\Util;
  */
 class UrlBuilder
 {
+    protected $hashingAlgorithm;
+
     /**
      * @var string
      */
@@ -38,13 +40,23 @@ class UrlBuilder
     /**
      * UrlBuilder constructor.
      *
-     * @param $secret
-     * @param $serverBaseUrl
+     * @param mixed $secret
+     * @param mixed $serverBaseUrl
+     * @param mixed $hashingAlgorithm
      */
-    public function __construct($secret, $serverBaseUrl)
+    public function __construct($secret, $serverBaseUrl, $hashingAlgorithm)
     {
         $this->securitySalt     = $secret;
         $this->bbbServerBaseUrl = $serverBaseUrl;
+        $this->hashingAlgorithm = $hashingAlgorithm;
+    }
+
+    /**
+     * Sets the hashing algorithm.
+     */
+    public function setHashingAlgorithm(string $hashingAlgorithm): void
+    {
+        $this->hashingAlgorithm = $hashingAlgorithm;
     }
 
     /**
@@ -71,6 +83,6 @@ class UrlBuilder
      */
     public function buildQs($method = '', $params = '')
     {
-        return $params . '&checksum=' . sha1($method . $params . $this->securitySalt);
+        return $params . '&checksum=' . hash($this->hashingAlgorithm, $method . $params . $this->securitySalt);
     }
 }
