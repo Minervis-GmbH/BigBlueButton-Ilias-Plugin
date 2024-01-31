@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -19,6 +19,8 @@
  */
 
 namespace BigBlueButton\Responses;
+
+use BigBlueButton\TestCase;
 
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
@@ -56,12 +58,13 @@ namespace BigBlueButton\Responses;
  * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
  *
  * @internal
+ *
  * @coversNothing
  */
-class GetMeetingInfoResponseTest extends \BigBlueButton\TestCase
+class GetMeetingInfoResponseTest extends TestCase
 {
     /**
-     * @var \BigBlueButton\Responses\GetMeetingInfoResponse
+     * @var GetMeetingInfoResponse
      */
     private $meetingInfo;
 
@@ -71,7 +74,7 @@ class GetMeetingInfoResponseTest extends \BigBlueButton\TestCase
 
         $xml = $this->loadXmlFile(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR . 'get_meeting_info.xml');
 
-        $this->meetingInfo = new \BigBlueButton\Responses\GetMeetingInfoResponse($xml);
+        $this->meetingInfo = new GetMeetingInfoResponse($xml);
     }
 
     public function testGetMeetingInfoResponseContent()

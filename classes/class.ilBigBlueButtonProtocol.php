@@ -267,10 +267,8 @@ class BBB extends \BigBlueButton\BigBlueButton
 {
     public function __construct($securitySecret=null, $baseUrl=null)
     {
-        parent::__construct();
-        $this->securitySecret = $securitySecret;
-        $this->bbbServerBaseUrl = $baseUrl;
-        $this->urlBuilder       = new UrlBuilder($this->securitySecret, $this->bbbServerBaseUrl);
+        parent::__construct($baseUrl, $securitySecret);
+
         //Add Proxy
 		require_once('Services/Http/classes/class.ilProxySettings.php');
 		if(ilProxySettings::_getInstance()->isActive())

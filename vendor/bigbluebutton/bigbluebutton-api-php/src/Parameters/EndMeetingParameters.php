@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -25,17 +25,12 @@ namespace BigBlueButton\Parameters;
  */
 class EndMeetingParameters extends BaseParameters
 {
-    /**
-     * @var string
-     */
-    private $meetingId;
+    private ?string $meetingId = null;
 
     /**
      * @deprecated
-     *
-     * @var string
      */
-    private $password;
+    private ?string $password = null;
 
     /**
      * EndMeetingParameters constructor.
@@ -43,7 +38,7 @@ class EndMeetingParameters extends BaseParameters
      * @param string $meetingId
      * @param string $password
      */
-    public function __construct($meetingId, $password = '')
+    public function __construct($meetingId = null, $password = null)
     {
         $this->password  = $password;
         $this->meetingId = $meetingId;
