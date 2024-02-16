@@ -463,8 +463,8 @@ class GuestLink
 
     private function __construct()
     {
-        $this->client = filter_var($_GET['client_id'], FILTER_SANITIZE_STRING);
-        $this->refId = filter_var($_GET['ref_id'], FILTER_SANITIZE_NUMBER_INT);
+        $this->client = isset($_GET['client_id']) ? filter_var($_GET['client_id'], FILTER_SANITIZE_STRING) : '';
+        $this->refId = isset($_GET['ref_id']) ? filter_var($_GET['ref_id'], FILTER_SANITIZE_NUMBER_INT) : 0;
         ilInitialisationGuest::initIlias($this->client);
         global $DIC; /** @var Container $DIC */
         $this->dic = $DIC;
