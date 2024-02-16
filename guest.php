@@ -241,7 +241,7 @@ class GuestLink
             return false;
         }
         $joinParams = new \BigBlueButton\Parameters\JoinMeetingParameters($this->meetingId, trim($this->userTitle . ' ') . $this->displayName, $this->attendeePwd);
-        $joinParams->setRedirect(true)->setRole('VIEWER')->setClientURL($this->dic->http()->request()->getUri());
+        $joinParams->setRedirect(true)->setRole('VIEWER')->setGuest(true)->setClientURL($this->dic->http()->request()->getUri());
 
         if( (bool)strlen($this->urlJoinMeeting = $this->bbb->getJoinMeetingURL($joinParams)) )
         {

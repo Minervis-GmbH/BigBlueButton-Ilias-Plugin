@@ -70,7 +70,6 @@ btntext_join_meeting#:#Rejoindre
 top_moderated_m#:#Bienvenue!<br/>&nbsp;<br/>Il s'agit d'une salle modérée et vous ne pourez rejoindre la salle de réunion que lorsqu'un modérateur y sera présent.
 dialnumber#:# Numéro de téléphone
 accesscode#:# code d'accès
-guestchoose#:# Permettre les invitations
 maxparticipants#:# Max. Participants
 maxparticipants_info#:#Nombre maximum de participants par réunion. Illimité, spécifier '0'.
 presentationurl#:#Démarrer la présentation
@@ -85,3 +84,8 @@ max_duration#:#Durée maximum de la réunion
 guest_invite_info#:#Vous pouvez inviter des participants en utilisant le lien suivant :
 allow_download#:#Permettre le téléchargement
 allow_download_info#:#Pour permettre le téléchargement, une extension doit être ajoutée au serveur BigBlueButton. Lire les recommandations des projets <a href="https://github.com/Minervis-GmbH/video-export">https://github.com/Minervis-GmbH/video-export</a>
+guestpolicy#:#Dealing with guests
+guestpolicy_info#:#This option regulates the handling of guests. It can be decided whether guests are allowed or not and whether the moderator has to admit a guest first.
+guestpolicy_option_accept#:#Allow all guests
+guestpolicy_option_deny#:#Do not allow guests
+guestpolicy_option_ask#:#Moderator must admit each guest

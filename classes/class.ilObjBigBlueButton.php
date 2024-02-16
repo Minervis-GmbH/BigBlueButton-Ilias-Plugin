@@ -42,6 +42,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
      * @var
      */
     private $accessCode;
+  
     /**
      * @var
      */
@@ -133,9 +134,16 @@ class ilObjBigBlueButton extends ilObjectPlugin
         //$this->setMaxParticipants(1000);
         $this->setSequence(1);
         $this->generateCode();
+        
+        if(isGuestGlabalAllowed())
+        {
+            $this->setGuestPolicy("ASK_MODERATOR");
+        } else {
+            $this->setGuestPolicy("ALWAYS_DENY");
+        }
 
         $ilDB->manipulate("INSERT INTO rep_robj_xbbb_data ".
-            "(id, is_online, attendeepwd, moderatorpwd, welcometext, maxparticipants, sequence, dialnumber, accesscode, duration, presentationurl, allow_download, guestchoose) VALUES (".
+            "(id, is_online, attendeepwd, moderatorpwd, welcometext, maxparticipants, sequence, dialnumber, accesscode, duration, presentationurl, allow_download, guestpolicy) VALUES (".
             $ilDB->quote($this->getId(), "integer").",".
             $ilDB->quote($this->getOnline(), "integer").",".
             $ilDB->quote($this->getAttendeePwd(), "text").",".
@@ -148,7 +156,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $ilDB->quote($this->getMeetingDuration(), "integer"). ",".
             $ilDB->quote($this->getPresentationUrl(), "text"). ",".
             $ilDB->quote((int)$this->isDownloadAllowed(), "integer"). ",".
-            $ilDB->quote((int)$this->isGuestLinkAllowed(), "integer").
+            $ilDB->quote((int)$this->getGuestPolicy(), "text").
             ")");
 
 
@@ -177,18 +185,19 @@ class ilObjBigBlueButton extends ilObjectPlugin
             " WHERE id = ".$ilDB->quote($this->getId(), "integer")
         );
         while ($rec = $ilDB->fetchAssoc($set)) {
+
             $this->setOnline((bool) ($rec["is_online"] ?? false));
-            $this->setAttendeePwd((string) ($rec["attendeepwd"] ?? ''));
-            $this->setModeratorPwd((string) ($rec["moderatorpwd"] ?? ''));
+            $this->setAttendeePwd((string) ($rec["attendeepwd"] ?: ''));
+            $this->setModeratorPwd((string) ($rec["moderatorpwd"] ?: ''));
             $this->setWelcomeText((string) $rec["welcometext"]);
             $this->setMaxParticipants((int) ($rec["maxparticipants"] ?? 0));
             $this->setSequence((string) ($rec["sequence"] ?? ''));
-            $this->setDialNumber((string) ($rec["dialnumber"] ?? ''));
-            $this->setAccessCode((string) ($rec["accesscode"] ?? ''));
-            $this->setMeetingDuration((int) ($rec["duration"] ?? 0));
+            $this->setDialNumber((string) ($rec["dialnumber"] ?: ''));
+            $this->setAccessCode((string) ($rec["accesscode"] ?: ''));
+            $this->setMeetingDuration((int) ($rec["duration"] ?: 0));
             $this->setGuestLinkAllowed((bool) $rec["guestchoose"]);
             $this->setDownloadAllowed((bool) $rec["allow_download"]);
-            $this->setPresentationUrl((string) ($rec["presentationurl"] ?? ''));
+            $this->setPresentationUrl((string) ($rec["presentationurl"] ?: ''));
             $this->setPublish((bool) ($rec["publish"] ?? false));
         }
 
@@ -222,7 +231,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
             " duration = ".$ilDB->quote($this->getMeetingDuration(), "integer").",".
             " dialnumber = ".$ilDB->quote($this->getDialNumber(), "text").",".
             " sequence = ".$ilDB->quote($this->getSequence(), "integer"). "," .
-            " guestchoose = ".$ilDB->quote((int)$this->isGuestLinkAllowed()). ",".
+            " guestpolicy = ".$ilDB->quote($this->getGuestPolicy(), "text"). ",".
             " allow_download = ".$ilDB->quote((int)$this->isDownloadAllowed()). ",".
             " publish = ".$ilDB->quote((int)$this->getPublish()). ",".
             " presentationurl = ". $ilDB->quote($this->getPresentationUrl()) .
@@ -256,7 +265,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
         $new_obj->setWelcomeText($this->getWelcomeText());
         $new_obj->setMaxParticipants($this->getMaxParticipants());
         $new_obj->setSequence($this->getSequence());
-        $new_obj->setGuestLinkAllowed($this->isGuestLinkAllowed());
+        $new_obj->setGuestPolicy($this->getGuestPolicy());
         $new_obj->setPublish($this->getPublish());
         $new_obj->setDownloadAllowed($this->isDownloadAllowed());
         $new_obj->enableMaxConcurrentSession($this->isMaxConcurrentSessionEnabled());
