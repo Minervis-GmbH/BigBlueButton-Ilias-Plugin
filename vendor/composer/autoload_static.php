@@ -31,6 +31,16 @@ class ComposerStaticInit979a6816c03d86bb5663f72d7eccc525
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Stringable' => __DIR__ . '/..' . '/marc-mabe/php-enum/stubs/Stringable.php',
+        'ilBBB' => __DIR__ . '/../..' . '/classes/class.ilBBB.php',
+        'ilBigBlueButtonConfigGUI' => __DIR__ . '/../..' . '/classes/class.ilBigBlueButtonConfigGUI.php',
+        'ilBigBlueButtonExporter' => __DIR__ . '/../..' . '/classes/class.ilBigBlueButtonExporter.php',
+        'ilBigBlueButtonImporter' => __DIR__ . '/../..' . '/classes/class.ilBigBlueButtonImporter.php',
+        'ilBigBlueButtonPlugin' => __DIR__ . '/../..' . '/classes/class.ilBigBlueButtonPlugin.php',
+        'ilBigBlueButtonProtocol' => __DIR__ . '/../..' . '/classes/class.ilBigBlueButtonProtocol.php',
+        'ilObjBigBlueButton' => __DIR__ . '/../..' . '/classes/class.ilObjBigBlueButton.php',
+        'ilObjBigBlueButtonAccess' => __DIR__ . '/../..' . '/classes/class.ilObjBigBlueButtonAccess.php',
+        'ilObjBigBlueButtonGUI' => __DIR__ . '/../..' . '/classes/class.ilObjBigBlueButtonGUI.php',
+        'ilObjBigBlueButtonListGUI' => __DIR__ . '/../..' . '/classes/class.ilObjBigBlueButtonListGUI.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

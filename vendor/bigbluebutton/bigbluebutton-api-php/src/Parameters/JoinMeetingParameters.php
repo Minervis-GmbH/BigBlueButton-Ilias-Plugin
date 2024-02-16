@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -20,122 +20,84 @@
 
 namespace BigBlueButton\Parameters;
 
+use BigBlueButton\Enum\Role;
+
 /**
  * Class JoinMeetingParametersTest.
  */
 class JoinMeetingParameters extends UserDataParameters
 {
-    /**
-     * @var string
-     */
-    private $meetingId;
+    private ?string $meetingId;
+
+    private ?string $username;
 
     /**
-     * @var string
+     * @deprecated Password-string replaced by an Enum\Role-constant in JoinMeetingParameters::__construct()
      */
-    private $username;
+    private ?string $password = null;
 
-    /**
-     * @var string
-     *
-     * @deprecated
-     */
-    private $password;
+    private ?string $userId = null;
 
-    /**
-     * @var string
-     */
-    private $userId;
+    private ?string $webVoiceConf = null;
 
-    /**
-     * @var string
-     */
-    private $webVoiceConf;
+    private ?string $creationTime = null;
 
-    /**
-     * @var string
-     */
-    private $creationTime;
+    private ?string $avatarURL = null;
 
-    /**
-     * @var string
-     */
-    private $avatarURL;
+    private ?bool $redirect = null;
 
-    /**
-     * @var bool
-     */
-    private $redirect;
+    private ?string $clientURL = null;
 
-    /**
-     * @var string
-     */
-    private $clientURL;
+    private array $customParameters;
 
-    /**
-     * @var array
-     */
-    private $customParameters;
+    private ?string $role = null;
 
-    /**
-     * @var string
-     */
-    private $role;
+    private ?bool $excludeFromDashboard = null;
 
-    /**
-     * @var bool
-     */
-    private $excludeFromDashboard;
+    private ?string $configToken = null;
+
+    private ?bool $guest = null;
+
+    private ?string $defaultLayout = null;
 
     /**
      * JoinMeetingParametersTest constructor.
      *
-     * @param $meetingId
-     * @param $username
-     * @param $password
+     * @param mixed $passwordOrRole
+     * @param mixed $meetingId
+     * @param mixed $username
      */
-    public function __construct($meetingId, $username, $password)
+    public function __construct($meetingId = null, $username = null, $passwordOrRole = null)
     {
-        $this->meetingId        = $meetingId;
-        $this->username         = $username;
-        $this->password         = $password;
+        $this->meetingId = $meetingId;
+        $this->username  = $username;
+
+        if (Role::MODERATOR === $passwordOrRole || Role::VIEWER === $passwordOrRole) {
+            $this->role = $passwordOrRole;
+        } else {
+            $this->password = $passwordOrRole;
+        }
         $this->customParameters = [];
     }
 
-    /**
-     * @return string
-     */
-    public function getMeetingId()
+    public function getMeetingId(): ?string
     {
         return $this->meetingId;
     }
 
-    /**
-     * @param string $meetingId
-     *
-     * @return JoinMeetingParameters
-     */
-    public function setMeetingId($meetingId)
+    public function setMeetingId(string $meetingId): JoinMeetingParameters
     {
         $this->meetingId = $meetingId;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    /**
-     * @param string $username
-     *
-     * @return JoinMeetingParameters
-     */
-    public function setUsername($username)
+    public function setUsername(string $username): self
     {
         $this->username = $username;
 
@@ -143,202 +105,164 @@ class JoinMeetingParameters extends UserDataParameters
     }
 
     /**
-     * @deprecated
-     *
-     * @return string
+     * @deprecated Password-string replaced by an Enum\Role-constant in JoinMeetingParameters::__construct()
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
     /**
-     * @param string $password
+     *@deprecated Password-string replaced by an Enum\Role-constant in JoinMeetingParameters::__construct()
      *
-     * @deprecated
-     *
-     * @return JoinMeetingParameters
      */
-    public function setPassword($password)
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getUserId()
+    public function getUserId(): ?string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $userId
-     *
-     * @return JoinMeetingParameters
-     */
-    public function setUserId($userId)
+    public function setUserId(string $userId): self
     {
         $this->userId = $userId;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getWebVoiceConf()
+    public function getWebVoiceConf(): ?string
     {
         return $this->webVoiceConf;
     }
 
-    /**
-     * @param string $webVoiceConf
-     *
-     * @return JoinMeetingParameters
-     */
-    public function setWebVoiceConf($webVoiceConf)
+    public function setWebVoiceConf(string $webVoiceConf): self
     {
         $this->webVoiceConf = $webVoiceConf;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCreationTime()
+    public function getCreationTime(): string
     {
         return $this->creationTime;
     }
 
-    /**
-     * @param int $creationTime
-     *
-     * @return JoinMeetingParameters
-     */
-    public function setCreationTime($creationTime)
+    public function setCreationTime(int $creationTime): self
     {
         $this->creationTime = $creationTime;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAvatarURL()
+    public function getAvatarURL(): ?string
     {
         return $this->avatarURL;
     }
 
-    /**
-     * @param string $avatarURL
-     *
-     * @return JoinMeetingParameters
-     */
-    public function setAvatarURL($avatarURL)
+    public function setAvatarURL(string $avatarURL): self
     {
         $this->avatarURL = $avatarURL;
 
         return $this;
     }
 
-    /**
-     * @return null|bool
-     */
-    public function isRedirect()
+    public function isRedirect(): ?bool
     {
         return $this->redirect;
     }
 
-    /**
-     * @param bool $redirect
-     *
-     * @return JoinMeetingParameters
-     */
-    public function setRedirect($redirect)
+    public function setRedirect(bool $redirect): self
     {
         $this->redirect = $redirect;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getClientURL()
+    public function getClientURL(): ?string
     {
         return $this->clientURL;
     }
 
-    /**
-     * @param mixed $clientURL
-     *
-     * @return JoinMeetingParameters
-     */
-    public function setClientURL($clientURL)
+    public function setClientURL(?string $clientURL): self
     {
         $this->clientURL = $clientURL;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getRole()
+    public function getRole(): ?string
     {
         return $this->role;
     }
 
-    /**
-     * @param string $role
-     */
-    public function setRole($role): JoinMeetingParameters
+    public function setRole(string $role): self
     {
         $this->role = $role;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isExcludeFromDashboard()
+    public function isExcludeFromDashboard(): ?bool
     {
         return $this->excludeFromDashboard;
     }
 
-    /**
-     * @param bool $excludeFromDashboard
-     */
-    public function setExcludeFromDashboard($excludeFromDashboard): JoinMeetingParameters
+    public function setExcludeFromDashboard(bool $excludeFromDashboard): self
     {
         $this->excludeFromDashboard = $excludeFromDashboard;
 
         return $this;
     }
 
-    /**
-     * @param string $paramName
-     * @param string $paramValue
-     *
-     * @return JoinMeetingParameters
-     */
-    public function setCustomParameter($paramName, $paramValue)
+    public function getConfigToken(): ?string
+    {
+        return $this->configToken;
+    }
+
+    public function setConfigToken(string $configToken): self
+    {
+        $this->configToken = $configToken;
+
+        return $this;
+    }
+
+    public function isGuest(): ?bool
+    {
+        return $this->guest;
+    }
+
+    public function setGuest(bool $guest): self
+    {
+        $this->guest = $guest;
+
+        return $this;
+    }
+
+    public function getDefaultLayout(): ?string
+    {
+        return $this->defaultLayout;
+    }
+
+    public function setDefaultLayout(string $defaultLayout): self
+    {
+        $this->defaultLayout = $defaultLayout;
+
+        return $this;
+    }
+
+    public function setCustomParameter(string $paramName, string $paramValue): self
     {
         $this->customParameters[$paramName] = $paramValue;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getHTTPQuery()
+    public function getHTTPQuery(): string
     {
         $queries = [
             'meetingID'            => $this->meetingId,
@@ -348,10 +272,13 @@ class JoinMeetingParameters extends UserDataParameters
             'webVoiceConf'         => $this->webVoiceConf,
             'createTime'           => $this->creationTime,
             'role'                 => $this->role,
-            'excludeFromDashboard' => $this->excludeFromDashboard ? 'true' : 'false',
+            'excludeFromDashboard' => !is_null($this->excludeFromDashboard) ? ($this->excludeFromDashboard ? 'true' : 'false') : $this->excludeFromDashboard,
             'avatarURL'            => $this->avatarURL,
-            'redirect'             => $this->redirect ? 'true' : 'false',
+            'redirect'             => !is_null($this->redirect) ? ($this->redirect ? 'true' : 'false') : $this->redirect,
             'clientURL'            => $this->clientURL,
+            'configToken'          => $this->configToken,
+            'guest'                => !is_null($this->guest) ? ($this->guest ? 'true' : 'false') : $this->guest,
+            'defaultLayout'        => $this->defaultLayout,
         ];
 
         foreach ($this->customParameters as $key => $value) {

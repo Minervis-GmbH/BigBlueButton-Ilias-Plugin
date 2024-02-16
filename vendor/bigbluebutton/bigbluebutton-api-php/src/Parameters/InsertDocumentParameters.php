@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -27,15 +27,15 @@ class InsertDocumentParameters extends BaseParameters
 {
     use DocumentableTrait;
 
+    private ?string $meetingId = null;
+
     /**
      * EndMeetingParameters constructor.
      *
      * @param string $meetingId
-     * @param string $password
      */
-    public function __construct($meetingId, $password = '')
+    public function __construct($meetingId = null)
     {
-        $this->password  = $password;
         $this->meetingId = $meetingId;
     }
 
@@ -60,30 +60,6 @@ class InsertDocumentParameters extends BaseParameters
     }
 
     /**
-     * @deprecated
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param string $password
-     *
-     * @deprecated
-     *
-     * @return EndMeetingParameters
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getHTTPQuery()
@@ -91,7 +67,6 @@ class InsertDocumentParameters extends BaseParameters
         return $this->buildHTTPQuery(
             [
                 'meetingID' => $this->meetingId,
-                'password'  => $this->password,
             ]
         );
     }
