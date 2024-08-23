@@ -65,7 +65,7 @@ class ilInitialisationGuest extends ilInitialisation
      *
      * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file)
      */
-    public static function initGlobal($a_name, $a_class, $a_source_file = null): void
+    public static function initGlobal(string $a_name, $a_class, ?string $a_source_file = null, ?bool $destroy_existing = false): void
     {
         parent::initGlobal($a_name, $a_class, $a_source_file);
     }
