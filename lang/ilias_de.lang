@@ -80,7 +80,6 @@ sess_msg_concurrent_limit_info#:#Diese Textnachricht wird bei überschrittener A
 sess_management_header#:#Sitzungsmanagement (experimentell)
 dialnumber#:# Telefonnummer
 accesscode#:# Zugangscode
-guestchoose#:# Einladen von Gästen zulassen
 maxparticipants#:# Max. Teilnehmer
 maxparticipants_info#:#Maximale Anzahl Teilnehmer je Meeting. Bei unbegrenzter Anzahl bitte '0' angeben.
 presentationurl#:#Startpräsentation
@@ -94,3 +93,8 @@ unpublish_link#:#Aufnahme privat machen
 max_duration#:#Maximale  Dauer der Sitzung
 allow_download#:#Herunterladen von Aufnahmen erlauben
 allow_download_info#:#Damit, das Dowload-Feature funktioniert muss ein Addon auf dem BBB-Server installiert werden. Für mehr infos: <a href="https://github.com/Minervis-GmbH/video-export">https://github.com/Minervis-GmbH/video-export</a>
+guestpolicy#:#Umgang mit Gästen
+guestpolicy_info#:#Diese Option regelt den Umgang mit Gästen. Dabei kann entschieden werden, ob Gäste zugelassen sind, oder nicht und ob der Moderator einen Gast erst zulassen muss.
+guestpolicy_option_accept#:#Alle Gäste zulassen
+guestpolicy_option_deny#:#Keine Gäste zulassen
+guestpolicy_option_ask#:#Moderator muss Gast zulassen
