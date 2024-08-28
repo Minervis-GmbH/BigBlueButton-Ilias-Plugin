@@ -22,7 +22,7 @@ It is assumed you already have a ILIAS Intallation [up and running](https://docu
 
 # Installation
 
-### ILIAS 5.4, 6.x, 7.x, 8.x
+### ILIAS 5.4, 6.x, 7.x, 8.x, 9.x
 
 On your ILIAS Server:
 
@@ -61,6 +61,7 @@ Tested with ILIAS
 - 6.1, 6.2, 6.3
 - 7.x
 - 8.x
+- 9.x
 
 
 
