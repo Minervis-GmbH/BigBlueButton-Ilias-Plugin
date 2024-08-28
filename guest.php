@@ -63,11 +63,11 @@ class ilInitialisationGuest extends ilInitialisation
      * Function; initGlobal($a_name, $a_class, $a_source_file)
      *  Derive from protected to public...
      *
-     * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file)
+     * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file, $destroy_existing)
      */
-    public static function initGlobal($a_name, $a_class, $a_source_file = null): void
+    public static function initGlobal($a_name, $a_class, $a_source_file = null, ?bool $destroy_existing = false): void
     {
-        parent::initGlobal($a_name, $a_class, $a_source_file);
+        parent::initGlobal($a_name, $a_class, $a_source_file, $destroy_existing);
     }
 
     /**
