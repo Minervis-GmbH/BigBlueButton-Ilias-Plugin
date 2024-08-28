@@ -463,8 +463,12 @@ class GuestLink
 
     private function __construct()
     {
-        $this->client = filter_var($_GET['client_id'], FILTER_SANITIZE_STRING);
-        $this->refId = filter_var($_GET['ref_id'], FILTER_SANITIZE_NUMBER_INT);
+        $this->client = isset($_GET['client_id']) ? filter_var($_GET['client_id'], FILTER_SANITIZE_STRING) : null;
+        $this->refId = isset($_GET['ref_id']) ? filter_var($_GET['ref_id'], FILTER_SANITIZE_NUMBER_INT) : 0;
+        if (is_null($this->client)) {
+            // Handle the error appropriately, e.g., throw an exception or return an error message
+            throw new \Exception("Client ID is missing.");
+        }
         ilInitialisationGuest::initIlias($this->client);
         global $DIC; /** @var Container $DIC */
         $this->dic = $DIC;
