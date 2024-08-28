@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -25,17 +25,18 @@ namespace BigBlueButton\Parameters;
  */
 class GetMeetingInfoParameters extends BaseParameters
 {
-    /**
-     * @var string
-     */
-    private $meetingId;
+    private ?string $meetingId = null;
+
+    private ?int $offset = null;
+
+    private ?int $limit = null;
 
     /**
      * GetMeetingInfoParameters constructor.
      *
-     * @param $meetingId
+     * @param mixed $meetingId
      */
-    public function __construct($meetingId)
+    public function __construct($meetingId = null)
     {
         $this->meetingId = $meetingId;
     }
@@ -60,6 +61,30 @@ class GetMeetingInfoParameters extends BaseParameters
         return $this;
     }
 
+    public function getOffset()
+    {
+        return $this->offset;
+    }
+
+    public function setOffset(int $offset): GetMeetingInfoParameters
+    {
+        $this->offset = $offset;
+
+        return $this;
+    }
+
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    public function setLimit(int $limit): GetMeetingInfoParameters
+    {
+        $this->limit = $limit;
+
+        return $this;
+    }
+
     /**
      * @return string
      */
@@ -68,6 +93,8 @@ class GetMeetingInfoParameters extends BaseParameters
         return $this->buildHTTPQuery(
             [
                 'meetingID' => $this->meetingId,
+                'offset'    => $this->offset,
+                'limit'     => $this->limit,
             ]
         );
     }

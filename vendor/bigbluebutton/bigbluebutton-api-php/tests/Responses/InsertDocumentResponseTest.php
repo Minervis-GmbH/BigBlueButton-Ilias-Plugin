@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -24,12 +24,13 @@ use BigBlueButton\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class InsertDocumentResponseTest extends TestCase
 {
     /**
-     * @var \BigBlueButton\Responses\InsertDocumentResponse
+     * @var InsertDocumentResponse
      */
     private $insertDocument;
 
@@ -48,9 +49,9 @@ class InsertDocumentResponseTest extends TestCase
         $this->assertEquals('Presentation is being uploaded', $this->insertDocument->getMessage());
     }
 
-    public function testIsMeetingRunningResponseTypes()
+    public function testInsertDocumentResponseTypes()
     {
         $this->assertEachGetterValueIsString($this->insertDocument, ['getReturnCode']);
-        $this->assertEachGetterValueIsBoolean($this->insertDocument, ['getMessage']);
+        $this->assertEachGetterValueIsString($this->insertDocument, ['getMessage']);
     }
 }

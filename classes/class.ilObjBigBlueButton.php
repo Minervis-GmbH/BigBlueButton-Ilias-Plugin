@@ -114,7 +114,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Get type.
     */
-    final public function initType(): void
+    final protected function initType(): void
     {
         $this->setType("xbbb");
     }
@@ -122,7 +122,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Create object
     */
-    public function doCreate(bool $clone_mode = false): void
+    protected function doCreate(bool $clone_mode = false): void
     {
         global $ilDB;
 
@@ -161,14 +161,14 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $this->enableUserLimit((bool) $record['enable_userlimit']);
             $this->enableMaxConcurrentSession((bool) $record['sess_enable_max_concurrent']);
             $this->setMaxConcurrentSessions((int) $record['sess_max_concurrent']);
-            $this->setMaxConcurrentSessionsMsg($record['sess_msg_concurrent']);
+            $this->setMaxConcurrentSessionsMsg($record['sess_msg_concurrent'] ?? '');
         }
     }
 
     /**
     * Read data from db
     */
-    public function doRead(): void
+    protected function doRead(): void
     {
         global $ilDB;
 
@@ -177,19 +177,19 @@ class ilObjBigBlueButton extends ilObjectPlugin
             " WHERE id = ".$ilDB->quote($this->getId(), "integer")
         );
         while ($rec = $ilDB->fetchAssoc($set)) {
-            $this->setOnline($rec["is_online"]);
-            $this->setAttendeePwd($rec["attendeepwd"]);
-            $this->setModeratorPwd($rec["moderatorpwd"]);
-            $this->setWelcomeText($rec["welcometext"]);
-            $this->setMaxParticipants($rec["maxparticipants"]);
-            $this->setSequence($rec["sequence"]);
-            $this->setDialNumber($rec["dialnumber"] !==null ? $rec["dialnumber"]: '');
-            $this->setAccessCode($rec["accesscode"]);
-            $this->setMeetingDuration($rec["duration"]);
-            $this->setGuestLinkAllowed((bool)$rec["guestchoose"]);
-            $this->setDownloadAllowed((bool)$rec["allow_download"]);
-            $this->setPresentationUrl($rec["presentationurl"]!==null? $rec["presentationurl"]: '');
-            $this->setPublish((bool)$rec["publish"]);
+            $this->setOnline((bool) ($rec["is_online"] ?? false));
+            $this->setAttendeePwd((string) ($rec["attendeepwd"] ?? ''));
+            $this->setModeratorPwd((string) ($rec["moderatorpwd"] ?? ''));
+            $this->setWelcomeText((string) $rec["welcometext"]);
+            $this->setMaxParticipants((int) ($rec["maxparticipants"] ?? 0));
+            $this->setSequence((string) ($rec["sequence"] ?? ''));
+            $this->setDialNumber((string) ($rec["dialnumber"] ?? ''));
+            $this->setAccessCode((string) ($rec["accesscode"] ?? ''));
+            $this->setMeetingDuration((int) ($rec["duration"] ?? 0));
+            $this->setGuestLinkAllowed((bool) $rec["guestchoose"]);
+            $this->setDownloadAllowed((bool) $rec["allow_download"]);
+            $this->setPresentationUrl((string) ($rec["presentationurl"] ?? ''));
+            $this->setPublish((bool) ($rec["publish"] ?? false));
         }
 
         $result = $ilDB->query("SELECT * FROM rep_robj_xbbb_conf");
@@ -201,14 +201,14 @@ class ilObjBigBlueButton extends ilObjectPlugin
             $this->enableUserLimit((bool) $record['enable_userlimit']);
             $this->enableMaxConcurrentSession((bool) $record['sess_enable_max_concurrent']);
             $this->setMaxConcurrentSessions((int) $record['sess_max_concurrent']);
-            $this->setMaxConcurrentSessionsMsg($record['sess_msg_concurrent']);
+            $this->setMaxConcurrentSessionsMsg($record['sess_msg_concurrent'] ?? '');
         }
     }
 
     /**
     * Update data
     */
-    public function doUpdate(): void
+    protected function doUpdate(): void
     {
         global $ilDB;
 
@@ -233,7 +233,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     /**
     * Delete data from db
     */
-    public function doDelete(): void
+    protected function doDelete(): void
     {
         global $ilDB;
 
@@ -584,13 +584,6 @@ class ilObjBigBlueButton extends ilObjectPlugin
         $this->guestGlobalEnabled = $enabled;
     }
 
-    /**
-     * @return mixed
-     */
-    public function isGuestLink()
-    {
-        return $this->is_guest_link;
-    }
 
     /**
      * @return bool

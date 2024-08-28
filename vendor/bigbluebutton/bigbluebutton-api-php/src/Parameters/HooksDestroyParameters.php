@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -22,17 +22,14 @@ namespace BigBlueButton\Parameters;
 
 class HooksDestroyParameters extends BaseParameters
 {
-    /**
-     * @var string
-     */
-    private $hookId;
+    private ?string $hookId = null;
 
     /**
      * HooksDestroyParameters constructor.
      *
-     * @param $hookId
+     * @param mixed $hookId
      */
-    public function __construct($hookId)
+    public function __construct($hookId = null)
     {
         $this->hookId = $hookId;
     }

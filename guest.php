@@ -47,7 +47,7 @@ class ilInitialisationGuest extends ilInitialisation
 
     public static function initIlias($client_id=null, $client_token=null): void
     {
-	    
+
 	if(empty($client_id))
 	{
 		throw new \Exception("There has been an error. Try it again.");
@@ -65,7 +65,7 @@ class ilInitialisationGuest extends ilInitialisation
      *
      * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file)
      */
-    public static function initGlobal($a_name, $a_class, $a_source_file = null): void
+    public static function initGlobal(string $a_name, $a_class, ?string $a_source_file = null, ?bool $destroy_existing = false): void
     {
         parent::initGlobal($a_name, $a_class, $a_source_file);
     }
@@ -136,7 +136,7 @@ class GuestLink
     /** @var ilUtil $ilUtil */
     private $ilUtil;
 
-    
+
     private $bbb;
 
     /** @var int $refId */
@@ -285,7 +285,7 @@ class GuestLink
 		if (strpos($http_base,'/m/')) {
 			$http_base = strstr($http_base,'/m/',true).'/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
 		}
-		
+
         $this->htmlTpl = new ilTemplate( dirname(__FILE__) . '/' . 'templates/tpl.guest.html', true, true);
         $this->htmlTpl->setVariable('USER_LANG', $this->isoLangCode[$this->userLang]);
         $this->htmlTpl->setVariable('HTTP_BASE', $http_base);
@@ -435,7 +435,7 @@ class GuestLink
                 $this->errState['displayname'] = isset($_POST['display_name']);
             }
         }
-        
+
         return $score >= 0;
     }
 
@@ -468,7 +468,7 @@ class GuestLink
         ilInitialisationGuest::initIlias($this->client);
         global $DIC; /** @var Container $DIC */
         $this->dic = $DIC;
-        
+
         try {
             $this->pluginObject = ilObjectFactory::getInstanceByRefId($this->refId);
         } catch (ilDatabaseException $e) {
@@ -492,7 +492,7 @@ class GuestLink
                     $this->errState['userLimit'] = true;
                 }
             }else if( !$this->errState['displayname'] ) {
-                $this->bbb = new BBB($this->pluginConfig->getSvrSalt(), $this->pluginConfig->getSvrPublicUrl());
+                $this->bbb = new ilBBB($this->pluginConfig->getSvrSalt(), $this->pluginConfig->getSvrPublicUrl());
                 $this->attendeePwd = $this->pluginObject->getAttendeePwd();
                 $this->setMeetingId();
                 if( $this->getUrlJoinMeeting() ) {

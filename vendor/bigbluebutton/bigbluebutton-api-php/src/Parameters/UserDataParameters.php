@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2022 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -31,7 +31,7 @@ abstract class UserDataParameters extends BaseParameters
     private $userData = [];
 
     /**
-     * @param $key
+     * @param mixed $key
      *
      * @return mixed
      */
@@ -60,7 +60,7 @@ abstract class UserDataParameters extends BaseParameters
                 if (!is_bool($v)) {
                     $queries['userdata-' . $k] = $v;
                 } else {
-                    $queries['userdata-' . $k] = $v ? 'true' : 'false';
+                    $queries['userdata-' . $k] = !is_null($v) ? ($v ? 'true' : 'false') : $v;
                 }
             }
         }

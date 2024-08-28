@@ -45,6 +45,7 @@
  */
 class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 {
+    private ?ilPropertyFormGUI $form = null;
     public bool $has_meeting_recordings = false;
 
     /**
@@ -120,7 +121,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
     /**
      * Set tabs
      */
-    public function setTabs(): void
+    protected function setTabs(): void
     {
         global $ilTabs, $ilCtrl, $ilAccess;
 
@@ -429,7 +430,10 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                 
                 if ($isPublished){
                     if ($this->object->isDownloadAllowed()){
-                        $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("DownloadText"), $BBBHelper->getVideoDownloadStreamUrl($format->url));
+                        $actions[] = $DIC->ui()->factory()->button()->shy(
+                            $this->txt("DownloadText"),
+                            $BBBHelper->getVideoDownloadStreamUrl($format->url ?? '')
+                        );
                     }
                     // $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("unpublish_link"), $this->editLink($recording->recordID, 0));
                     // $actions[] = $DIC->ui()->factory()->button()->shy($this->txt("publish_link"), $this->editLink($recording->recordID, 1)); 
@@ -530,7 +534,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
          $publish = boolval(filter_input(INPUT_GET, "publish"));
 
         $BBBHelper->publishRecordings($this->object,$recordID, $publish );
-        $this->object=$bbb_obj;
+
         $ilCtrl->redirect($this, "showContent");
 
     }
