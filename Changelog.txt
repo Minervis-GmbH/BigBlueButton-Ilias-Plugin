@@ -64,3 +64,8 @@ BigBLueButton-ILIAS Plugin Changelog
 	- Fix phone calls
 	- delete recording messages when the meeting is not being recorded
 	- Add proxy to the new client
+
+	--------#
+2024-12-04 Version 3.1
+    - Fix guest links
+    - Fix some PHP 7 errors
