@@ -374,7 +374,8 @@ class GuestLink
                 if($available_sessions['max_sessions'] ||  (  key_exists($this->pluginObject->getBBBId(), $available_sessions['meetings']) && $available_sessions['meetings'][$this->pluginObject->getBBBId()]['userlimit'])){
                     $this->errState['userLimit'] = true;
                 }
-            }else if( !$this->errState['displayname'] ) {
+            }
+            if( !$this->errState['displayname'] ) {
                 $this->bbb = new ilBBB($this->pluginConfig->getSvrSalt(), $this->pluginConfig->getSvrPublicUrl());
                 $this->attendeePwd = $this->pluginObject->getAttendeePwd();
                 $this->setMeetingId();
