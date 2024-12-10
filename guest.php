@@ -292,7 +292,12 @@ class GuestLink
     private function setUserLangBySvrParam(): void
     {
         if( isset($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE']) && strlen($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE']) >= 2 ) {
-            $this->userLang = substr($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+            $lang = substr($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+            if (in_array($lang, ilLanguage::_getInstalledLanguages())) {
+                $this->userLang = $lang;
+            }else {
+                $this->userLang = ilSession::get("lang");
+            }
         }
     }
 
