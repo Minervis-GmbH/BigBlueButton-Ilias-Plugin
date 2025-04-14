@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2024 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -15,7 +15,7 @@
  * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License along
- * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
+ * with BigBlueButton; if not, see <https://www.gnu.org/licenses/>.
  */
 
 namespace BigBlueButton\Parameters;
@@ -23,18 +23,17 @@ namespace BigBlueButton\Parameters;
 use BigBlueButton\Enum\MeetingLayout;
 use BigBlueButton\Enum\Role;
 use BigBlueButton\TestCase;
+use BigBlueButton\TestServices\Fixtures;
 
 /**
  * @internal
- *
- * @coversNothing
  */
 class JoinMeetingParametersTest extends TestCase
 {
-    public function testJoinMeetingParameters()
+    public function testJoinMeetingParameters(): void
     {
-        $params            = $this->generateJoinMeetingParams();
-        $joinMeetingParams = $this->getJoinMeetingMock($params);
+        $params            = Fixtures::generateJoinMeetingParams();
+        $joinMeetingParams = Fixtures::getJoinMeetingMock($params);
 
         $this->assertEquals($params['meetingId'], $joinMeetingParams->getMeetingId());
         $this->assertEquals($params['userName'], $joinMeetingParams->getUsername());
@@ -55,8 +54,6 @@ class JoinMeetingParametersTest extends TestCase
         $joinMeetingParams->setExcludeFromDashboard($excludeFromDashboard = $this->faker->boolean);
         $joinMeetingParams->setAvatarURL($avatarUrl = $this->faker->url);
         $joinMeetingParams->setRedirect($redirect = $this->faker->boolean(50));
-        $joinMeetingParams->setClientURL($clientUrl = $this->faker->url);
-        $joinMeetingParams->setConfigToken($configToken = $this->faker->word);
         $joinMeetingParams->setGuest($guest = $this->faker->boolean(50));
         $joinMeetingParams->setDefaultLayout($defaultLayout = $this->faker->randomElement(MeetingLayout::getValues()));
         $this->assertEquals($newId, $joinMeetingParams->getMeetingId());
@@ -66,8 +63,6 @@ class JoinMeetingParametersTest extends TestCase
         $this->assertEquals($excludeFromDashboard, $joinMeetingParams->isExcludeFromDashboard());
         $this->assertEquals($avatarUrl, $joinMeetingParams->getAvatarURL());
         $this->assertEquals($redirect, $joinMeetingParams->isRedirect());
-        $this->assertEquals($clientUrl, $joinMeetingParams->getClientURL());
-        $this->assertEquals($configToken, $joinMeetingParams->getConfigToken());
         $this->assertEquals($guest, $joinMeetingParams->isGuest());
         $this->assertEquals($defaultLayout, $joinMeetingParams->getDefaultLayout());
     }
