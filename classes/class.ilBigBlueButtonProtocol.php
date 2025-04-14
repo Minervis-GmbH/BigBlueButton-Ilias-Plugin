@@ -101,8 +101,8 @@ class ilBigBlueButtonProtocol
 
         $joinParameters = new JoinMeetingParameters($meetingID, $userName, $aPW);
         $joinParameters->setRole('VIEWER')
-            ->setRedirect(true)
-            ->setClientURL($DIC->http()->request()->getUri());
+            ->setRedirect(true);
+
         return $this->bbb->getJoinMeetingURL($joinParameters);
     }
 
@@ -115,8 +115,8 @@ class ilBigBlueButtonProtocol
         $mPW=$object->getModeratorPwd();
         $joinParameters = new JoinMeetingParameters($meetingID, $userName, $mPW);
         $joinParameters->setRole('MODERATOR')
-            ->setRedirect(true)
-            ->setClientURL($DIC->http()->request()->getUri());
+            ->setRedirect(true);
+
         return $this->bbb->getJoinMeetingURL($joinParameters);
     }
 
