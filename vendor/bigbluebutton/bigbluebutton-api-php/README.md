@@ -31,27 +31,65 @@ install and usage example.
 Bugs and feature request are tracked on [GitHub](https://github.com/bigbluebutton/bigbluebutton-api-php/issues)
 
 ## Contributing guidelines
-### Code style
+### Code Quality 1: Style
 
 Make sure the code style configuration is applied by running PHPCS-Fixer.
 
-```
-composer cs-fix
+```bash
+# using an alias
+$ composer cs-fix
 ```
 
-### Running tests
+### Code Quality 2: Static code analysis
+PHPStan shall be used for static code analysis by running the command below:
+
+```bash
+# using an alias
+$ composer code-check
+
+# or the same w/o alias
+$ ./vendor/bin/phpstan analyse
+```
+
+### Code Quality 3: Tests
 
 For every implemented feature add unit tests and check all is green by running the command below.
 
 ```bash
-composer test
+# using an alias
+$ composer code-test
+
+# or the same w/o alias
+./vendor/bin/phpunit
 ```
 
 To run a single test
 
 ```bash
-./vendor/bin/phpunit --filter "BigBlueButtonTest::testApiVersion"
+# using an alias
+$ composer code-test -- --filter BigBlueButtonTest::testApiVersion
+
+# or the same w/o alias
+./vendor/bin/phpunit --filter BigBlueButtonTest::testApiVersion
 ```
+A code-coverage report will be created along with the tests. This report will be stored in:
+````
+./var/coverage/
+````
+In case of trouble with the creation of the code-coverage report (e.g. local environment does not fulfill requirements) 
+the creation can be skipped with:
+```bash
+# using an alias
+$ composer code-test -- --no-coverage
+```
+
+**Remark:**
+
+Some test will connect to an existing BBB-server, which is specified in the `.env`-file. You 
+can specify your own BBB-server by copy that file into the same folder and name it `.env.local`.
+Exchange the credentials `BBB_SERVER_BASE_URL` and `BBB_SECRET` to your server's values.
+Since this new file (`.env.local`) takes precedence over the main file (`.env`), you will now test 
+with your own server.
 
 [bbb]: http://bigbluebutton.org
 [composer]: https://getcomposer.org

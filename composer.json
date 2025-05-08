@@ -1,6 +1,6 @@
 {
     "require": {
-        "bigbluebutton/bigbluebutton-api-php": "dev-master"
+        "bigbluebutton/bigbluebutton-api-php": "^2.3"
     },
     "autoload": {
         "classmap": [
