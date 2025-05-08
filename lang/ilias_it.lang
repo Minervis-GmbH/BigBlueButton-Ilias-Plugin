@@ -3,73 +3,92 @@
 //
 <!-- language file start -->
 obj_xbbb#:#Bigbluebutton
-objs_xbbb#:#Bigbluebutton Virtual Classrooms
+objs_xbbb#:#Aule Virtuali Bigbluebutton
 obj_xbbb_duplicate#:#Copia
-objs_xbbb_duplicate#:#Copia Bigbluebutton Virtual Classroom
-obj_xbbb_select#:#Seleziona Bigbluebutton Virtual Classroom
-xbbb_add#:#Aggiungi Bigbluebutton Virtual Classroom
-xbbb_new#:#Aggiungi una Nuova Bigbluebutton Virtual Classroom
-xbbb_read#:#Accesso in Lettura a Bigbluebutton Virtual Classroom
-xbbb_write#:#Modifica Bigbluebutton Virtual Classroom
-xbbb_delete#:#Elimina Bigbluebutton Virtual Classroom
-xbbb_visible#:#Bigbluebutton Virtual Classroom è visibile
-xbbb_edit_permission#:#Cambia le impostazioni sui permessi
-BigBlueButton_plugin_configuration#:#Proprietà di Connessione a Bigbluebutton
-crs_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
-grp_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
-fold_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
-root_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
-cat_create_xbbb#:#Crea Bigbluebutton Virtual Classroom
-content#:#Content#:#Crea Bigbluebutton Virtual Classroom
-class_not_started_yet#:#Questa classe non è ancora iniziata. Riprova più tardi.
-click_to_open_class#:#Clicca qui per aprire la Virtual Classroom in una nuova finestra.
-no_class_running#:#Non c'è nessuna classe in corso,
-start_class#:#clicca qui per iniziare una classe.
-class_running#:#C'è una classe in corso,
-end_class#:#clicca qui per terminare una classe.
-end_class_comment#:#(Nota che tutti i partecipanti ancora connessi saranno espulsi).
-new_class_created#:#E' stata creata una nuova Virtual Clasroom che verrà aperta in una nuova finestra.
-new_class_created_warning#:#DEVI entrare nella classe PRIMA degli iscritti. Nessuno può accedere senza un moderatore.
-new_class_created_join_manual#:#Clicca qui per entrare nella tua Virtual Classroom se non sia apre automaticamente.
-class_ended#:#La classe è stata chiusa.
-publicurl#:#URL Pubblico (es. https://my.bbb-server.com:9005/bigbluebutton/)
-salt#:#Security Salt
-edit#:#Modifica
-properties#:Proprietà
-title#:#Titolo
-description#:#Descrizione
-welcometext#:#Testo di benvenuto
+objs_xbbb_duplicate#:#Copia Aula Virtuale Bigbluebutton
+obj_xbbb_select#:#Seleziona Aula Virtuale Bigbluebutton
+xbbb_add#:#Aggiungi Aula Virtuale Bigbluebutton
+xbbb_new#:#Aggiungi Nuova Aula Virtuale Bigbluebutton
+xbbb_read#:#Accesso in lettura all'Aula Virtuale Bigbluebutton
+xbbb_write#:#Modifica Aula Virtuale Bigbluebutton
+xbbb_delete#:#Elimina Aula Virtuale Bigbluebutton
+xbbb_visible#:#L'Aula Virtuale Bigbluebutton è visibile
+xbbb_edit_permission#:#Modifica impostazioni dei permessi
+BigBlueButton_plugin_configuration#:#Proprietà Connessione Bigbluebutton
+crs_create_xbbb#:#Crea Aula Virtuale Bigbluebutton
+grp_create_xbbb#:#Crea Aula Virtuale Bigbluebutton
+fold_create_xbbb#:#Crea Aula Virtuale Bigbluebutton
+root_create_xbbb#:#Crea Aula Virtuale Bigbluebutton
+cat_create_xbbb#:#Crea Aula Virtuale Bigbluebutton
+content#:#Contenuto#:#Crea Aula Virtuale Bigbluebutton
+class_not_started_yet#:#Questa aula non è ancora iniziata. Riprova più tardi quando sarà attiva.
+click_to_open_class#:#Apri Aula Virtuale
+no_class_running#:#La tua Aula Virtuale non è ancora stata attivata. Gli altri utenti non possono entrare finché non viene avviata.
+start_class#:#Avvia Aula Virtuale
+class_running#:#È in corso un'aula virtuale, fai clic qui per terminare l'aula:
+end_class#:#Chiudi Aula Virtuale
+end_class_comment#:#(Nota che tutti i partecipanti verranno espulsi se ancora collegati all'aula).
+new_class_created#:#È stata creata una nuova Aula Virtuale che si aprirà automaticamente in una nuova finestra.
+new_class_created_warning#:#DEVI entrare nell'aula prima dei partecipanti. Nessuno potrà accedere finché un moderatore non sarà presente.
+new_class_created_join_manual#:#Entra manualmente nell'Aula Virtuale se non si è aperta automaticamente
+class_ended#:#L'aula è terminata.
+publicurl#:#URL pubblico (es. https://my.bbb-server.com:9005/bigbluebutton/)
+salt#:#Salt di Sicurezza
 Date_Title#:#data
 Date_Format#:#%H:%I:%S
-DeleteLink_Title#:#eliminare la registrazione
-Duration_Title#:#lunghezza
+DeleteLink_Title#:#elimina registrazione
+DownloadText#:#scarica
+Duration_Title#:#durata
 Link_Title#:#formati
 Recording_type_presentation#:#presentazione
-Recording_type_notes#:#appunti
-Headline_Recordings#:#registrazioni precedenti
-checkbox_record_meeting#:#sessione di registrazione
-meetingRecordedMessage#:#La sessione corrente viene registrato
-saving_invoked#:#saved
-sever_not_reachable#:#Si è verificato un errore durante il tentativo di raggiungere il server. Si prega di verificare la validità dell'URL inserito e del sale.
-choose_recording#:#Allow recordings globally
-choose_recording_info#:#Activate this option if you want users with write permissions to select 'Allow capturing' under Settings. Since the URL for the recording is known to be distributed to unintended persons, this option should not be activated in most cases.
-configurations#:# Konfiguration
-advanced_configurations#:# Advanced configuration.
-join_info#:#<br/>Important notes:<ul><li>Please <b>use a headset</b> to avoid annoying feedback or echoes!</li><li><b>If you have a poor internet connection</b> you should turn off your camera (webcam) and if you have an even poorer connection you should use a conference call to transmit the audio.</li></ul>.
-tech_requirements_info#:#Technical requirements:<ul><li>BigBlueButton uses the open standard WebRTC, which is supported by more and more browsers. Currently Google Chrome, the Chromium-based browser Microsoft Edge or with restrictions Mozilla Firefox are recommended. Furthermore, you can use Safari Mobile from iOS 12.2 and Chrome Mobile from Android 6.0. Microsoft Internet Explorer and older Edge versions are not supported.</li><li>The firewall you use must not block the following ports: TCP/IP ports 80/443 (for HTTP/HTTPS) and UDP ports in the range 16384 - 32768 (<a href="https://docs.bigbluebutton.org/2.2/configure-firewall.html" target="_blank">Advanced Notes</a>).</li><li>In order to be able to transfer your screen (desktop sharing), you should use Google Chrome and have a high-performance Internet connection. In addition, we recommend that presenters and moderators use a wired network (not WLAN).
-wait_join_meeting#:#<b>Currently there is no presenter in the virtual meeting room.<br/>Please wait and access this page again in one minute.</b>
-wait_join_meeting_guest#:#<b>Currently there is no person with moderator function present in the virtual meeting room.<br/>Please wait and click the 'Join Meeting' button again in one minute.</b>
-top_moderator#:#Welcome to the meeting room!<br/>&nbsp;<br/><b>This is a moderated room and you have the moderator function in this room.</b><br/>People without moderator function cannot enter the meeting room until a person with moderator function is in the room.
-guest_displayname_input#:#title firstname lastname
-btntext_join_meeting#:#join meeting
-top_moderated_m#:#Welcome to the meeting room!<br/>&nbsp;<br/>This is a moderated room and you can always join the meeting room only when a moderator person is in the room.
-dialnumber#:# Telefonnummer
-accesscode#:# Zugangscode
-guestchoose#:# Einladen von Gästen zulassen
-maxparticipants#:# Max. Teilnehmer
-maxparticipants_info#:#Maximale Anzahl Teilnehmer je Meeting. Bei unbegrenzter Anzahl bitte '0' angeben.
-presentationurl#:#Startpräsentation
-presentationurl_info#:#Eigene Startpräsentation über URL laden. Der URL-Aufbau mu
-guest_global_choose#:# Gastlink Voreinstellung
-guest_global_choose_info#:#Diese Option sollte in den meisten Fällen deaktiviert sein. Eine Nutzung durch Unbefugte sollte weitgehend ausgeschlossen werden können. Gäste kommen stets nur als Teilnehmer in einen moderierten Raum. Dort muss ein Moderierender bereits anwesend sein. Gäste müssen Nutzungsbedingungen zustimmen, die als ILIAS-Sprachvariable gespeichert sind. Wechseln Sie zum Editieren zu Administration -> Sprachen. Klicken Sie auf die gewünschte 'Sprache' und tippen Sie bei 'Identifier' 'rep_robj_bbb_terms_of_use' ein. Klicken Sie dann auf 'Filter anwenden' und editieren Sie den Text.
-terms_of_use#:#<b>Schutzrechte</b><br/>Die in BigBlueButton-Konferenzen enthaltenen Informationen und Materialien wie z.B. Texte oder Bilder sind in der Regel durch Urheber-, Marken- oder Patentrechte geschützt.<br/>Die gesetzlichen Vorschriften zum Datenschutz sind zu beachten. Dies gilt insbesondere für die Aufzeichnung von BigBlueButton-Konferenzen. Das heimliche Aufzeichnen von Video- oder Audiokonferenzen ist ein Straftatbestand.<br/><br/><b>Verhaltensregeln</b><br/>Sie dürfen keine gegen gesetzliche Bestimmungen verstoßende, pornographische, obszöne, diffamierende, verleumderische, beleidigende, bedrohende, volksverhetzende oder rassistische Inhalte einstellen. Auch das Einstellen von Werbung ohne Genehmigung sowie die Übermittlung von Informationen, welche einen Virus, Manipulationen oder ähnliche schädigende Elemente enthalten, ist untersagt.<br/><br/><b>Verarbeitete Daten</b><br/>Bei der Nutzung von BigBlueButton werden folgende Daten erhoben:<ul><li>Verbindungsdaten (z. B. IP-Adresse, Browsertyp, Datum und Uhrzeit des Zugriffs)</li><li>Gegebenenfalls Zugangsdaten: Benutzername, Passwort in verschlüsselter Form</li><li>Inhaltsdaten (z. B. hochgeladene Dateien, Chatbeiträge, Umfragen)</li></ul>Die vorübergehende Speicherung der Verbindungsdaten, insbesondere der IP-Adresse, durch das System ist notwendig, um eine Auslieferung von BigBlueButton an den Rechner des Nutzers zu ermöglichen. Hierfür muss die IP-Adresse des Nutzers für die Dauer der Sitzung gespeichert bleiben. Rechtsgrundlage für die vorübergehende Speicherung der Daten ist Art. 6 Abs. 1 lit. f DSGVO.<br/>Die Verbindungsdaten werden ebenfalls in der Regel in Logfiles gespeichert. Der Löschzeitpunkt wird durch den Betreiber des Servers für BigBlueButton festgelegt.
+Recording_type_notes#:#note
+Headline_Recordings#:#registrazioni
+checkbox_record_meeting#:#registra la prossima sessione
+meetingRecordedMessage#:#La sessione corrente verrà registrata!
+properties#:#Proprietà
+edit_properties#:#modifica proprietà
+description#:#descrizione
+welcometext#:#testo di benvenuto
+welcome_text_content#:#Benvenuto<br/>in <br/><b>{MEETING_TITLE}</b><br/><br/>Per assistenza sull'uso di BigBlueButton consulta questi brevi <a href="http://www.bigbluebutton.org/html5" target="_blank"><u>video tutorial</u></a>.<br /><br />Per connettersi all'audio clicca sull'icona del telefono. Usa delle cuffie per evitare di causare rumori di sottofondo agli altri.
+save#:#Salva
+edit#:#Modifica
+title#:#titolo
+status#:#stato
+saving_invoked#:#salvato
+sever_not_reachable#:#Si è verificato un errore nel tentativo di raggiungere il server. Verifica l'URL inserito e il salt per validità.
+choose_recording#:#Consenti registrazioni globalmente
+choose_recording_info#:#Attiva questa opzione se desideri consentire agli utenti con permessi di modifica di selezionare 'Consenti cattura' sotto Impostazioni. Poiché l'URL della registrazione potrebbe essere distribuito a persone non autorizzate, questa opzione non dovrebbe essere attivata nella maggior parte dei casi.
+configurations#:#Configurazione
+advanced_configurations#:#Configurazione avanzata.
+join_info#:#<br/>Note importanti:<ul><li>Si prega di <b>usare delle cuffie</b> per evitare fastidiosi ritorni o echi!</li><li><b>Se hai una connessione internet scarsa</b> disattiva la videocamera (webcam) e, se la connessione è molto debole, usa una chiamata in conferenza per trasmettere l'audio.</li></ul>.
+tech_requirements_info#:#Requisiti tecnici:<ul><li>BigBlueButton usa lo standard aperto WebRTC, supportato da molti browser. Attualmente sono consigliati Google Chrome, Microsoft Edge basato su Chromium o, con limitazioni, Mozilla Firefox. Inoltre, puoi utilizzare Safari Mobile da iOS 12.2 e Chrome Mobile da Android 6.0. Microsoft Internet Explorer e le versioni precedenti di Edge non sono supportati.</li><li>Il firewall che utilizzi non deve bloccare le seguenti porte: porte TCP/IP 80/443 (per HTTP/HTTPS) e porte UDP nel range 16384 - 32768 (<a href="https://docs.bigbluebutton.org/2.2/configure-firewall.html" target="_blank">Note avanzate</a>).</li><li>Per poter condividere il tuo schermo (condivisione del desktop), usa Google Chrome e assicurati di avere una connessione internet ad alta velocità. Si consiglia inoltre di utilizzare una rete cablata (non Wi-Fi) per i presentatori e i moderatori.
+wait_join_meeting#:#<b>Attualmente non ci sono moderatori nella stanza virtuale.<br/>Si prega di attendere e ricaricare questa pagina tra un minuto.</b>
+wait_join_meeting_guest#:#<b>Attualmente non ci sono moderatori nella stanza virtuale.<br/>Si prega di attendere e cliccare su 'Entra nell'aula' tra un minuto.</b>
+top_moderator#:#Benvenuto nella stanza!<br/>&nbsp;<br/><b>Questa è una stanza moderata e hai la funzione di moderatore in questa stanza.</b><br/>Gli utenti senza funzione di moderatore non possono entrare fino a che un moderatore non è presente.
+guest_displayname_input#:#Inserisci il tuo nome!
+btntext_join_meeting#:#entra nell'aula
+top_moderated_m#:#Benvenuto nella stanza!<br/>&nbsp;<br/>Questa è una stanza moderata e puoi entrare solo quando un moderatore è presente.
+sess_max_concurrent_sessions#:#Numero limitato di sessioni simultanee
+sess_enable_userlimit#:# Consenti di impostare un limite di utenti nelle impostazioni della sessione
+sess_msg_userlimit#:#Il numero di utenti consentiti per sessione è stato raggiunto.
+sess_msg_concurrent_limit#:#È stato superato il numero consentito di sessioni simultanee
+sess_msg_concurrent_limit_title#:#Messaggio di errore
+sess_msg_concurrent_limit_info#:#Questo messaggio viene visualizzato quando il numero di sessioni viene superato
+sess_management_header#:#Gestione delle sessioni (Sperimentale)
+dialnumber#:# numero di telefono
+accesscode#:# codice di accesso
+guestchoose#:# Consenti l'invito degli ospiti
+maxparticipants#:# Max. Partecipanti
+maxparticipants_info#:#Numero massimo di partecipanti per incontro. Se illimitato, specifica '0'.
+presentationurl#:#Inizia presentazione
+presentationurl_info#:#Carica la tua presentazione iniziale tramite URL. La struttura URL deve essere
+guest_global_choose#:#Preimpostazione link ospiti
+guest_global_choose_info#:#Questa opzione dovrebbe essere disabilitata nella maggior parte dei casi. Dovrebbe essere possibile escludere l'uso da parte di persone non autorizzate. Gli ospiti accedono sempre a una stanza moderata solo come partecipanti. Un moderatore deve già essere presente. Gli ospiti devono accettare i termini d'uso, memorizzati come variabile linguistica ILIAS. Per modificare, passa a Amministrazione -> Lingue. Clicca sulla lingua desiderata e digita 'rep_robj_bbb_terms_of_use' per 'Identificatore'. Poi clicca su 'Applica filtro' e modifica il testo.
+terms_of_use#:#<b>Diritti di protezione</b><br/>Le informazioni e i materiali contenuti nelle conferenze BigBlueButton, come testi o immagini, sono solitamente protetti da copyright, marchi o brevetti.<br/>Le normative legali sulla protezione dei dati devono essere rispettate, in particolare per quanto riguarda la registrazione delle conferenze BigBlueButton. La registrazione non autorizzata di video o conferenze audio è un reato.<br/><br/><b>Regole di Condotta</b><br/>Non è consentito pubblicare contenuti che violino la legge, inclusi materiali pornografici, osceni, diffamatori, offensivi, minacciosi, odiosi o razzisti. È inoltre vietato pubblicare annunci senza permesso e trasmettere informazioni contenenti virus, manipolazioni o elementi dannosi.<br/><br/><b>Dati Elaborati</b><br/>Durante l'uso di BigBlueButton vengono raccolti i seguenti dati:<ul><li>Dati di connessione (es. indirizzo IP, tipo di browser, data e ora di accesso)</li><li>Dati di accesso, se applicabile: nome utente, password in forma criptata</li><li>Dati di contenuto (es. file caricati, messaggi in chat, sondaggi)</li></ul>La memorizzazione temporanea dei dati di connessione, in particolare l'indirizzo IP, è necessaria per consentire l'erogazione di BigBlueButton. A questo scopo, l'indirizzo IP dell'utente deve rimanere memorizzato per la durata della sessione. La base legale per la memorizzazione temporanea dei dati è l'Art. 6 (1) lit. f DSGVO.<br/>Di solito anche i dati di connessione vengono memorizzati nei file di log. I tempi di cancellazione sono determinati dall'operatore del server BigBlueButton.
+err_msg_displayname#:# Il nome visualizzato non può essere vuoto.
+publish_link#:#pubblica la registrazione
+unpublish_link#:#rimuovi pubblicazione registrazione
+max_duration#:#Massima durata dell'incontro
+guest_invite_info#:#Puoi invitare ospiti utilizzando il seguente link:
+allow_download#:#Consenti Scaricamento
+allow_download_info#:#Per la funzionalità di scaricamento, deve essere installato un add-on sul server BBB. Verifica lo script su <a href="https://github.com/Minervis-GmbH/video-export">https://github.com/Minervis-GmbH/video-export</a>
