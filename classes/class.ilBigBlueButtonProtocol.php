@@ -60,24 +60,8 @@ class ilBigBlueButtonProtocol
 
     public function createMeeting($object, $record = false)
     {
-
         $meetingID=$object->getBBBId();
         $meetingTitle=$object->getTitle();
-
-        $welcomeString=$object->getWelcomeText();
-        /*if(!$object->isWelcomeTextSet()){
-            $welcomeString=str_replace(
-                [
-                    '{MEETING_TITLE}'
-                ],
-                [
-                    $meetingTitle
-                ],
-                $dic->language()->txt('rep_robj_xbbb_welcome_text_content')
-            );
-        }*/
-
-
         $logoutURL = ilLink::_getLink($object->getRefId());
 
         $this->createMeetingParam = new CreateMeetingParameters($meetingID, $meetingTitle);
@@ -90,8 +74,8 @@ class ilBigBlueButtonProtocol
             ->setDuration($this->object->getMeetingDuration())
             ;
 
-        if (trim($welcomeString)) {
-            $this->createMeetingParam->setWelcomeMessage($welcomeString);
+        if (!empty($object->getWelcomeText())) {
+            $this->createMeetingParam->setWelcomeMessage(trim($object->getWelcomeText()));
         }
         if ($object->getMaxParticipants()>0){
             $this->createMeetingParam->setMaxParticipants($object->getMaxParticipants());
