@@ -1392,7 +1392,7 @@ class CreateMeetingParameters extends MetaParameters
             'maxParticipants'                        => $this->maxParticipants,
             'autoStartRecording'                     => !is_null($this->autoStartRecording) ? ($this->autoStartRecording ? 'true' : 'false') : $this->autoStartRecording,
             'allowStartStopRecording'                => !is_null($this->allowStartStopRecording) ? ($this->allowStartStopRecording ? 'true' : 'false') : $this->allowStartStopRecording,
-            'welcome'                                => trim($this->welcomeMessage),
+            'welcome'                                => trim($this->welcomeMessage ?? ''),
             'moderatorOnlyMessage'                   => trim($this->moderatorOnlyMessage),
             'webcamsOnlyForModerator'                => !is_null($this->webcamsOnlyForModerator) ? ($this->webcamsOnlyForModerator ? 'true' : 'false') : $this->webcamsOnlyForModerator,
             'logo'                                   => $this->logo,
