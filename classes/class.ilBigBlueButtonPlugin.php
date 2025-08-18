@@ -34,7 +34,7 @@ class ilBigBlueButtonPlugin extends ilRepositoryObjectPlugin
     {
         $plugin_folder = "BigBlueButton";
 
-        return "Customizing/plugins/Repository/RepositoryObject/" . $plugin_folder
+        return "Customizing/global/plugins/Services/Repository/RepositoryObject/" . $plugin_folder
             . "/templates/images/icon_" . $a_type . ".svg";
     }
 

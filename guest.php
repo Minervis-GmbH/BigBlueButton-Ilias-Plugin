@@ -40,7 +40,7 @@ class GuestLink
 {
     const DEFAULT_LANG = 'de';
 
-    const PLUGIN_DIR = 'public/Customizing/plugins/Repository/RepositoryObject/BigBlueButton';
+    const PLUGIN_DIR = 'public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
 
     /** @var GuestLink|null $instance */
     static private $instance;
@@ -186,7 +186,7 @@ class GuestLink
     {
 		$http_base = ILIAS_HTTP_PATH;
 		if (strpos($http_base,'/m/')) {
-			$http_base = strstr($http_base,'/m/',true).'/public/Customizing/plugins/Repository/RepositoryObject/BigBlueButton';
+			$http_base = strstr($http_base,'/m/',true).'/public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
 		}
 
         $tpl = new HTML_Template_ITX();
