@@ -94,3 +94,7 @@ unpublish_link#:#Aufnahme privat machen
 max_duration#:#Maximale  Dauer der Sitzung
 allow_download#:#Herunterladen von Aufnahmen erlauben
 allow_download_info#:#Damit, das Dowload-Feature funktioniert muss ein Addon auf dem BBB-Server installiert werden. Für mehr infos: <a href="https://github.com/Minervis-GmbH/video-export">https://github.com/Minervis-GmbH/video-export</a>
+bbb_error_max_participants#:#Die maximale Teilnehmerzahl für diese Besprechung wurde erreicht. Bitte versuchen Sie es später erneut.
+bbb_error_not_found#:#Die Besprechung wurde nicht gefunden oder ist beendet.
+bbb_error_meeting_ended#:#Die Besprechung wurde zwangsweise beendet.
+bbb_error_generic#:#Beim Beitritt zur Besprechung ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.

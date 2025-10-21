@@ -92,3 +92,7 @@ max_duration#:#Max. duration of the meeting
 guest_invite_info#:#You can invite guests using the following link:
 allow_download#:#Allow Download
 allow_download_info#:#For the download feature to work, an addon should be installed at the bbb-server. Please check the script at <a href="https://github.com/Minervis-GmbH/video-export">https://github.com/Minervis-GmbH/video-export</a>
+bbb_error_max_participants#:#The maximum number of participants for this meeting has been reached. Please try again later.
+bbb_error_not_found#:#The meeting was not found or has ended.
+bbb_error_meeting_ended#:#The meeting has been forcibly ended.
+bbb_error_generic#:#An error occurred while trying to join the meeting. Please try again later.

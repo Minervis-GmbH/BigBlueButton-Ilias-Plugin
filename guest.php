@@ -5,16 +5,18 @@ ini_set('display_errors', 1);
 use BigBlueButton\Enum\Role;
 use ILIAS\DI\Container;
 
-$directory = strstr($_SERVER['SCRIPT_FILENAME'], 'Customizing', true);
-if(empty($directory))
-{
-	$directory = getcwd();
+$directory = strstr($_SERVER['SCRIPT_FILENAME'], '/public/Customizing', true);
+if (empty($directory)) {
+    $directory = getcwd();
 }
 chdir($directory);
 
-require_once('./Services/Context/classes/class.ilContext.php');
-require_once("./Services/Init/classes/class.ilInitialisation.php");
-require_once('./Services/Language/classes/class.ilLanguage.php');
+// Load ILIAS autoloader
+require_once('./vendor/composer/vendor/autoload.php');
+
+// Initialize ILIAS
+ilContext::init(ilContext::CONTEXT_WEBDAV);
+ilInitialisation::initILIAS();
 
 
 /**
@@ -29,7 +31,7 @@ class GuestLink
 {
     const DEFAULT_LANG = 'de';
 
-    const PLUGIN_DIR = 'Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
+    const PLUGIN_DIR = 'public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
 
     /** @var GuestLink|null $instance */
     static private $instance;
@@ -175,10 +177,13 @@ class GuestLink
     {
 		$http_base = ILIAS_HTTP_PATH;
 		if (strpos($http_base,'/m/')) {
-			$http_base = strstr($http_base,'/m/',true).'/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
+			$http_base = strstr($http_base,'/m/',true).'/public/Customizing/plugins/Repository/RepositoryObject/BigBlueButton';
 		}
 
-        $this->htmlTpl = new ilTemplate( dirname(__FILE__) . '/' . 'templates/tpl.guest.html', true, true);
+        $tpl = new HTML_Template_ITX();
+        $tpl->loadTemplatefile(__DIR__ . '/templates/tpl.guest.html', true, true);
+        $this->htmlTpl = $tpl;
+
         $this->htmlTpl->setVariable('USER_LANG', $this->isoLangCode[$this->userLang]);
         $this->htmlTpl->setVariable('HTTP_BASE', $http_base);
         $this->htmlTpl->setVariable('MEETING_TITLE', $this->getMeetingTitle());// . ' - ' . $this->getLangVar('big_blue_button'));
@@ -291,8 +296,37 @@ class GuestLink
 
     private function setUserLangBySvrParam(): void
     {
+        // Default to German if nothing is set
+        $this->userLang = self::DEFAULT_LANG;
+        
         if( isset($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE']) && strlen($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE']) >= 2 ) {
-            $this->userLang = substr($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+            $lang = substr($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+            if (in_array($lang, ilLanguage::_getInstalledLanguages())) {
+                $this->userLang = $lang;
+            }else {
+                $sessionLang = ilSession::get("lang");
+                if ($sessionLang && in_array($sessionLang, ilLanguage::_getInstalledLanguages())) {
+                    $this->userLang = $sessionLang;
+                }
+            }
+        }
+    }
+
+    private function loadLanguageFile(): void
+    {
+        global $DIC;
+        
+        $plugin_lang_file = dirname(__FILE__) . '/../lang/ilias_' . $this->userLang . '.lang';
+        
+        if (file_exists($plugin_lang_file)) {
+            // Try to load via language module
+            try {
+                $lng = $DIC->language();
+                $lng->loadLanguageModule('rep_robj_xbbb');
+            } catch (Exception $e) {
+                // If that fails, we'll rely on ilLanguage::_lookupEntry which reads from DB
+                // The language entries should have been installed when the plugin was activated
+            }
         }
     }
 
@@ -367,6 +401,10 @@ class GuestLink
         $this->setGuestLoginState();
 
         $this->setUserLangBySvrParam();
+        
+        // Load plugin language file
+        $this->loadLanguageFile();
+        
         // redirect to BBB if valid
         if( $this->checkPostRequest() ) {
             if($this->pluginObject->isMaxConcurrentSessionEnabled()){
@@ -374,7 +412,8 @@ class GuestLink
                 if($available_sessions['max_sessions'] ||  (  key_exists($this->pluginObject->getBBBId(), $available_sessions['meetings']) && $available_sessions['meetings'][$this->pluginObject->getBBBId()]['userlimit'])){
                     $this->errState['userLimit'] = true;
                 }
-            }else if( !$this->errState['displayname'] ) {
+            }
+            if( !$this->errState['displayname'] ) {
                 $this->bbb = new ilBBB($this->pluginConfig->getSvrSalt(), $this->pluginConfig->getSvrPublicUrl());
                 $this->attendeePwd = $this->pluginObject->getAttendeePwd();
                 $this->setMeetingId();
@@ -407,9 +446,3 @@ class GuestLink
 }
 
 echo GuestLink::init();
-
-
-
-
-
-
