@@ -53,7 +53,8 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
      */
     protected function afterConstructor(): void
     {
-        $this->tpl->addCss("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/bbb.css");
+        // $this->tpl->addCss("./public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/bbb.css");
+        $this->tpl->addCss($this->getPlugin()->getDirectory() . '/templates/bbb.css');
     }
 
     /**
@@ -166,7 +167,9 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
     {
         global $ilCtrl;
 
-        include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
+        include_once ILIAS_ABSOLUTE_PATH . "/components/ILIAS/Form/classes/class.ilPropertyFormGUI.php";
+
+
         $this->form = new ilPropertyFormGUI();
 
         // title
@@ -309,11 +312,10 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
         $available_sessions = $BBBHelper->getMaximumSessionsAvailable();
         //$BBBHelper->getMeetings();
 
-        $client_js = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/client.js", true, true);
+        $client_js = new ilTemplate("../client.js", true, true, "public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
 
         if ($isModerator) {
-            $my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorClient.html", true, true);
-
+            $my_tpl = new ilTemplate("../tpl.BigBlueButtonModeratorClient.html", true, true, "public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
             $my_tpl->setVariable("CMD_END_CLASS", "cmd[endClass]");
             $my_tpl->setVariable("END_CLASS", $this->txt('end_bbb_class'));
             $my_tpl->setVariable("FORMACTION", $this->ctrl->getFormAction($this));
@@ -331,13 +333,25 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $my_tpl->setVariable("startClass", $this->txt("start_class"));
             $my_tpl->setVariable("endClass", $this->txt("end_class"));
             $my_tpl->setVariable("endClassComment", $this->txt("end_class_comment"));
-            if($this->object->isGuestGlabalAllowed() && $this->object->isGuestLinkAllowed()){
+            
+            global $DIC;  // Get global ILIAS dependency injection container
+
+            // Log the values of guest access settings
+            $data = [
+                "Guest Global Allowed" => $this->object->isGuestGlabalAllowed(),
+                "Guest Link Allowed"   => $this->object->isGuestLinkAllowed(),
+            ];
+
+            $DIC->logger()->root()->dump($data); // Logs data in ILIAS 10
+
+            if ($this->object->isGuestGlabalAllowed() && $this->object->isGuestLinkAllowed()) {
+                $my_tpl->setCurrentBlock("guestlink_block");
                 $my_tpl->setVariable("GUEST_INVITE_INFO", $this->txt("guest_invite_info"));
                 $my_tpl->setVariable("GUEST_INVITE_URL", $BBBHelper->getInviteUrl());
-            }else{
-                $my_tpl->setVariable("HIDE_GUESTLINK", "hide");
+                $my_tpl->parseCurrentBlock();
             }
-
+            
+            
             if ($values["choose_recording"]){
                 $my_tpl->setVariable("recordings", $this->buildRecordingUI());
                 $my_tpl->setVariable("Headline_Recordings", $this->txt("Headline_Recordings"));
@@ -354,8 +368,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 
             $bbbURL=$BBBHelper->joinURLModerator($this->object);
         } else {
-            $my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonClient.html", true, true);
-
+            $my_tpl = new ilTemplate("../tpl.BigBlueButtonClient.html", true, true, "public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
             $my_tpl->setVariable("classNotStartedText", $this->txt("class_not_started_yet"));
 
             $bbbURL=$BBBHelper->joinURL($this->object);
@@ -388,7 +401,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                 "tpl.BigBlueButtonRecordTable.html",
                 true,
                 true,
-                "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton"
+                "public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton"
         );
         $table_content = [];
         $recordcount=0;
@@ -400,7 +413,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                 $table_row_template = new ilTemplate("tpl.BigBlueButtonRecordTableRow.html",
                                 true,
                                 true,
-                                "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+                                "public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
                 $table_row_template->setVariable("Date",date("d.m.Y H:i",  substr ($recording->startTime,0,10)));
                 $seconds = round(($recording->endTime - $recording->startTime)/1000);
                 $table_row_template->setVariable("Duration", $this->formatTimeDiff( $seconds ));
@@ -410,7 +423,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
                     $table_link_template = new ilTemplate("tpl.BigBlueButtonRecordTableLink.html",
                                     true,
                                     true,
-                                    "Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
+                                    "public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
                     $table_link_template->setVariable("URL",$format->url);
                     if($format->type=="presentation" && $this->object->isDownloadAllowed() ){
                         $node = '<a href="'.$BBBHelper->getVideoDownloadStreamUrl($format->url).'" download>' .$this->txt("DownloadText") . '</a>';
@@ -474,7 +487,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 
         //$this->object->incSequence();
 
-        $my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorMeetingEnded.html", true, true);
+        $my_tpl = new ilTemplate("../tpl.BigBlueButtonModeratorMeetingEnded.html", true, true, "public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
         $my_tpl->setVariable("classEnded", $this->txt("class_ended"));
         $tpl->setContent($my_tpl->get());
         $this->showContent();
@@ -492,7 +505,7 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
 
         $BBBHelper->createMeeting($this->object, isset($_POST["recordmeeting"]));
 
-        $my_tpl = new ilTemplate("./Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton/templates/tpl.BigBlueButtonModeratorMeetingCreated.html", true, true);
+        $my_tpl = new ilTemplate("../tpl.BigBlueButtonModeratorMeetingCreated.html", true, true, "public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton");
 
         $bbbURL=$BBBHelper->joinURLModerator($this->object);
 
