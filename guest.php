@@ -2,30 +2,19 @@
 // enable display errors only on dev systems
 ini_set('display_errors', 1);
 
-
-
-
 use BigBlueButton\Enum\Role;
 use ILIAS\DI\Container;
 
-// Load Composer Autoload First
-
-
-// Now Load ILIAS Container
-//require_once dirname(__DIR__, 6) . "/components/ILIAS/DI/src/Container.php";
-
-// Go up 6 levels: from guest.php to ILIAS root
-$directory = strstr($_SERVER['SCRIPT_FILENAME'], '/public/Customizing', true);
-if (empty($directory)) {
-    $directory = getcwd();
+$directory = strstr($_SERVER['SCRIPT_FILENAME'], 'Customizing', true);
+if(empty($directory))
+{
+	$directory = getcwd();
 }
 chdir($directory);
 
-
-require_once("./vendor/composer/vendor/autoload.php");
-require_once('./components/ILIAS/Context/classes/class.ilContext.php');
-require_once('./components/ILIAS/Init/classes/class.ilInitialisation.php');
-require_once('./components/ILIAS/Language/classes/class.ilLanguage.php');
+require_once('./Services/Context/classes/class.ilContext.php');
+require_once("./Services/Init/classes/class.ilInitialisation.php");
+require_once('./Services/Language/classes/class.ilLanguage.php');
 
 
 /**
@@ -40,7 +29,7 @@ class GuestLink
 {
     const DEFAULT_LANG = 'de';
 
-    const PLUGIN_DIR = 'public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
+    const PLUGIN_DIR = 'Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
 
     /** @var GuestLink|null $instance */
     static private $instance;
@@ -186,13 +175,10 @@ class GuestLink
     {
 		$http_base = ILIAS_HTTP_PATH;
 		if (strpos($http_base,'/m/')) {
-			$http_base = strstr($http_base,'/m/',true).'/public/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
+			$http_base = strstr($http_base,'/m/',true).'/Customizing/global/plugins/Services/Repository/RepositoryObject/BigBlueButton';
 		}
 
-        $tpl = new HTML_Template_ITX();
-        $tpl->loadTemplatefile(__DIR__ . '/templates/tpl.guest.html', true, true);
-        $this->htmlTpl = $tpl;
-
+        $this->htmlTpl = new ilTemplate( dirname(__FILE__) . '/' . 'templates/tpl.guest.html', true, true);
         $this->htmlTpl->setVariable('USER_LANG', $this->isoLangCode[$this->userLang]);
         $this->htmlTpl->setVariable('HTTP_BASE', $http_base);
         $this->htmlTpl->setVariable('MEETING_TITLE', $this->getMeetingTitle());// . ' - ' . $this->getLangVar('big_blue_button'));
@@ -306,12 +292,7 @@ class GuestLink
     private function setUserLangBySvrParam(): void
     {
         if( isset($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE']) && strlen($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE']) >= 2 ) {
-            $lang = substr($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-            if (in_array($lang, ilLanguage::_getInstalledLanguages())) {
-                $this->userLang = $lang;
-            }else {
-                $this->userLang = ilSession::get("lang");
-            }
+            $this->userLang = substr($this->dic->http()->request()->getServerParams()['HTTP_ACCEPT_LANGUAGE'], 0, 2);
         }
     }
 
@@ -393,8 +374,7 @@ class GuestLink
                 if($available_sessions['max_sessions'] ||  (  key_exists($this->pluginObject->getBBBId(), $available_sessions['meetings']) && $available_sessions['meetings'][$this->pluginObject->getBBBId()]['userlimit'])){
                     $this->errState['userLimit'] = true;
                 }
-            }
-            if( !$this->errState['displayname'] ) {
+            }else if( !$this->errState['displayname'] ) {
                 $this->bbb = new ilBBB($this->pluginConfig->getSvrSalt(), $this->pluginConfig->getSvrPublicUrl());
                 $this->attendeePwd = $this->pluginObject->getAttendeePwd();
                 $this->setMeetingId();
@@ -427,3 +407,9 @@ class GuestLink
 }
 
 echo GuestLink::init();
+
+
+
+
+
+

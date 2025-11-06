@@ -30,16 +30,18 @@
 	{maxNumberofSessionsExceededText}
 </div>
 
-<!-- BEGIN guestlink_block -->
-<div class="ilInfoScreenSec form-horizontal" id="infoscreen_section_2">
+<div class="ilInfoScreenSec form-horizontal {HIDE_GUESTLINK}" id="infoscreen_section_2">
     <h3 class="ilHeader">{GUEST_INVITE_INFO}&nbsp;</h3>
     <div class="form-group">
+        <!-- <div class="il_InfoScreenProperty control-label col-xs-1">{userInviteInfo}</div> -->
         <div class="il_InfoScreenPropertyValue col-xs-6">
             <div class="ilPermalinkContainer input-group">
                 <input class="form-control" readonly="readonly" id="userInviteUrl" type="text" value="{GUEST_INVITE_URL}" onclick="return false;">
                 <span class="input-group-btn">
                     <div class="btn-group">
+                    <!-- Important: The next a-tag had a this.blur(); in the onclick event before. Please do not add it again, see bug #8723 -->
                         <button type="button" class="btn btn-default" id="copyUserInviteUrl">
+                            <span></span>
                             <span class="sr-only">Copy to clipboard</span>
                             <span class="glyphicon glyphicon-copy"></span>
                         </button>
@@ -49,7 +51,6 @@
         </div>
     </div>
 </div>
-<!-- END guestlink_block -->
 <form id="deleteRecording" action="{FORMACTION3}" method="post">
     <input id="deleteRecordingInput" class="submit" type="submit" name="{CMD_DELETE_RECORDING}" value="{DELETE_RECORDING}" >
     <input type="text" id="recordID" name="recordID" />

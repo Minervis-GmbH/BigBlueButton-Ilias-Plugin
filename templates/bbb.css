@@ -26,8 +26,3 @@
     color: red;
     font-weight: 700;
 }
-
-
-.ilInfoScreenSec.form-horizontal.d-none{
-    display: none !important;
-}
