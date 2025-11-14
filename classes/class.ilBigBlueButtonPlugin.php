@@ -24,4 +24,12 @@ class ilBigBlueButtonPlugin extends ilRepositoryObjectPlugin
          	$ilDB->dropTable('rep_robj_xbbb_conf');
 
     }
+
+    public static function _getIcon(string $a_type): string
+    {
+        $plugin_folder = "BigBlueButton";
+
+        return "Customizing/global/plugins/Services/Repository/RepositoryObject/" . $plugin_folder
+            . "/templates/images/icon_" . $a_type . ".svg";
+    }
 }
