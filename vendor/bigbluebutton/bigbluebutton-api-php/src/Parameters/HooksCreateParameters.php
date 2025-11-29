@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2024 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -15,93 +15,75 @@
  * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License along
- * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
+ * with BigBlueButton; if not, see <https://www.gnu.org/licenses/>.
  */
 
 namespace BigBlueButton\Parameters;
 
 class HooksCreateParameters extends BaseParameters
 {
-    private ?string $callbackUrl = null;
+    private string $callbackUrl;
 
     private ?string $meetingId = null;
 
+    private ?string $eventId = null;
+
     private ?bool $getRaw = null;
 
-    /**
-     * HooksCreateParameters constructor.
-     *
-     * @param mixed $callbackUrl
-     */
-    public function __construct($callbackUrl)
+    public function __construct(string $callbackUrl)
     {
         $this->callbackUrl = $callbackUrl;
     }
 
-    /**
-     * @return string
-     */
-    public function getCallbackUrl()
+    public function getCallbackUrl(): string
     {
         return $this->callbackUrl;
     }
 
-    /**
-     * @param string $callbackUrl
-     *
-     * @return HooksCreateParameters
-     */
-    public function setCallbackUrl($callbackUrl)
+    public function setCallbackUrl(string $callbackUrl): self
     {
         $this->callbackUrl = $callbackUrl;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getMeetingId()
+    public function getMeetingId(): ?string
     {
         return $this->meetingId;
     }
 
-    /**
-     * @param string $meetingId
-     *
-     * @return HooksCreateParameters
-     */
-    public function setMeetingId($meetingId)
+    public function setMeetingId(string $meetingId): self
     {
         $this->meetingId = $meetingId;
 
         return $this;
     }
 
-    /**
-     * @return null|bool
-     */
-    public function getRaw()
+    public function getEventId(): ?string
+    {
+        return $this->eventId;
+    }
+
+    public function setEventId(string $eventId): self
+    {
+        $this->eventId = $eventId;
+
+        return $this;
+    }
+
+    public function getRaw(): ?bool
     {
         return $this->getRaw;
     }
 
-    /**
-     * @param bool $getRaw
-     *
-     * @return HooksCreateParameters
-     */
-    public function setGetRaw($getRaw)
+    public function setGetRaw(bool $getRaw): self
     {
         $this->getRaw = $getRaw;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getHTTPQuery()
+    public function getHTTPQuery(): string
     {
         $queries = [
             'callbackURL' => $this->callbackUrl,

@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2024 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -15,7 +15,7 @@
  * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License along
- * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
+ * with BigBlueButton; if not, see <https://www.gnu.org/licenses/>.
  */
 
 namespace BigBlueButton\Responses;
@@ -33,22 +33,20 @@ abstract class BaseJsonResponse
      */
     protected $data;
 
-    /**
-     * BaseJsonResponse constructor.
-     *
-     * @param string $json
-     */
-    public function __construct($json)
+    public function __construct(string $json)
     {
         $this->data = json_decode($json);
     }
 
+    /**
+     * @return false|string
+     */
     public function getRawJson()
     {
         return json_encode($this->data);
     }
 
-    public function getMessage()
+    public function getMessage(): ?string
     {
         if ($this->failed()) {
             return $this->data->response->message;
@@ -57,7 +55,7 @@ abstract class BaseJsonResponse
         return null;
     }
 
-    public function getMessageKey()
+    public function getMessageKey(): ?string
     {
         if ($this->failed()) {
             return $this->data->response->messageKey;
@@ -66,17 +64,22 @@ abstract class BaseJsonResponse
         return null;
     }
 
-    public function getReturnCode()
+    /**
+     * Return will be either 'SUCCESS' or 'FAILED' (nothing else).
+     *
+     * @see: https://docs.bigbluebutton.org/development/api/#api-calls
+     */
+    public function getReturnCode(): string
     {
         return $this->data->response->returncode;
     }
 
-    public function success()
+    public function success(): bool
     {
         return self::SUCCESS === $this->getReturnCode();
     }
 
-    public function failed()
+    public function failed(): bool
     {
         return self::FAILED === $this->getReturnCode();
     }
