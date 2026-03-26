@@ -334,15 +334,6 @@ class ilObjBigBlueButtonGUI extends ilObjectPluginGUI
             $my_tpl->setVariable("endClass", $this->txt("end_class"));
             $my_tpl->setVariable("endClassComment", $this->txt("end_class_comment"));
             
-            global $DIC;  // Get global ILIAS dependency injection container
-
-            // Log the values of guest access settings
-            $data = [
-                "Guest Global Allowed" => $this->object->isGuestGlabalAllowed(),
-                "Guest Link Allowed"   => $this->object->isGuestLinkAllowed(),
-            ];
-
-            $DIC->logger()->root()->dump($data); // Logs data in ILIAS 10
 
             if ($this->object->isGuestGlabalAllowed() && $this->object->isGuestLinkAllowed()) {
                 $my_tpl->setCurrentBlock("guestlink_block");
