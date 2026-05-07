@@ -96,7 +96,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     private string $svrSalt = '';
     private string $attendeePwd = '';
     private string $moderatorPwd = '';
-    private string $welcomeText = '';
+    private ?string $welcomeText = null;
     private string $sequence = '';
     private string $presentationUrl = '';
 
@@ -358,19 +358,12 @@ class ilObjBigBlueButton extends ilObjectPlugin
         return $this->moderatorPwd;
     }
 
-    /**
-     * @param $a_val
-     * @return void
-     */
-    public function setWelcomeText($a_val)
+    public function setWelcomeText(?string $a_val): void
     {
         $this->welcomeText = $a_val;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getWelcomeText()
+    public function getWelcomeText(): ?string
     {
         return $this->welcomeText;
     }
@@ -531,7 +524,7 @@ class ilObjBigBlueButton extends ilObjectPlugin
     public function setDialNumber(string $dialNumber)
     {
         $this->dialNumber = $dialNumber;
-        
+
     }
 
     /**

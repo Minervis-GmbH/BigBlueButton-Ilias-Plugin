@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2024 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -15,42 +15,41 @@
  * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License along
- * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
+ * with BigBlueButton; if not, see <https://www.gnu.org/licenses/>.
  */
 
 namespace BigBlueButton\Responses;
 
 use BigBlueButton\TestCase;
+use BigBlueButton\TestServices\Fixtures;
 
 /**
  * @internal
- *
- * @coversNothing
  */
 class GetRecordingsTextTracksResponseTest extends TestCase
 {
-    /**
-     * @var GetRecordingTextTracksResponse
-     */
-    private $tracks;
+    private GetRecordingTextTracksResponse $tracks;
 
     public function setUp(): void
     {
         parent::setUp();
-        $json = $this->loadJsonFile(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR . 'get_recording_text_tracks.json');
+
+        $fixtures = new Fixtures();
+
+        $json = $fixtures->fromJsonFile('get_recording_text_tracks.json');
 
         $this->tracks = new GetRecordingTextTracksResponse($json);
     }
 
-    public function testGetRecordingTextTracksResponseContent()
+    public function testGetRecordingTextTracksResponseContent(): void
     {
-        $this->assertEquals(GetRecordingTextTracksResponse::SUCCESS, $this->tracks->getReturnCode());
+        $this->assertEquals(BaseJsonResponse::SUCCESS, $this->tracks->getReturnCode());
         $this->assertTrue($this->tracks->success());
         $this->assertFalse($this->tracks->failed());
         $this->assertCount(3, $this->tracks->getTracks());
     }
 
-    public function testGetRecordingTextTracksResponseTypes()
+    public function testGetRecordingTextTracksResponseTypes(): void
     {
         $this->assertEachGetterValueIsString($this->tracks, ['getReturnCode']);
 
@@ -72,7 +71,7 @@ class GetRecordingsTextTracksResponseTest extends TestCase
         );
     }
 
-    public function testGetRecordingTextTracksResponseValues()
+    public function testGetRecordingTextTracksResponseValues(): void
     {
         $secondTracks = $this->tracks->getTracks()[1];
 

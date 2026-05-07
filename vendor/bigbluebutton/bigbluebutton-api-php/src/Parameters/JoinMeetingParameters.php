@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2024 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -15,7 +15,7 @@
  * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License along
- * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
+ * with BigBlueButton; if not, see <https://www.gnu.org/licenses/>.
  */
 
 namespace BigBlueButton\Parameters;
@@ -40,29 +40,26 @@ class JoinMeetingParameters extends UserDataParameters
 
     private ?string $webVoiceConf = null;
 
-    private ?string $creationTime = null;
+    private ?float $creationTime = null;
 
     private ?string $avatarURL = null;
 
     private ?bool $redirect = null;
 
-    private ?string $clientURL = null;
-
+    /**
+     * @var array<string, string>
+     */
     private array $customParameters;
 
     private ?string $role = null;
 
     private ?bool $excludeFromDashboard = null;
 
-    private ?string $configToken = null;
-
     private ?bool $guest = null;
 
     private ?string $defaultLayout = null;
 
     /**
-     * JoinMeetingParametersTest constructor.
-     *
      * @param mixed $passwordOrRole
      * @param mixed $meetingId
      * @param mixed $username
@@ -114,7 +111,6 @@ class JoinMeetingParameters extends UserDataParameters
 
     /**
      *@deprecated Password-string replaced by an Enum\Role-constant in JoinMeetingParameters::__construct()
-     *
      */
     public function setPassword(string $password): self
     {
@@ -147,12 +143,12 @@ class JoinMeetingParameters extends UserDataParameters
         return $this;
     }
 
-    public function getCreationTime(): string
+    public function getCreationTime(): ?float
     {
         return $this->creationTime;
     }
 
-    public function setCreationTime(int $creationTime): self
+    public function setCreationTime(float $creationTime): self
     {
         $this->creationTime = $creationTime;
 
@@ -183,18 +179,6 @@ class JoinMeetingParameters extends UserDataParameters
         return $this;
     }
 
-    public function getClientURL(): ?string
-    {
-        return $this->clientURL;
-    }
-
-    public function setClientURL(?string $clientURL): self
-    {
-        $this->clientURL = $clientURL;
-
-        return $this;
-    }
-
     public function getRole(): ?string
     {
         return $this->role;
@@ -215,18 +199,6 @@ class JoinMeetingParameters extends UserDataParameters
     public function setExcludeFromDashboard(bool $excludeFromDashboard): self
     {
         $this->excludeFromDashboard = $excludeFromDashboard;
-
-        return $this;
-    }
-
-    public function getConfigToken(): ?string
-    {
-        return $this->configToken;
-    }
-
-    public function setConfigToken(string $configToken): self
-    {
-        $this->configToken = $configToken;
 
         return $this;
     }
@@ -275,8 +247,6 @@ class JoinMeetingParameters extends UserDataParameters
             'excludeFromDashboard' => !is_null($this->excludeFromDashboard) ? ($this->excludeFromDashboard ? 'true' : 'false') : $this->excludeFromDashboard,
             'avatarURL'            => $this->avatarURL,
             'redirect'             => !is_null($this->redirect) ? ($this->redirect ? 'true' : 'false') : $this->redirect,
-            'clientURL'            => $this->clientURL,
-            'configToken'          => $this->configToken,
             'guest'                => !is_null($this->guest) ? ($this->guest ? 'true' : 'false') : $this->guest,
             'defaultLayout'        => $this->defaultLayout,
         ];

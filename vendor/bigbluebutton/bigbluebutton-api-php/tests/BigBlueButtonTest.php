@@ -3,7 +3,7 @@
 /*
  * BigBlueButton open source conferencing system - https://www.bigbluebutton.org/.
  *
- * Copyright (c) 2016-2023 BigBlueButton Inc. and by respective authors (see below).
+ * Copyright (c) 2016-2024 BigBlueButton Inc. and by respective authors (see below).
  *
  * This program is free software; you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free Software
@@ -15,33 +15,33 @@
  * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License along
- * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
+ * with BigBlueButton; if not, see <https://www.gnu.org/licenses/>.
  */
 
 namespace BigBlueButton;
 
 use BigBlueButton\Core\ApiMethod;
+use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
 use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
+use BigBlueButton\Parameters\HooksCreateParameters;
+use BigBlueButton\Parameters\HooksDestroyParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
-use BigBlueButton\Util\ParamsIterator;
+use BigBlueButton\TestServices\EnvLoader;
+use BigBlueButton\TestServices\Fixtures;
+use BigBlueButton\TestServices\ParamsIterator;
 
 /**
  * Class BigBlueButtonTest.
  *
  * @internal
- *
- * @coversNothing
  */
 class BigBlueButtonTest extends TestCase
 {
-    /**
-     * @var BigBlueButton
-     */
-    private $bbb;
+    private BigBlueButton $bbb;
 
     /**
      * Setup test class.
@@ -50,14 +50,26 @@ class BigBlueButtonTest extends TestCase
     {
         parent::setUp();
 
-        foreach (['BBB_SECRET', 'BBB_SERVER_BASE_URL'] as $k) {
-            if (!getenv($k)) {
-                $this->fail('$_SERVER[\'' . $k . '\'] not set in '
-                    . 'phpunit.xml');
-            }
-        }
+        EnvLoader::loadEnvironmentVariables();
 
         $this->bbb = new BigBlueButton();
+    }
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
+
+        // close all existing meetings
+        $meetingsResponse = $this->bbb->getMeetings();
+        $this->assertTrue($meetingsResponse->success(), $meetingsResponse->getMessage());
+
+        $meetings = $meetingsResponse->getMeetings();
+        foreach ($meetings as $meeting) {
+            $endMeetingParameters = new EndMeetingParameters($meeting->getMeetingId(), $meeting->getModeratorPassword());
+            $endMeetingResponse   = $this->bbb->endMeeting($endMeetingParameters);
+
+            $this->assertEquals('SUCCESS', $endMeetingResponse->getReturnCode());
+        }
     }
 
     // API Version
@@ -65,7 +77,7 @@ class BigBlueButtonTest extends TestCase
     /**
      * Test API version call.
      */
-    public function testApiVersion()
+    public function testApiVersion(): void
     {
         $apiVersion = $this->bbb->getApiVersion();
         $this->assertEquals('SUCCESS', $apiVersion->getReturnCode());
@@ -76,12 +88,14 @@ class BigBlueButtonTest extends TestCase
     // Create Meeting
 
     /**
-     * Test create meeting URL.
+     * @deprecated test will be removed together with the deprecated function from BigBlueButton::class
+     *
+     * Test create meeting URL
      */
-    public function testCreateMeetingUrl()
+    public function testCreateMeetingUrl(): void
     {
-        $params = $this->generateCreateParams();
-        $url    = $this->bbb->getCreateMeetingUrl($this->getCreateMock($params));
+        $params = Fixtures::generateCreateParams();
+        $url    = $this->bbb->getCreateMeetingUrl(Fixtures::getCreateMeetingParametersMock($params));
 
         $paramsIterator = new ParamsIterator();
         $paramsIterator->iterate($params, $url);
@@ -90,10 +104,11 @@ class BigBlueButtonTest extends TestCase
     /**
      * Test create meeting.
      */
-    public function testCreateMeeting()
+    public function testCreateMeeting(): void
     {
-        $params = $this->generateCreateParams();
-        $result = $this->bbb->createMeeting($this->getCreateMock($params));
+        $createMeetingParams = Fixtures::getCreateMeetingParametersMock(Fixtures::generateCreateParams());
+
+        $result = $this->bbb->createMeeting($createMeetingParams);
 
         $this->assertEquals('SUCCESS', $result->getReturnCode());
         $this->assertTrue($result->success());
@@ -102,9 +117,9 @@ class BigBlueButtonTest extends TestCase
     /**
      * Test create meeting with a document URL.
      */
-    public function testCreateMeetingWithDocumentUrl()
+    public function testCreateMeetingWithDocumentUrl(): void
     {
-        $params = $this->getCreateMock($this->generateCreateParams());
+        $params = Fixtures::getCreateMeetingParametersMock(Fixtures::generateCreateParams());
         $params->addPresentation('https://picsum.photos/3840/2160/?random');
 
         $result = $this->bbb->createMeeting($params);
@@ -117,9 +132,9 @@ class BigBlueButtonTest extends TestCase
     /**
      * Test create meeting with a document URL and filename.
      */
-    public function testCreateMeetingWithDocumentUrlAndFileName()
+    public function testCreateMeetingWithDocumentUrlAndFileName(): void
     {
-        $params = $this->getCreateMock($this->generateCreateParams());
+        $params = Fixtures::getCreateMeetingParametersMock(Fixtures::generateCreateParams());
         $params->addPresentation('https://picsum.photos/3840/2160/?random', null, 'placeholder.png');
 
         $result = $this->bbb->createMeeting($params);
@@ -132,9 +147,9 @@ class BigBlueButtonTest extends TestCase
     /**
      * Test create meeting with a document URL.
      */
-    public function testCreateMeetingWithDocumentEmbedded()
+    public function testCreateMeetingWithDocumentEmbedded(): void
     {
-        $params = $this->getCreateMock($this->generateCreateParams());
+        $params = Fixtures::getCreateMeetingParametersMock(Fixtures::generateCreateParams());
 
         $params->addPresentation('bbb_logo.png', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR . 'bbb_logo.png'));
 
@@ -148,9 +163,9 @@ class BigBlueButtonTest extends TestCase
     /**
      * Test create meeting with a multiple documents.
      */
-    public function testCreateMeetingWithMultiDocument()
+    public function testCreateMeetingWithMultiDocument(): void
     {
-        $params = $this->getCreateMock($this->generateCreateParams());
+        $params = Fixtures::getCreateMeetingParametersMock(Fixtures::generateCreateParams());
         $params->addPresentation('https://picsum.photos/3840/2160/?random', null, 'presentation.png');
         $params->addPresentation('logo.png', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR . 'bbb_logo.png'));
 
@@ -164,13 +179,15 @@ class BigBlueButtonTest extends TestCase
     // Join Meeting
 
     /**
-     * Test create join meeting URL.
+     * @deprecated test will be removed together with the deprecated function from BigBlueButton::class
+     *
+     * Test create join meeting URL
      */
-    public function testCreateJoinMeetingUrl()
+    public function testCreateJoinMeetingUrl(): void
     {
-        $joinMeetingParams = $this->generateJoinMeetingParams();
+        $joinMeetingParams = Fixtures::generateJoinMeetingParams();
 
-        $joinMeetingMock = $this->getJoinMeetingMock($joinMeetingParams);
+        $joinMeetingMock = Fixtures::getJoinMeetingMock($joinMeetingParams);
 
         $url            = $this->bbb->getJoinMeetingURL($joinMeetingMock);
         $paramsIterator = new ParamsIterator();
@@ -182,37 +199,55 @@ class BigBlueButtonTest extends TestCase
      *
      * @expectedExceptionMessage String could not be parsed as XML
      */
-    public function testJoinMeeting()
+    public function testJoinMeeting(): void
     {
-        $joinMeetingParams = $this->generateJoinMeetingParams();
-        $joinMeetingMock   = $this->getJoinMeetingMock($joinMeetingParams);
+        // create a meeting that can be joined
+        $createMeetingParameters = new CreateMeetingParameters($this->faker->uuid(), $this->faker->word());
+        $createMeetingResponse   = $this->bbb->createMeeting($createMeetingParameters);
+        $this->assertEquals('SUCCESS', $createMeetingResponse->getReturnCode());
+        $this->assertTrue($createMeetingResponse->success());
+
+        // prepare to join the meeting
+        $joinMeetingParams = Fixtures::generateJoinMeetingParams();
+        $joinMeetingMock   = Fixtures::getJoinMeetingMock($joinMeetingParams);
+
+        // adapt to join the above created meeting
         $joinMeetingMock->setRedirect(false);
+        $joinMeetingMock->setMeetingId($createMeetingResponse->getMeetingId());
+        $joinMeetingMock->setCreationTime($createMeetingResponse->getCreationTime());
 
-        $joinMeeting = $this->bbb->joinMeeting($joinMeetingMock);
+        // join the meeting
+        $joinMeetingResponse = $this->bbb->joinMeeting($joinMeetingMock);
 
-        $this->assertEquals('SUCCESS', $joinMeeting->getReturnCode());
-        $this->assertTrue($joinMeeting->success());
-        $this->assertNotEmpty($joinMeeting->getAuthToken());
-        $this->assertNotEmpty($joinMeeting->getUserId());
-        $this->assertNotEmpty($joinMeeting->getSessionToken());
-        $this->assertNotEmpty($joinMeeting->getGuestStatus());
-        $this->assertNotEmpty($joinMeeting->getUrl());
+        $this->assertEquals(
+            'SUCCESS',
+            $joinMeetingResponse->getReturnCode(),
+            $joinMeetingResponse->getRawXml()->message->__toString()
+        );
+        $this->assertTrue($joinMeetingResponse->success());
+        $this->assertNotEmpty($joinMeetingResponse->getAuthToken());
+        $this->assertNotEmpty($joinMeetingResponse->getUserId());
+        $this->assertNotEmpty($joinMeetingResponse->getSessionToken());
+        $this->assertNotEmpty($joinMeetingResponse->getGuestStatus());
+        $this->assertNotEmpty($joinMeetingResponse->getUrl());
     }
 
     // End Meeting
 
     /**
-     * Test generate end meeting URL.
+     * @deprecated test will be removed together with the deprecated function from BigBlueButton::class
+     *
+     * Test generate end meeting URL
      */
-    public function testCreateEndMeetingUrl()
+    public function testCreateEndMeetingUrl(): void
     {
-        $params         = $this->generateEndMeetingParams();
-        $url            = $this->bbb->getEndMeetingURL($this->getEndMeetingMock($params));
+        $params         = Fixtures::generateEndMeetingParams();
+        $url            = $this->bbb->getEndMeetingURL(Fixtures::getEndMeetingMock($params));
         $paramsIterator = new ParamsIterator();
         $paramsIterator->iterate($params, $url);
     }
 
-    public function testEndMeeting()
+    public function testEndMeeting(): void
     {
         $meeting = $this->createRealMeeting($this->bbb);
 
@@ -222,17 +257,17 @@ class BigBlueButtonTest extends TestCase
         $this->assertTrue($result->success());
     }
 
-    public function testEndNonExistingMeeting()
+    public function testEndNonExistingMeeting(): void
     {
-        $params = $this->generateEndMeetingParams();
-        $result = $this->bbb->endMeeting($this->getEndMeetingMock($params));
+        $params = Fixtures::generateEndMeetingParams();
+        $result = $this->bbb->endMeeting(Fixtures::getEndMeetingMock($params));
         $this->assertEquals('FAILED', $result->getReturnCode());
         $this->assertTrue($result->failed());
     }
 
-    // Is Meeting Running
+    // Is Meeting Running / Existing
 
-    public function testIsMeetingRunning()
+    public function testIsMeetingRunning(): void
     {
         $result = $this->bbb->isMeetingRunning(new IsMeetingRunningParameters($this->faker->uuid));
         $this->assertEquals('SUCCESS', $result->getReturnCode());
@@ -240,23 +275,51 @@ class BigBlueButtonTest extends TestCase
         $this->assertEquals(false, $result->isRunning());
     }
 
+    public function testIsMeetingExisting(): void
+    {
+        $meetingId = $this->faker->uuid;
+
+        // check existence of non-existing meeting
+        $isMeetingExisting = $this->bbb->isMeetingExisting($meetingId);
+        $this->assertFalse($isMeetingExisting);
+
+        // create meeting
+        $createMeetingResponse = $this->bbb->createMeeting(new CreateMeetingParameters($meetingId, $this->faker->word));
+        $this->assertEquals('SUCCESS', $createMeetingResponse->getReturnCode());
+        $this->assertTrue($createMeetingResponse->success());
+
+        // check existence of existing meeting
+        $isMeetingExisting = $this->bbb->isMeetingExisting($meetingId);
+        $this->assertTrue($isMeetingExisting);
+    }
+
     // Get Meetings
 
-    public function testGetMeetingsUrl()
+    /**
+     * @deprecated Test will be removed together with the deprecated function from BigBlueButton::class
+     */
+    public function testGetMeetingsUrl(): void
     {
         $url = $this->bbb->getMeetingsUrl();
         $this->assertStringContainsString(ApiMethod::GET_MEETINGS, $url);
     }
 
-    public function testGetMeetings()
+    public function testGetMeetings(): void
     {
+        // create some meetings
+        $createMeetingResponse = $this->createRealMeeting($this->bbb);
+        $this->assertEquals('SUCCESS', $createMeetingResponse->getReturnCode());
+
         $result = $this->bbb->getMeetings();
         $this->assertNotEmpty($result->getMeetings());
     }
 
     // Get meeting info
 
-    public function testGetMeetingInfoUrl()
+    /**
+     * @deprecated Test will be removed together with the deprecated function from BigBlueButton::class
+     */
+    public function testGetMeetingInfoUrl(): void
     {
         $meeting = $this->createRealMeeting($this->bbb);
 
@@ -264,7 +327,7 @@ class BigBlueButtonTest extends TestCase
         $this->assertStringContainsString('=' . urlencode($meeting->getMeetingId()), $url);
     }
 
-    public function testGetMeetingInfo()
+    public function testGetMeetingInfo(): void
     {
         $meeting = $this->createRealMeeting($this->bbb);
 
@@ -273,58 +336,109 @@ class BigBlueButtonTest extends TestCase
         $this->assertTrue($result->success());
     }
 
-    public function testGetRecordingsUrl()
+    // Get Recordings
+
+    /**
+     * @deprecated Test will be removed together with the deprecated function from BigBlueButton::class
+     */
+    public function testGetRecordingsUrl(): void
     {
         $url = $this->bbb->getRecordingsUrl(new GetRecordingsParameters());
         $this->assertStringContainsString(ApiMethod::GET_RECORDINGS, $url);
     }
 
-    public function testGetRecordings()
+    public function testGetRecordings(): void
     {
         $result = $this->bbb->getRecordings(new GetRecordingsParameters());
         $this->assertEquals('SUCCESS', $result->getReturnCode());
         $this->assertTrue($result->success());
     }
 
-    public function testPublishRecordingsUrl()
+    /**
+     * @deprecated Test will be removed together with the deprecated function from BigBlueButton::class
+     */
+    public function testPublishRecordingsUrl(): void
     {
         $url = $this->bbb->getPublishRecordingsUrl(new PublishRecordingsParameters($this->faker->sha1, true));
         $this->assertStringContainsString(ApiMethod::PUBLISH_RECORDINGS, $url);
     }
 
-    public function testPublishRecordings()
+    public function testPublishRecordings(): void
     {
         $result = $this->bbb->publishRecordings(new PublishRecordingsParameters('non-existing-id-' . $this->faker->sha1, true));
         $this->assertEquals('FAILED', $result->getReturnCode());
         $this->assertTrue($result->failed());
     }
 
-    public function testDeleteRecordingsUrl()
+    /**
+     * @deprecated Test will be removed together with the deprecated function from BigBlueButton::class
+     */
+    public function testDeleteRecordingsUrl(): void
     {
         $url = $this->bbb->getDeleteRecordingsUrl(new DeleteRecordingsParameters($this->faker->sha1));
         $this->assertStringContainsString(ApiMethod::DELETE_RECORDINGS, $url);
     }
 
-    public function testDeleteRecordings()
+    public function testDeleteRecordings(): void
     {
         $result = $this->bbb->deleteRecordings(new DeleteRecordingsParameters('non-existing-id-' . $this->faker->sha1));
         $this->assertEquals('FAILED', $result->getReturnCode());
         $this->assertTrue($result->failed());
     }
 
-    public function testUpdateRecordingsUrl()
+    /**
+     * @deprecated Test will be removed together with the deprecated function from BigBlueButton::class
+     */
+    public function testUpdateRecordingsUrl(): void
     {
-        $params         = $this->generateUpdateRecordingsParams();
-        $url            = $this->bbb->getUpdateRecordingsUrl($this->getUpdateRecordingsParamsMock($params));
+        $params         = Fixtures::generateUpdateRecordingsParams();
+        $url            = $this->bbb->getUpdateRecordingsUrl(Fixtures::getUpdateRecordingsParamsMock($params));
         $paramsIterator = new ParamsIterator();
         $paramsIterator->iterate($params, $url);
     }
 
-    public function testUpdateRecordings()
+    public function testUpdateRecordings(): void
     {
-        $params = $this->generateUpdateRecordingsParams();
-        $result = $this->bbb->updateRecordings($this->getUpdateRecordingsParamsMock($params));
+        $params = Fixtures::generateUpdateRecordingsParams();
+        $result = $this->bbb->updateRecordings(Fixtures::getUpdateRecordingsParamsMock($params));
         $this->assertEquals('FAILED', $result->getReturnCode());
         $this->assertTrue($result->failed());
+    }
+
+    // Hooks: create
+
+    public function testHooksCreate(): void
+    {
+        // create a hook
+        $hooksCreateParameters = new HooksCreateParameters($this->faker->url);
+        $hooksCreateResponse   = $this->bbb->hooksCreate($hooksCreateParameters);
+        $this->assertTrue($hooksCreateResponse->success(), $hooksCreateResponse->getMessage());
+    }
+
+    public function testHooksList(): void
+    {
+        // create a hook
+        $hooksListResponse = $this->bbb->hooksList();
+        $this->assertTrue($hooksListResponse->success(), $hooksListResponse->getMessage());
+    }
+
+    public function testHooksDestroy(): void
+    {
+        // create a hook
+        $hooksCreateParameters = new HooksCreateParameters($this->faker->url);
+        $hooksCreateResponse   = $this->bbb->hooksCreate($hooksCreateParameters);
+        $this->assertTrue($hooksCreateResponse->success(), $hooksCreateResponse->getMessage());
+        $hookId = $hooksCreateResponse->getHookId();
+        $this->assertNotNull($hookId);
+
+        // destroy existing hook
+        $hooksDestroyParameters = new HooksDestroyParameters($hookId);
+        $hooksCreateResponse    = $this->bbb->hooksDestroy($hooksDestroyParameters);
+        $this->assertTrue($hooksCreateResponse->success(), $hooksCreateResponse->getMessage());
+
+        // destroy non-existing hook
+        $hooksDestroyParameters = new HooksDestroyParameters($this->faker->numberBetween(10000, 99999));
+        $hooksCreateResponse    = $this->bbb->hooksDestroy($hooksDestroyParameters);
+        $this->assertFalse($hooksCreateResponse->success(), $hooksCreateResponse->getMessage());
     }
 }
