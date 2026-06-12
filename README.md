@@ -18,23 +18,22 @@ The following data from BBB is required to configure this ILIAS Plugin:
 
 ## ILIAS
 
-It is assumed you already have a ILIAS Intallation [up and running](https://docu.ilias.de/goto_docu_pg_116903_367.html).
+It is assumed you already have a ILIAS Intallation [up and running](https://docu.ilias.de/go/pg/220443_367).
 
 # Installation
 
-### ILIAS 5.4, 6.x, 7.x, 8.x, 9.x, 10.x
+### ILIAS  10.x
 
 On your ILIAS Server:
 
 **Note:** it is assumed that you'already in ILIAS web root directory
 
-- `mkdir -p Customizing/global/plugins/Services/Repository/RepositoryObject`
-- `cd Customizing/global/plugins/Services/Repository/RepositoryObject`
+- `mkdir -p public/Customizing/global/plugins/Services/Repository/RepositoryObject`
+- `cd public/Customizing/global/plugins/Services/Repository/RepositoryObject`
 - `git clone https://github.com/Minervis-GmbH/BigBlueButton-Ilias-Plugin.git BigBlueButton/`
-- `cd BigBlueButton`
 - log in to ILIAS as `administrator` and go to the administration page
-- select `Plugins` in the menu on the right (for ILIAS6.x and above go to `Administration>Extending ILIAS>Plugins`)
-- look for BigBlueButton from the table of plugins and click a drop down button
+- go to `Administration>Extending ILIAS>Plugins`
+- look for BigBlueButton from the list of plugins and click a drop down button
 - install and activate
 - now hit the `configure` link and enter your 
     - public or private server URL : {PROTOCOL}://{SERVER_ADDRESS}{:PORT}/{BBB_SUBPATH}/. Where 
@@ -48,21 +47,8 @@ On your ILIAS Server:
     - Choose, if record the session should be allowed, or not
 - finally you can create "Bigbluebutton" Virtual Classrooms as regular repository object
 **Note:** If the server is not reachable, during configuration a message will be displayed. After correcting the error, make sure to press the save button twice.
+  
 
-# Notes  
-- In ILIAS 8 you had to build plugin artifacts before you can be able to install the plugin. You can follow the guidelines in the ILIAS 8 setup documentation.
-- It is recommended to refresh languages if you use the guest feature.
-# Compatibility
-
-Tested with ILIAS
-
-- 5.4.x
-- 6.0
-- 6.1, 6.2, 6.3
-- 7.x
-- 8.x
-- 9.x
-- 10.x
 
 
 
